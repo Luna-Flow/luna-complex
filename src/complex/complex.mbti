@@ -1,6 +1,7 @@
-package KCN-judu/calculus-numerical/complex
+package KCN-judu/luna-complex/complex
 
 // Values
+fn hypot(Double, Double) -> Double
 
 // Types and methods
 pub(all) struct Complex {

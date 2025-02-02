@@ -82,7 +82,7 @@ pub fn Complex::arg(self : Complex) -> Double {
 
 ///|
 pub fn Complex::abs(self : Complex) -> Double {
-  @basic.hypot(self.re, self.im)
+  hypot(self.re, self.im)
 }
 
 ///|
@@ -279,12 +279,10 @@ pub fn Complex::sqrt(self : Complex) -> Complex {
   let mut w = 0.0
   if re_abs >= im_abs {
     let t = im_abs / re_abs
-    w = @luna_math.sqrt(re_abs) *
-      @luna_math.sqrt(0.5 * (1.0 + @basic.hypot(1.0, t)))
+    w = @luna_math.sqrt(re_abs) * @luna_math.sqrt(0.5 * (1.0 + hypot(1.0, t)))
   } else {
     let t = re_abs / im_abs
-    w = @luna_math.sqrt(im_abs) *
-      @luna_math.sqrt(0.5 * (t + @basic.hypot(1.0, t)))
+    w = @luna_math.sqrt(im_abs) * @luna_math.sqrt(0.5 * (t + hypot(1.0, t)))
   }
   if self.re >= 0.0 {
     Complex::new(w, self.im / (2.0 * w))

@@ -1,19 +1,17 @@
 {
-  "name": "KCN-judu/calculus-numerical",
-  "version": "0.2.1-alpha-5",
+  "name": "KCN-judu/luna-complex",
+  "version": "0.0.1-alpha-1",
   "deps": {
-    "KCN-judu/linear-algebra": "0.0.1-alpha-2",
     "Kaida-Amethyst/math": "0.1.13",
     "KCN-judu/luna-utils": "0.0.1-alpha-2"
   },
   "readme": "README.md",
-  "repository": "https://github.com/moonbit-community/calculus-numerical",
+  "repository": "https://github.com/Luna-Flow/luna-complex",
   "license": "MIT",
   "keywords": [
-    "calculus",
-    "numerical-methods",
+    "complex-numbers",
     "math"
   ],
-  "description": "A numerical calculus library, a part of LunaFlow.",
+  "description": "A complex number library, a part of LunaFlow.",
   "source": "src"
 }

@@ -1,6 +1,5 @@
 {
 	"import": [
-		"KCN-judu/calculus-numerical/basic",
 		{
 			"path": "KCN-judu/luna-utils",
 			"alias": "luna_utils"
