@@ -424,11 +424,11 @@ pub fn Complex::tan(self : Complex) -> Complex {
   let r = self.re
   let i = self.im
   if i<1.0 && i>-1.0 {
-     let d = @double.pow(@luna_math.cos(r), 2.0) + @double.pow(@luna_math.sinh(i), 2.0) 
+     let d = @luna_math.pow(@luna_math.cos(r), 2.0) + @luna_math.pow(@luna_math.sinh(i), 2.0) 
      Complex::new(0.5 * @luna_math.sin(2.0 * r) / d, 0.5 * @luna_math.sinh(2.0 * i) / d)
   }else{
-     let d = @double.pow(@luna_math.cos(r), 2.0) + @double.pow(@luna_math.sinh(i), 2.0) 
-     let f = 1.0 + @double.pow(@luna_math.cos(r) / @luna_math.sinh(i), 2.0)
+     let d = @luna_math.pow(@luna_math.cos(r), 2.0) + @luna_math.pow(@luna_math.sinh(i), 2.0) 
+     let f = 1.0 + @luna_math.pow(@luna_math.cos(r) / @luna_math.sinh(i), 2.0)
      Complex::new(0.5 * @luna_math.sin(2.0 * r) / d, 1.0 / (@luna_math.tanh(i) * f))
   } 
 }
@@ -479,7 +479,7 @@ pub fn Complex::arcsin(self : Complex) -> Complex {
     }else{
       if x <= 1 {
         let d = 0.5 * (a + x) * (y2 / (r + x + 1.0)) + (s + (1.0 - x))
-        real = @luna_math.atan (x / @luna_math.sqrt(d))
+        real = @luna_math.atan(x / @luna_math.sqrt(d))
       }else{
         let apx = a + x
         let d = 0.5 * (apx / (r + x + 1.0) + apx / (s + (x - 1.0)))
