@@ -49,6 +49,44 @@ impl Complex {
   sub_imag_inplace(Self, Double) -> Unit
   sub_real(Self, Double) -> Self
   sub_real_inplace(Self, Double) -> Unit
+
+  
+  exp(Self) -> Self
+  pow(Self, Double) -> Self
+  pow_real(Self, Double) -> Self
+  log(Self) -> Self
+  log10(Self) -> Self
+  log_b(Self, Self) -> Self
+  sin(Self) -> Self
+  cos(Self) -> Self
+  tan(Self) -> Self
+  sec(Self) -> Self
+  csc(Self) -> Self
+  cot(Self) -> Self
+  arcsin(Self) -> Self
+  arcsin_real(Double) -> Self
+  arccos(Self) -> Self
+  arccos_real(Double) -> Self
+  arctan(Self) -> Self
+  arcsec(Self) -> Self
+  arcsec_real(Double) -> Self
+  arccsc(Self) -> Self
+  arccsc_real(Double) -> Self
+  arccot(Self) -> Self
+  sinh(Self) -> Self
+  cosh(Self) -> Self
+  tanh(Self) -> Self
+  sech(Self) -> Self
+  csch(Self) -> Self
+  coth(Self) -> Self
+  arcsinh(Self) -> Self
+  arccosh(Self) -> Self
+  arccosh_real(Double) -> Self
+  arctanh(Self) -> Self
+  arctanh_real(Double) -> Self
+  arcsech(Self) -> Self
+  arccsch(Self) -> Self
+  arccoth(Self) -> Self
 }
 impl Eq for Complex
 

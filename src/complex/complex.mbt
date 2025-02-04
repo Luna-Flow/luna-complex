@@ -74,20 +74,20 @@ pub fn Complex::pack(self : Complex, arr : Array[Double], offset : Int) -> Unit 
 
 ///|
 pub fn Complex::polar(r : Double, theta : Double) -> Complex {
-  Complex::new(r * @math.cos(theta), r * @math.sin(theta))
+  Complex::new(r * @luna_math.cos(theta), r * @luna_math.sin(theta))
 }
 
 ///|
 /// 计算复数的辐角
 pub fn Complex::arg(self : Complex) -> Double {
   guard self.re != 0.0 || self.im != 0.0 else { 0.0 }
-  @math.atan2(self.im, self.re)
+  @luna_math.atan2(self.im, self.re)
 }
 
 ///|
 /// 求 虚数的模
 pub fn Complex::abs(self : Complex) -> Double {
-  @basic.hypot(self.re, self.im)
+  @luna_math.hypot(self.re, self.im)
 }
 
 ///|
@@ -107,7 +107,7 @@ pub fn Complex::abs_log(self : Complex) -> Double {
   } else {
     t = re_abs / im_abs
   }
-  @math.ln(@basic.max(re_abs, im_abs)) + 0.5 * @math.ln(1.0 + t * t)
+  @luna_math.ln(@luna_math.max(re_abs, im_abs)) + 0.5 * @luna_math.ln(1.0 + t * t)
 }
 
 ///|
@@ -303,12 +303,12 @@ pub fn Complex::sqrt(self : Complex) -> Complex {
   let mut w = 0.0
   if re_abs >= im_abs {
     let t = im_abs / re_abs
-    w = @basic.sqrt(re_abs) *
-      @basic.sqrt(0.5 * (1.0 + @basic.hypot(1.0, t)))
+    w = @luna_math.sqrt(re_abs) *
+      @luna_math.sqrt(0.5 * (1.0 + @luna_math.hypot(1.0, t)))
   } else {
     let t = re_abs / im_abs
-    w = @basic.sqrt(im_abs) *
-      @basic.sqrt(0.5 * (t + @basic.hypot(1.0, t)))
+    w = @luna_math.sqrt(im_abs) *
+      @luna_math.sqrt(0.5 * (t + @luna_math.hypot(1.0, t)))
   }
   if self.re >= 0.0 {
     Complex::new(w, self.im / (2.0 * w))
@@ -321,17 +321,17 @@ pub fn Complex::sqrt(self : Complex) -> Complex {
 /// 求Double类型的平方根 如果为负数返回复数
 pub fn Complex::sqrt_real(self :Double) -> Complex{
   if self >= 0{
-    Complex::new(@basic.sqrt(self),0)
+    Complex::new(@luna_math.sqrt(self),0)
   }else{
-    Complex::new(0,@basic.sqrt(-self))
+    Complex::new(0,@luna_math.sqrt(-self))
   }
 }
 ///|
 /// 这个函数的实现基于欧拉公式 e^(a+bi) = (e^a)*(cosb+i*sinb)
 pub fn Complex::exp(self : Complex) -> Complex {
-  let rho = @math.exp(self.re) //计算e^re
+  let rho = @luna_math.exp(self.re) //计算e^re
   let thete = self.im
-  Complex::new(rho * @math.cos(thete), rho * @math.sin(thete) )
+  Complex::new(rho * @luna_math.cos(thete), rho * @luna_math.sin(thete) )
 }
 ///|
 /// 计算 self^other 其中self是调用者，other是传递的参数。二者都是虚数
@@ -351,9 +351,9 @@ pub fn Complex::pow(self : Complex, other : Complex) -> Complex{
     let theta = self.arg()
     let oreal = other.re
     let oimag = other.im
-    let rho = @math.ln(logr * oreal - oimag * theta)
+    let rho = @luna_math.ln(logr * oreal - oimag * theta)
     let beta = theta * oreal + oimag * logr
-    return Complex::new(rho * @math.cos(beta), rho * @math.sin(beta))
+    return Complex::new(rho * @luna_math.cos(beta), rho * @luna_math.sin(beta))
   }
 }
 ///|
@@ -368,9 +368,9 @@ pub fn Complex::pow_real(self : Complex, other : Double) -> Complex{
   }else{
     let logr = self.abs_log()
     let theta = self.arg()
-    let rho = @math.exp(logr * other)
+    let rho = @luna_math.exp(logr * other)
     let beta = theta * other
-    Complex::new(rho * @math.cos(beta), rho * @math.sin(beta))
+    Complex::new(rho * @luna_math.cos(beta), rho * @luna_math.sin(beta))
   }
 }
 ///|
@@ -384,7 +384,7 @@ pub fn Complex::log(self : Complex) -> Complex {
 /// 计算复数的对数（以10为底）
 /// log[10](a) = ln(a) / ln(10)
 pub fn Complex::log10(self : Complex) -> Complex {
-  mul_real(self.log(),1.0/@math.ln(10))
+  mul_real(self.log(),1.0/@luna_math.ln(10))
 }
 ///|
 /// 计算复数的对数 （以复数为底）
@@ -401,10 +401,10 @@ pub fn Complex::log_b(self : Complex, other : Complex) -> Complex {
 pub fn Complex::sin(self : Complex) -> Complex {
   if self.im==0.0 {
     //* avoid returing negative zero (-0.0) for the imaginary part
-    return Complex::new(@math.sin(self.re),0.0)
+    return Complex::new(@luna_math.sin(self.re),0.0)
   }else{
-    return Complex::new(@math.sin(self.re) * @basic.cosh(self.im),
-                        @math.cos(self.re) * @basic.sinh(self.im))
+    return Complex::new(@luna_math.sin(self.re) * @luna_math.cosh(self.im),
+                        @luna_math.cos(self.re) * @luna_math.sinh(self.im))
   }
 }
 ///|
@@ -412,10 +412,10 @@ pub fn Complex::sin(self : Complex) -> Complex {
 pub fn Complex::cos(self : Complex) -> Complex {
   if self.im==0.0 {  
     //* avoid returing negative zero (-0.0) for the imaginary part
-    Complex::new(@math.cos(self.re),0.0)
+    Complex::new(@luna_math.cos(self.re),0.0)
   }else{
-    return Complex::new(@math.cos(self.re) * @basic.cosh(self.im),
-                        @math.sin(self.re) * @basic.sinh(self.im))
+    return Complex::new(@luna_math.cos(self.re) * @luna_math.cosh(self.im),
+                        @luna_math.sin(self.re) * @luna_math.sinh(self.im))
   }
 }
 ///|
@@ -424,12 +424,12 @@ pub fn Complex::tan(self : Complex) -> Complex {
   let r = self.re
   let i = self.im
   if i<1.0 && i>-1.0 {
-     let d = @double.pow(@math.cos(r), 2.0) + @double.pow(@basic.sinh(i), 2.0) 
-     Complex::new(0.5 * @math.sin(2.0 * r) / d, 0.5 * @basic.sinh(2.0 * i) / d)
+     let d = @double.pow(@luna_math.cos(r), 2.0) + @double.pow(@luna_math.sinh(i), 2.0) 
+     Complex::new(0.5 * @luna_math.sin(2.0 * r) / d, 0.5 * @luna_math.sinh(2.0 * i) / d)
   }else{
-     let d = @double.pow(@math.cos(r), 2.0) + @double.pow(@basic.sinh(i), 2.0) 
-     let f = 1.0 + @double.pow(@math.cos(r) / @basic.sinh(i), 2.0)
-     Complex::new(0.5 * @math.sin(2.0 * r) / d, 1.0 / (@basic.tanh(i) * f))
+     let d = @double.pow(@luna_math.cos(r), 2.0) + @double.pow(@luna_math.sinh(i), 2.0) 
+     let f = 1.0 + @double.pow(@luna_math.cos(r) / @luna_math.sinh(i), 2.0)
+     Complex::new(0.5 * @luna_math.sin(2.0 * r) / d, 1.0 / (@luna_math.tanh(i) * f))
   } 
 }
 ///|
@@ -463,10 +463,10 @@ pub fn Complex::arcsin(self : Complex) -> Complex {
     arcsin_real(re)
   }else{
 
-    let x = Double::abs(re)
-    let y = Double::abs(im)
-    let r = @basic.hypot(x + 1, y)
-    let s = @basic.hypot(x - 1, y)
+    let x = @luna_math.abs(re)
+    let y = @luna_math.abs(im)
+    let r = @luna_math.hypot(x + 1, y)
+    let s = @luna_math.hypot(x - 1, y)
     let a = 0.5 * (r + s)
     let b = x / a
     let y2 = y * y
@@ -475,15 +475,15 @@ pub fn Complex::arcsin(self : Complex) -> Complex {
     let mut imag = 0.0
 
     if b <= B_crossover {
-      real = @math.asin(b)
+      real = @luna_math.asin(b)
     }else{
       if x <= 1 {
         let d = 0.5 * (a + x) * (y2 / (r + x + 1.0)) + (s + (1.0 - x))
-        real = @math.atan (x / Double::sqrt(d))
+        real = @luna_math.atan (x / @luna_math.sqrt(d))
       }else{
         let apx = a + x
         let d = 0.5 * (apx / (r + x + 1.0) + apx / (s + (x - 1.0)))
-        real = @math.atan(x / (y * Double::sqrt(d)))
+        real = @luna_math.atan(x / (y * @luna_math.sqrt(d)))
       }
     }
 
@@ -494,9 +494,9 @@ pub fn Complex::arcsin(self : Complex) -> Complex {
       }else{
         am1 = 0.5 * (y2 / (r + (x + 1.0)) + (s + (x - 1.0)))
       }
-      imag = @basic.log1p(am1 + Double::sqrt(a * a - 1.0))
+      imag = @luna_math.log1p(am1 + @luna_math.sqrt(a * a - 1.0))
     }else{
-      imag = @math.ln(a + Double::sqrt(a * a - 1.0))
+      imag = @luna_math.ln(a + @luna_math.sqrt(a * a - 1.0))
     }
     Complex::new(
       if re >= 0 {real} else {-real},
@@ -507,12 +507,12 @@ pub fn Complex::arcsin(self : Complex) -> Complex {
 /// 计算实数的复数反正弦（arcsine）
 pub fn Complex::arcsin_real(x : Double) -> Complex{
   if x >= -1.0 && x <= 1.0 {
-    Complex::new(@math.asin(x), 0.0)
+    Complex::new(@luna_math.asin(x), 0.0)
   }else{
     if x < 0.0 {
-      Complex::new(-@math.PI / 2.0, @basic.acosh(-x))
+      Complex::new(-@luna_math.PI / 2.0, @luna_math.acosh(-x))
     }else{
-      Complex::new(@math.PI / 2.0, -@basic.acosh(x))
+      Complex::new(@luna_math.PI / 2.0, -@luna_math.acosh(x))
     }
   }
 }
@@ -524,10 +524,10 @@ pub fn Complex::arccos(self : Complex) -> Complex {
   if im == 0 {
     arccos_real(re)
   }else{
-    let x = Double::abs(re)
-    let y = Double::abs(im)
-    let r = @basic.hypot(x + 1, y)
-    let s = @basic.hypot(x - 1, y)
+    let x = @luna_math.abs(re)
+    let y = @luna_math.abs(im)
+    let r = @luna_math.hypot(x + 1, y)
+    let s = @luna_math.hypot(x - 1, y)
     let a = 0.5 * (r + s)
     let b = x / a
     let y2 = y * y
@@ -536,15 +536,15 @@ pub fn Complex::arccos(self : Complex) -> Complex {
     let mut imag = 0.0
 
     if b <= B_crossover {
-      real = @math.acos(b)
+      real = @luna_math.acos(b)
     }else{
       if x <= 1 {
         let d = 0.5 * (a + x) * (y2 / (r + x + 1.0) + (s + (1.0 - x)))
-        real = @math.atan(Double::sqrt(d) / x)
+        real = @luna_math.atan(@luna_math.sqrt(d) / x)
       }else{
         let apx = a + x
         let d = 0.5 * (apx / (r + x + 1.0) + apx / (s + (x - 1.0)))
-        real = @math.atan((y * Double::sqrt(d)) / x)
+        real = @luna_math.atan((y * @luna_math.sqrt(d)) / x)
       }
     }
     if a <= A_crossover {
@@ -555,12 +555,12 @@ pub fn Complex::arccos(self : Complex) -> Complex {
       }else {
         am1 = 0.5 * (y2 / (r + (x + 1)) + (s + (x - 1)))
       }
-      imag = @basic.log1p(am1 + Double::sqrt(am1 * (a + 1)))
+      imag = @luna_math.log1p(am1 + @luna_math.sqrt(am1 * (a + 1)))
     }else{
-      imag = @math.ln(a + Double::sqrt(a * a - 1.0))
+      imag = @luna_math.ln(a + @luna_math.sqrt(a * a - 1.0))
     }
     Complex::new(
-      if re >= 0 {real} else {@math.PI - real},
+      if re >= 0 {real} else {@luna_math.PI - real},
       if im >= 0 {-imag} else {imag})
   }
 }
@@ -569,12 +569,12 @@ pub fn Complex::arccos(self : Complex) -> Complex {
 /// 计算实数的复数反余弦
 pub fn Complex::arccos_real (x : Double) -> Complex {
   if x >= -1.0 && x <= 1.0 {
-    Complex::new(@math.acos(x), 0.0)
+    Complex::new(@luna_math.acos(x), 0.0)
   }else{
     if x < 0.0{
-      Complex::new(@math.PI, -@basic.acosh(-x))
+      Complex::new(@luna_math.PI, -@luna_math.acosh(-x))
     }else{
-      Complex::new(0, @basic.acosh(x))
+      Complex::new(0, @luna_math.acosh(x))
     }
   }
 }
@@ -584,34 +584,34 @@ pub fn arctan (self : Complex) -> Complex {
   let re = self.re
   let im = self.im
   if im == 0 {
-    Complex::new(@math.atan(re),0.0)
+    Complex::new(@luna_math.atan(re),0.0)
   }else{
     // FIXME: This is a naive implementation which does not fully
     // take into account cancellation errors, overflow, underflow
     // etc.  It would benefit from the Hull et al treatment.
-    let r = @basic.hypot(re,im)
+    let r = @luna_math.hypot(re,im)
     let mut imag = 0.0
     let u = 2.0 * im / (1.0 + r * r)
     //* FIXME: the following cross-over should be optimized but 0.1
     //  seems to work ok */
-    if Double::abs(u) < 0.1{
-      imag = 0.25 * (@basic.log1p(u) - @basic.log1p(-u))
+    if @luna_math.abs(u) < 0.1{
+      imag = 0.25 * (@luna_math.log1p(u) - @luna_math.log1p(-u))
     }else{
-      let a = @basic.hypot(re, im + 1.0)
-      let b = @basic.hypot(re, im - 1.0)
-      imag = 0.5 * @math.ln(a / b)
+      let a = @luna_math.hypot(re, im + 1.0)
+      let b = @luna_math.hypot(re, im - 1.0)
+      imag = 0.5 * @luna_math.ln(a / b)
     }
 
     if re == 0 {
       if im > 1.0{
-        Complex::new(@math.PI / 2.0, imag)
+        Complex::new(@luna_math.PI / 2.0, imag)
       }else if im < -1.0{
-        Complex::new(-@math.PI / 2.0, imag)
+        Complex::new(-@luna_math.PI / 2.0, imag)
       }else{
         Complex::new(0.0, imag)
       }
     }else{
-      Complex::new(0.5 * @math.atan2(2.0 * re, ((1.0 + r) * (1.0 - r))), imag)
+      Complex::new(0.5 * @luna_math.atan2(2.0 * re, ((1.0 + r) * (1.0 - r))), imag)
     }
   }
 }
@@ -624,12 +624,12 @@ pub fn Complex::arcsec(self : Complex) -> Complex {
 /// 计算实数的反正割
 pub fn Complex::aecsec_real(x : Double) -> Complex {
   if x <- -1.0 || x >= 1.0 {
-    Complex::new(@math.acos(1.0 / x), 0.0)
+    Complex::new(@luna_math.acos(1.0 / x), 0.0)
   }else{
     if x >= 0.0 {
-      Complex::new(0.0, @basic.acosh(1.0 / x))
+      Complex::new(0.0, @luna_math.acosh(1.0 / x))
     }else{
-      Complex::new(@math.PI, -@basic.acosh(-1.0 / x))
+      Complex::new(@luna_math.PI, -@luna_math.acosh(-1.0 / x))
     }
   }
 }
@@ -642,12 +642,12 @@ pub fn Complex::arccsc(self : Complex) -> Complex {
 /// 计算实数的反余割
 pub fn Complex::arccsc_real(x : Double) -> Complex {
   if x <= -1.0 || x >= 1.0 {
-    Complex::new(@math.asin(1.0 / x), 0.0)
+    Complex::new(@luna_math.asin(1.0 / x), 0.0)
   }else{
     if x >= 0.0{
-      Complex::new(@math.PI / 2.0, -@basic.acosh(1.0 / x))
+      Complex::new(@luna_math.PI / 2.0, -@luna_math.acosh(1.0 / x))
     }else{
-      Complex::new(-@math.PI / 2.0, @basic.acosh(-1.0 / x))
+      Complex::new(-@luna_math.PI / 2.0, @luna_math.acosh(-1.0 / x))
     }
   }
 }
@@ -655,7 +655,7 @@ pub fn Complex::arccsc_real(x : Double) -> Complex {
 /// 计算复数的反余切
 pub fn Complex::arccot(self : Complex) -> Complex {
   if self.re == 0.0 && self.im == 0.0 {
-    Complex::new(@math.PI / 2.0, 0.0)
+    Complex::new(@luna_math.PI / 2.0, 0.0)
   }else{
     self.inverse().arctan()
   }
@@ -668,26 +668,26 @@ pub fn Complex::arccot(self : Complex) -> Complex {
 pub fn Complex::sinh(self : Complex) -> Complex {
   let re = self.re
   let im = self.im
-  Complex::new(@basic.sinh(re) * @math.cos(im),
-                @basic.cosh(re) * @math.sin(im) )
+  Complex::new(@luna_math.sinh(re) * @luna_math.cos(im),
+                @luna_math.cosh(re) * @luna_math.sin(im) )
  }
  ///|
 pub fn Complex::cosh(self : Complex) -> Complex {
   let re = self.re
   let im = self.im
-  Complex::new(@basic.cosh(re) * @math.cos(im),
-                  @basic.sinh(re) * @math.sin(im))
+  Complex::new(@luna_math.cosh(re) * @luna_math.cos(im),
+                  @luna_math.sinh(re) * @luna_math.sin(im))
 }
 pub fn Complex::tanh(self : Complex) -> Complex {
   let re = self.re
   let im = self.im
   if re > -1.0 && re < 1.0 {
-    let d = Double::pow(@math.cos(im), 2.0) + Double::pow(@basic.sinh(re), 2.0)
-    Complex::new(@basic.sinh(re) * @basic.cosh(re) / d, 0.5 * @math.sin(2.0 * im) / d)
+    let d = @luna_math.pow(@luna_math.cos(im), 2.0) + @luna_math.pow(@luna_math.sinh(re), 2.0)
+    Complex::new(@luna_math.sinh(re) * @luna_math.cosh(re) / d, 0.5 * @luna_math.sin(2.0 * im) / d)
   }else{
-    let d = Double::pow(@math.cos(im), 2.0) + Double::pow(@basic.sinh(re), 2.0)
-    let f = 1.0 + Double::pow(@math.cos(im) / @basic.sinh(re), 2.0)
-    Complex::new(1.0 / (@basic.tanh(re) * f), 0.5 * @math.sin(2.0 * im) / d)
+    let d = @luna_math.pow(@luna_math.cos(im), 2.0) + @luna_math.pow(@luna_math.sinh(re), 2.0)
+    let f = 1.0 + @luna_math.pow(@luna_math.cos(im) / @luna_math.sinh(re), 2.0)
+    Complex::new(1.0 / (@luna_math.tanh(re) * f), 0.5 * @luna_math.sin(2.0 * im) / d)
   }
 }
 ///|
@@ -719,17 +719,19 @@ pub fn Complex::arccosh(self : Complex) -> Complex {
   z.mul_imag(  if z.im > 0 {-1.0} 
                else {1.0}   )
 }
+///|
 pub fn Complex::arccosh_real(x : Double) -> Complex {
   if x >= 1 {
-    Complex::new(@basic.acosh(x), 0.0)
+    Complex::new(@luna_math.acosh(x), 0.0)
   }else{
     if x >= -1.0 {
-      Complex::new(0, @math.acos(x))
+      Complex::new(0, @luna_math.acos(x))
     }else{
-      Complex::new(@basic.acosh(-x), @math.PI)
+      Complex::new(@luna_math.acosh(-x), @luna_math.PI)
     }
   }
 }
+///|
 pub fn Complex::arctanh(self : Complex) -> Complex {
   if self.im == 0.0 {
     arctanh_real(self.re)
@@ -739,21 +741,25 @@ pub fn Complex::arctanh(self : Complex) -> Complex {
     z.mul_imag(-1.0)
   }
 }
+///|
 pub fn Complex::arctanh_real(x : Double) -> Complex {
   if x > -1.0 && x < 1.0 {
-    Complex::new(@basic.atanh(x), 0.0)
+    Complex::new(@luna_math.atanh(x), 0.0)
   }else{
-    Complex::new(@basic.atanh(1.0 / x) ,
-                  if x < 0 {@math.PI / 2}
-                  else     {-@math.PI / 2})
+    Complex::new(@luna_math.atanh(1.0 / x) ,
+                  if x < 0 {@luna_math.PI / 2}
+                  else     {-@luna_math.PI / 2})
   }
 }
+///|
 pub fn Complex::arcsech(self : Complex) -> Complex {
   self.inverse().arccosh()
 }
+///|
 pub fn Complex::arccsch(self : Complex) -> Complex {
   self.inverse().arcsinh()
 }
+///|
 pub fn Complex::arccoth(self : Complex) -> Complex {
   self.inverse().arctanh()
 }

@@ -1,4 +1,8 @@
 ///|
+pub fn hypot(x : Double, y : Double) -> Double {
+  @luna_math.sqrt(x * x + y * y)
+}
+///|
 /// 双曲正弦函数
 pub fn sinh(x: Double) -> Double {
     (@math.exp(x) - @math.exp(-x)) / 2.0
