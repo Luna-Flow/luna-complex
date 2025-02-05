@@ -3,7 +3,8 @@
   "version": "0.0.1-alpha-1",
   "deps": {
     "Kaida-Amethyst/math": "0.1.13",
-    "KCN-judu/luna-utils": "0.0.1-alpha-2"
+    "KCN-judu/luna-utils": "0.0.1-alpha-2",
+    "Kaida-Amethyst/moonbit-math": "0.1.13"
   },
   "readme": "README.md",
   "repository": "https://github.com/Luna-Flow/luna-complex",

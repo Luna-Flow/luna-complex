@@ -1,7 +1,21 @@
 package KCN-judu/luna-complex/complex
 
 // Values
+fn acosh(Double) -> Double
+
+fn asinh(Double) -> Double
+
+fn atanh(Double) -> Double
+
+fn cosh(Double) -> Double
+
 fn hypot(Double, Double) -> Double
+
+fn log1p(Double) -> Double
+
+fn sinh(Double) -> Double
+
+fn tanh(Double) -> Double
 
 // Types and methods
 pub(all) struct Complex {
@@ -17,14 +31,43 @@ impl Complex {
   add_imag_inplace(Self, Double) -> Unit
   add_real(Self, Double) -> Self
   add_real_inplace(Self, Double) -> Unit
+  aecsec_real(Double) -> Self
+  arccos(Self) -> Self
+  arccos_real(Double) -> Self
+  arccosh(Self) -> Self
+  arccosh_real(Double) -> Self
+  arccot(Self) -> Self
+  arccoth(Self) -> Self
+  arccsc(Self) -> Self
+  arccsc_real(Double) -> Self
+  arccsch(Self) -> Self
+  arcsec(Self) -> Self
+  arcsech(Self) -> Self
+  arcsin(Self) -> Self
+  arcsin_real(Double) -> Self
+  arcsinh(Self) -> Self
+  arctan(Self) -> Self
+  arctanh(Self) -> Self
+  arctanh_real(Double) -> Self
   arg(Self) -> Double
   conjugate(Self) -> Self
   conjugate_inplace(Self) -> Unit
+  cos(Self) -> Self
+  cosh(Self) -> Self
+  cot(Self) -> Self
+  coth(Self) -> Self
+  csc(Self) -> Self
+  csch(Self) -> Self
   div(Self, Self) -> Unit
   div_imag(Self, Double) -> Self
   div_imag_inplace(Self, Double) -> Unit
   div_real(Self, Double) -> Self
   div_real_inplace(Self, Double) -> Unit
+  exp(Self) -> Self
+  inverse(Self) -> Self
+  log(Self) -> Self
+  log10(Self) -> Self
+  log_b(Self, Self) -> Self
   mul(Self, Self) -> Unit
   mul_imag(Self, Double) -> Self
   mul_imag_inplace(Self, Double) -> Unit
@@ -40,53 +83,24 @@ impl Complex {
   op_sub(Self, Self) -> Self
   pack(Self, Array[Double], Int) -> Unit
   polar(Double, Double) -> Self
+  pow(Self, Self) -> Self
+  pow_real(Self, Double) -> Self
+  sec(Self) -> Self
+  sech(Self) -> Self
   set(Self, Double, Double) -> Unit
   set_im(Self, Double) -> Unit
   set_re(Self, Double) -> Unit
+  sin(Self) -> Self
+  sinh(Self) -> Self
   sqrt(Self) -> Self
+  sqrt_real(Double) -> Self
   sub(Self, Self) -> Unit
   sub_imag(Self, Double) -> Self
   sub_imag_inplace(Self, Double) -> Unit
   sub_real(Self, Double) -> Self
   sub_real_inplace(Self, Double) -> Unit
-
-  
-  exp(Self) -> Self
-  pow(Self, Double) -> Self
-  pow_real(Self, Double) -> Self
-  log(Self) -> Self
-  log10(Self) -> Self
-  log_b(Self, Self) -> Self
-  sin(Self) -> Self
-  cos(Self) -> Self
   tan(Self) -> Self
-  sec(Self) -> Self
-  csc(Self) -> Self
-  cot(Self) -> Self
-  arcsin(Self) -> Self
-  arcsin_real(Double) -> Self
-  arccos(Self) -> Self
-  arccos_real(Double) -> Self
-  arctan(Self) -> Self
-  arcsec(Self) -> Self
-  arcsec_real(Double) -> Self
-  arccsc(Self) -> Self
-  arccsc_real(Double) -> Self
-  arccot(Self) -> Self
-  sinh(Self) -> Self
-  cosh(Self) -> Self
   tanh(Self) -> Self
-  sech(Self) -> Self
-  csch(Self) -> Self
-  coth(Self) -> Self
-  arcsinh(Self) -> Self
-  arccosh(Self) -> Self
-  arccosh_real(Double) -> Self
-  arctanh(Self) -> Self
-  arctanh_real(Double) -> Self
-  arcsech(Self) -> Self
-  arccsch(Self) -> Self
-  arccoth(Self) -> Self
 }
 impl Eq for Complex
 
