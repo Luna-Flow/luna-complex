@@ -1,21 +1,6 @@
 package KCN-judu/luna-complex/complex
 
 // Values
-fn acosh(Double) -> Double
-
-fn asinh(Double) -> Double
-
-fn atanh(Double) -> Double
-
-fn cosh(Double) -> Double
-
-fn hypot(Double, Double) -> Double
-
-fn log1p(Double) -> Double
-
-fn sinh(Double) -> Double
-
-fn tanh(Double) -> Double
 
 // Types and methods
 pub(all) struct Complex {
