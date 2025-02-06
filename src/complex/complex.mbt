@@ -462,11 +462,11 @@ const A_crossover = 1.5
 const B_crossover = 0.6417
 
 ///|
-pub fn Complex::arcsin(self : Complex) -> Complex {
+pub fn Complex::asin(self : Complex) -> Complex {
   let re = self.re
   let im = self.im
   if im == 0 {
-    Complex::arcsin_real(re)
+    Complex::asin_real(re)
   } else {
     let x = Double::abs(re)
     let y = Double::abs(im)
@@ -514,7 +514,7 @@ pub fn Complex::arcsin(self : Complex) -> Complex {
 }
 
 ///|
-pub fn Complex::arcsin_real(x : Double) -> Complex {
+pub fn Complex::asin_real(x : Double) -> Complex {
   if x >= -1.0 && x <= 1.0 {
     Complex::new(@luna_math.asin(x), 0.0)
   } else if x < 0.0 {
@@ -525,11 +525,11 @@ pub fn Complex::arcsin_real(x : Double) -> Complex {
 }
 
 ///|
-pub fn Complex::arccos(self : Complex) -> Complex {
+pub fn Complex::acos(self : Complex) -> Complex {
   let re = self.re
   let im = self.im
   if im == 0 {
-    Complex::arccos_real(re)
+    Complex::acos_real(re)
   } else {
     let x = Double::abs(re)
     let y = Double::abs(im)
@@ -577,7 +577,7 @@ pub fn Complex::arccos(self : Complex) -> Complex {
 }
 
 ///|
-pub fn Complex::arccos_real(x : Double) -> Complex {
+pub fn Complex::acos_real(x : Double) -> Complex {
   if x >= -1.0 && x <= 1.0 {
     Complex::new(@luna_math.acos(x), 0.0)
   } else if x < 0.0 {
@@ -588,7 +588,7 @@ pub fn Complex::arccos_real(x : Double) -> Complex {
 }
 
 ///|
-pub fn arctan(self : Complex) -> Complex {
+pub fn atan(self : Complex) -> Complex {
   let re = self.re
   let im = self.im
   if im == 0 {
@@ -627,8 +627,8 @@ pub fn arctan(self : Complex) -> Complex {
 }
 
 ///|
-pub fn Complex::arcsec(self : Complex) -> Complex {
-  self.inverse().arccos()
+pub fn Complex::asec(self : Complex) -> Complex {
+  self.inverse().acos()
 }
 
 ///|
@@ -643,12 +643,12 @@ pub fn Complex::aecsec_real(x : Double) -> Complex {
 }
 
 ///|
-pub fn Complex::arccsc(self : Complex) -> Complex {
-  self.inverse().arcsin()
+pub fn Complex::acsc(self : Complex) -> Complex {
+  self.inverse().asin()
 }
 
 ///|
-pub fn Complex::arccsc_real(x : Double) -> Complex {
+pub fn Complex::acsc_real(x : Double) -> Complex {
   if x <= -1.0 || x >= 1.0 {
     Complex::new(@luna_math.asin(1.0 / x), 0.0)
   } else if x >= 0.0 {
@@ -659,11 +659,11 @@ pub fn Complex::arccsc_real(x : Double) -> Complex {
 }
 
 ///|
-pub fn Complex::arccot(self : Complex) -> Complex {
+pub fn Complex::acot(self : Complex) -> Complex {
   if self.re == 0.0 && self.im == 0.0 {
     Complex::new(@luna_math.PI / 2.0, 0.0)
   } else {
-    self.inverse().arctan()
+    self.inverse().atan()
   }
 }
 
@@ -729,20 +729,20 @@ pub fn Complex::coth(self : Complex) -> Complex {
 // Inverse Complex Hyperbolic Functions
 
 ///|
-pub fn Complex::arcsinh(self : Complex) -> Complex {
+pub fn Complex::asinh(self : Complex) -> Complex {
   let mut z = Complex::mul_imag(self, 1.0)
-  z = z.arcsin()
+  z = z.asin()
   z.mul_imag(-1.0)
 }
 
 ///|
-pub fn Complex::arccosh(self : Complex) -> Complex {
-  let z = self.arccos()
+pub fn Complex::acosh(self : Complex) -> Complex {
+  let z = self.acos()
   z.mul_imag(if z.im > 0 { -1.0 } else { 1.0 })
 }
 
 ///|
-pub fn Complex::arccosh_real(x : Double) -> Complex {
+pub fn Complex::acosh_real(x : Double) -> Complex {
   if x >= 1 {
     Complex::new(@luna_math.acosh(x), 0.0)
   } else if x >= -1.0 {
@@ -753,18 +753,18 @@ pub fn Complex::arccosh_real(x : Double) -> Complex {
 }
 
 ///|
-pub fn Complex::arctanh(self : Complex) -> Complex {
+pub fn Complex::atanh(self : Complex) -> Complex {
   if self.im == 0.0 {
-    Complex::arctanh_real(self.re)
+    Complex::atanh_real(self.re)
   } else {
     let mut z = Complex::mul_imag(self, 1.0)
-    z = z.arctan()
+    z = z.atan()
     z.mul_imag(-1.0)
   }
 }
 
 ///|
-pub fn Complex::arctanh_real(x : Double) -> Complex {
+pub fn Complex::atanh_real(x : Double) -> Complex {
   if x > -1.0 && x < 1.0 {
     Complex::new(@luna_math.atanh(x), 0.0)
   } else {
@@ -780,18 +780,18 @@ pub fn Complex::arctanh_real(x : Double) -> Complex {
 }
 
 ///|
-pub fn Complex::arcsech(self : Complex) -> Complex {
-  self.inverse().arccosh()
+pub fn Complex::asech(self : Complex) -> Complex {
+  self.inverse().acosh()
 }
 
 ///|
-pub fn Complex::arccsch(self : Complex) -> Complex {
-  self.inverse().arcsinh()
+pub fn Complex::acsch(self : Complex) -> Complex {
+  self.inverse().asinh()
 }
 
 ///|
-pub fn Complex::arccoth(self : Complex) -> Complex {
-  self.inverse().arctanh()
+pub fn Complex::acoth(self : Complex) -> Complex {
+  self.inverse().atanh()
 }
 
 //prop

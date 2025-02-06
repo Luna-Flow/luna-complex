@@ -186,11 +186,11 @@ test "Complex/trigonometric functions" {
 }
 
 test "Complex/inverse trigonometric functions" {
-  // For real numbers, arcsin and arccos should return real values.
+  // For real numbers, asin and acos should return real values.
   let z = Complex::new(0.5, 0.0)
-  let asin_z = z.arcsin()
-  let acos_z = z.arccos()
-  // Check that the sum of arcsin and arccos is close to π/2.
+  let asin_z = z.asin()
+  let acos_z = z.acos()
+  // Check that the sum of asin and acos is close to π/2.
   assert_eq!(
     approx_equal(asin_z.re + acos_z.re, @luna_math.PI / 2.0, Tol),
     true,
@@ -207,14 +207,14 @@ test "Complex/hyperbolic functions" {
 }
 
 test "Complex/inverse hyperbolic functions" {
-  // Test arcsinh: arcsinh(0) should be 0.
+  // Test asinh: asinh(0) should be 0.
   let z0 = Complex::new(0.0, 0.0)
-  let asinhz = z0.arcsinh()
+  let asinhz = z0.asinh()
   assert_eq!(complex_approx_equal(asinhz, Complex::new(0.0, 0.0), Tol), true)
 
-  // Test arctanh for a small real number.
+  // Test atanh for a small real number.
   let z1 = Complex::new(0.5, 0.0)
-  let atanhz = z1.arctanh()
+  let atanhz = z1.atanh()
   let expected_atanh = Complex::new(@luna_math.atanh(0.5), 0.0)
   assert_eq!(complex_approx_equal(atanhz, expected_atanh, Tol), true)
 }
