@@ -89,7 +89,19 @@ pub fn Complex::abs(self : Complex) -> Double {
 
 ///|
 pub fn Complex::abs_sqr(self : Complex) -> Double {
-  self.re * self.re + self.im * self.im
+  //self.re * self.re + self.im * self.im
+
+  // to avoid re*re + im*im too large,so use the following code
+  let re_abs = self.re.abs()
+  let im_abs = self.im.abs()
+  let max_val = @luna_utils.max(re_abs, im_abs)
+  // avoid 0.0
+  if max_val == 0.0 {
+    return 0.0
+  }
+  let re_scaled = self.re / max_val
+  let im_scaled = self.im / max_val
+  return max_val * max_val * (re_scaled * re_scaled + im_scaled * im_scaled)
 }
 
 ///|
@@ -399,7 +411,7 @@ pub fn Complex::cos(self : Complex) -> Complex {
   } else {
     return Complex::new(
       @luna_math.cos(self.re) * @luna_math.cosh(self.im),
-      @luna_math.sin(self.re) * @luna_math.sinh(self.im),
+      @luna_math.sin(self.re) * @luna_math.sinh(-self.im),
     )
   }
 }
