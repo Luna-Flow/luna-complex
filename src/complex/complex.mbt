@@ -456,10 +456,10 @@ pub fn Complex::cot(self : Complex) -> Complex {
 // Inverse Complex Trigonometric Functions
 
 ///|
-const A_crossover = 1.5
+const A_CROSSOVER = 1.5
 
 ///|
-const B_crossover = 0.6417
+const B_CROSSOVER = 0.6417
 
 ///|
 pub fn Complex::asin(self : Complex) -> Complex {
@@ -477,7 +477,7 @@ pub fn Complex::asin(self : Complex) -> Complex {
     let y2 = y * y
     let mut real = 0.0
     let mut imag = 0.0
-    if b <= B_crossover {
+    if b <= B_CROSSOVER {
       real = @luna_math.asin(b)
     } else if x <= 1 {
       let d = 0.5 * (a + x) * (y2 / (r + x + 1.0)) + (s + (1.0 - x))
@@ -487,7 +487,7 @@ pub fn Complex::asin(self : Complex) -> Complex {
       let d = 0.5 * (apx / (r + x + 1.0) + apx / (s + (x - 1.0)))
       real = @luna_math.atan(x / (y * @luna_math.sqrt(d)))
     }
-    if a <= A_crossover {
+    if a <= A_CROSSOVER {
       let mut am1 = 0.0
       if x < 1 {
         am1 = 0.5 * (y2 / (r + (x + 1.0)) + y2 / (s + (1.0 - x)))
@@ -540,7 +540,7 @@ pub fn Complex::acos(self : Complex) -> Complex {
     let y2 = y * y
     let mut real = 0.0
     let mut imag = 0.0
-    if b <= B_crossover {
+    if b <= B_CROSSOVER {
       real = @luna_math.acos(b)
     } else if x <= 1 {
       let d = 0.5 * (a + x) * (y2 / (r + x + 1.0) + (s + (1.0 - x)))
@@ -550,7 +550,7 @@ pub fn Complex::acos(self : Complex) -> Complex {
       let d = 0.5 * (apx / (r + x + 1.0) + apx / (s + (x - 1.0)))
       real = @luna_math.atan(y * @luna_math.sqrt(d) / x)
     }
-    if a <= A_crossover {
+    if a <= A_CROSSOVER {
       let mut am1 = 0.0
       if x < 1 {
         am1 = 0.5 * (y2 / (r + (x + 1)) + y2 / (s + (1.0 - x)))
