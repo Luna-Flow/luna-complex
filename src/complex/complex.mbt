@@ -326,7 +326,7 @@ pub fn Complex::sqrt_real(self : Double) -> Complex {
 
 ///|
 pub fn Complex::exp(self : Complex) -> Complex {
-  let rho = @luna_math.exp(self.re) //计算e^re
+  let rho = @luna_math.exp(self.re) 
   let thete = self.im
   Complex::new(rho * @luna_math.cos(thete), rho * @luna_math.sin(thete))
 }
@@ -348,7 +348,7 @@ pub fn Complex::pow(self : Complex, other : Complex) -> Complex {
     let theta = self.arg()
     let oreal = other.re
     let oimag = other.im
-    let rho = @luna_math.log(logr * oreal - oimag * theta)
+    let rho = @luna_math.exp(logr * oreal - oimag * theta)
     let beta = theta * oreal + oimag * logr
     return Complex::new(rho * @luna_math.cos(beta), rho * @luna_math.sin(beta))
   }

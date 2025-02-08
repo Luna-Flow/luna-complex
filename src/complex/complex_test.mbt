@@ -125,9 +125,53 @@ test "Complex/real operations" {
   assert_eq!(complex_approx_equal(z_div, expected_div, Tol), true)
 }
 
+test "Complex/imag operation" {
+  let z = Complex::new(3.0, 4.0)
+
+  // Test multiplying by a imag.(3+4i) + (2i) = (3+6i)
+  let z_add = z.add_imag(2.0);
+  let except_add = Complex::new(3.0, 6.0)
+  assert_eq!(complex_approx_equal(z_add, except_add, Tol), true)
+
+  // Test multiplying by a imag.(3+4i) * (2i) = (-8+6i)
+  let z_mul = z.mul_imag(2.0)
+  let except_mul = Complex::new(-8.0, 6.0)
+  assert_eq!(complex_approx_equal(z_mul, except_mul, Tol), true)
+
+  // Test subtracting a imag.(3+4i) - (2i) = (3+2i)
+  let z_sub = z.sub_imag(2.0)
+  let except_sub = Complex::new(3.0, 2.0)
+  assert_eq!(complex_approx_equal(z_sub, except_sub, Tol), true)
+
+  // Test dividing by a imag.(3+4i) / (2i) = [(3+4i)*(-2i)] / 4 = (2-1.5i)
+  let z_div = z.div_imag(2.0)
+  let except_div = Complex::new(2.0, -1.5)
+  assert_eq!(complex_approx_equal(z_div, except_div, Tol), true)
+}
+
+test "Complex/conjugate, inverse, neg and sqrt" {
+  let z = Complex::new(3.0, 4.0)
+
+  // Test conjugate: conjugate(3+4i) = (3-4i)
+  let z_conjugate = z.conjugate()
+  assert_eq!(complex_approx_equal(z_conjugate, Complex::new(3.0, -4.0), Tol), true)
+
+  //Test inverse: inverse(3+4i) = (3-4i) / 25
+  let z_inverse = z.inverse()
+  assert_eq!(complex_approx_equal(z_inverse, Complex::new(3.0/25.0, -4.0/25.0), Tol), true)
+
+  //Test neg: -(3+4i) = (-3-4i)
+  let z_neg = -(z)
+  assert_eq!(complex_approx_equal(z_neg, Complex::new(-3.0,-4.0), Tol), true)
+
+  //Test sqrt: sqrt(-7+24i) = (3+4i)
+  z.set(-7,24)
+  let z_sqrt = z.sqrt()
+  assert_eq!(complex_approx_equal(z_sqrt, Complex::new(3.0, 4.0), Tol), true)
+}
+
 test "Complex/exp and log functions" {
-  // Test exp: exp(0+0i) should equal 1+0i.
-  // exp(1+1i) should equal [e^1*cos(1) + e^1*sin(1)i]
+  // Test exp: exp(1+1i) = [e^1*cos(1) + e^1*sin(1)i] 
   let z0 = Complex::new(0.0, 0.0)
   let exp0 = z0.exp()
   z0.set(1.0,1.0)
@@ -139,8 +183,18 @@ test "Complex/exp and log functions" {
   assert_eq!(complex_approx_equal(exp0, expected_exp0, Tol), true)
   assert_eq!(complex_approx_equal(exp1, expected_exp1, Tol), true)
 
-  // Test log: For a positive real number, log(z) should be (ln(|z|),0)
-  // ln(10+10i) = [(ln(10)+ln(2)/2) + (PI/4)i]
+  // Test pow: (1+i)^ (1+i) = e^ [(1+i)ln(1+i)]
+  let ba_po = Complex::new(1.0, 1.0)
+  let z_pow = ba_po.pow(ba_po)
+  let expected_pow = (ba_po.log() * ba_po).exp()
+  assert_eq!(complex_approx_equal(z_pow, expected_pow, 0.1), true)
+
+  // Test pow_real: (1+i)^2 = (2i)
+  let z_pow_real = ba_po.pow_real(2.0)
+  let expected_pow_real = Complex::new(0.0, 2.0)
+  assert_eq!(complex_approx_equal(z_pow_real, expected_pow_real, Tol), true)
+
+  // Test log:ln(10+10i) = [(ln(10)+ln(2)/2) + (PI/4)i] 
   let z1 = Complex::new(10.0, 10.0)
   let logz = z1.log()
   let expected_log = Complex::new(
@@ -180,21 +234,61 @@ test "Complex/trigonometric functions" {
   assert_eq!(complex_approx_equal(cosz, expected_cos, Tol), true)
 
   // Test tan for a real angle
+  // tan(a+bi) = sin(a+bi) / cos(a+bi)
   let tanz = z.tan()
-  let expected_tan = expected_sin / expected_cos
+  let expected_tan = sinz / cosz
   assert_eq!(complex_approx_equal(tanz, expected_tan, Tol), true)
+
+  //Test sec for a real angle
+  //sec(a+bi) = 1 / cos(a+bi)
+  let secz = z.sec()
+  let expected_sec = cosz.inverse()
+  assert_eq!(complex_approx_equal(secz, expected_sec, Tol), true)
+
+  //Test csc for a real angle
+  //csc(a+bi) = 1 / csc(a+bi)
+  let cscz = z.csc()
+  let expected_csc = sinz.inverse()
+  assert_eq!(complex_approx_equal(cscz, expected_csc, Tol), true)
+
+  //Test cot for a real angle
+  let cot = z.cot()
+  let expected_cot = tanz.inverse()
+  assert_eq!(complex_approx_equal(cot, expected_cot, Tol), true)
 }
 
 test "Complex/inverse trigonometric functions" {
-  // For real numbers, asin and acos should return real values.
+  // Test asin_real && acos_real.
+  // asin_real(0.5) + acos_real(0.5) = PI/2
   let z = Complex::new(0.5, 0.0)
-  let asin_z = z.asin()
-  let acos_z = z.acos()
-  // Check that the sum of asin and acos is close to π/2.
+  let asin_real_z = z.asin()
+  let acos_real_z = z.acos()
   assert_eq!(
-    approx_equal(asin_z.re + acos_z.re, @luna_math.PI / 2.0, Tol),
+    approx_equal(asin_real_z.re + acos_real_z.re, @luna_math.PI / 2.0, Tol),
     true,
   )
+
+  // Test asin: asin(1+i) = (−i) * ln[(−1+i) + (1−2i).sqrt()]
+  // asin(z) = (-i) * ln[(-i) * z + (1 - z^2).sqrt()]
+  z.set(1.0, 1.0)
+  let asin_z = z.asin()
+  let expected_asin = Complex::log(Complex::new(-1.0, 1.0) + Complex::new(1, -2).sqrt()).mul_imag(-1.0)
+  assert_eq!(complex_approx_equal(asin_z, expected_asin, Tol), true)
+
+  // Test acos: acos(1+i) = (-i) * ln[(1+i) + (i) * (1-2i).sqrt()]
+  // acos(z) = (-i) * ln[z + (-i) * (1 - z^2).sqrt()]
+  let acos_z = z.acos()
+  let expected_acos = Complex::log(Complex::new(1.0, 1.0) + Complex::new(1, -2).sqrt().mul_imag(1.0)).mul_imag(-1.0)
+  assert_eq!(complex_approx_equal(acos_z, expected_acos, Tol), true)
+
+  // Test atan: atan(z) = (1/(2i)) * ln((1 + iz)/(1 - iz))
+  // z = 1+i; 1+iz = i; 1-iz = 2-i
+  let atan_z = z.atan()
+  let expected_atan = Complex::new(0.0, 2.0).inverse() * (Complex::new(0.0, 1.0) / Complex::new(2.0, -1.0)).log()
+  assert_eq!(complex_approx_equal(atan_z, expected_atan, Tol), true)
+
+  // asec、acsc、acot functions are based on asin、acos、atan and inverse functions.
+  // So I skipped the tests for the three items
 }
 
 test "Complex/hyperbolic functions" {
