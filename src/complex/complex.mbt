@@ -100,7 +100,7 @@ pub fn Complex::abs_log(self : Complex) -> Double {
   } else {
     t = re_abs / im_abs
   }
-  @math.ln(@luna_utils.max(re_abs, im_abs)) + 0.5 * @math.ln(1.0 + t * t)
+  @math.ln(@math.maximum(re_abs, im_abs)) + 0.5 * @math.ln(1.0 + t * t)
 }
 
 ///|
