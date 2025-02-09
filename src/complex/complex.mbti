@@ -11,30 +11,30 @@ impl Complex {
   abs(Self) -> Double
   abs_log(Self) -> Double
   abs_sqr(Self) -> Double
+  acos(Self) -> Self
+  acos_real(Double) -> Self
+  acosh(Self) -> Self
+  acosh_real(Double) -> Self
+  acot(Self) -> Self
+  acoth(Self) -> Self
+  acsc(Self) -> Self
+  acsc_real(Double) -> Self
+  acsch(Self) -> Self
   add(Self, Self) -> Unit
   add_imag(Self, Double) -> Self
   add_imag_inplace(Self, Double) -> Unit
   add_real(Self, Double) -> Self
   add_real_inplace(Self, Double) -> Unit
   aecsec_real(Double) -> Self
-  arccos(Self) -> Self
-  arccos_real(Double) -> Self
-  arccosh(Self) -> Self
-  arccosh_real(Double) -> Self
-  arccot(Self) -> Self
-  arccoth(Self) -> Self
-  arccsc(Self) -> Self
-  arccsc_real(Double) -> Self
-  arccsch(Self) -> Self
-  arcsec(Self) -> Self
-  arcsech(Self) -> Self
-  arcsin(Self) -> Self
-  arcsin_real(Double) -> Self
-  arcsinh(Self) -> Self
-  arctan(Self) -> Self
-  arctanh(Self) -> Self
-  arctanh_real(Double) -> Self
   arg(Self) -> Double
+  asec(Self) -> Self
+  asech(Self) -> Self
+  asin(Self) -> Self
+  asin_real(Double) -> Self
+  asinh(Self) -> Self
+  atan(Self) -> Self
+  atanh(Self) -> Self
+  atanh_real(Double) -> Self
   conjugate(Self) -> Self
   conjugate_inplace(Self) -> Unit
   cos(Self) -> Self

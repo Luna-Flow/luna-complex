@@ -94,7 +94,7 @@ pub fn Complex::abs_sqr(self : Complex) -> Double {
   // to avoid re*re + im*im too large,so use the following code
   let re_abs = self.re.abs()
   let im_abs = self.im.abs()
-  let max_val = @luna_utils.max(re_abs, im_abs)
+  let max_val = @math.maximum(re_abs, im_abs)
   // avoid 0.0
   if max_val == 0.0 {
     return 0.0
@@ -114,7 +114,7 @@ pub fn Complex::abs_log(self : Complex) -> Double {
   } else {
     t = re_abs / im_abs
   }
-  @luna_math.log(@luna_utils.max(re_abs, im_abs)) +
+  @luna_math.log(@math.maximum(re_abs, im_abs)) +
   0.5 * @luna_math.log(1.0 + t * t)
 }
 

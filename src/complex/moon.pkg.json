@@ -1,10 +1,6 @@
 {
 	"import": [
 		{
-			"path": "KCN-judu/luna-utils",
-			"alias": "luna_utils"
-		},
-		{
 			"path": "Kaida-Amethyst/math",
 			"alias": "luna_math"
 		}
