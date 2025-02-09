@@ -33,7 +33,7 @@ test "Complex/setters" {
 
 test "Complex/native_pack and pack" {
   let z = Complex::new(1.5, -3.0)
-  let arr = Array::make(10,0.0) // array of sufficient length (holds 5 complex numbers)
+  let arr = Array::make(10, 0.0) // array of sufficient length (holds 5 complex numbers)
   // Pack using native_pack directly.
   Complex::native_pack(z.re, z.im, arr, 1)
   // Verify that arr[2] and arr[3] hold the correct values.
@@ -42,7 +42,7 @@ test "Complex/native_pack and pack" {
   inspect!(arr[3], content="-3")
 
   // Pack using the object's pack method.
-  let arr2 = Array::make(10,0.0)
+  let arr2 = Array::make(10, 0.0)
   z.pack(arr2, 2)
   inspect!(arr2[4], content="1.5")
   inspect!(arr2[5], content="-3")
@@ -97,7 +97,7 @@ test "Complex/basic arithmetic" {
   // Division (operator version)
   let f = a.op_div(b)
   // (2+3i)*(4+i)/(4*4+1*1) = (5+14i)/17
-  let expected_div = Complex::new(5.0 / 17.0 , 14.0 / 17.0)
+  let expected_div = Complex::new(5.0 / 17.0, 14.0 / 17.0)
   assert_eq!(complex_approx_equal(f, expected_div, Tol), true)
 }
 
@@ -130,12 +130,13 @@ test "Complex/exp and log functions" {
   // exp(1+1i) should equal [e^1*cos(1) + e^1*sin(1)i]
   let z0 = Complex::new(0.0, 0.0)
   let exp0 = z0.exp()
-  z0.set(1.0,1.0)
+  z0.set(1.0, 1.0)
   let exp1 = z0.exp()
   let expected_exp0 = Complex::new(1.0, 0.0)
   let expected_exp1 = Complex::new(
     @luna_math.exp(1.0) * @luna_math.cos(1),
-    @luna_math.exp(1.0) * @luna_math.sin(1.0))
+    @luna_math.exp(1.0) * @luna_math.sin(1.0),
+  )
   assert_eq!(complex_approx_equal(exp0, expected_exp0, Tol), true)
   assert_eq!(complex_approx_equal(exp1, expected_exp1, Tol), true)
 
@@ -144,8 +145,9 @@ test "Complex/exp and log functions" {
   let z1 = Complex::new(10.0, 10.0)
   let logz = z1.log()
   let expected_log = Complex::new(
-    @luna_math.log(10.0) + (@luna_math.log(2)/2),
-    @luna_math.PI/4)
+    @luna_math.log(10.0) + @luna_math.log(2) / 2,
+    @luna_math.PI / 4,
+  )
   assert_eq!(complex_approx_equal(logz, expected_log, Tol), true)
 
   // Test log10: log10(10+10i) should be [ln(10+10i) / ln(10)].
@@ -168,7 +170,8 @@ test "Complex/trigonometric functions" {
   let sinz = z.sin()
   let expected_sin = Complex::new(
     @luna_math.sin(1) * @luna_math.cosh(1),
-    @luna_math.cos(1) * @luna_math.sinh(1))
+    @luna_math.cos(1) * @luna_math.sinh(1),
+  )
   assert_eq!(complex_approx_equal(sinz, expected_sin, Tol), true)
 
   // Test cos for a real angle
@@ -176,7 +179,8 @@ test "Complex/trigonometric functions" {
   let cosz = z.cos()
   let expected_cos = Complex::new(
     @luna_math.cos(1) * @luna_math.cosh(1),
-    -@luna_math.sin(1) * @luna_math.sinh(1))
+    -@luna_math.sin(1) * @luna_math.sinh(1),
+  )
   assert_eq!(complex_approx_equal(cosz, expected_cos, Tol), true)
 
   // Test tan for a real angle
