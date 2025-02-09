@@ -1,6 +1,7 @@
 moon fmt
 moon check
 moon info
+moon clean
 moon coverage clean
 moon test --enable-coverage
 moon coverage report -f summary > coverage_summary.txt
