@@ -1,8 +1,7 @@
 {
   "name": "KCN-judu/luna-complex",
-  "version": "0.0.1-alpha-2",
+  "version": "0.0.1-alpha-3",
   "deps": {
-    "KCN-judu/luna-utils": "0.0.1-alpha-2",
     "Kaida-Amethyst/math": "0.1.13"
   },
   "readme": "README.md",
