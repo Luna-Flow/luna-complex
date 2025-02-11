@@ -37,7 +37,6 @@ test "Complex/native_pack and pack" {
   // Pack using native_pack directly.
   Complex::native_pack(z.re, z.im, arr, 1)
   // Verify that arr[2] and arr[3] hold the correct values.
-  println(arr)
   inspect!(arr[2], content="1.5")
   inspect!(arr[3], content="-3")
 
@@ -184,7 +183,7 @@ test "Complex/exp and log functions" {
   assert_eq!(complex_approx_equal(exp0, expected_exp0, Tol), true)
   assert_eq!(complex_approx_equal(exp1, expected_exp1, Tol), true)
 
-  // Test pow: (1+i)^ (1+i) = e^ [(1+i)ln(1+i)]
+  // Test pow: (1+i)^ (1+i) = e^ [(1+i) * ln(1+i)]
   let ba_po = Complex::new(1.0, 1.0)
   let z_pow = ba_po.pow(ba_po)
   let expected_pow = (ba_po.log() * ba_po).exp()
@@ -296,25 +295,63 @@ test "Complex/inverse trigonometric functions" {
 }
 
 test "Complex/hyperbolic functions" {
-  let z = Complex::new(1.0, 0.0)
+  let z = Complex::new(1.0, 1.0)
+
+  //Test sinh: sinh(1+i) = sinh(1)⋅cos(1) + cosh(1)⋅sin(1)i
   let sinhz = z.sinh()
+  let excepted_sinh = Complex::new(
+    @luna_math.sinh(1) * @luna_math.cos(1),
+    @luna_math.cosh(1) * @luna_math.sin(1),
+  ) 
+  assert_eq!(complex_approx_equal(sinhz, excepted_sinh, Tol), true)
+
+  //Test cosh: cosh(1+i) = cosh(1)⋅cos(1) + sinh(1)⋅sin(1)i
   let coshz = z.cosh()
-  // For real numbers: cosh^2 - sinh^2 = 1
-  let diff = @luna_math.pow(coshz.re, 2.0) - @luna_math.pow(sinhz.re, 2.0)
-  assert_eq!(approx_equal(diff, 1.0, Tol), true)
+  let excepted_cosh = Complex::new(
+    @luna_math.cosh(1) * @luna_math.cos(1),
+    @luna_math.sinh(1) * @luna_math.sin(1),
+  )
+  assert_eq!(complex_approx_equal(coshz, excepted_cosh, Tol), true)
+
+  //Test tanh: tanh = sinh / cosh
+  let tanhz = z.tanh()
+  let excepted_tanh = excepted_sinh / excepted_cosh
+  assert_eq!(complex_approx_equal(tanhz, excepted_tanh, Tol), true)
+  
+  //sech、csch、coth functions is based on sinh、cosh、tanh
+  //So I skipped the tests for the three items
 }
 
 test "Complex/inverse hyperbolic functions" {
-  // Test asinh: asinh(0) should be 0.
-  let z0 = Complex::new(0.0, 0.0)
-  let asinhz = z0.asinh()
-  assert_eq!(complex_approx_equal(asinhz, Complex::new(0.0, 0.0), Tol), true)
+  let z = Complex::new(1.0, 1.0)
 
-  // Test atanh for a small real number.
-  let z1 = Complex::new(0.5, 0.0)
-  let atanhz = z1.atanh()
-  let expected_atanh = Complex::new(@luna_math.atanh(0.5), 0.0)
-  assert_eq!(complex_approx_equal(atanhz, expected_atanh, Tol), true)
+  // Test asinh: asinh(1+i) = ln(1 + i + (1+2i).sqrt())
+  let asinhz = z.asinh()
+  let excepted_asinh = (Complex::new(1, 2).sqrt() + Complex::new(1, 1)).log()
+  assert_eq!(complex_approx_equal(asinhz, excepted_asinh, Tol), true)
+
+  // Test acosh: acosh(1+i) = ln(1 + i + (2i−1).sqrt())
+  let acoshz = z.acosh()
+  let expected_acosh = (Complex::new(-1, 2).sqrt() + Complex::new(1, 1)).log()
+  assert_eq!(complex_approx_equal(acoshz, expected_acosh, Tol), true)
+
+  // Test atanh: atanh(1+i) = 0.5 * ln(-1 + 2i)
+  let atanz = z.atanh()
+  let expected_atanh = Complex::new(-1, 2).log().mul_real(0.5)
+  assert_eq!(complex_approx_equal(atanz, expected_atanh, Tol), true)
+
+  //Test acosh_real: acosh_real(0.5) = ln(0.5 + (sqrt(3) / 2) * i)
+  let acos_real = Complex::acosh_real(0.5)
+  let excepted_acos_real = Complex::new(0.5, 0.5 * @luna_math.sqrt(3)).log()
+  assert_eq!(complex_approx_equal(acos_real, excepted_acos_real, Tol), true)
+  
+  //Test atanh_real: atanh_real(10) = 0.5 * ln(11 / 9) + (Pi/2) * i
+  let atan_real = Complex::atanh_real(10)
+  let excepted_atan_real = Complex::new(
+    0.5 * @luna_math.log(11.0 / 9.0),
+    @luna_math.PI / 2
+  )
+  assert_eq!(complex_approx_equal(atan_real, excepted_atan_real, Tol), true)
 }
 
 test "Complex/equality" {

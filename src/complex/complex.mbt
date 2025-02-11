@@ -771,9 +771,9 @@ pub fn Complex::atanh_real(x : Double) -> Complex {
     Complex::new(
       @luna_math.atanh(1.0 / x),
       if x < 0 {
-        @luna_math.PI / 2
-      } else {
         -@luna_math.PI / 2
+      } else {
+        @luna_math.PI / 2
       },
     )
   }
