@@ -161,7 +161,7 @@ test "Complex/conjugate, inverse, neg and sqrt" {
 
   //Test neg: -(3+4i) = (-3-4i)
   let z_neg = -(z)
-  assert_eq!(complex_approx_equal(z_neg, Complex::new(-3.0,-4.0), Tol), true)
+  assert_eq!(complex_approx_equal(z_neg, Complex::new(-3.0, -4.0), Tol), true)
 
   //Test sqrt: sqrt(-7+24i) = (3+4i)
   z.set(-7,24)
