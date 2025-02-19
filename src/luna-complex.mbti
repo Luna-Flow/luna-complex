@@ -1,4 +1,4 @@
-package KCN-judu/luna-complex/complex
+package Luna-Flow/luna-complex
 
 // Values
 
@@ -35,7 +35,6 @@ impl Complex {
   atan(Self) -> Self
   atanh(Self) -> Self
   atanh_real(Double) -> Self
-  conjugate(Self) -> Self
   conjugate_inplace(Self) -> Unit
   cos(Self) -> Self
   cosh(Self) -> Self
@@ -61,10 +60,7 @@ impl Complex {
   native_pack(Double, Double, Array[Double], Int) -> Unit
   neg(Self) -> Unit
   new(Double, Double) -> Self
-  op_add(Self, Self) -> Self
   op_div(Self, Self) -> Self
-  op_mul(Self, Self) -> Self
-  op_neg(Self) -> Self
   op_sub(Self, Self) -> Self
   pack(Self, Array[Double], Int) -> Unit
   polar(Double, Double) -> Self
@@ -87,6 +83,12 @@ impl Complex {
   tan(Self) -> Self
   tanh(Self) -> Self
 }
+impl @Luna-Flow/luna-generic.Add for Complex
+impl @Luna-Flow/luna-generic.Conjugate for Complex
+impl @Luna-Flow/luna-generic.Mul for Complex
+impl @Luna-Flow/luna-generic.Neg for Complex
+impl @Luna-Flow/luna-generic.One for Complex
+impl @Luna-Flow/luna-generic.Zero for Complex
 impl Eq for Complex
 
 // Type aliases

@@ -3,6 +3,10 @@
 		{
 			"path": "Kaida-Amethyst/math",
 			"alias": "luna_math"
+		},
+		{
+			"path": "Luna-Flow/luna-generic",
+			"alias": "luna_generic"
 		}
 	]
 }

@@ -119,7 +119,20 @@ pub fn Complex::abs_log(self : Complex) -> Double {
 }
 
 ///|
-pub fn Complex::op_add(self : Complex, other : Complex) -> Complex {
+pub impl @luna_generic.One for Complex with one() -> Complex {
+  Complex::new(1.0, 0.0)
+}
+
+///|
+pub impl @luna_generic.Zero for Complex with zero() -> Complex {
+  Complex::new(0.0, 0.0)
+}
+
+///|
+pub impl @luna_generic.Add for Complex with op_add(
+  self : Complex,
+  other : Complex
+) -> Complex {
   Complex::new(self.re + other.re, self.im + other.im)
 }
 
@@ -181,7 +194,10 @@ pub fn Complex::sub_imag_inplace(self : Complex, other : Double) -> Unit {
 }
 
 ///|
-pub fn Complex::op_mul(self : Complex, other : Complex) -> Complex {
+pub impl @luna_generic.Mul for Complex with op_mul(
+  self : Complex,
+  other : Complex
+) -> Complex {
   Complex::new(
     self.re * other.re - self.im * other.im,
     self.re * other.im + self.im * other.re,
@@ -266,7 +282,7 @@ pub fn Complex::div_imag_inplace(self : Complex, other : Double) -> Unit {
 }
 
 ///|
-pub fn Complex::conjugate(self : Complex) -> Complex {
+pub impl @luna_generic.Conjugate for Complex with conjugate(self : Complex) -> Complex {
   Complex::new(self.re, -self.im)
 }
 
@@ -276,7 +292,7 @@ pub fn Complex::conjugate_inplace(self : Complex) -> Unit {
 }
 
 ///|
-pub fn Complex::op_neg(self : Complex) -> Complex {
+pub impl @luna_generic.Neg for Complex with op_neg(self : Complex) -> Complex {
   Complex::new(-self.re, -self.im)
 }
 
@@ -326,7 +342,7 @@ pub fn Complex::sqrt_real(self : Double) -> Complex {
 
 ///|
 pub fn Complex::exp(self : Complex) -> Complex {
-  let rho = @luna_math.exp(self.re) 
+  let rho = @luna_math.exp(self.re)
   let thete = self.im
   Complex::new(rho * @luna_math.cos(thete), rho * @luna_math.sin(thete))
 }
