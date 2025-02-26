@@ -593,3 +593,21 @@ pub fn Complex::acsch(self : Complex) -> Complex {
 pub fn Complex::acoth(self : Complex) -> Complex {
   self.inv().atanh()
 }
+
+///|
+pub fn Complex::op_bin_re(
+  self : Complex,
+  other : Double,
+  f : (Complex, Complex) -> Complex
+) -> Complex {
+  f(self, Complex::new(other, 0.0))
+}
+
+///|
+pub fn Complex::op_bin_im(
+  self : Complex,
+  other : Double,
+  f : (Complex, Complex) -> Complex
+) -> Complex {
+  f(self, Complex::new(0.0, other))
+}

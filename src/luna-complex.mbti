@@ -42,6 +42,8 @@ impl Complex {
   log_b(Self, Self) -> Self
   native_pack(Double, Double, Array[Double], Int) -> Unit
   new(Double, Double) -> Self
+  op_bin_im(Self, Double, (Self, Self) -> Self) -> Self
+  op_bin_re(Self, Double, (Self, Self) -> Self) -> Self
   op_div(Self, Self) -> Self
   pack(Self, Array[Double], Int) -> Unit
   polar(Double, Double) -> Self
