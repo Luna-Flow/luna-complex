@@ -25,7 +25,7 @@
 pub(all) struct Complex {
   mut re : Double
   mut im : Double
-}
+} derive(Eq)
 
 //init
 
@@ -59,9 +59,14 @@ pub fn Complex::native_pack(
   arr : Array[Double],
   offset : Int
 ) -> Unit {
-  guard offset >= 0 && offset < arr.length() / 2
-  arr[2 * offset] = re
-  arr[2 * offset + 1] = im
+  if offset == arr.length() / 2 {
+    arr.push(re)
+    arr.push(im)
+  } else {
+    guard offset >= 0 && offset < arr.length() / 2
+    arr[2 * offset] = re
+    arr[2 * offset + 1] = im
+  }
 }
 
 ///|
