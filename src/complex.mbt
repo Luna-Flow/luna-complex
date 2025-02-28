@@ -73,18 +73,18 @@ pub fn Complex::pack(self : Complex, arr : Array[Double], offset : Int) -> Unit 
 
 ///|
 pub fn Complex::polar(r : Double, theta : Double) -> Complex {
-  Complex::new(r * @luna_math.cos(theta), r * @luna_math.sin(theta))
+  Complex::new(r * @lm.cos(theta), r * @lm.sin(theta))
 }
 
 ///|
 pub fn Complex::arg(self : Complex) -> Double {
   guard self.re != 0.0 || self.im != 0.0 else { 0.0 }
-  @luna_math.atan2(self.im, self.re)
+  @lm.atan2(self.im, self.re)
 }
 
 ///|
 pub fn Complex::abs(self : Complex) -> Double {
-  @luna_math.hypot(self.re, self.im)
+  @lm.hypot(self.re, self.im)
 }
 
 ///|
@@ -109,126 +109,7 @@ pub fn Complex::abs_log(self : Complex) -> Double {
   let re_abs = self.re.abs()
   let im_abs = self.im.abs()
   let t = if re_abs >= im_abs { im_abs / re_abs } else { re_abs / im_abs }
-  @luna_math.log(@math.maximum(re_abs, im_abs)) +
-  0.5 * @luna_math.log(1.0 + t * t)
-}
-
-///|
-pub impl @luna_generic.One for Complex with one() -> Complex {
-  Complex::new(1.0, 0.0)
-}
-
-///|
-pub impl @luna_generic.Zero for Complex with zero() -> Complex {
-  Complex::new(0.0, 0.0)
-}
-
-///|
-pub impl @luna_generic.Add for Complex with op_add(
-  self : Complex,
-  other : Complex
-) -> Complex {
-  Complex::new(self.re + other.re, self.im + other.im)
-}
-
-///|
-pub fn Complex::add(self : Complex, other : Complex) -> Unit {
-  self.re = self.re + other.re
-  self.im = self.im + other.im
-}
-
-///|
-pub fn Complex::add_real(self : Complex, other : Double) -> Complex {
-  Complex::new(self.re + other, self.im)
-}
-
-///|
-pub fn Complex::add_real_inplace(self : Complex, other : Double) -> Unit {
-  self.re = self.re + other
-}
-
-///|
-pub fn Complex::add_imag(self : Complex, other : Double) -> Complex {
-  Complex::new(self.re, self.im + other)
-}
-
-///|
-pub fn Complex::add_imag_inplace(self : Complex, other : Double) -> Unit {
-  self.im = self.im + other
-}
-
-///|
-pub fn Complex::op_sub(self : Complex, other : Complex) -> Complex {
-  Complex::new(self.re - other.re, self.im - other.im)
-}
-
-///|
-pub fn Complex::sub(self : Complex, other : Complex) -> Unit {
-  self.re = self.re - other.re
-  self.im = self.im - other.im
-}
-
-///|
-pub fn Complex::sub_real(self : Complex, other : Double) -> Complex {
-  Complex::new(self.re - other, self.im)
-}
-
-///|
-pub fn Complex::sub_real_inplace(self : Complex, other : Double) -> Unit {
-  self.re = self.re - other
-}
-
-///|
-pub fn Complex::sub_imag(self : Complex, other : Double) -> Complex {
-  Complex::new(self.re, self.im - other)
-}
-
-///|
-pub fn Complex::sub_imag_inplace(self : Complex, other : Double) -> Unit {
-  self.im = self.im - other
-}
-
-///|
-pub impl @luna_generic.Mul for Complex with op_mul(
-  self : Complex,
-  other : Complex
-) -> Complex {
-  Complex::new(
-    self.re * other.re - self.im * other.im,
-    self.re * other.im + self.im * other.re,
-  )
-}
-
-///|
-pub fn Complex::mul(self : Complex, other : Complex) -> Unit {
-  let re = self.re * other.re - self.im * other.im
-  let im = self.re * other.im + self.im * other.re
-  self.re = re
-  self.im = im
-}
-
-///|
-pub fn Complex::mul_real(self : Complex, other : Double) -> Complex {
-  Complex::new(self.re * other, self.im * other)
-}
-
-///|
-pub fn Complex::mul_real_inplace(self : Complex, other : Double) -> Unit {
-  self.re *= other
-  self.im *= other
-}
-
-///|
-pub fn Complex::mul_imag(self : Complex, other : Double) -> Complex {
-  Complex::new(-self.im * other, self.re * other)
-}
-
-///|
-pub fn Complex::mul_imag_inplace(self : Complex, other : Double) -> Unit {
-  let re = -self.im * other
-  let im = self.re * other
-  self.re = re
-  self.im = im
+  @lm.log(@math.maximum(re_abs, im_abs)) + 0.5 * @lm.log(1.0 + t * t)
 }
 
 ///|
@@ -242,80 +123,16 @@ pub fn Complex::op_div(self : Complex, other : Complex) -> Complex {
 }
 
 ///|
-pub fn Complex::div(self : Complex, other : Complex) -> Unit {
-  let s = 1.0 / other.abs()
-  let sbr = s * other.re
-  let sbi = s * other.im
-  let re = (self.re * sbr + self.im * sbi) * s
-  let im = (self.im * sbr - self.re * sbi) * s
-  self.re = re
-  self.im = im
-}
-
-///|
-pub fn Complex::div_real(self : Complex, other : Double) -> Complex {
-  Complex::new(self.re / other, self.im / other)
-}
-
-///|
-pub fn Complex::div_real_inplace(self : Complex, other : Double) -> Unit {
-  self.re /= other
-  self.im /= other
-}
-
-///| 
-pub fn Complex::div_imag(self : Complex, other : Double) -> Complex {
-  Complex::new(self.im / other, -self.re / other)
-}
-
-///|
-pub fn Complex::div_imag_inplace(self : Complex, other : Double) -> Unit {
-  let re = self.im / other
-  let im = -self.re / other
-  self.re = re
-  self.im = im
-}
-
-///|
-pub impl @luna_generic.Conjugate for Complex with conjugate(self : Complex) -> Complex {
-  Complex::new(self.re, -self.im)
-}
-
-///|
-pub fn Complex::conjugate_inplace(self : Complex) -> Unit {
-  self.im = -self.im
-}
-
-///|
-pub impl @luna_generic.Neg for Complex with op_neg(self : Complex) -> Complex {
-  Complex::new(-self.re, -self.im)
-}
-
-///|
-pub fn Complex::neg(self : Complex) -> Unit {
-  self.re -= self.re
-  self.im -= self.im
-}
-
-///|
-pub fn Complex::inverse(self : Complex) -> Complex {
-  let s = 1.0 / self.abs()
-  Complex::new(self.re * s * s, -self.im * s * s)
-}
-
-///|
 pub fn Complex::sqrt(self : Complex) -> Complex {
   guard self.re != 0 || self.im != 0 else { Complex::new(0.0, 0.0) }
   let re_abs = self.re.abs()
   let im_abs = self.im.abs()
   let w = if re_abs >= im_abs {
     let t = im_abs / re_abs
-    @luna_math.sqrt(re_abs) *
-    @luna_math.sqrt(0.5 * (1.0 + @luna_math.hypot(1.0, t)))
+    @lm.sqrt(re_abs) * @lm.sqrt(0.5 * (1.0 + @lm.hypot(1.0, t)))
   } else {
     let t = re_abs / im_abs
-    @luna_math.sqrt(im_abs) *
-    @luna_math.sqrt(0.5 * (t + @luna_math.hypot(1.0, t)))
+    @lm.sqrt(im_abs) * @lm.sqrt(0.5 * (t + @lm.hypot(1.0, t)))
   }
   if self.re >= 0.0 {
     Complex::new(w, self.im / (2.0 * w))
@@ -328,17 +145,17 @@ pub fn Complex::sqrt(self : Complex) -> Complex {
 ///|
 pub fn Complex::sqrt_real(self : Double) -> Complex {
   if self >= 0 {
-    Complex::new(@luna_math.sqrt(self), 0)
+    Complex::new(@lm.sqrt(self), 0)
   } else {
-    Complex::new(0, @luna_math.sqrt(-self))
+    Complex::new(0, @lm.sqrt(-self))
   }
 }
 
 ///|
 pub fn Complex::exp(self : Complex) -> Complex {
-  let rho = @luna_math.exp(self.re)
+  let rho = @lm.exp(self.re)
   let thete = self.im
-  Complex::new(rho * @luna_math.cos(thete), rho * @luna_math.sin(thete))
+  Complex::new(rho * @lm.cos(thete), rho * @lm.sin(thete))
 }
 
 ///|
@@ -358,9 +175,9 @@ pub fn Complex::pow(self : Complex, other : Complex) -> Complex {
     let theta = self.arg()
     let oreal = other.re
     let oimag = other.im
-    let rho = @luna_math.exp(logr * oreal - oimag * theta)
+    let rho = @lm.exp(logr * oreal - oimag * theta)
     let beta = theta * oreal + oimag * logr
-    Complex::new(rho * @luna_math.cos(beta), rho * @luna_math.sin(beta))
+    Complex::new(rho * @lm.cos(beta), rho * @lm.sin(beta))
   }
 }
 
@@ -375,9 +192,9 @@ pub fn Complex::pow_real(self : Complex, other : Double) -> Complex {
   } else {
     let logr = self.abs_log()
     let theta = self.arg()
-    let rho = @luna_math.exp(logr * other)
+    let rho = @lm.exp(logr * other)
     let beta = theta * other
-    Complex::new(rho * @luna_math.cos(beta), rho * @luna_math.sin(beta))
+    Complex::new(rho * @lm.cos(beta), rho * @lm.sin(beta))
   }
 }
 
@@ -389,13 +206,16 @@ pub fn Complex::log(self : Complex) -> Complex {
 }
 
 ///|
-pub fn Complex::log10(self : Complex) -> Complex {
-  self.log().mul_real(1.0 / @luna_math.log(10))
+let inv_log_e_10 : Double = 1.0 / @lm.log(10)
+
+///|
+pub fn Complex::log_10(self : Complex) -> Complex {
+  Complex::new(self.log().re / inv_log_e_10, self.log().im * inv_log_e_10)
 }
 
 ///|
-pub fn Complex::log_b(self : Complex, other : Complex) -> Complex {
-  self.log() / other.log()
+pub fn Complex::log_b(self : Complex, b : Complex) -> Complex {
+  self.log() / b.log()
 }
 
 // Complex trigonometric functions
@@ -404,11 +224,11 @@ pub fn Complex::log_b(self : Complex, other : Complex) -> Complex {
 pub fn Complex::sin(self : Complex) -> Complex {
   if self.im == 0.0 {
     // avoid returing negative zero (-0.0) for the imaginary part
-    Complex::new(@luna_math.sin(self.re), 0.0)
+    Complex::new(@lm.sin(self.re), 0.0)
   } else {
     Complex::new(
-      @luna_math.sin(self.re) * @luna_math.cosh(self.im),
-      @luna_math.cos(self.re) * @luna_math.sinh(self.im),
+      @lm.sin(self.re) * @lm.cosh(self.im),
+      @lm.cos(self.re) * @lm.sinh(self.im),
     )
   }
 }
@@ -417,11 +237,11 @@ pub fn Complex::sin(self : Complex) -> Complex {
 pub fn Complex::cos(self : Complex) -> Complex {
   if self.im == 0.0 {
     // avoid returing negative zero (-0.0) for the imaginary part
-    Complex::new(@luna_math.cos(self.re), 0.0)
+    Complex::new(@lm.cos(self.re), 0.0)
   } else {
     Complex::new(
-      @luna_math.cos(self.re) * @luna_math.cosh(self.im),
-      @luna_math.sin(self.re) * @luna_math.sinh(-self.im),
+      @lm.cos(self.re) * @lm.cosh(self.im),
+      @lm.sin(self.re) * @lm.sinh(-self.im),
     )
   }
 }
@@ -431,36 +251,28 @@ pub fn Complex::tan(self : Complex) -> Complex {
   let r = self.re
   let i = self.im
   if i < 1.0 && i > -1.0 {
-    let d = @luna_math.pow(@luna_math.cos(r), 2.0) +
-      @luna_math.pow(@luna_math.sinh(i), 2.0)
-    Complex::new(
-      0.5 * @luna_math.sin(2.0 * r) / d,
-      0.5 * @luna_math.sinh(2.0 * i) / d,
-    )
+    let d = @lm.pow(@lm.cos(r), 2.0) + @lm.pow(@lm.sinh(i), 2.0)
+    Complex::new(0.5 * @lm.sin(2.0 * r) / d, 0.5 * @lm.sinh(2.0 * i) / d)
   } else {
-    let d = @luna_math.pow(@luna_math.cos(r), 2.0) +
-      @luna_math.pow(@luna_math.sinh(i), 2.0)
-    let f = 1.0 + @luna_math.pow(@luna_math.cos(r) / @luna_math.sinh(i), 2.0)
-    Complex::new(
-      0.5 * @luna_math.sin(2.0 * r) / d,
-      1.0 / (@luna_math.tanh(i) * f),
-    )
+    let d = @lm.pow(@lm.cos(r), 2.0) + @lm.pow(@lm.sinh(i), 2.0)
+    let f = 1.0 + @lm.pow(@lm.cos(r) / @lm.sinh(i), 2.0)
+    Complex::new(0.5 * @lm.sin(2.0 * r) / d, 1.0 / (@lm.tanh(i) * f))
   }
 }
 
 ///|
 pub fn Complex::sec(self : Complex) -> Complex {
-  self.cos().inverse()
+  self.cos().inv()
 }
 
 ///|
 pub fn Complex::csc(self : Complex) -> Complex {
-  self.sin().inverse()
+  self.sin().inv()
 }
 
 ///|
 pub fn Complex::cot(self : Complex) -> Complex {
-  self.tan().inverse()
+  self.tan().inv()
 }
 
 // Inverse Complex Trigonometric Functions
@@ -480,20 +292,20 @@ pub fn Complex::asin(self : Complex) -> Complex {
   } else {
     let x = Double::abs(re)
     let y = Double::abs(im)
-    let r = @luna_math.hypot(x + 1, y)
-    let s = @luna_math.hypot(x - 1, y)
+    let r = @lm.hypot(x + 1, y)
+    let s = @lm.hypot(x - 1, y)
     let a = 0.5 * (r + s)
     let b = x / a
     let y2 = y * y
     let real = if b <= B_CROSSOVER {
-      @luna_math.asin(b)
+      @lm.asin(b)
     } else if x <= 1 {
       let d = 0.5 * (a + x) * (y2 / (r + x + 1.0)) + (s + (1.0 - x))
-      @luna_math.atan(x / @luna_math.sqrt(d))
+      @lm.atan(x / @lm.sqrt(d))
     } else {
       let apx = a + x
       let d = 0.5 * (apx / (r + x + 1.0) + apx / (s + (x - 1.0)))
-      @luna_math.atan(x / (y * @luna_math.sqrt(d)))
+      @lm.atan(x / (y * @lm.sqrt(d)))
     }
     let imag = if a <= A_CROSSOVER {
       let am1 = if x < 1 {
@@ -501,9 +313,9 @@ pub fn Complex::asin(self : Complex) -> Complex {
       } else {
         0.5 * (y2 / (r + (x + 1.0)) + (s + (x - 1.0)))
       }
-      @luna_math.log1p(am1 + @luna_math.sqrt(a * a - 1.0))
+      @lm.log1p(am1 + @lm.sqrt(a * a - 1.0))
     } else {
-      @luna_math.log(a + @luna_math.sqrt(a * a - 1.0))
+      @lm.log(a + @lm.sqrt(a * a - 1.0))
     }
     Complex::new(
       if re >= 0 {
@@ -523,11 +335,11 @@ pub fn Complex::asin(self : Complex) -> Complex {
 ///|
 pub fn Complex::asin_real(x : Double) -> Complex {
   if x >= -1.0 && x <= 1.0 {
-    Complex::new(@luna_math.asin(x), 0.0)
+    Complex::new(@lm.asin(x), 0.0)
   } else if x < 0.0 {
-    Complex::new(-@luna_math.PI / 2.0, @luna_math.acosh(-x))
+    Complex::new(-@lm.PI / 2.0, @lm.acosh(-x))
   } else {
-    Complex::new(@luna_math.PI / 2.0, -@luna_math.acosh(x))
+    Complex::new(@lm.PI / 2.0, -@lm.acosh(x))
   }
 }
 
@@ -540,20 +352,20 @@ pub fn Complex::acos(self : Complex) -> Complex {
   } else {
     let x = Double::abs(re)
     let y = Double::abs(im)
-    let r = @luna_math.hypot(x + 1, y)
-    let s = @luna_math.hypot(x - 1, y)
+    let r = @lm.hypot(x + 1, y)
+    let s = @lm.hypot(x - 1, y)
     let a = 0.5 * (r + s)
     let b = x / a
     let y2 = y * y
     let real = if b <= B_CROSSOVER {
-      @luna_math.acos(b)
+      @lm.acos(b)
     } else if x <= 1 {
       let d = 0.5 * (a + x) * (y2 / (r + x + 1.0) + (s + (1.0 - x)))
-      @luna_math.atan(@luna_math.sqrt(d) / x)
+      @lm.atan(@lm.sqrt(d) / x)
     } else {
       let apx = a + x
       let d = 0.5 * (apx / (r + x + 1.0) + apx / (s + (x - 1.0)))
-      @luna_math.atan(y * @luna_math.sqrt(d) / x)
+      @lm.atan(y * @lm.sqrt(d) / x)
     }
     let imag = if a <= A_CROSSOVER {
       let am1 = if x < 1 {
@@ -561,15 +373,15 @@ pub fn Complex::acos(self : Complex) -> Complex {
       } else {
         0.5 * (y2 / (r + (x + 1)) + (s + (x - 1)))
       }
-      @luna_math.log1p(am1 + @luna_math.sqrt(am1 * (a + 1)))
+      @lm.log1p(am1 + @lm.sqrt(am1 * (a + 1)))
     } else {
-      @luna_math.log(a + @luna_math.sqrt(a * a - 1.0))
+      @lm.log(a + @lm.sqrt(a * a - 1.0))
     }
     Complex::new(
       if re >= 0 {
         real
       } else {
-        @luna_math.PI - real
+        @lm.PI - real
       },
       if im >= 0 {
         -imag
@@ -583,11 +395,11 @@ pub fn Complex::acos(self : Complex) -> Complex {
 ///|
 pub fn Complex::acos_real(x : Double) -> Complex {
   if x >= -1.0 && x <= 1.0 {
-    Complex::new(@luna_math.acos(x), 0.0)
+    Complex::new(@lm.acos(x), 0.0)
   } else if x < 0.0 {
-    Complex::new(@luna_math.PI, -@luna_math.acosh(-x))
+    Complex::new(@lm.PI, -@lm.acosh(-x))
   } else {
-    Complex::new(0, @luna_math.acosh(x))
+    Complex::new(0, @lm.acosh(x))
   }
 }
 
@@ -596,77 +408,74 @@ pub fn atan(self : Complex) -> Complex {
   let re = self.re
   let im = self.im
   if im == 0 {
-    Complex::new(@luna_math.atan(re), 0.0)
+    Complex::new(@lm.atan(re), 0.0)
   } else {
     // FIXME: This is a naive implementation which does not fully
     // take into account cancellation errors, overflow, underflow
     // etc.  It would benefit from the Hull et al treatment.
-    let r = @luna_math.hypot(re, im)
+    let r = @lm.hypot(re, im)
     let u = 2.0 * im / (1.0 + r * r)
     // FIXME: the following cross-over should be optimized but 0.1
     // seems to work ok 
     let imag = if Double::abs(u) < 0.1 {
-      0.25 * (@luna_math.log1p(u) - @luna_math.log1p(-u))
+      0.25 * (@lm.log1p(u) - @lm.log1p(-u))
     } else {
-      let a = @luna_math.hypot(re, im + 1.0)
-      let b = @luna_math.hypot(re, im - 1.0)
-      0.5 * @luna_math.log(a / b)
+      let a = @lm.hypot(re, im + 1.0)
+      let b = @lm.hypot(re, im - 1.0)
+      0.5 * @lm.log(a / b)
     }
     if re == 0 {
       if im > 1.0 {
-        Complex::new(@luna_math.PI / 2.0, imag)
+        Complex::new(@lm.PI / 2.0, imag)
       } else if im < -1.0 {
-        Complex::new(-@luna_math.PI / 2.0, imag)
+        Complex::new(-@lm.PI / 2.0, imag)
       } else {
         Complex::new(0.0, imag)
       }
     } else {
-      Complex::new(
-        0.5 * @luna_math.atan2(2.0 * re, (1.0 + r) * (1.0 - r)),
-        imag,
-      )
+      Complex::new(0.5 * @lm.atan2(2.0 * re, (1.0 + r) * (1.0 - r)), imag)
     }
   }
 }
 
 ///|
 pub fn Complex::asec(self : Complex) -> Complex {
-  self.inverse().acos()
+  self.inv().acos()
 }
 
 ///|
 pub fn Complex::aecsec_real(x : Double) -> Complex {
   if x < 1.0 || x >= 1.0 {
-    Complex::new(@luna_math.acos(1.0 / x), 0.0)
+    Complex::new(@lm.acos(1.0 / x), 0.0)
   } else if x >= 0.0 {
-    Complex::new(0.0, @luna_math.acosh(1.0 / x))
+    Complex::new(0.0, @lm.acosh(1.0 / x))
   } else {
-    Complex::new(@luna_math.PI, -@luna_math.acosh(-1.0 / x))
+    Complex::new(@lm.PI, -@lm.acosh(-1.0 / x))
   }
 }
 
 ///|
 pub fn Complex::acsc(self : Complex) -> Complex {
-  self.inverse().asin()
+  self.inv().asin()
 }
 
 ///|
 pub fn Complex::acsc_real(x : Double) -> Complex {
   if x <= -1.0 || x >= 1.0 {
-    Complex::new(@luna_math.asin(1.0 / x), 0.0)
+    Complex::new(@lm.asin(1.0 / x), 0.0)
   } else if x >= 0.0 {
-    Complex::new(@luna_math.PI / 2.0, -@luna_math.acosh(1.0 / x))
+    Complex::new(@lm.PI / 2.0, -@lm.acosh(1.0 / x))
   } else {
-    Complex::new(-@luna_math.PI / 2.0, @luna_math.acosh(-1.0 / x))
+    Complex::new(-@lm.PI / 2.0, @lm.acosh(-1.0 / x))
   }
 }
 
 ///|
 pub fn Complex::acot(self : Complex) -> Complex {
   if self.re == 0.0 && self.im == 0.0 {
-    Complex::new(@luna_math.PI / 2.0, 0.0)
+    Complex::new(@lm.PI / 2.0, 0.0)
   } else {
-    self.inverse().atan()
+    self.inv().atan()
   }
 }
 
@@ -676,20 +485,14 @@ pub fn Complex::acot(self : Complex) -> Complex {
 pub fn Complex::sinh(self : Complex) -> Complex {
   let re = self.re
   let im = self.im
-  Complex::new(
-    @luna_math.sinh(re) * @luna_math.cos(im),
-    @luna_math.cosh(re) * @luna_math.sin(im),
-  )
+  Complex::new(@lm.sinh(re) * @lm.cos(im), @lm.cosh(re) * @lm.sin(im))
 }
 
 ///|
 pub fn Complex::cosh(self : Complex) -> Complex {
   let re = self.re
   let im = self.im
-  Complex::new(
-    @luna_math.cosh(re) * @luna_math.cos(im),
-    @luna_math.sinh(re) * @luna_math.sin(im),
-  )
+  Complex::new(@lm.cosh(re) * @lm.cos(im), @lm.sinh(re) * @lm.sin(im))
 }
 
 ///|
@@ -697,61 +500,56 @@ pub fn Complex::tanh(self : Complex) -> Complex {
   let re = self.re
   let im = self.im
   if re > -1.0 && re < 1.0 {
-    let d = @luna_math.pow(@luna_math.cos(im), 2.0) +
-      @luna_math.pow(@luna_math.sinh(re), 2.0)
-    Complex::new(
-      @luna_math.sinh(re) * @luna_math.cosh(re) / d,
-      0.5 * @luna_math.sin(2.0 * im) / d,
-    )
+    let d = @lm.pow(@lm.cos(im), 2.0) + @lm.pow(@lm.sinh(re), 2.0)
+    Complex::new(@lm.sinh(re) * @lm.cosh(re) / d, 0.5 * @lm.sin(2.0 * im) / d)
   } else {
-    let d = @luna_math.pow(@luna_math.cos(im), 2.0) +
-      @luna_math.pow(@luna_math.sinh(re), 2.0)
-    let f = 1.0 + @luna_math.pow(@luna_math.cos(im) / @luna_math.sinh(re), 2.0)
-    Complex::new(
-      1.0 / (@luna_math.tanh(re) * f),
-      0.5 * @luna_math.sin(2.0 * im) / d,
-    )
+    let d = @lm.pow(@lm.cos(im), 2.0) + @lm.pow(@lm.sinh(re), 2.0)
+    let f = 1.0 + @lm.pow(@lm.cos(im) / @lm.sinh(re), 2.0)
+    Complex::new(1.0 / (@lm.tanh(re) * f), 0.5 * @lm.sin(2.0 * im) / d)
   }
 }
 
 ///|
 pub fn Complex::sech(self : Complex) -> Complex {
-  self.cosh().inverse()
+  self.cosh().inv()
 }
 
 ///|
 pub fn Complex::csch(self : Complex) -> Complex {
-  self.sinh().inverse()
+  self.sinh().inv()
 }
 
 ///|
 pub fn Complex::coth(self : Complex) -> Complex {
-  self.tanh().inverse()
+  self.tanh().inv()
 }
 
 // Inverse Complex Hyperbolic Functions
 
 ///|
 pub fn Complex::asinh(self : Complex) -> Complex {
-  let mut z = Complex::mul_imag(self, 1.0)
-  z = z.asin()
-  z.mul_imag(-1.0)
+  let z = Complex::new(-self.im, self.re).asin()
+  Complex::new(z.im, -z.re)
 }
 
 ///|
 pub fn Complex::acosh(self : Complex) -> Complex {
   let z = self.acos()
-  z.mul_imag(if z.im > 0 { -1.0 } else { 1.0 })
+  if z.im < 0 {
+    Complex::new(-z.im, z.re)
+  } else {
+    Complex::new(z.im, -z.re)
+  }
 }
 
 ///|
 pub fn Complex::acosh_real(x : Double) -> Complex {
   if x >= 1 {
-    Complex::new(@luna_math.acosh(x), 0.0)
+    Complex::new(@lm.acosh(x), 0.0)
   } else if x >= -1.0 {
-    Complex::new(0, @luna_math.acos(x))
+    Complex::new(0, @lm.acos(x))
   } else {
-    Complex::new(@luna_math.acosh(-x), @luna_math.PI)
+    Complex::new(@lm.acosh(-x), @lm.PI)
   }
 }
 
@@ -760,23 +558,22 @@ pub fn Complex::atanh(self : Complex) -> Complex {
   if self.im == 0.0 {
     Complex::atanh_real(self.re)
   } else {
-    let mut z = Complex::mul_imag(self, 1.0)
-    z = z.atan()
-    z.mul_imag(-1.0)
+    let z = Complex::new(-self.im, self.re).atan()
+    Complex::new(z.im, -z.re)
   }
 }
 
 ///|
 pub fn Complex::atanh_real(x : Double) -> Complex {
   if x > -1.0 && x < 1.0 {
-    Complex::new(@luna_math.atanh(x), 0.0)
+    Complex::new(@lm.atanh(x), 0.0)
   } else {
     Complex::new(
-      @luna_math.atanh(1.0 / x),
+      @lm.atanh(1.0 / x),
       if x < 0 {
-        -@luna_math.PI / 2
+        -@lm.PI / 2
       } else {
-        @luna_math.PI / 2
+        @lm.PI / 2
       },
     )
   }
@@ -784,22 +581,33 @@ pub fn Complex::atanh_real(x : Double) -> Complex {
 
 ///|
 pub fn Complex::asech(self : Complex) -> Complex {
-  self.inverse().acosh()
+  self.inv().acosh()
 }
 
 ///|
 pub fn Complex::acsch(self : Complex) -> Complex {
-  self.inverse().asinh()
+  self.inv().asinh()
 }
 
 ///|
 pub fn Complex::acoth(self : Complex) -> Complex {
-  self.inverse().atanh()
+  self.inv().atanh()
 }
 
-//prop
+///|
+pub fn Complex::op_bin_re(
+  self : Complex,
+  other : Double,
+  f : (Complex, Complex) -> Complex
+) -> Complex {
+  f(self, Complex::new(other, 0.0))
+}
 
 ///|
-pub impl Eq for Complex with op_equal(self : Complex, other : Complex) -> Bool {
-  self.re == other.re && self.im == other.im
+pub fn Complex::op_bin_im(
+  self : Complex,
+  other : Double,
+  f : (Complex, Complex) -> Complex
+) -> Complex {
+  f(self, Complex::new(0.0, other))
 }

@@ -20,11 +20,6 @@ impl Complex {
   acsc(Self) -> Self
   acsc_real(Double) -> Self
   acsch(Self) -> Self
-  add(Self, Self) -> Unit
-  add_imag(Self, Double) -> Self
-  add_imag_inplace(Self, Double) -> Unit
-  add_real(Self, Double) -> Self
-  add_real_inplace(Self, Double) -> Unit
   aecsec_real(Double) -> Self
   arg(Self) -> Double
   asec(Self) -> Self
@@ -35,33 +30,21 @@ impl Complex {
   atan(Self) -> Self
   atanh(Self) -> Self
   atanh_real(Double) -> Self
-  conjugate_inplace(Self) -> Unit
   cos(Self) -> Self
   cosh(Self) -> Self
   cot(Self) -> Self
   coth(Self) -> Self
   csc(Self) -> Self
   csch(Self) -> Self
-  div(Self, Self) -> Unit
-  div_imag(Self, Double) -> Self
-  div_imag_inplace(Self, Double) -> Unit
-  div_real(Self, Double) -> Self
-  div_real_inplace(Self, Double) -> Unit
   exp(Self) -> Self
-  inverse(Self) -> Self
   log(Self) -> Self
-  log10(Self) -> Self
+  log_10(Self) -> Self
   log_b(Self, Self) -> Self
-  mul(Self, Self) -> Unit
-  mul_imag(Self, Double) -> Self
-  mul_imag_inplace(Self, Double) -> Unit
-  mul_real(Self, Double) -> Self
-  mul_real_inplace(Self, Double) -> Unit
   native_pack(Double, Double, Array[Double], Int) -> Unit
-  neg(Self) -> Unit
   new(Double, Double) -> Self
+  op_bin_im(Self, Double, (Self, Self) -> Self) -> Self
+  op_bin_re(Self, Double, (Self, Self) -> Self) -> Self
   op_div(Self, Self) -> Self
-  op_sub(Self, Self) -> Self
   pack(Self, Array[Double], Int) -> Unit
   polar(Double, Double) -> Self
   pow(Self, Self) -> Self
@@ -75,21 +58,19 @@ impl Complex {
   sinh(Self) -> Self
   sqrt(Self) -> Self
   sqrt_real(Double) -> Self
-  sub(Self, Self) -> Unit
-  sub_imag(Self, Double) -> Self
-  sub_imag_inplace(Self, Double) -> Unit
-  sub_real(Self, Double) -> Self
-  sub_real_inplace(Self, Double) -> Unit
   tan(Self) -> Self
   tanh(Self) -> Self
 }
 impl @Luna-Flow/luna-generic.Add for Complex
 impl @Luna-Flow/luna-generic.Conjugate for Complex
+impl @Luna-Flow/luna-generic.Inverse for Complex
 impl @Luna-Flow/luna-generic.Mul for Complex
 impl @Luna-Flow/luna-generic.Neg for Complex
 impl @Luna-Flow/luna-generic.One for Complex
+impl @Luna-Flow/luna-generic.Sub for Complex
 impl @Luna-Flow/luna-generic.Zero for Complex
 impl Eq for Complex
+impl Show for Complex
 
 // Type aliases
 

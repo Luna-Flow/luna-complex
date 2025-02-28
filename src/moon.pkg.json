@@ -2,11 +2,11 @@
 	"import": [
 		{
 			"path": "Kaida-Amethyst/math",
-			"alias": "luna_math"
+			"alias": "lm"
 		},
 		{
 			"path": "Luna-Flow/luna-generic",
-			"alias": "luna_generic"
+			"alias": "lg"
 		}
 	]
 }
