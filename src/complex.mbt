@@ -159,8 +159,8 @@ pub fn Complex::sqrt_real(self : Double) -> Complex {
 ///|
 pub fn Complex::exp(self : Complex) -> Complex {
   let rho = @lm.exp(self.re)
-  let thete = self.im
-  Complex::new(rho * @lm.cos(thete), rho * @lm.sin(thete))
+  let theta = self.im
+  Complex::new(rho * @lm.cos(theta), rho * @lm.sin(theta))
 }
 
 ///|
@@ -176,12 +176,12 @@ pub fn Complex::pow(self : Complex, other : Complex) -> Complex {
   } else if other.re == -1.0 && other.im == 0.0 {
     self.conjugate()
   } else {
-    let logr = self.abs_log()
+    let log_re = self.abs_log()
     let theta = self.arg()
-    let oreal = other.re
-    let oimag = other.im
-    let rho = @lm.exp(logr * oreal - oimag * theta)
-    let beta = theta * oreal + oimag * logr
+    let o_re = other.re
+    let o_im = other.im
+    let rho = @lm.exp(log_re * o_re - o_im * theta)
+    let beta = theta * o_re + o_im * log_re
     Complex::new(rho * @lm.cos(beta), rho * @lm.sin(beta))
   }
 }
@@ -195,9 +195,9 @@ pub fn Complex::pow_real(self : Complex, other : Double) -> Complex {
       Complex::new(0.0, 0.0)
     }
   } else {
-    let logr = self.abs_log()
+    let log_re = self.abs_log()
     let theta = self.arg()
-    let rho = @lm.exp(logr * other)
+    let rho = @lm.exp(log_re * other)
     let beta = theta * other
     Complex::new(rho * @lm.cos(beta), rho * @lm.sin(beta))
   }
@@ -205,9 +205,9 @@ pub fn Complex::pow_real(self : Complex, other : Double) -> Complex {
 
 ///|
 pub fn Complex::log(self : Complex) -> Complex {
-  let logr = self.abs_log()
+  let log_re = self.abs_log()
   let theta = self.arg()
-  Complex::new(logr, theta)
+  Complex::new(log_re, theta)
 }
 
 ///|
@@ -228,7 +228,7 @@ pub fn Complex::log_b(self : Complex, b : Complex) -> Complex {
 ///|
 pub fn Complex::sin(self : Complex) -> Complex {
   if self.im == 0.0 {
-    // avoid returing negative zero (-0.0) for the imaginary part
+    // avoid return negative zero (-0.0) for the imaginary part
     Complex::new(@lm.sin(self.re), 0.0)
   } else {
     Complex::new(
@@ -241,7 +241,7 @@ pub fn Complex::sin(self : Complex) -> Complex {
 ///|
 pub fn Complex::cos(self : Complex) -> Complex {
   if self.im == 0.0 {
-    // avoid returing negative zero (-0.0) for the imaginary part
+    // avoid return negative zero (-0.0) for the imaginary part
     Complex::new(@lm.cos(self.re), 0.0)
   } else {
     Complex::new(
@@ -312,7 +312,7 @@ pub fn Complex::asin(self : Complex) -> Complex {
       let d = 0.5 * (apx / (r + x + 1.0) + apx / (s + (x - 1.0)))
       @lm.atan(x / (y * @lm.sqrt(d)))
     }
-    let imag = if a <= A_CROSSOVER {
+    let im_res = if a <= A_CROSSOVER {
       let am1 = if x < 1 {
         0.5 * (y2 / (r + (x + 1.0)) + y2 / (s + (1.0 - x)))
       } else {
@@ -329,9 +329,9 @@ pub fn Complex::asin(self : Complex) -> Complex {
         -real
       },
       if im >= 0 {
-        imag
+        im_res
       } else {
-        -imag
+        -im_res
       },
     )
   }
@@ -372,7 +372,7 @@ pub fn Complex::acos(self : Complex) -> Complex {
       let d = 0.5 * (apx / (r + x + 1.0) + apx / (s + (x - 1.0)))
       @lm.atan(y * @lm.sqrt(d) / x)
     }
-    let imag = if a <= A_CROSSOVER {
+    let im_res = if a <= A_CROSSOVER {
       let am1 = if x < 1 {
         0.5 * (y2 / (r + (x + 1)) + y2 / (s + (1.0 - x)))
       } else {
@@ -389,9 +389,9 @@ pub fn Complex::acos(self : Complex) -> Complex {
         @lm.PI - real
       },
       if im >= 0 {
-        -imag
+        -im_res
       } else {
-        imag
+        im_res
       },
     )
   }
@@ -422,7 +422,7 @@ pub fn atan(self : Complex) -> Complex {
     let u = 2.0 * im / (1.0 + r * r)
     // FIXME: the following cross-over should be optimized but 0.1
     // seems to work ok 
-    let imag = if Double::abs(u) < 0.1 {
+    let im_abs = if Double::abs(u) < 0.1 {
       0.25 * (@lm.log1p(u) - @lm.log1p(-u))
     } else {
       let a = @lm.hypot(re, im + 1.0)
@@ -431,14 +431,14 @@ pub fn atan(self : Complex) -> Complex {
     }
     if re == 0 {
       if im > 1.0 {
-        Complex::new(@lm.PI / 2.0, imag)
+        Complex::new(@lm.PI / 2.0, im_abs)
       } else if im < -1.0 {
-        Complex::new(-@lm.PI / 2.0, imag)
+        Complex::new(-@lm.PI / 2.0, im_abs)
       } else {
-        Complex::new(0.0, imag)
+        Complex::new(0.0, im_abs)
       }
     } else {
-      Complex::new(0.5 * @lm.atan2(2.0 * re, (1.0 + r) * (1.0 - r)), imag)
+      Complex::new(0.5 * @lm.atan2(2.0 * re, (1.0 + r) * (1.0 - r)), im_abs)
     }
   }
 }
@@ -449,7 +449,7 @@ pub fn Complex::asec(self : Complex) -> Complex {
 }
 
 ///|
-pub fn Complex::aecsec_real(x : Double) -> Complex {
+pub fn Complex::asec_real(x : Double) -> Complex {
   if x < 1.0 || x >= 1.0 {
     Complex::new(@lm.acos(1.0 / x), 0.0)
   } else if x >= 0.0 {

@@ -20,9 +20,9 @@ impl Complex {
   acsc(Self) -> Self
   acsc_real(Double) -> Self
   acsch(Self) -> Self
-  aecsec_real(Double) -> Self
   arg(Self) -> Double
   asec(Self) -> Self
+  asec_real(Double) -> Self
   asech(Self) -> Self
   asin(Self) -> Self
   asin_real(Double) -> Self
