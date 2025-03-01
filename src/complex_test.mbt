@@ -22,3 +22,13 @@ test "basic operations" {
   let c = a.inv()
   assert_true!(c == Complex::new(0.2, -0.4))
 }
+
+///|
+test "struct related" {
+  let a = Complex::new(1, 2)
+  let arr : Array[Double] = [1, 2, 3, 4]
+  a.pack(arr, 1)
+  assert_eq!(arr, [1, 2, 1, 2])
+  a.pack(arr, 2)
+  assert_eq!(arr, [1, 2, 1, 2, 1, 2])
+}

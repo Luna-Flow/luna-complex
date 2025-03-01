@@ -1,9 +1,4 @@
 ///|
-pub impl Eq for Complex with op_equal(self : Complex, other : Complex) -> Bool {
-  self.re == other.re && self.im == other.im
-}
-
-///|
 pub impl Show for Complex with to_string(s) -> String {
   s.re.to_string() + " + " + s.im.to_string() + "i"
 }
