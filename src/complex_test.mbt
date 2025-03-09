@@ -324,15 +324,3 @@ test "inverse hyperbolic functions" {
   )
 }
 
-///|
-test "000" {
-  // println(@lm.sin(@lm.PI_OVER_4))
-  // println(@lm.exp(1.0))
-  // println(1.0 / @lm.log(10))
-  // println(Complex::new(1, 1).pow_real(2))
-  //println(Complex::new(1, @lm.PI_OVER_4).exp())
-  // println(Complex::new(1, 1).log())
-  // println(Complex::new(1, 2).log())
-  // println(Complex::new(1, 1).log_b(Complex::new(1, 2)))
-  println(Complex::new(1, 1).cot())
-}
