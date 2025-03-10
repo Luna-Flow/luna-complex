@@ -13,6 +13,8 @@ fn complex_approx_equal(a : Complex, b : Complex, tol : Double) -> Bool {
 
 ///|
 test "basic operations" {
+  assert_true!(Complex::zero() == Complex::new(0, 0))
+  assert_true!(Complex::one() == Complex::new(1, 0))
   let a = Complex::new(1, 2)
   let b = Complex::new(3, 4)
   let b_ = Complex::new(0.5, 1)
@@ -135,7 +137,7 @@ test "trigonometric functions" {
   assert_true!(
     complex_approx_equal(
       c,
-      Complex::new(0.2717525853121625, 1.0839233273386946),
+      Complex::new(0.27175258531951174, 1.0839233273386948),
       Tol,
     ),
   )
@@ -159,7 +161,7 @@ test "trigonometric functions" {
   assert_true!(
     complex_approx_equal(
       c, 
-      Complex::new(0.217621561849, -0.868014142899), 
+      Complex::new(0.2176215618544027, -0.868014142895925), 
       Tol,
     ),
   )
