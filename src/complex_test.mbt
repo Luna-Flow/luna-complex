@@ -160,8 +160,8 @@ test "trigonometric functions" {
   let c = a.cot()
   assert_true!(
     complex_approx_equal(
-      c, 
-      Complex::new(0.2176215618544027, -0.868014142895925), 
+      c,
+      Complex::new(0.2176215618544027, -0.868014142895925),
       Tol,
     ),
   )
@@ -325,4 +325,3 @@ test "inverse hyperbolic functions" {
     ),
   )
 }
-
