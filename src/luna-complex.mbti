@@ -61,16 +61,16 @@ impl Complex {
   tan(Self) -> Self
   tanh(Self) -> Self
 }
-impl @Luna-Flow/luna-generic.Add for Complex
 impl @Luna-Flow/luna-generic.Conjugate for Complex
 impl @Luna-Flow/luna-generic.Inverse for Complex
-impl @Luna-Flow/luna-generic.Mul for Complex
-impl @Luna-Flow/luna-generic.Neg for Complex
 impl @Luna-Flow/luna-generic.One for Complex
-impl @Luna-Flow/luna-generic.Sub for Complex
 impl @Luna-Flow/luna-generic.Zero for Complex
+impl Add for Complex
 impl Eq for Complex
+impl Mul for Complex
+impl Neg for Complex
 impl Show for Complex
+impl Sub for Complex
 
 // Type aliases
 
