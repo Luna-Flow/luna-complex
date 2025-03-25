@@ -215,7 +215,7 @@ let inv_log_e_10 : Double = 1.0 / @lm.log(10)
 
 ///|
 pub fn Complex::log_10(self : Complex) -> Complex {
-  Complex::new(self.log().re / inv_log_e_10, self.log().im * inv_log_e_10)
+  Complex::new(self.log().re * inv_log_e_10, self.log().im * inv_log_e_10)
 }
 
 ///|
