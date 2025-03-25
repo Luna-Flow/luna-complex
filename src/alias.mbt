@@ -1,0 +1,1 @@
+traitalias @lg.(One, Zero, Inverse, Conjugate)
