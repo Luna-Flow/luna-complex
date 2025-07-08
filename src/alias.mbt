@@ -2,7 +2,7 @@
 traitalias @lg.(One, Zero, Inverse, Conjugate)
 
 ///|
-fnalias @math.maximum as max
+fnalias @cmp.maximum as max
 
 ///|
 fnalias @lm.(
