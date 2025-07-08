@@ -118,7 +118,7 @@ pub fn Complex::abs_log(self : Complex) -> Double {
 }
 
 ///|
-pub fn Complex::op_div(self : Complex, other : Complex) -> Complex {
+pub impl Div for Complex with op_div(self, other) -> Complex {
   let s = 1.0 / other.abs()
   let sbr = s * other.re
   let sbi = s * other.im
