@@ -2,7 +2,7 @@
   "name": "Luna-Flow/luna-complex",
   "version": "0.1.0-alpha-3",
   "deps": {
-    "Kaida-Amethyst/math": "0.1.16",
+    "Kaida-Amethyst/math": "0.1.18",
     "Luna-Flow/luna-generic": "0.2.0-alpha-1"
   },
   "readme": "README.md",

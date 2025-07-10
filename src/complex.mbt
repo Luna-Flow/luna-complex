@@ -336,9 +336,9 @@ pub fn Complex::asin_real(x : Double) -> Complex {
   if x >= -1.0 && x <= 1.0 {
     Complex::new(asin(x), 0.0)
   } else if x < 0.0 {
-    Complex::new(-@lm.PI / 2.0, acosh(-x))
+    Complex::new(-@lm.DOUBLE_PI / 2.0, acosh(-x))
   } else {
-    Complex::new(@lm.PI / 2.0, -acosh(x))
+    Complex::new(@lm.DOUBLE_PI / 2.0, -acosh(x))
   }
 }
 
@@ -380,7 +380,7 @@ pub fn Complex::acos(self : Complex) -> Complex {
       if re >= 0 {
         real
       } else {
-        @lm.PI - real
+        @lm.DOUBLE_PI - real
       },
       if im >= 0 {
         -im_res
@@ -396,7 +396,7 @@ pub fn Complex::acos_real(x : Double) -> Complex {
   if x >= -1.0 && x <= 1.0 {
     Complex::new(acos(x), 0.0)
   } else if x < 0.0 {
-    Complex::new(@lm.PI, -acosh(-x))
+    Complex::new(@lm.DOUBLE_PI, -acosh(-x))
   } else {
     Complex::new(0, acosh(x))
   }
@@ -425,9 +425,9 @@ pub fn Complex::atan(self : Complex) -> Complex {
     }
     if re == 0 {
       if im > 1.0 {
-        Complex::new(@lm.PI / 2.0, im_abs)
+        Complex::new(@lm.DOUBLE_PI / 2.0, im_abs)
       } else if im < -1.0 {
-        Complex::new(-@lm.PI / 2.0, im_abs)
+        Complex::new(-@lm.DOUBLE_PI / 2.0, im_abs)
       } else {
         Complex::new(0.0, im_abs)
       }
@@ -449,7 +449,7 @@ pub fn Complex::asec_real(x : Double) -> Complex {
   } else if x >= 0.0 {
     Complex::new(0.0, acosh(1.0 / x))
   } else {
-    Complex::new(@lm.PI, -acosh(-1.0 / x))
+    Complex::new(@lm.DOUBLE_PI, -acosh(-1.0 / x))
   }
 }
 
@@ -463,16 +463,16 @@ pub fn Complex::acsc_real(x : Double) -> Complex {
   if x <= -1.0 || x >= 1.0 {
     Complex::new(asin(1.0 / x), 0.0)
   } else if x >= 0.0 {
-    Complex::new(@lm.PI / 2.0, -acosh(1.0 / x))
+    Complex::new(@lm.DOUBLE_PI / 2.0, -acosh(1.0 / x))
   } else {
-    Complex::new(-@lm.PI / 2.0, acosh(-1.0 / x))
+    Complex::new(-@lm.DOUBLE_PI / 2.0, acosh(-1.0 / x))
   }
 }
 
 ///|
 pub fn Complex::acot(self : Complex) -> Complex {
   if self.re == 0.0 && self.im == 0.0 {
-    Complex::new(@lm.PI / 2.0, 0.0)
+    Complex::new(@lm.DOUBLE_PI / 2.0, 0.0)
   } else {
     self.inv().atan()
   }
@@ -548,7 +548,7 @@ pub fn Complex::acosh_real(x : Double) -> Complex {
   } else if x >= -1.0 {
     Complex::new(0, acos(x))
   } else {
-    Complex::new(acosh(-x), @lm.PI)
+    Complex::new(acosh(-x), @lm.DOUBLE_PI)
   }
 }
 
@@ -567,7 +567,14 @@ pub fn Complex::atanh_real(x : Double) -> Complex {
   if x > -1.0 && x < 1.0 {
     Complex::new(atanh(x), 0.0)
   } else {
-    Complex::new(atanh(1.0 / x), if x < 0 { -@lm.PI / 2 } else { @lm.PI / 2 })
+    Complex::new(
+      atanh(1.0 / x),
+      if x < 0 {
+        -@lm.DOUBLE_PI / 2
+      } else {
+        @lm.DOUBLE_PI / 2
+      },
+    )
   }
 }
 
