@@ -1,0 +1,107 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "Luna-Flow/luna-complex"
+
+import(
+  "Luna-Flow/luna-generic"
+)
+
+// Values
+
+// Errors
+
+// Types and methods
+pub(all) struct Complex {
+  mut re : Double
+  mut im : Double
+}
+fn Complex::abs(Self) -> Double
+fn Complex::abs_log(Self) -> Double
+fn Complex::abs_sqr(Self) -> Double
+fn Complex::acos(Self) -> Self
+fn Complex::acos_real(Double) -> Self
+fn Complex::acosh(Self) -> Self
+fn Complex::acosh_real(Double) -> Self
+fn Complex::acot(Self) -> Self
+fn Complex::acoth(Self) -> Self
+fn Complex::acsc(Self) -> Self
+fn Complex::acsc_real(Double) -> Self
+fn Complex::acsch(Self) -> Self
+fn Complex::add(Self, Self) -> Self // from trait `Add`
+fn Complex::arg(Self) -> Double
+fn Complex::asec(Self) -> Self
+fn Complex::asec_real(Double) -> Self
+fn Complex::asech(Self) -> Self
+fn Complex::asin(Self) -> Self
+fn Complex::asin_real(Double) -> Self
+fn Complex::asinh(Self) -> Self
+fn Complex::atan(Self) -> Self
+fn Complex::atanh(Self) -> Self
+fn Complex::atanh_real(Double) -> Self
+fn Complex::conjugate(Self) -> Self // from trait `@luna-generic.Conjugate`
+fn Complex::cos(Self) -> Self
+fn Complex::cosh(Self) -> Self
+fn Complex::cot(Self) -> Self
+fn Complex::coth(Self) -> Self
+fn Complex::csc(Self) -> Self
+fn Complex::csch(Self) -> Self
+fn Complex::div(Self, Self) -> Self // from trait `Div`
+fn Complex::equal(Self, Self) -> Bool // from trait `Eq`
+fn Complex::exp(Self) -> Self
+fn Complex::inv(Self) -> Self // from trait `@luna-generic.Inverse`
+fn Complex::log(Self) -> Self
+fn Complex::log_10(Self) -> Self
+fn Complex::log_b(Self, Self) -> Self
+fn Complex::mul(Self, Self) -> Self // from trait `Mul`
+fn Complex::native_pack(Double, Double, Array[Double], Int) -> Unit
+fn Complex::neg(Self) -> Self // from trait `Neg`
+fn Complex::new(Double, Double) -> Self
+fn Complex::one() -> Self // from trait `@luna-generic.One`
+#deprecated
+fn Complex::op_add(Self, Self) -> Self // from trait `Add`
+fn Complex::op_bin_im(Self, Double, (Self, Self) -> Self) -> Self
+fn Complex::op_bin_re(Self, Double, (Self, Self) -> Self) -> Self
+#deprecated
+fn Complex::op_div(Self, Self) -> Self // from trait `Div`
+#deprecated
+fn Complex::op_equal(Self, Self) -> Bool // from trait `Eq`
+#deprecated
+fn Complex::op_mul(Self, Self) -> Self // from trait `Mul`
+#deprecated
+fn Complex::op_neg(Self) -> Self // from trait `Neg`
+#deprecated
+fn Complex::op_sub(Self, Self) -> Self // from trait `Sub`
+fn Complex::output(Self, &Logger) -> Unit // from trait `Show`
+fn Complex::pack(Self, Array[Double], Int) -> Unit
+fn Complex::polar(Double, Double) -> Self
+fn Complex::pow(Self, Self) -> Self
+fn Complex::pow_real(Self, Double) -> Self
+fn Complex::sec(Self) -> Self
+fn Complex::sech(Self) -> Self
+fn Complex::set(Self, Double, Double) -> Unit
+fn Complex::set_im(Self, Double) -> Unit
+fn Complex::set_re(Self, Double) -> Unit
+fn Complex::sin(Self) -> Self
+fn Complex::sinh(Self) -> Self
+fn Complex::sqrt(Self) -> Self
+fn Complex::sqrt_real(Double) -> Self
+fn Complex::sub(Self, Self) -> Self // from trait `Sub`
+fn Complex::tan(Self) -> Self
+fn Complex::tanh(Self) -> Self
+fn Complex::to_string(Self) -> String // from trait `Show`
+fn Complex::zero() -> Self // from trait `@luna-generic.Zero`
+impl @luna-generic.Conjugate for Complex
+impl @luna-generic.Inverse for Complex
+impl @luna-generic.One for Complex
+impl @luna-generic.Zero for Complex
+impl Add for Complex
+impl Div for Complex
+impl Eq for Complex
+impl Mul for Complex
+impl Neg for Complex
+impl Show for Complex
+impl Sub for Complex
+
+// Type aliases
+
+// Traits
+
