@@ -57,7 +57,7 @@ pub fn Complex::native_pack(
   re : Double,
   im : Double,
   arr : Array[Double],
-  offset : Int
+  offset : Int,
 ) -> Unit {
   if offset == arr.length() / 2 {
     arr.push(re)
@@ -118,7 +118,7 @@ pub fn Complex::abs_log(self : Complex) -> Double {
 }
 
 ///|
-pub impl Div for Complex with op_div(self, other) -> Complex {
+pub impl Div for Complex with div(self, other) -> Complex {
   let s = 1.0 / other.abs()
   let sbr = s * other.re
   let sbi = s * other.im
@@ -597,7 +597,7 @@ pub fn Complex::acoth(self : Complex) -> Complex {
 pub fn Complex::op_bin_re(
   self : Complex,
   other : Double,
-  f : (Complex, Complex) -> Complex
+  f : (Complex, Complex) -> Complex,
 ) -> Complex {
   f(self, Complex::new(other, 0.0))
 }
@@ -606,7 +606,7 @@ pub fn Complex::op_bin_re(
 pub fn Complex::op_bin_im(
   self : Complex,
   other : Double,
-  f : (Complex, Complex) -> Complex
+  f : (Complex, Complex) -> Complex,
 ) -> Complex {
   f(self, Complex::new(0.0, other))
 }

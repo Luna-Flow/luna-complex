@@ -9,7 +9,7 @@ pub impl Show for Complex with output(s, l) {
 }
 
 ///|
-pub impl Mul for Complex with op_mul(self : Complex, other : Complex) -> Complex {
+pub impl Mul for Complex with mul(self : Complex, other : Complex) -> Complex {
   Complex::new(
     self.re * other.re - self.im * other.im,
     self.re * other.im + self.im * other.re,
@@ -17,12 +17,12 @@ pub impl Mul for Complex with op_mul(self : Complex, other : Complex) -> Complex
 }
 
 ///|
-pub impl Add for Complex with op_add(self : Complex, other : Complex) -> Complex {
+pub impl Add for Complex with add(self : Complex, other : Complex) -> Complex {
   Complex::new(self.re + other.re, self.im + other.im)
 }
 
 ///|
-pub impl Neg for Complex with op_neg(self : Complex) -> Complex {
+pub impl Neg for Complex with neg(self : Complex) -> Complex {
   Complex::new(-self.re, -self.im)
 }
 
@@ -48,6 +48,6 @@ pub impl Conjugate for Complex with conjugate(self : Complex) -> Complex {
 }
 
 ///|
-pub impl Sub for Complex with op_sub(self : Complex, other : Complex) -> Complex {
+pub impl Sub for Complex with sub(self : Complex, other : Complex) -> Complex {
   Complex::new(self.re - other.re, self.im - other.im)
 }
