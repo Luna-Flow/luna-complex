@@ -3,4 +3,5 @@ target/
 .DS_Store
 .vscode/
 _coverage/
+_build/
 coverage_summary.txt

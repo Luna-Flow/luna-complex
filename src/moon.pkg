@@ -1,0 +1,7 @@
+import {
+  "moonbitlang/core/cmp",
+  "moonbitlang/core/double",
+  "Kaida-Amethyst/math" @lm,
+  "Luna-Flow/luna-generic" @lg,
+  "moonbitlang/quickcheck" @qc,
+}
