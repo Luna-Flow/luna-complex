@@ -9,6 +9,7 @@ using @lm {
   acos,
   acosh,
   asin,
+  asinh,
   atan,
   atan2,
   atanh,

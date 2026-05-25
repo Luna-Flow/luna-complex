@@ -10,6 +10,38 @@ fn scaled_tanh_for_large_re(re : Double, im : Double) -> Complex {
 }
 
 ///|
+fn atanh_real_component(re : Double, im : Double) -> Double {
+  let u = 4.0 * re / ((1.0 - re) * (1.0 - re) + im * im)
+  if u.abs() < 0.25 {
+    0.25 * log1p(u)
+  } else {
+    let a = hypot(1.0 + re, im)
+    let b = hypot(1.0 - re, im)
+    0.5 * log(a / b)
+  }
+}
+
+///|
+fn atanh_imag_component(re : Double, im : Double) -> Double {
+  let re_abs = re.abs()
+  let im_abs = im.abs()
+  let max_val = maximum(re_abs, im_abs)
+  if max_val == 0.0 {
+    return 0.0
+  }
+  if max_val <= 1.0 {
+    return 0.5 * atan2(2.0 * im, 1.0 - re * re - im * im)
+  }
+  let re_scaled = re / max_val
+  let im_scaled = im / max_val
+  let inv_scale_sq = 1.0 / (max_val * max_val)
+  0.5 * atan2(
+    2.0 * im_scaled / max_val,
+    inv_scale_sq - re_scaled * re_scaled - im_scaled * im_scaled,
+  )
+}
+
+///|
 pub fn Complex::sinh(self : Complex) -> Complex {
   Complex::new(sinh(self.re) * cos(self.im), cosh(self.re) * sin(self.im))
 }
@@ -48,18 +80,31 @@ pub fn Complex::coth(self : Complex) -> Complex {
 
 ///|
 pub fn Complex::asinh(self : Complex) -> Complex {
-  let z = Complex::new(-self.im, self.re).asin()
-  Complex::new(z.im, -z.re)
+  if self.im == 0.0 {
+    Complex::new(asinh(self.re), 0.0)
+  } else if self.re == 0.0 {
+    if self.im >= -1.0 && self.im <= 1.0 {
+      Complex::new(0.0, asin(self.im))
+    } else if self.im > 0.0 {
+      Complex::new(acosh(self.im), @lm.DOUBLE_PI / 2.0)
+    } else {
+      Complex::new(-acosh(-self.im), -@lm.DOUBLE_PI / 2.0)
+    }
+  } else {
+    let z = Complex::new(-self.im, self.re).asin()
+    Complex::new(z.im, -z.re)
+  }
 }
 
 ///|
 pub fn Complex::acosh(self : Complex) -> Complex {
-  let z = self.acos()
-  if z.im <= 0.0 {
-    Complex::new(-z.im, z.re)
-  } else {
-    Complex::new(z.im, -z.re)
+  if self.im == 0.0 {
+    return Complex::acosh_real(self.re)
   }
+  let left = Complex::new(0.5 * (self.re + 1.0), 0.5 * self.im).sqrt()
+  let right = Complex::new(0.5 * (self.re - 1.0), 0.5 * self.im).sqrt()
+  let z = (left + right).log()
+  Complex::new(2.0 * z.re, 2.0 * z.im)
 }
 
 ///|
@@ -78,8 +123,10 @@ pub fn Complex::atanh(self : Complex) -> Complex {
   if self.im == 0.0 {
     Complex::atanh_real(self.re)
   } else {
-    let z = Complex::new(-self.im, self.re).atan()
-    Complex::new(z.im, -z.re)
+    Complex::new(
+      atanh_real_component(self.re, self.im),
+      atanh_imag_component(self.re, self.im),
+    )
   }
 }
 
