@@ -93,3 +93,16 @@ test "complex inverse hyperbolic functions" {
     ),
   )
 }
+
+///|
+test "complex hyperbolic large real inputs stay stable" {
+  let z = Complex::new(30.0, 0.75)
+  let tanh_z = z.tanh()
+
+  assert_true(approx_equal_relaxed(tanh_z.re, 1.0))
+  assert_true(tanh_z.im.abs() < 1.0e-24)
+
+  let neg = Complex::new(-30.0, 0.75).tanh()
+  assert_true(approx_equal_relaxed(neg.re, -1.0))
+  assert_true(neg.im.abs() < 1.0e-24)
+}

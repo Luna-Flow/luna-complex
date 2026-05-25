@@ -102,3 +102,16 @@ test "complex inverse trigonometric functions" {
   )
   assert_true(complex_approx_equal_relaxed(b.asin().sin(), b))
 }
+
+///|
+test "complex trigonometric large imaginary inputs stay stable" {
+  let z = Complex::new(0.75, 30.0)
+  let tan_z = z.tan()
+
+  assert_true(tan_z.re.abs() < 1.0e-24)
+  assert_true(approx_equal_relaxed(tan_z.im, 1.0))
+
+  let neg = Complex::new(0.75, -30.0).tan()
+  assert_true(neg.re.abs() < 1.0e-24)
+  assert_true(approx_equal_relaxed(neg.im, -1.0))
+}

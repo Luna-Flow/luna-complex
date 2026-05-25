@@ -172,3 +172,26 @@ test "complex elementary edge cases and branch values" {
     ),
   )
 }
+
+///|
+test "complex scaled division and integer powers" {
+  let huge = 1.0e308
+  let z = Complex::new(huge, huge)
+
+  assert_true(complex_approx_equal_relaxed(z / z, Complex::one()))
+  assert_true(
+    complex_approx_equal_relaxed(
+      z.inv(),
+      Complex::new(5.0e-309, -5.0e-309),
+    ),
+  )
+
+  let w = Complex::new(1.0, 2.0)
+  assert_true(complex_approx_equal_relaxed(w.pow_real(4.0), w * w * w * w))
+  assert_true(
+    complex_approx_equal_relaxed(
+      w.pow(Complex::new(-3.0, 0.0)),
+      (w * w * w).inv(),
+    ),
+  )
+}
