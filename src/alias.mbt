@@ -1,26 +1,26 @@
 ///|
-traitalias @lg.(One, Zero, Inverse, Conjugate)
+using @lg {trait Conjugate, trait Inverse, trait One, trait Zero}
 
 ///|
-fnalias @cmp.maximum as max
+using @cmp {maximum}
 
 ///|
-fnalias @lm.(
-  log,
-  log1p,
-  cos,
-  sin,
+using @lm {
+  acos,
+  acosh,
+  asin,
   atan,
   atan2,
-  acos,
-  asin,
-  sinh,
-  cosh,
-  tanh,
-  acosh,
   atanh,
-  sqrt,
-  hypot,
+  cos,
+  cosh,
   exp,
-  pow
-)
+  hypot,
+  log,
+  log1p,
+  pow,
+  sin,
+  sinh,
+  sqrt,
+  tanh,
+}
