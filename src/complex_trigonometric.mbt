@@ -36,6 +36,18 @@ fn atan_real_component(re : Double, im : Double) -> Double {
 }
 
 ///|
+fn asin_large_magnitude(re : Double, im : Double) -> Complex {
+  let x = re.abs()
+  let y = im.abs()
+  let real = atan2(x, y)
+  let imag = log(2.0) + Complex::new(x, y).abs_log()
+  Complex::new(
+    if re >= 0.0 { real } else { -real },
+    if im >= 0.0 { imag } else { -imag },
+  )
+}
+
+///|
 pub fn Complex::sin(self : Complex) -> Complex {
   if self.im == 0.0 {
     Complex::new(sin(self.re), 0.0)
@@ -86,6 +98,10 @@ pub fn Complex::asin(self : Complex) -> Complex {
   let im = self.im
   if im == 0.0 {
     Complex::asin_real(re)
+  } else if re == 0.0 {
+    Complex::new(0.0, asinh(im))
+  } else if re.abs() > 1.0e150 || im.abs() > 1.0e150 {
+    asin_large_magnitude(re, im)
   } else {
     let x = re.abs()
     let y = im.abs()
@@ -131,7 +147,9 @@ pub fn Complex::asin(self : Complex) -> Complex {
 
 ///|
 pub fn Complex::asin_real(x : Double) -> Complex {
-  if x >= -1.0 && x <= 1.0 {
+  if x.is_nan() {
+    undefined_complex()
+  } else if x >= -1.0 && x <= 1.0 {
     Complex::new(asin(x), 0.0)
   } else if x < 0.0 {
     Complex::new(-@lm.DOUBLE_PI / 2.0, acosh(-x))
@@ -146,6 +164,11 @@ pub fn Complex::acos(self : Complex) -> Complex {
   let im = self.im
   if im == 0.0 {
     Complex::acos_real(re)
+  } else if re == 0.0 {
+    Complex::new(@lm.DOUBLE_PI / 2.0, -asinh(im))
+  } else if re.abs() > 1.0e150 || im.abs() > 1.0e150 {
+    let asin_z = asin_large_magnitude(re, im)
+    Complex::new(@lm.DOUBLE_PI / 2.0 - asin_z.re, -asin_z.im)
   } else {
     let x = re.abs()
     let y = im.abs()
@@ -191,7 +214,9 @@ pub fn Complex::acos(self : Complex) -> Complex {
 
 ///|
 pub fn Complex::acos_real(x : Double) -> Complex {
-  if x >= -1.0 && x <= 1.0 {
+  if x.is_nan() {
+    undefined_complex()
+  } else if x >= -1.0 && x <= 1.0 {
     Complex::new(acos(x), 0.0)
   } else if x < 0.0 {
     Complex::new(@lm.DOUBLE_PI, -acosh(-x))

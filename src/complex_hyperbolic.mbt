@@ -109,7 +109,9 @@ pub fn Complex::acosh(self : Complex) -> Complex {
 
 ///|
 pub fn Complex::acosh_real(x : Double) -> Complex {
-  if x >= 1.0 {
+  if x.is_nan() {
+    undefined_complex()
+  } else if x >= 1.0 {
     Complex::new(acosh(x), 0.0)
   } else if x >= -1.0 {
     Complex::new(0.0, acos(x))
@@ -122,6 +124,10 @@ pub fn Complex::acosh_real(x : Double) -> Complex {
 pub fn Complex::atanh(self : Complex) -> Complex {
   if self.im == 0.0 {
     Complex::atanh_real(self.re)
+  } else if self.im.is_pos_inf() {
+    Complex::new(0.0, @lm.DOUBLE_PI / 2.0)
+  } else if self.im.is_neg_inf() {
+    Complex::new(0.0, -@lm.DOUBLE_PI / 2.0)
   } else {
     Complex::new(
       atanh_real_component(self.re, self.im),
@@ -132,7 +138,9 @@ pub fn Complex::atanh(self : Complex) -> Complex {
 
 ///|
 pub fn Complex::atanh_real(x : Double) -> Complex {
-  if x > -1.0 && x < 1.0 {
+  if x.is_nan() {
+    undefined_complex()
+  } else if x > -1.0 && x < 1.0 {
     Complex::new(atanh(x), 0.0)
   } else if x == 1.0 {
     Complex::new(1.0 / 0.0, 0.0)
