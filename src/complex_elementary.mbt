@@ -2,6 +2,57 @@
 let inv_log_e_10 : Double = 1.0 / log(10)
 
 ///|
+fn stable_quotient(
+  a : Double,
+  b : Double,
+  c : Double,
+  d : Double,
+) -> Complex {
+  let c_abs = c.abs()
+  let d_abs = d.abs()
+  if c_abs >= d_abs {
+    let ratio = d / c
+    let denom = 1.0 + ratio * ratio
+    let scale = 1.0 / c
+    Complex::new(
+      (a * scale + b * scale * ratio) / denom,
+      (b * scale - a * scale * ratio) / denom,
+    )
+  } else {
+    let ratio = c / d
+    let denom = 1.0 + ratio * ratio
+    let scale = 1.0 / d
+    Complex::new(
+      (a * scale * ratio + b * scale) / denom,
+      (b * scale * ratio - a * scale) / denom,
+    )
+  }
+}
+
+///|
+fn complex_pow_integer(base : Complex, exponent : Int) -> Complex {
+  if exponent == 0 {
+    return Complex::one()
+  }
+  if exponent < 0 {
+    return complex_pow_integer(base.inv(), -exponent)
+  }
+  let mut result = Complex::one()
+  let mut factor = base
+  let mut power = exponent
+  while power > 0 {
+    if power % 2 == 1 {
+      result = result * factor
+    }
+    power = power / 2
+    if power > 0 {
+      factor = factor * factor
+    }
+  }
+  result
+}
+
+///|
 pub fn Complex::polar(r : Double, theta : Double) -> Complex {
   Complex::new(r * cos(theta), r * sin(theta))
 }
@@ -44,12 +95,7 @@ pub fn Complex::abs_log(self : Complex) -> Double {
 ///|
 pub impl Div for Complex with fn div(self, other) -> Complex {
   guard other.re != 0.0 || other.im != 0.0 else { undefined_complex() }
-  let scale = 1.0 / other.abs()
-  let scaled_re = scale * other.re
-  let scaled_im = scale * other.im
-  let re = (self.re * scaled_re + self.im * scaled_im) * scale
-  let im = (self.im * scaled_re - self.re * scaled_im) * scale
-  Complex::new(re, im)
+  stable_quotient(self.re, self.im, other.re, other.im)
 }
 
 ///|
@@ -102,6 +148,9 @@ pub fn Complex::pow(self : Complex, other : Complex) -> Complex {
     self
   } else if other.re == -1.0 && other.im == 0.0 {
     self.inv()
+  } else if other.im == 0.0 && other.re == other.re.trunc() &&
+    other.re.abs() <= 2147483647.0 {
+    complex_pow_integer(self, other.re.to_int())
   } else {
     let log_re = self.abs_log()
     let theta = self.arg()
@@ -121,6 +170,8 @@ pub fn Complex::pow_real(self : Complex, other : Double) -> Complex {
     } else {
       undefined_complex()
     }
+  } else if other == other.trunc() && other.abs() <= 2147483647.0 {
+    complex_pow_integer(self, other.to_int())
   } else {
     let log_re = self.abs_log()
     let theta = self.arg()

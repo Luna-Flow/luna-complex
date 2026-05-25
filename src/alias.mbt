@@ -22,5 +22,4 @@ using @lm {
   sin,
   sinh,
   sqrt,
-  tanh,
 }

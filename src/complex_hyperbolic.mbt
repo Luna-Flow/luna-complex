@@ -1,4 +1,15 @@
 ///|
+fn scaled_tanh_for_large_re(re : Double, im : Double) -> Complex {
+  let sign = if re >= 0.0 { 1.0 } else { -1.0 }
+  let decay = exp(-2.0 * re.abs())
+  let decay_sq = decay * decay
+  let sin_2im = sin(2.0 * im)
+  let cos_2im = cos(2.0 * im)
+  let denom = 1.0 + decay_sq + 2.0 * decay * cos_2im
+  Complex::new(sign * (1.0 - decay_sq) / denom, 2.0 * decay * sin_2im / denom)
+}
+
+///|
 pub fn Complex::sinh(self : Complex) -> Complex {
   Complex::new(sinh(self.re) * cos(self.im), cosh(self.re) * sin(self.im))
 }
@@ -16,8 +27,7 @@ pub fn Complex::tanh(self : Complex) -> Complex {
   if re > -1.0 && re < 1.0 {
     Complex::new(sinh(re) * cosh(re) / denom, 0.5 * sin(2.0 * im) / denom)
   } else {
-    let factor = 1.0 + pow(cos(im) / sinh(re), 2.0)
-    Complex::new(1.0 / (tanh(re) * factor), 0.5 * sin(2.0 * im) / denom)
+    scaled_tanh_for_large_re(re, im)
   }
 }
 
