@@ -34,12 +34,16 @@ pub fn Complex::abs_sqr(self : Complex) -> Double {
 pub fn Complex::abs_log(self : Complex) -> Double {
   let re_abs = self.re.abs()
   let im_abs = self.im.abs()
+  if re_abs == 0.0 && im_abs == 0.0 {
+    return @double.neg_infinity
+  }
   let t = if re_abs >= im_abs { im_abs / re_abs } else { re_abs / im_abs }
   log(maximum(re_abs, im_abs)) + 0.5 * log(1.0 + t * t)
 }
 
 ///|
 pub impl Div for Complex with fn div(self, other) -> Complex {
+  guard other.re != 0.0 || other.im != 0.0 else { undefined_complex() }
   let scale = 1.0 / other.abs()
   let scaled_re = scale * other.re
   let scaled_im = scale * other.im
@@ -89,13 +93,15 @@ pub fn Complex::pow(self : Complex, other : Complex) -> Complex {
   if self.re == 0.0 && self.im == 0.0 {
     if other.re == 0.0 && other.im == 0.0 {
       Complex::new(1.0, 0.0)
-    } else {
+    } else if other.im == 0.0 && other.re > 0.0 {
       Complex::new(0.0, 0.0)
+    } else {
+      undefined_complex()
     }
   } else if other.re == 1.0 && other.im == 0.0 {
     self
   } else if other.re == -1.0 && other.im == 0.0 {
-    self.conjugate()
+    self.inv()
   } else {
     let log_re = self.abs_log()
     let theta = self.arg()
@@ -110,8 +116,10 @@ pub fn Complex::pow_real(self : Complex, other : Double) -> Complex {
   if self.re == 0.0 && self.im == 0.0 {
     if other == 0.0 {
       Complex::new(1.0, 0.0)
-    } else {
+    } else if other > 0.0 {
       Complex::new(0.0, 0.0)
+    } else {
+      undefined_complex()
     }
   } else {
     let log_re = self.abs_log()

@@ -52,8 +52,7 @@ test "complex elementary functions" {
   )
   assert_true(Complex::sqrt_real(-9.0) == Complex::new(0.0, 3.0))
   assert_true(
-    Complex::new(-3.0, 4.0).sqrt() == Complex::new(1.0, 2.0) ||
-    Complex::new(-3.0, 4.0).sqrt() == Complex::new(-1.0, -2.0),
+    Complex::new(-3.0, 4.0).sqrt() == Complex::new(1.0, 2.0),
   )
   assert_true(
     complex_approx_equal(a.pow_real(2.0), Complex::new(-3.0, 4.0), tol),
@@ -86,6 +85,90 @@ test "complex elementary functions" {
       x.log_b(a),
       Complex::new(0.6130442078620816, 0.13255193491810882),
       tol,
+    ),
+  )
+}
+
+///|
+test "complex elementary edge cases and branch values" {
+  let zero = Complex::zero()
+  let a = Complex::new(1.0, 2.0)
+
+  assert_true(
+    complex_approx_equal_relaxed(a.pow(Complex::new(-1.0, 0.0)), a.inv()),
+  )
+  assert_true(Complex::zero().pow(Complex::zero()) == Complex::one())
+  assert_true(Complex::zero().pow(Complex::new(2.0, 0.0)) == Complex::zero())
+  assert_true(
+    Complex::new(0.0, 1.0).pow(Complex::new(-1.0, 0.0)) ==
+    Complex::new(0.0, -1.0),
+  )
+  assert_true(
+    assert_complex_special(
+      zero.pow(Complex::new(-1.0, 0.0)),
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+    ),
+  )
+  assert_true(
+    assert_complex_special(
+      zero.pow(Complex::new(1.0, 1.0)),
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+    ),
+  )
+  assert_true(
+    assert_complex_special(
+      zero.pow_real(-1.0),
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+    ),
+  )
+  assert_true(
+    assert_complex_special(zero.inv(), true, false, false, true, false, false),
+  )
+  assert_true(
+    assert_complex_special(
+      Complex::one() / zero,
+      true,
+      false,
+      false,
+      true,
+      false,
+      false,
+    ),
+  )
+  assert_true(Complex::new(-4.0, 0.0).sqrt() == Complex::new(0.0, 2.0))
+
+  let log_zero = zero.log()
+  assert_true(
+    assert_complex_special(log_zero, false, false, true, false, false, false),
+  )
+  assert_true(log_zero.im == 0.0)
+
+  let log10_zero = zero.log_10()
+  assert_true(
+    assert_complex_special(log10_zero, false, false, true, false, false, false),
+  )
+  assert_true(log10_zero.im == 0.0)
+
+  assert_true(Complex::new(-1.0, 0.0).log() == Complex::new(0.0, @lm.DOUBLE_PI))
+  assert_true(
+    complex_approx_equal_relaxed(
+      Complex::new(-1.0, 0.0).log_10(),
+      Complex::new(0.0, 1.3643763538418412),
     ),
   )
 }

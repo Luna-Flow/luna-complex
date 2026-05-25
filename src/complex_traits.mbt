@@ -28,6 +28,7 @@ pub impl Neg for Complex with fn neg(self : Complex) -> Complex {
 
 ///|
 pub impl Inverse for Complex with fn inv(self : Complex) -> Complex {
+  guard self.re != 0.0 || self.im != 0.0 else { undefined_complex() }
   let scale = 1.0 / self.abs_sqr()
   Complex::new(self.re * scale, -self.im * scale)
 }

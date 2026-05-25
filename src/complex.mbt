@@ -47,3 +47,8 @@ pub fn Complex::native_pack(
 pub fn Complex::pack(self : Complex, arr : Array[Double], offset : Int) -> Unit {
   Complex::native_pack(self.re, self.im, arr, offset)
 }
+
+///|
+fn undefined_complex() -> Complex {
+  Complex::new(@double.not_a_number, @double.not_a_number)
+}

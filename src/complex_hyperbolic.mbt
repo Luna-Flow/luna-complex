@@ -45,7 +45,7 @@ pub fn Complex::asinh(self : Complex) -> Complex {
 ///|
 pub fn Complex::acosh(self : Complex) -> Complex {
   let z = self.acos()
-  if z.im < 0.0 {
+  if z.im <= 0.0 {
     Complex::new(-z.im, z.re)
   } else {
     Complex::new(z.im, -z.re)
@@ -77,15 +77,12 @@ pub fn Complex::atanh(self : Complex) -> Complex {
 pub fn Complex::atanh_real(x : Double) -> Complex {
   if x > -1.0 && x < 1.0 {
     Complex::new(atanh(x), 0.0)
+  } else if x == 1.0 {
+    Complex::new(1.0 / 0.0, 0.0)
+  } else if x == -1.0 {
+    Complex::new(-1.0 / 0.0, 0.0)
   } else {
-    Complex::new(
-      atanh(1.0 / x),
-      if x < 0.0 {
-        -@lm.DOUBLE_PI / 2.0
-      } else {
-        @lm.DOUBLE_PI / 2.0
-      },
-    )
+    Complex::new(atanh(1.0 / x), @lm.DOUBLE_PI / 2.0)
   }
 }
 
