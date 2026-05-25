@@ -106,3 +106,25 @@ test "complex hyperbolic large real inputs stay stable" {
   assert_true(approx_equal_relaxed(neg.re, -1.0))
   assert_true(neg.im.abs() < 1.0e-24)
 }
+
+///|
+test "complex inverse hyperbolic pure imaginary branch values" {
+  assert_true(
+    complex_approx_equal_relaxed(
+      Complex::new(0.0, 2.0).asinh(),
+      Complex::new(1.3169578969248166, @lm.DOUBLE_PI / 2.0),
+    ),
+  )
+  assert_true(
+    complex_approx_equal_relaxed(
+      Complex::new(0.0, 2.0).acosh(),
+      Complex::new(1.4436354751788103, @lm.DOUBLE_PI / 2.0),
+    ),
+  )
+  assert_true(
+    complex_approx_equal_relaxed(
+      Complex::new(0.0, 2.0).atanh(),
+      Complex::new(0.0, 1.1071487177940904),
+    ),
+  )
+}

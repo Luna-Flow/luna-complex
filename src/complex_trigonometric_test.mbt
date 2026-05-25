@@ -115,3 +115,13 @@ test "complex trigonometric large imaginary inputs stay stable" {
   assert_true(neg.re.abs() < 1.0e-24)
   assert_true(approx_equal_relaxed(neg.im, -1.0))
 }
+
+///|
+test "complex inverse tangent pure imaginary branch value" {
+  assert_true(
+    complex_approx_equal_relaxed(
+      Complex::new(0.0, 2.0).atan(),
+      Complex::new(@lm.DOUBLE_PI / 2.0, 0.5493061443340549),
+    ),
+  )
+}
