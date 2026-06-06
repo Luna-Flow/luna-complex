@@ -1,0 +1,113 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "Luna-Flow/luna-complex/double_ext"
+
+import {
+  "Luna-Flow/luna-complex",
+}
+
+// Values
+pub fn abs(@luna-complex.Complex[Double]) -> Double
+
+pub fn abs_log(@luna-complex.Complex[Double]) -> Double
+
+pub fn abs_sqr(@luna-complex.Complex[Double]) -> Double
+
+pub fn acos(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn acos_real(Double) -> @luna-complex.Complex[Double]
+
+pub fn acosh(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn acosh_real(Double) -> @luna-complex.Complex[Double]
+
+pub fn acot(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn acoth(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn acsc(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn acsc_real(Double) -> @luna-complex.Complex[Double]
+
+pub fn acsch(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn arg(@luna-complex.Complex[Double]) -> Double
+
+pub fn asec(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn asec_real(Double) -> @luna-complex.Complex[Double]
+
+pub fn asech(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn asin(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn asin_real(Double) -> @luna-complex.Complex[Double]
+
+pub fn asinh(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn atan(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn atanh(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn atanh_real(Double) -> @luna-complex.Complex[Double]
+
+pub fn cos(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn cosh(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn cot(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn coth(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn csc(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn csch(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn div(@luna-complex.Complex[Double], @luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn exp(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn log(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn log_10(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn log_b(@luna-complex.Complex[Double], @luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn native_pack(Double, Double, Array[Double], Int) -> Unit
+
+pub fn op_bin_im(@luna-complex.Complex[Double], Double, (@luna-complex.Complex[Double], @luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn op_bin_re(@luna-complex.Complex[Double], Double, (@luna-complex.Complex[Double], @luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn pack(@luna-complex.Complex[Double], Array[Double], Int) -> Unit
+
+pub fn polar(Double, Double) -> @luna-complex.Complex[Double]
+
+pub fn pow(@luna-complex.Complex[Double], @luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn pow_real(@luna-complex.Complex[Double], Double) -> @luna-complex.Complex[Double]
+
+pub fn sec(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn sech(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn sin(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn sinh(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn sqrt(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn sqrt_real(Double) -> @luna-complex.Complex[Double]
+
+pub fn tan(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+pub fn tanh(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+pub using @luna-complex {type Complex}
+
+// Traits
+

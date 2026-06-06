@@ -1,54 +1,27 @@
 ///|
 /// Represents a complex number with mutable real and imaginary parts.
-pub(all) struct Complex {
-  mut re : Double
-  mut im : Double
+pub(all) struct Complex[T] {
+  mut re : T
+  mut im : T
 } derive(Eq)
 
 ///|
-pub fn Complex::new(re : Double, im : Double) -> Complex {
+pub fn[T] Complex::new(re : T, im : T) -> Complex[T] {
   Complex::{ re, im }
 }
 
 ///|
-pub fn Complex::set(self : Complex, re : Double, im : Double) -> Unit {
+pub fn[T] Complex::set(self : Complex[T], re : T, im : T) -> Unit {
   self.re = re
   self.im = im
 }
 
 ///|
-pub fn Complex::set_re(self : Complex, re : Double) -> Unit {
+pub fn[T] Complex::set_re(self : Complex[T], re : T) -> Unit {
   self.re = re
 }
 
 ///|
-pub fn Complex::set_im(self : Complex, im : Double) -> Unit {
+pub fn[T] Complex::set_im(self : Complex[T], im : T) -> Unit {
   self.im = im
-}
-
-///|
-pub fn Complex::native_pack(
-  re : Double,
-  im : Double,
-  arr : Array[Double],
-  offset : Int,
-) -> Unit {
-  if offset == arr.length() / 2 {
-    arr.push(re)
-    arr.push(im)
-  } else {
-    guard offset >= 0 && offset < arr.length() / 2
-    arr[2 * offset] = re
-    arr[2 * offset + 1] = im
-  }
-}
-
-///|
-pub fn Complex::pack(self : Complex, arr : Array[Double], offset : Int) -> Unit {
-  Complex::native_pack(self.re, self.im, arr, offset)
-}
-
-///|
-fn undefined_complex() -> Complex {
-  Complex::new(@double.not_a_number, @double.not_a_number)
 }

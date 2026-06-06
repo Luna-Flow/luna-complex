@@ -1,26 +1,14 @@
 ///|
-using @lg {trait Conjugate, trait Inverse, trait One, trait Zero}
-
-///|
-using @cmp {maximum}
-
-///|
-using @lm {
-  acos,
-  acosh,
-  asin,
-  asinh,
-  atan,
-  atan2,
-  atanh,
-  cos,
-  cosh,
-  exp,
-  hypot,
-  log,
-  log1p,
-  pow,
-  sin,
-  sinh,
-  sqrt,
+using @lg {
+  trait AddGroup,
+  trait AddMonoid,
+  trait Conjugate,
+  trait Field,
+  trait Inverse,
+  trait MulGroup,
+  trait MulMonoid,
+  trait One,
+  trait Ring,
+  trait Semiring,
+  trait Zero,
 }

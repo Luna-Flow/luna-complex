@@ -10,71 +10,31 @@ import {
 // Errors
 
 // Types and methods
-pub(all) struct Complex {
-  mut re : Double
-  mut im : Double
+pub(all) struct Complex[T] {
+  mut re : T
+  mut im : T
 } derive(Eq)
-pub fn Complex::abs(Self) -> Double
-pub fn Complex::abs_log(Self) -> Double
-pub fn Complex::abs_sqr(Self) -> Double
-pub fn Complex::acos(Self) -> Self
-pub fn Complex::acos_real(Double) -> Self
-pub fn Complex::acosh(Self) -> Self
-pub fn Complex::acosh_real(Double) -> Self
-pub fn Complex::acot(Self) -> Self
-pub fn Complex::acoth(Self) -> Self
-pub fn Complex::acsc(Self) -> Self
-pub fn Complex::acsc_real(Double) -> Self
-pub fn Complex::acsch(Self) -> Self
-pub fn Complex::arg(Self) -> Double
-pub fn Complex::asec(Self) -> Self
-pub fn Complex::asec_real(Double) -> Self
-pub fn Complex::asech(Self) -> Self
-pub fn Complex::asin(Self) -> Self
-pub fn Complex::asin_real(Double) -> Self
-pub fn Complex::asinh(Self) -> Self
-pub fn Complex::atan(Self) -> Self
-pub fn Complex::atanh(Self) -> Self
-pub fn Complex::atanh_real(Double) -> Self
-pub fn Complex::cos(Self) -> Self
-pub fn Complex::cosh(Self) -> Self
-pub fn Complex::cot(Self) -> Self
-pub fn Complex::coth(Self) -> Self
-pub fn Complex::csc(Self) -> Self
-pub fn Complex::csch(Self) -> Self
-pub fn Complex::exp(Self) -> Self
-pub fn Complex::log(Self) -> Self
-pub fn Complex::log_10(Self) -> Self
-pub fn Complex::log_b(Self, Self) -> Self
-pub fn Complex::native_pack(Double, Double, Array[Double], Int) -> Unit
-pub fn Complex::new(Double, Double) -> Self
-pub fn Complex::op_bin_im(Self, Double, (Self, Self) -> Self) -> Self
-pub fn Complex::op_bin_re(Self, Double, (Self, Self) -> Self) -> Self
-pub fn Complex::pack(Self, Array[Double], Int) -> Unit
-pub fn Complex::polar(Double, Double) -> Self
-pub fn Complex::pow(Self, Self) -> Self
-pub fn Complex::pow_real(Self, Double) -> Self
-pub fn Complex::sec(Self) -> Self
-pub fn Complex::sech(Self) -> Self
-pub fn Complex::set(Self, Double, Double) -> Unit
-pub fn Complex::set_im(Self, Double) -> Unit
-pub fn Complex::set_re(Self, Double) -> Unit
-pub fn Complex::sin(Self) -> Self
-pub fn Complex::sinh(Self) -> Self
-pub fn Complex::sqrt(Self) -> Self
-pub fn Complex::sqrt_real(Double) -> Self
-pub fn Complex::tan(Self) -> Self
-pub fn Complex::tanh(Self) -> Self
-pub impl @luna-generic.Conjugate for Complex
-pub impl @luna-generic.Inverse for Complex
-pub impl @luna-generic.One for Complex
-pub impl @luna-generic.Zero for Complex
-pub impl Add for Complex
-pub impl Div for Complex
-pub impl Mul for Complex
-pub impl Neg for Complex
-pub impl Show for Complex
-pub impl Sub for Complex
+pub fn[T] Complex::new(T, T) -> Self[T]
+pub fn[T] Complex::set(Self[T], T, T) -> Unit
+pub fn[T] Complex::set_im(Self[T], T) -> Unit
+pub fn[T] Complex::set_re(Self[T], T) -> Unit
+pub impl[T : Add + @luna-generic.Zero + Neg + Sub] @luna-generic.AddGroup for Complex[T]
+pub impl[T : Add + @luna-generic.Zero] @luna-generic.AddMonoid for Complex[T]
+pub impl[T : Neg] @luna-generic.Conjugate for Complex[T]
+pub impl[T : @luna-generic.Field] @luna-generic.Field for Complex[T]
+pub impl[T : @luna-generic.Field] @luna-generic.Inverse for Complex[T]
+pub impl[T : @luna-generic.Field] @luna-generic.MulGroup for Complex[T]
+pub impl[T : @luna-generic.Ring] @luna-generic.MulMonoid for Complex[T]
+pub impl[T : @luna-generic.One + @luna-generic.Zero] @luna-generic.One for Complex[T]
+pub impl[T : @luna-generic.Ring] @luna-generic.Ring for Complex[T]
+pub impl[T : @luna-generic.Ring] @luna-generic.Semiring for Complex[T]
+pub impl[T : @luna-generic.Zero] @luna-generic.Zero for Complex[T]
+pub impl[T : Add] Add for Complex[T]
+pub impl[T : @luna-generic.Field] Div for Complex[T]
+pub impl[T : Mul + Add + Sub] Mul for Complex[T]
+pub impl[T : Neg] Neg for Complex[T]
+pub impl[T : Show] Show for Complex[T]
+pub impl[T : Sub] Sub for Complex[T]
 
 // Type aliases
 

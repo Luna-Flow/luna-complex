@@ -1,11 +1,11 @@
 name = "Luna-Flow/luna-complex"
 
-version = "0.1.0-alpha-4"
+version = "0.2.0"
 
 import {
   "Kaida-Amethyst/math@0.1.20",
-  "Luna-Flow/luna-generic@0.2.3",
-  "moonbitlang/quickcheck@0.14.0",
+  "Luna-Flow/luna-generic@0.3.1",
+  "Luna-Flow/arithmetic@0.1.0",
 }
 
 readme = "README.md"
