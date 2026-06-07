@@ -12,7 +12,7 @@ readme = "README.md"
 
 repository = "https://github.com/Luna-Flow/luna-complex"
 
-license = "MIT"
+license = "Apache-2.0"
 
 keywords = [ "complex-numbers", "math" ]
 
