@@ -62,11 +62,8 @@ let inverse_sine = @double_ext.asin(z)
 API documentation is available at [mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-complex).
 When browsing docs, check both the root package and the `double_ext` subpackage because the analytic `Double` APIs are no longer in the root package.
 
-Contribution guidance is available in:
-
-- English: `doc/en_US/CONTRIBUTING.md`
-- 简体中文: `doc/zh_CN/CONTRIBUTING.md`
-- 日本語: `doc/ja_JP/CONTRIBUTING.md`
+The manual, with Chinese and Japanese translations, is published at <https://luna-flow.github.io/en/luna-complex/>; its English source lives in [`doc/manual/`](doc/manual/index.md).
+Contribution guidance is in [`doc/manual/contributing.md`](doc/manual/contributing.md).
 
 ### Development
 

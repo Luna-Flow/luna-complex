@@ -1,1 +1,1 @@
-View Contribution Guidelines in [zh_CN](https://github.com/Luna-Flow/luna-complex/tree/main/doc/zh_CN/CONTRIBUTING.md) | [en_US](https://github.com/Luna-Flow/luna-complex/tree/main/doc/en_US/CONTRIBUTING.md) | [ja_JP](https://github.com/Luna-Flow/luna-complex/tree/main/doc/ja_JP/CONTRIBUTING.md) 
+See the [contribution guidelines](./doc/manual/contributing.md), also available on the [documentation site](https://luna-flow.github.io/en/luna-complex/) in English, Chinese, and Japanese.

@@ -1,0 +1,220 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Luna-Flow documentation\n"
+"Report-Msgid-Bugs-To: https://github.com/Luna-Flow\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: conf.json:summary
+msgid "Generic complex-number arithmetic for LunaFlow, with analytic and transcendental functions for complex doubles."
+msgstr "LunaFlow 的泛型复数运算库，并为双精度复数提供解析函数与超越函数。"
+
+#: manual/contributing.md:1
+msgid "Contribution Guidelines"
+msgstr "贡献规范"
+
+#: manual/contributing.md:3
+msgid "Code Style"
+msgstr "代码风格"
+
+#: manual/contributing.md:5
+msgid "Format all code with `moon fmt`."
+msgstr "所有代码统一使用 `moon fmt` 格式化。"
+
+#: manual/contributing.md:6
+msgid "Prefer the shared aliases imported in `src/alias.mbt` instead of scattering repeated fully-qualified calls across implementation files."
+msgstr "优先复用 `src/alias.mbt` 中集中定义的别名和导入风格，不要在实现文件里重复堆叠完全限定名调用。"
+
+#: manual/contributing.md:7
+msgid "Keep comments short and technical. Comments should explain numerical stability choices, branch selection, or non-obvious contracts, not restate the code."
+msgstr "注释保持简洁、技术化，重点说明数值稳定性、分支选择和不明显的契约，不要简单复述代码。"
+
+#: manual/contributing.md:9
+msgid "Naming Conventions"
+msgstr "命名约定"
+
+#: manual/contributing.md:11
+msgid "Bindings and functions: lowercase with underscores, such as `scaled_re` or `pow_real`."
+msgstr "绑定和函数名使用小写加下划线，例如 `scaled_re`、`pow_real`。"
+
+#: manual/contributing.md:12
+msgid "Types and traits: PascalCase, such as `Complex`."
+msgstr "类型和 Trait 使用 PascalCase，例如 `Complex`。"
+
+#: manual/contributing.md:13
+msgid "Files: lowercase with underscores, and named after a specific behavior rather than a vague bucket."
+msgstr "文件名使用小写加下划线，并直接反映所负责的能力。"
+
+#: manual/contributing.md:14
+msgid "If an error code is introduced later, use uppercase with underscores and an `E_` prefix."
+msgstr "如果后续引入错误码，使用全大写加下划线，并以 `E_` 为前缀。"
+
+#: manual/contributing.md:16
+msgid "File Organization"
+msgstr "文件组织"
+
+#: manual/contributing.md:18
+msgid "Organize files by package boundary first, then by behavior. In this repository, the root package owns the generic `Complex[T]` core, while `src/double_ext` owns the `Complex[Double]` analytic layer."
+msgstr "先按包边界组织，再按行为拆分文件。当前仓库中，根包负责泛型 `Complex[T]` 核心，`src/double_ext` 负责 `Complex[Double]` 的解析与超越函数层。"
+
+#: manual/contributing.md:20
+msgid "Inside each package, keep core data operations, elementary functions, trigonometric functions, hyperbolic functions, and tests in separate files."
+msgstr "在每个包内部，再把核心数据结构、初等函数、三角函数、双曲函数和测试分别放在独立文件中。"
+
+#: manual/contributing.md:21
+msgid "Avoid catch-all files such as `utils.mbt`. New files should describe the behavior they own."
+msgstr "避免 `utils.mbt` 这类兜底文件。新增文件名必须能明确说明职责。"
+
+#: manual/contributing.md:22
+msgid "Keep public API changes deliberate. Internal helpers should remain internal unless the package genuinely needs to expose them."
+msgstr "公共 API 变更要有意识地控制；内部辅助函数除非确有必要，不应暴露到包接口中。"
+
+#: manual/contributing.md:23
+msgid "Do not assume the `double_ext` package can add methods to `Complex[T]`. Under current MoonBit rules, subpackages cannot attach methods or trait impls to a type defined in another package, so `double_ext` uses free functions."
+msgstr "不要假设 `double_ext` 可以给 `Complex[T]` 追加方法。以当前 MoonBit 规则，子包不能给别的包定义的类型补方法或 trait impl，所以 `double_ext` 采用自由函数形式。"
+
+#: manual/contributing.md:26
+msgid "Testing"
+msgstr "测试要求"
+
+#: manual/contributing.md:28
+msgid "Add or update tests whenever changing numerical behavior."
+msgstr "任何数值行为调整都必须同步补测试或改测试。"
+
+#: manual/contributing.md:29
+msgid "Prefer a mix of regression examples and algebraic identity checks."
+msgstr "测试应同时包含回归样例和代数恒等式校验。"
+
+#: manual/contributing.md:30
+msgid "Preserve coverage for both layers: generic algebraic behavior in the root package and `Complex[Double]` analytic behavior in `double_ext`."
+msgstr "同时覆盖两层能力：根包中的泛型代数能力，以及 `double_ext` 中的 `Complex[Double]` 数值能力。"
+
+#: manual/contributing.md:32
+msgid "Use `moon test --enable-coverage` before submitting changes."
+msgstr "提交前运行 `moon test --enable-coverage`。"
+
+#: manual/contributing.md:33
+msgid "Regenerate `pkg.generated.mbti` with `moon info` whenever the public API changes."
+msgstr "如果公共 API 有变化，使用 `moon info` 重新生成 `pkg.generated.mbti`。"
+
+#: manual/contributing.md:35
+msgid "Commit Guidelines"
+msgstr "提交规范"
+
+#: manual/contributing.md:37
+msgid "Run `./ready_to_pr.sh` before committing when the change affects code or public API."
+msgstr "代码或公开接口有改动时，提交前运行 `./ready_to_pr.sh`。"
+
+#: manual/contributing.md:38
+msgid "Use concise English Conventional Commit messages such as `fix: stabilize inverse trigonometric branches`."
+msgstr "Commit message 使用简洁英文 Conventional Commits，例如 `fix: stabilize inverse trigonometric branches`。"
+
+#: manual/contributing.md:39
+msgid "Keep each commit focused on one logical change."
+msgstr "每次提交只聚焦一个逻辑变更。"
+
+#: manual/contributing.md:41
+msgid "Release Checklist"
+msgstr "发布检查"
+
+#: manual/contributing.md:43
+msgid "Update `moon.mod` before publishing a new package version."
+msgstr "发布前先更新 `moon.mod` 中的版本号。"
+
+#: manual/contributing.md:44
+msgid "Ensure `README.md` reflects the current package state."
+msgstr "确保 `README.md` 与当前仓库状态一致。"
+
+#: manual/contributing.md:45
+msgid "Run `moon check` and `moon test --enable-coverage`."
+msgstr "运行 `moon check` 和 `moon test --enable-coverage`。"
+
+#: manual/contributing.md:46
+msgid "When triggering GitHub Actions `publish-package`, provide the exact version from `moon.mod`."
+msgstr "触发 GitHub Actions `publish-package` 时，输入值必须与 `moon.mod` 中版本完全一致。"
+
+#: manual/contributing.md:48
+msgid "Code Review"
+msgstr "代码审查"
+
+#: manual/contributing.md:50
+msgid "If you are not a maintainer or collaborator, contact them before changing dependency or version declarations in `moon.mod`."
+msgstr "如果你不是维护者或协作者，在修改 `moon.mod` 中的依赖或版本前，请先联系维护者。"
+
+#: manual/contributing.md:51
+msgid "Reviews should focus on correctness, numerical stability, API clarity, tests, and maintainability."
+msgstr "审查重点应放在正确性、数值稳定性、API 清晰度、测试充分性和可维护性。"
+
+#: manual/index.md:1
+msgid "luna-complex"
+msgstr "luna-complex"
+
+#: manual/index.md:3
+msgid "`luna-complex` provides a generic `Complex[T]` core for algebraic complex arithmetic in LunaFlow, with `Double`-specific analytic and transcendental helpers split into the `Luna-Flow/luna-complex/double_ext` subpackage. This manual describes version 0.2.0."
+msgstr "`luna-complex` 为 LunaFlow 提供用于代数复数运算的泛型 `Complex[T]` 核心，`Double` 专用的解析函数与超越函数辅助则拆分到 `Luna-Flow/luna-complex/double_ext` 子包中。本手册描述 0.2.0 版本。"
+
+#: manual/index.md:5
+msgid "Packages"
+msgstr "包"
+
+#: manual/index.md:7
+msgid "Package"
+msgstr "包"
+
+#: manual/index.md:7
+msgid "Source"
+msgstr "源码"
+
+#: manual/index.md:7
+msgid "Contents"
+msgstr "内容"
+
+#: manual/index.md:9
+msgid "The generic `Complex[T]` type, its trait implementations, and basic algebraic operations."
+msgstr "泛型 `Complex[T]` 类型、它的 trait 实现以及基本代数运算。"
+
+#: manual/index.md:10
+msgid "`Complex[Double]` functions such as `polar`, `arg`, `abs`, `sqrt`, `log`, `sin`, `cos`, `asin`, `acosh`, and `atanh`."
+msgstr "`Complex[Double]` 函数，例如 `polar`、`arg`、`abs`、`sqrt`、`log`、`sin`、`cos`、`asin`、`acosh` 和 `atanh`。"
+
+#: manual/index.md:12
+msgid "The root package owns generic `Complex[T]` structure, algebraic operations, and trait-driven constraints."
+msgstr "根包负责泛型 `Complex[T]` 结构、代数运算以及由 trait 驱动的约束。"
+
+#: manual/index.md:14
+msgid "`Complex[T]` is a mutable struct with explicit `re` / `im` fields for in-place updates when desired. Besides `Complex::new`, it provides `set`, `set_re`, and `set_im`. Under the matching constraints on `T`, it implements the `luna-generic` algebra traits from `Zero` and `AddMonoid` up to `Ring` and `Field`, together with `Conjugate`, `Inverse`, the arithmetic operators, `Eq`, and `Show`. Because the constraints are traits rather than a fixed scalar type, values can nest, as in `Complex[Complex[Double]]`."
+msgstr "`Complex[T]` 是一个可变结构体，带有显式的 `re` / `im` 字段，需要时可以原地更新。除 `Complex::new` 外，它还提供 `set`、`set_re` 和 `set_im`。在 `T` 满足相应约束时，它实现从 `Zero`、`AddMonoid` 直到 `Ring`、`Field` 的 `luna-generic` 代数 trait，以及 `Conjugate`、`Inverse`、算术运算符、`Eq` 和 `Show`。由于约束是 trait 而不是固定的标量类型，值可以嵌套，例如 `Complex[Complex[Double]]`。"
+
+#: manual/index.md:16
+msgid "`double_ext` covers the elementary functions (`exp`, `log`, `log_10`, `log_b`, `pow`, `pow_real`, `sqrt`), the trigonometric and hyperbolic functions with their inverses, and real-argument variants such as `sqrt_real`, `asin_real`, and `acosh_real`. It relies on `Luna-Flow/arithmetic` for the elementary-function capability surface and keeps the `Double`-only numeric-stability logic inside the subpackage."
+msgstr "`double_ext` 涵盖初等函数（`exp`、`log`、`log_10`、`log_b`、`pow`、`pow_real`、`sqrt`）、三角函数与双曲函数及其反函数，以及 `sqrt_real`、`asin_real`、`acosh_real` 等实数参数版本。它依赖 `Luna-Flow/arithmetic` 提供初等函数能力，并把只针对 `Double` 的数值稳定性逻辑保留在子包内部。"
+
+#: manual/index.md:18
+msgid "Use this subsystem when you need logarithmic, trigonometric, or hyperbolic helpers specialized for `Complex[Double]`."
+msgstr "当你需要专门针对 `Complex[Double]` 的对数、三角或双曲函数时，使用这个子包。"
+
+#: manual/index.md:20
+msgid "Quick start"
+msgstr "快速开始"
+
+#: manual/index.md:44
+msgid "Design notes"
+msgstr "设计说明"
+
+#: manual/index.md:46
+msgid "The analytic functions are free functions, such as `@double_ext.log(z)` and `@double_ext.sin(z)`, not methods. MoonBit does not allow a subpackage to add methods or trait implementations to a type defined in another package, so `double_ext` cannot attach them to `Complex[T]`. Restoring method-style transcendental APIs would require moving those definitions back into the root package or introducing a different wrapper design."
+msgstr "解析函数是自由函数，例如 `@double_ext.log(z)` 和 `@double_ext.sin(z)`，而不是方法。MoonBit 不允许子包为其他包中定义的类型添加方法或 trait 实现，因此 `double_ext` 无法把它们挂到 `Complex[T]` 上。若要恢复方法风格的超越函数 API，需要把这些定义移回根包，或采用另一种包装设计。"
+
+#: manual/index.md:48
+msgid "The split is intentional: once real-function and transcendental trait constraints exist, they can replace the `Double` extension layer without changing the generic core."
+msgstr "这种拆分是有意为之：一旦有了实函数与超越函数的 trait 约束，就可以用它们替换 `Double` 扩展层，而无需改动泛型核心。"
+
+#: manual/index.md:50
+msgid "Where to go next"
+msgstr "下一步"
+
+#: manual/index.md:52
+msgid "The generated interface files `src/pkg.generated.mbti` and `src/double_ext/pkg.generated.mbti` list every public signature, and the package documentation on [mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-complex) renders them. To work on the library, read the [contribution guidelines](contributing.md)."
+msgstr "生成的接口文件 `src/pkg.generated.mbti` 和 `src/double_ext/pkg.generated.mbti` 列出了全部公开签名，[mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-complex) 上的包文档会渲染这些接口。如需参与本库的开发，请阅读[贡献规范](contributing.md)。"

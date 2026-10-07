@@ -1,7 +1,5 @@
 # Contribution Guidelines
 
-View this guide in [zh_CN](https://github.com/Luna-Flow/luna-complex/tree/main/doc/zh_CN/CONTRIBUTING.md) | [ja_JP](https://github.com/Luna-Flow/luna-complex/tree/main/doc/ja_JP/CONTRIBUTING.md)
-
 ## Code Style
 
 - Format all code with `moon fmt`.

@@ -1,0 +1,220 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Luna-Flow documentation\n"
+"Report-Msgid-Bugs-To: https://github.com/Luna-Flow\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: conf.json:summary
+msgid "Generic complex-number arithmetic for LunaFlow, with analytic and transcendental functions for complex doubles."
+msgstr ""
+
+#: manual/contributing.md:1
+msgid "Contribution Guidelines"
+msgstr ""
+
+#: manual/contributing.md:3
+msgid "Code Style"
+msgstr ""
+
+#: manual/contributing.md:5
+msgid "Format all code with `moon fmt`."
+msgstr ""
+
+#: manual/contributing.md:6
+msgid "Prefer the shared aliases imported in `src/alias.mbt` instead of scattering repeated fully-qualified calls across implementation files."
+msgstr ""
+
+#: manual/contributing.md:7
+msgid "Keep comments short and technical. Comments should explain numerical stability choices, branch selection, or non-obvious contracts, not restate the code."
+msgstr ""
+
+#: manual/contributing.md:9
+msgid "Naming Conventions"
+msgstr ""
+
+#: manual/contributing.md:11
+msgid "Bindings and functions: lowercase with underscores, such as `scaled_re` or `pow_real`."
+msgstr ""
+
+#: manual/contributing.md:12
+msgid "Types and traits: PascalCase, such as `Complex`."
+msgstr ""
+
+#: manual/contributing.md:13
+msgid "Files: lowercase with underscores, and named after a specific behavior rather than a vague bucket."
+msgstr ""
+
+#: manual/contributing.md:14
+msgid "If an error code is introduced later, use uppercase with underscores and an `E_` prefix."
+msgstr ""
+
+#: manual/contributing.md:16
+msgid "File Organization"
+msgstr ""
+
+#: manual/contributing.md:18
+msgid "Organize files by package boundary first, then by behavior. In this repository, the root package owns the generic `Complex[T]` core, while `src/double_ext` owns the `Complex[Double]` analytic layer."
+msgstr ""
+
+#: manual/contributing.md:20
+msgid "Inside each package, keep core data operations, elementary functions, trigonometric functions, hyperbolic functions, and tests in separate files."
+msgstr ""
+
+#: manual/contributing.md:21
+msgid "Avoid catch-all files such as `utils.mbt`. New files should describe the behavior they own."
+msgstr ""
+
+#: manual/contributing.md:22
+msgid "Keep public API changes deliberate. Internal helpers should remain internal unless the package genuinely needs to expose them."
+msgstr ""
+
+#: manual/contributing.md:23
+msgid "Do not assume the `double_ext` package can add methods to `Complex[T]`. Under current MoonBit rules, subpackages cannot attach methods or trait impls to a type defined in another package, so `double_ext` uses free functions."
+msgstr ""
+
+#: manual/contributing.md:26
+msgid "Testing"
+msgstr ""
+
+#: manual/contributing.md:28
+msgid "Add or update tests whenever changing numerical behavior."
+msgstr ""
+
+#: manual/contributing.md:29
+msgid "Prefer a mix of regression examples and algebraic identity checks."
+msgstr ""
+
+#: manual/contributing.md:30
+msgid "Preserve coverage for both layers: generic algebraic behavior in the root package and `Complex[Double]` analytic behavior in `double_ext`."
+msgstr ""
+
+#: manual/contributing.md:32
+msgid "Use `moon test --enable-coverage` before submitting changes."
+msgstr ""
+
+#: manual/contributing.md:33
+msgid "Regenerate `pkg.generated.mbti` with `moon info` whenever the public API changes."
+msgstr ""
+
+#: manual/contributing.md:35
+msgid "Commit Guidelines"
+msgstr ""
+
+#: manual/contributing.md:37
+msgid "Run `./ready_to_pr.sh` before committing when the change affects code or public API."
+msgstr ""
+
+#: manual/contributing.md:38
+msgid "Use concise English Conventional Commit messages such as `fix: stabilize inverse trigonometric branches`."
+msgstr ""
+
+#: manual/contributing.md:39
+msgid "Keep each commit focused on one logical change."
+msgstr ""
+
+#: manual/contributing.md:41
+msgid "Release Checklist"
+msgstr ""
+
+#: manual/contributing.md:43
+msgid "Update `moon.mod` before publishing a new package version."
+msgstr ""
+
+#: manual/contributing.md:44
+msgid "Ensure `README.md` reflects the current package state."
+msgstr ""
+
+#: manual/contributing.md:45
+msgid "Run `moon check` and `moon test --enable-coverage`."
+msgstr ""
+
+#: manual/contributing.md:46
+msgid "When triggering GitHub Actions `publish-package`, provide the exact version from `moon.mod`."
+msgstr ""
+
+#: manual/contributing.md:48
+msgid "Code Review"
+msgstr ""
+
+#: manual/contributing.md:50
+msgid "If you are not a maintainer or collaborator, contact them before changing dependency or version declarations in `moon.mod`."
+msgstr ""
+
+#: manual/contributing.md:51
+msgid "Reviews should focus on correctness, numerical stability, API clarity, tests, and maintainability."
+msgstr ""
+
+#: manual/index.md:1
+msgid "luna-complex"
+msgstr ""
+
+#: manual/index.md:3
+msgid "`luna-complex` provides a generic `Complex[T]` core for algebraic complex arithmetic in LunaFlow, with `Double`-specific analytic and transcendental helpers split into the `Luna-Flow/luna-complex/double_ext` subpackage. This manual describes version 0.2.0."
+msgstr ""
+
+#: manual/index.md:5
+msgid "Packages"
+msgstr ""
+
+#: manual/index.md:7
+msgid "Package"
+msgstr ""
+
+#: manual/index.md:7
+msgid "Source"
+msgstr ""
+
+#: manual/index.md:7
+msgid "Contents"
+msgstr ""
+
+#: manual/index.md:9
+msgid "The generic `Complex[T]` type, its trait implementations, and basic algebraic operations."
+msgstr ""
+
+#: manual/index.md:10
+msgid "`Complex[Double]` functions such as `polar`, `arg`, `abs`, `sqrt`, `log`, `sin`, `cos`, `asin`, `acosh`, and `atanh`."
+msgstr ""
+
+#: manual/index.md:12
+msgid "The root package owns generic `Complex[T]` structure, algebraic operations, and trait-driven constraints."
+msgstr ""
+
+#: manual/index.md:14
+msgid "`Complex[T]` is a mutable struct with explicit `re` / `im` fields for in-place updates when desired. Besides `Complex::new`, it provides `set`, `set_re`, and `set_im`. Under the matching constraints on `T`, it implements the `luna-generic` algebra traits from `Zero` and `AddMonoid` up to `Ring` and `Field`, together with `Conjugate`, `Inverse`, the arithmetic operators, `Eq`, and `Show`. Because the constraints are traits rather than a fixed scalar type, values can nest, as in `Complex[Complex[Double]]`."
+msgstr ""
+
+#: manual/index.md:16
+msgid "`double_ext` covers the elementary functions (`exp`, `log`, `log_10`, `log_b`, `pow`, `pow_real`, `sqrt`), the trigonometric and hyperbolic functions with their inverses, and real-argument variants such as `sqrt_real`, `asin_real`, and `acosh_real`. It relies on `Luna-Flow/arithmetic` for the elementary-function capability surface and keeps the `Double`-only numeric-stability logic inside the subpackage."
+msgstr ""
+
+#: manual/index.md:18
+msgid "Use this subsystem when you need logarithmic, trigonometric, or hyperbolic helpers specialized for `Complex[Double]`."
+msgstr ""
+
+#: manual/index.md:20
+msgid "Quick start"
+msgstr ""
+
+#: manual/index.md:44
+msgid "Design notes"
+msgstr ""
+
+#: manual/index.md:46
+msgid "The analytic functions are free functions, such as `@double_ext.log(z)` and `@double_ext.sin(z)`, not methods. MoonBit does not allow a subpackage to add methods or trait implementations to a type defined in another package, so `double_ext` cannot attach them to `Complex[T]`. Restoring method-style transcendental APIs would require moving those definitions back into the root package or introducing a different wrapper design."
+msgstr ""
+
+#: manual/index.md:48
+msgid "The split is intentional: once real-function and transcendental trait constraints exist, they can replace the `Double` extension layer without changing the generic core."
+msgstr ""
+
+#: manual/index.md:50
+msgid "Where to go next"
+msgstr ""
+
+#: manual/index.md:52
+msgid "The generated interface files `src/pkg.generated.mbti` and `src/double_ext/pkg.generated.mbti` list every public signature, and the package documentation on [mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-complex) renders them. To work on the library, read the [contribution guidelines](contributing.md)."
+msgstr ""

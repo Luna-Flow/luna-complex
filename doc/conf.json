@@ -1,0 +1,8 @@
+{
+  "title": "luna-complex",
+  "summary": "Generic complex-number arithmetic for LunaFlow, with analytic and transcendental functions for complex doubles.",
+  "locales": [
+    "zh_CN",
+    "ja_JP"
+  ]
+}
