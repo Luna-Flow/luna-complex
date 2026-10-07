@@ -11,6 +11,86 @@ msgstr ""
 msgid "Generic complex-number arithmetic for LunaFlow, with analytic and transcendental functions for complex doubles."
 msgstr "LunaFlow のための汎用複素数演算ライブラリ。倍精度複素数向けの解析関数・超越関数も備えます。"
 
+#: manual/api/core.md:1
+msgid "core API"
+msgstr "core API"
+
+#: manual/api/core.md:3
+msgid "The root package `Luna-Flow/luna-complex` exposes the generic complex-number core."
+msgstr "ルートパッケージ `Luna-Flow/luna-complex` は、汎用複素数コアを公開します。"
+
+#: manual/api/core.md:5
+#: manual/api/float_backend.md:5
+msgid "Scope"
+msgstr "範囲"
+
+#: manual/api/core.md:7
+msgid "Source boundary: `src`"
+msgstr "ソース境界: `src`"
+
+#: manual/api/core.md:8
+#: manual/api/float_backend.md:8
+msgid "Audience: package users, integrators, and maintainers who need the exported contract"
+msgstr "想定読者: 公開契約に依存する利用者、統合担当者、保守者"
+
+#: manual/api/core.md:9
+#: manual/api/float_backend.md:9
+msgid "Status: active"
+msgstr "状態: active"
+
+#: manual/api/core.md:11
+#: manual/api/float_backend.md:11
+msgid "Public contract"
+msgstr "公開契約"
+
+#: manual/api/core.md:13
+msgid "`Complex[T]` is a mutable struct with public `re` and `im` fields."
+msgstr "`Complex[T]` は可変構造体で、`re` と `im` フィールドを公開します。"
+
+#: manual/api/core.md:14
+msgid "Constructors and mutators are `Complex::new`, `set`, `set_re`, and `set_im`."
+msgstr "構築と更新の入口は `Complex::new`、`set`、`set_re`、`set_im` です。"
+
+#: manual/api/core.md:15
+msgid "The root package implements generic algebraic operations and Luna Flow traits when the scalar type supplies the matching capability: `Add`, `Sub`, `Neg`, `Mul`, `Div`, `Zero`, `One`, `Conjugate`, `Inverse`, `AddMonoid`, `AddGroup`, `MulMonoid`, `MulGroup`, `Semiring`, `Ring`, and `Field`."
+msgstr "スカラー型が対応する能力を持つ場合、ルートパッケージは `Add`、`Sub`、`Neg`、`Mul`、`Div`、`Zero`、`One`、`Conjugate`、`Inverse`、`AddMonoid`、`AddGroup`、`MulMonoid`、`MulGroup`、`Semiring`、`Ring`、`Field` を実装します。"
+
+#: manual/api/core.md:16
+msgid "The root package does not expose analytic functions such as `sin`, `log`, or `sqrt`; use `Luna-Flow/luna-complex/float_backend` for the floating analytic layer."
+msgstr "ルートパッケージは `sin`、`log`、`sqrt` などの解析関数を公開しません。浮動小数点の解析レイヤーには `Luna-Flow/luna-complex/float_backend` を使います。"
+
+#: manual/api/float_backend.md:1
+msgid "float_backend API"
+msgstr "float_backend API"
+
+#: manual/api/float_backend.md:3
+msgid "`Luna-Flow/luna-complex/float_backend` exposes the floating analytic backend for complex numbers."
+msgstr "`Luna-Flow/luna-complex/float_backend` は、複素数向けの浮動小数点解析バックエンドを公開します。"
+
+#: manual/api/float_backend.md:7
+msgid "Source boundary: `src/float_backend`"
+msgstr "ソース境界: `src/float_backend`"
+
+#: manual/api/float_backend.md:13
+msgid "Re-exports `Complex[T]` from the root package."
+msgstr "ルートパッケージの `Complex[T]` を再エクスポートします。"
+
+#: manual/api/float_backend.md:14
+msgid "Defines backend capability traits: `FloatingAnalyticScalar`, `FloatingSpecialValues`, and `FloatingBackendScalar`."
+msgstr "バックエンド能力 trait として `FloatingAnalyticScalar`、`FloatingSpecialValues`、`FloatingBackendScalar` を定義します。"
+
+#: manual/api/float_backend.md:15
+msgid "Provides `Float` and `Double` implementations for the backend traits."
+msgstr "`Float` と `Double` に対して、これらのバックエンド trait 実装を提供します。"
+
+#: manual/api/float_backend.md:16
+msgid "Exposes the current complete analytic function surface for `Complex[Double]`: polar construction, argument and magnitude helpers, square root, exponentials, logarithms, powers, trigonometric functions, inverse trigonometric functions, hyperbolic functions, and inverse hyperbolic functions."
+msgstr "現在の完全な解析関数面は `Complex[Double]` 向けです。極形式の構築、偏角と大きさの補助関数、平方根、指数、対数、累乗、三角関数、逆三角関数、双曲関数、逆双曲関数を含みます。"
+
+#: manual/api/float_backend.md:17
+msgid "Keeps IEEE special-value behavior, branch choices, and numeric-stability helpers inside this package instead of the generic root package."
+msgstr "IEEE 特殊値の扱い、分岐選択、数値安定性 helper は、汎用ルートパッケージではなくこのパッケージ内に置きます。"
+
 #: manual/contributing.md:1
 msgid "Contribution Guidelines"
 msgstr "貢献ガイドライン"
@@ -56,8 +136,8 @@ msgid "File Organization"
 msgstr "ファイル構成"
 
 #: manual/contributing.md:18
-msgid "Organize files by package boundary first, then by behavior. In this repository, the root package owns the generic `Complex[T]` core, while `src/double_ext` owns the `Complex[Double]` analytic layer."
-msgstr "まず package 境界で整理し、そのうえで機能ごとにファイルを分割すること。このリポジトリでは、ルート package が汎用 `Complex[T]` コアを持ち、`src/double_ext` が `Complex[Double]` の解析・超越関数レイヤーを持つ。"
+msgid "Organize files by package boundary first, then by behavior. In this repository, the root package owns the generic `Complex[T]` core, while `src/float_backend` owns floating backend traits and the current `Complex[Double]` analytic layer."
+msgstr "まず package 境界で整理し、そのうえで機能ごとにファイルを分割すること。このリポジトリでは、ルート package が汎用 `Complex[T]` コアを持ち、`src/float_backend` が浮動小数点バックエンド trait と現在の `Complex[Double]` 解析レイヤーを持つ。"
 
 #: manual/contributing.md:20
 msgid "Inside each package, keep core data operations, elementary functions, trigonometric functions, hyperbolic functions, and tests in separate files."
@@ -72,8 +152,8 @@ msgid "Keep public API changes deliberate. Internal helpers should remain intern
 msgstr "公開 API の追加は意図的に行い、内部補助関数は必要になるまで公開しないこと。"
 
 #: manual/contributing.md:23
-msgid "Do not assume the `double_ext` package can add methods to `Complex[T]`. Under current MoonBit rules, subpackages cannot attach methods or trait impls to a type defined in another package, so `double_ext` uses free functions."
-msgstr "`double_ext` から `Complex[T]` にメソッドを追加できる前提で設計しないこと。現在の MoonBit ルールでは、別 package で定義された型に対して子 package からメソッドや trait impl を追加できないため、`double_ext` は自由関数 API を使う。"
+msgid "Do not assume the `float_backend` package can add methods to `Complex[T]`. Under current MoonBit rules, subpackages cannot attach methods or trait impls to a type defined in another package, so `float_backend` uses free functions."
+msgstr "`float_backend` から `Complex[T]` にメソッドを追加できる前提で設計しないこと。現在の MoonBit ルールでは、別 package で定義された型に対して子 package からメソッドや trait impl を追加できないため、`float_backend` は自由関数 API を使う。"
 
 #: manual/contributing.md:26
 msgid "Testing"
@@ -88,8 +168,8 @@ msgid "Prefer a mix of regression examples and algebraic identity checks."
 msgstr "回帰ケースと代数的恒等式チェックの両方を含めること。"
 
 #: manual/contributing.md:30
-msgid "Preserve coverage for both layers: generic algebraic behavior in the root package and `Complex[Double]` analytic behavior in `double_ext`."
-msgstr "ルート package の汎用代数挙動と、`double_ext` の `Complex[Double]` 数値挙動の両方を維持すること。"
+msgid "Preserve coverage for both layers: generic algebraic behavior in the root package and floating analytic behavior in `float_backend`."
+msgstr "ルート package の汎用代数挙動と、`float_backend` の浮動小数点解析挙動の両方を維持すること。"
 
 #: manual/contributing.md:32
 msgid "Use `moon test --enable-coverage` before submitting changes."
@@ -147,13 +227,88 @@ msgstr "メンテナーまたはコラボレーターでない場合、`moon.mod
 msgid "Reviews should focus on correctness, numerical stability, API clarity, tests, and maintainability."
 msgstr "レビューでは、正しさ、数値安定性、API の明確さ、テストの十分性、保守性を重視すること。"
 
+#: manual/design/core.md:1
+msgid "core design"
+msgstr "core 設計"
+
+#: manual/design/core.md:3
+#: manual/index.md:12
+msgid "The root package owns generic `Complex[T]` structure, algebraic operations, and trait-driven constraints."
+msgstr "ルートパッケージは、汎用 `Complex[T]` の構造、代数演算、trait による制約を担います。"
+
+#: manual/design/core.md:5
+#: manual/design/float_backend.md:5
+msgid "Responsibilities"
+msgstr "責務"
+
+#: manual/design/core.md:7
+msgid "Keep `Complex[T]` generic and independent of floating-point analytic semantics."
+msgstr "`Complex[T]` を汎用のまま保ち、浮動小数点の解析セマンティクスを入れない。"
+
+#: manual/design/core.md:8
+msgid "Preserve the mutable field model because callers may intentionally update `re` or `im` in place."
+msgstr "呼び出し側が `re` や `im` を意図的に更新できるよう、可変フィールドモデルを維持する。"
+
+#: manual/design/core.md:9
+msgid "Keep algebraic trait implementations constrained by the smallest scalar capability needed."
+msgstr "代数 trait 実装は、実際に必要な最小のスカラー能力だけを要求する。"
+
+#: manual/design/core.md:10
+msgid "Leave branch cuts, NaN, infinity, negative zero, and transcendental functions to `float_backend`."
+msgstr "分岐切断、NaN、無限大、負のゼロ、超越関数は `float_backend` に置く。"
+
+#: manual/design/core.md:12
+#: manual/design/float_backend.md:12
+msgid "Maintenance notes"
+msgstr "保守メモ"
+
+#: manual/design/core.md:14
+msgid "Update this page when the root package gains or loses a public trait implementation."
+msgstr "ルートパッケージの公開 trait 実装が増減したときは、このページを更新する。"
+
+#: manual/design/core.md:15
+msgid "Do not document speculative generic analytic APIs in the root package."
+msgstr "未実装の汎用解析 API をルートパッケージの文書に書かない。"
+
+#: manual/design/float_backend.md:1
+msgid "float_backend design"
+msgstr "float_backend 設計"
+
+#: manual/design/float_backend.md:3
+msgid "The `float_backend` package owns floating-point analytic behavior for complex numbers."
+msgstr "`float_backend` パッケージは、複素数の浮動小数点解析挙動を担当します。"
+
+#: manual/design/float_backend.md:7
+msgid "Keep floating arithmetic, special values, and branch-cut semantics out of the root package."
+msgstr "浮動小数点演算、特殊値、分岐切断のセマンティクスをルートパッケージから切り離す。"
+
+#: manual/design/float_backend.md:8
+msgid "Keep backend capability traits local to this package until a broader ecosystem trait is justified."
+msgstr "より広いエコシステム trait が必要になるまでは、バックエンド能力 trait をこのパッケージ内に保つ。"
+
+#: manual/design/float_backend.md:9
+msgid "Preserve the current `Complex[Double]` stability behavior while allowing future `Float` analytic functions to share the backend capability surface."
+msgstr "現在の `Complex[Double]` の安定性挙動を維持しつつ、将来の `Float` 解析関数が同じバックエンド能力面を共有できるようにする。"
+
+#: manual/design/float_backend.md:10
+msgid "Keep helper code internal unless a function is part of the documented public API."
+msgstr "helper は原則として内部に保ち、文書化された公開 API だけをエクスポートする。"
+
+#: manual/design/float_backend.md:14
+msgid "Update this page when public backend traits or analytic function signatures change."
+msgstr "公開バックエンド trait や解析関数シグネチャが変わったときは、このページを更新する。"
+
+#: manual/design/float_backend.md:15
+msgid "Do not imply full `Complex[Float]` analytic coverage until those functions are actually exported."
+msgstr "`Complex[Float]` の解析関数が実際にエクスポートされるまでは、完全対応済みであるかのように書かない。"
+
 #: manual/index.md:1
 msgid "luna-complex"
 msgstr "luna-complex"
 
 #: manual/index.md:3
-msgid "`luna-complex` provides a generic `Complex[T]` core for algebraic complex arithmetic in LunaFlow, with `Double`-specific analytic and transcendental helpers split into the `Luna-Flow/luna-complex/double_ext` subpackage. This manual describes version 0.2.0."
-msgstr "`luna-complex` は LunaFlow における代数的な複素数演算のための汎用 `Complex[T]` コアを提供し、`Double` 専用の解析関数・超越関数ヘルパーは `Luna-Flow/luna-complex/double_ext` サブパッケージに分離しています。このマニュアルはバージョン 0.2.0 を対象とします。"
+msgid "`luna-complex` provides a generic `Complex[T]` core for algebraic complex arithmetic in LunaFlow, with floating analytic and transcendental helpers split into the `Luna-Flow/luna-complex/float_backend` backend package. This manual describes version 0.3.0."
+msgstr "`luna-complex` は LunaFlow における代数的な複素数演算のための汎用 `Complex[T]` コアを提供し、浮動小数点の解析関数・超越関数ヘルパーは `Luna-Flow/luna-complex/float_backend` バックエンドパッケージに分離しています。このマニュアルはバージョン 0.3.0 を対象とします。"
 
 #: manual/index.md:5
 msgid "Packages"
@@ -176,24 +331,21 @@ msgid "The generic `Complex[T]` type, its trait implementations, and basic algeb
 msgstr "汎用の `Complex[T]` 型、その trait 実装、基本的な代数演算。"
 
 #: manual/index.md:10
-msgid "`Complex[Double]` functions such as `polar`, `arg`, `abs`, `sqrt`, `log`, `sin`, `cos`, `asin`, `acosh`, and `atanh`."
-msgstr "`polar`、`arg`、`abs`、`sqrt`、`log`、`sin`、`cos`、`asin`、`acosh`、`atanh` などの `Complex[Double]` 関数。"
-
-#: manual/index.md:12
-msgid "The root package owns generic `Complex[T]` structure, algebraic operations, and trait-driven constraints."
-msgstr "ルートパッケージは、汎用 `Complex[T]` の構造、代数演算、trait による制約を担います。"
+msgid "Floating backend traits plus `Complex[Double]` functions such as `polar`, `arg`, `abs`, `sqrt`, `log`, `sin`, `cos`, `asin`, `acosh`, and `atanh`."
+msgstr "浮動小数点バックエンド trait と、`polar`、`arg`、`abs`、`sqrt`、`log`、`sin`、`cos`、`asin`、`acosh`、`atanh` などの `Complex[Double]` 関数。"
 
 #: manual/index.md:14
 msgid "`Complex[T]` is a mutable struct with explicit `re` / `im` fields for in-place updates when desired. Besides `Complex::new`, it provides `set`, `set_re`, and `set_im`. Under the matching constraints on `T`, it implements the `luna-generic` algebra traits from `Zero` and `AddMonoid` up to `Ring` and `Field`, together with `Conjugate`, `Inverse`, the arithmetic operators, `Eq`, and `Show`. Because the constraints are traits rather than a fixed scalar type, values can nest, as in `Complex[Complex[Double]]`."
 msgstr "`Complex[T]` は明示的な `re` / `im` フィールドを持つ可変構造体で、必要に応じて原地で更新できます。`Complex::new` のほかに `set`、`set_re`、`set_im` を提供します。`T` が対応する制約を満たすとき、`Zero` や `AddMonoid` から `Ring`、`Field` までの `luna-generic` 代数 trait と、`Conjugate`、`Inverse`、算術演算子、`Eq`、`Show` を実装します。制約が固定のスカラー型ではなく trait であるため、`Complex[Complex[Double]]` のように値を入れ子にできます。"
 
 #: manual/index.md:16
-msgid "`double_ext` covers the elementary functions (`exp`, `log`, `log_10`, `log_b`, `pow`, `pow_real`, `sqrt`), the trigonometric and hyperbolic functions with their inverses, and real-argument variants such as `sqrt_real`, `asin_real`, and `acosh_real`. It relies on `Luna-Flow/arithmetic` for the elementary-function capability surface and keeps the `Double`-only numeric-stability logic inside the subpackage."
-msgstr "`double_ext` は初等関数（`exp`、`log`、`log_10`、`log_b`、`pow`、`pow_real`、`sqrt`）、三角関数と双曲線関数およびその逆関数、そして `sqrt_real`、`asin_real`、`acosh_real` などの実数引数版を提供します。初等関数の能力には `Luna-Flow/arithmetic` を使い、`Double` 専用の数値安定性ロジックはサブパッケージ内に閉じ込めています。"
+msgid "`float_backend` covers the elementary functions (`exp`, `log`, `log_10`, `log_b`, `pow`, `pow_real`, `sqrt`), the trigonometric and hyperbolic functions with their inverses, and real-argument variants such as `sqrt_real`, `asin_real`, and `acosh_real`. It relies on `Luna-Flow/arithmetic` for the elementary-function capability surface and keeps its floating backend traits, IEEE special-value handling, and numeric-stability logic inside the package."
+msgstr "`float_backend` は初等関数（`exp`、`log`、`log_10`、`log_b`、`pow`、`pow_real`、`sqrt`）、三角関数と双曲線関数およびその逆関数、そして `sqrt_real`、`asin_real`、`acosh_real` などの実数引数版を提供します。初等関数の能力には `Luna-Flow/arithmetic` を使い、浮動小数点バックエンド trait、IEEE 特殊値の扱い、数値安定性ロジックはパッケージ内に閉じ込めています。"
 
 #: manual/index.md:18
-msgid "Use this subsystem when you need logarithmic, trigonometric, or hyperbolic helpers specialized for `Complex[Double]`."
-msgstr "`Complex[Double]` に特化した対数・三角・双曲線関数が必要な場合は、このサブパッケージを使います。"
+#: manual/tutorial/float_backend.md:3
+msgid "Use `float_backend` when a `Complex[Double]` value needs analytic or transcendental functions."
+msgstr "`Complex[Double]` に解析関数や超越関数が必要なときは `float_backend` を使います。"
 
 #: manual/index.md:20
 msgid "Quick start"
@@ -204,17 +356,97 @@ msgid "Design notes"
 msgstr "設計メモ"
 
 #: manual/index.md:46
-msgid "The analytic functions are free functions, such as `@double_ext.log(z)` and `@double_ext.sin(z)`, not methods. MoonBit does not allow a subpackage to add methods or trait implementations to a type defined in another package, so `double_ext` cannot attach them to `Complex[T]`. Restoring method-style transcendental APIs would require moving those definitions back into the root package or introducing a different wrapper design."
-msgstr "解析関数は `@double_ext.log(z)` や `@double_ext.sin(z)` のような自由関数であり、メソッドではありません。MoonBit ではサブパッケージが別パッケージで定義された型にメソッドや trait 実装を追加できないため、`double_ext` はそれらを `Complex[T]` に付けられません。メソッド形式の超越関数 API に戻すには、定義をルートパッケージに戻すか、別のラッパー設計を導入する必要があります。"
+msgid "The analytic functions are free functions, such as `@float_backend.log(z)` and `@float_backend.sin(z)`, not methods. MoonBit does not allow a subpackage to add methods or trait implementations to a type defined in another package, so `float_backend` cannot attach them to `Complex[T]`. Restoring method-style transcendental APIs would require moving those definitions back into the root package or introducing a different wrapper design."
+msgstr "解析関数は `@float_backend.log(z)` や `@float_backend.sin(z)` のような自由関数であり、メソッドではありません。MoonBit ではサブパッケージが別パッケージで定義された型にメソッドや trait 実装を追加できないため、`float_backend` はそれらを `Complex[T]` に付けられません。メソッド形式の超越関数 API に戻すには、定義をルートパッケージに戻すか、別のラッパー設計を導入する必要があります。"
 
 #: manual/index.md:48
-msgid "The split is intentional: once real-function and transcendental trait constraints exist, they can replace the `Double` extension layer without changing the generic core."
-msgstr "この分割は意図的なものです。実関数・超越関数の trait 制約が用意されれば、汎用コアを変えずに `Double` 拡張層を置き換えられます。"
+msgid "The split is intentional: it keeps floating arithmetic, IEEE special values, and branch-cut behavior out of the root package's generic algebraic semantics."
+msgstr "この分割は意図的なものです。浮動小数点演算、IEEE 特殊値、分岐切断の挙動を、ルートパッケージの汎用的な代数的意味論から切り離します。"
 
 #: manual/index.md:50
 msgid "Where to go next"
 msgstr "次に読むもの"
 
 #: manual/index.md:52
-msgid "The generated interface files `src/pkg.generated.mbti` and `src/double_ext/pkg.generated.mbti` list every public signature, and the package documentation on [mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-complex) renders them. To work on the library, read the [contribution guidelines](contributing.md)."
-msgstr "生成されたインターフェースファイル `src/pkg.generated.mbti` と `src/double_ext/pkg.generated.mbti` にすべての公開シグネチャが載っており、[mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-complex) のパッケージドキュメントがそれを表示します。ライブラリの開発に参加する場合は、[貢献ガイドライン](contributing.md)を読んでください。"
+msgid "Each package has an API reference ([core](api/core.md), [float_backend](api/float_backend.md)), a tutorial ([core](tutorial/core.md), [float_backend](tutorial/float_backend.md)), and a design note ([core](design/core.md), [float_backend](design/float_backend.md))."
+msgstr "各パッケージには API リファレンス（[core](api/core.md)、[float_backend](api/float_backend.md)）、チュートリアル（[core](tutorial/core.md)、[float_backend](tutorial/float_backend.md)）、設計ノート（[core](design/core.md)、[float_backend](design/float_backend.md)）があります。"
+
+#: manual/index.md:54
+msgid "The generated interface files `src/pkg.generated.mbti` and `src/float_backend/pkg.generated.mbti` list every public signature, and the package documentation on [mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-complex) renders them. To work on the library, read the [contribution guidelines](contributing.md)."
+msgstr "生成されたインターフェースファイル `src/pkg.generated.mbti` と `src/float_backend/pkg.generated.mbti` にすべての公開シグネチャが載っており、[mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-complex) のパッケージドキュメントがそれを表示します。ライブラリの開発に参加する場合は、[貢献ガイドライン](contributing.md)を読んでください。"
+
+#: manual/tutorial/core.md:1
+msgid "core tutorial"
+msgstr "core チュートリアル"
+
+#: manual/tutorial/core.md:3
+msgid "Use the root package when you need generic complex construction and algebraic operations."
+msgstr "汎用複素数の構築と代数演算が必要なときは、ルートパッケージを使います。"
+
+#: manual/tutorial/core.md:5
+#: manual/tutorial/float_backend.md:5
+msgid "Suggested flow"
+msgstr "推奨フロー"
+
+#: manual/tutorial/core.md:7
+msgid "Import the root package and bring `Complex` into scope."
+msgstr "ルートパッケージを import し、`Complex` をスコープに入れる。"
+
+#: manual/tutorial/core.md:8
+msgid "Construct values with `Complex::new(re, im)`."
+msgstr "`Complex::new(re, im)` で値を作る。"
+
+#: manual/tutorial/core.md:9
+msgid "Use algebraic operators when the scalar type implements the required Luna Flow traits."
+msgstr "スカラー型が必要な Luna Flow trait を実装している場合、代数演算子を使う。"
+
+#: manual/tutorial/core.md:11
+#: manual/tutorial/float_backend.md:11
+msgid "Practical guidance"
+msgstr "実用上の注意"
+
+#: manual/tutorial/core.md:13
+msgid "Use `Complex[Double]` for ordinary floating-point values and `Complex[Complex[Double]]` when nested algebraic behavior is useful."
+msgstr "通常の浮動小数点値には `Complex[Double]` を使い、入れ子の代数挙動が必要な場合は `Complex[Complex[Double]]` を使う。"
+
+#: manual/tutorial/core.md:14
+msgid "Use `set`, `set_re`, and `set_im` only when mutation is intended."
+msgstr "`set`、`set_re`、`set_im` は、意図的にミューテーションしたい場合だけ使う。"
+
+#: manual/tutorial/core.md:15
+msgid "Use `float_backend` for transcendental and branch-sensitive floating behavior."
+msgstr "超越関数や分岐に敏感な浮動小数点挙動には `float_backend` を使う。"
+
+#: manual/tutorial/float_backend.md:1
+msgid "float_backend tutorial"
+msgstr "float_backend チュートリアル"
+
+#: manual/tutorial/float_backend.md:7
+msgid "Import `Complex` from the root package or through `float_backend`."
+msgstr "ルートパッケージまたは `float_backend` から `Complex` を import する。"
+
+#: manual/tutorial/float_backend.md:8
+msgid "Construct a `Complex[Double]` value."
+msgstr "`Complex[Double]` の値を作る。"
+
+#: manual/tutorial/float_backend.md:9
+msgid "Call free functions such as `@float_backend.log(z)`, `@float_backend.sin(z)`, or `@float_backend.sqrt(z)`."
+msgstr "`@float_backend.log(z)`、`@float_backend.sin(z)`、`@float_backend.sqrt(z)` などの自由関数を呼ぶ。"
+
+#: manual/tutorial/float_backend.md:13
+msgid "Prefer the free functions in this package over duplicating formulas downstream."
+msgstr "下流で公式を再実装せず、このパッケージの自由関数を優先して使う。"
+
+#: manual/tutorial/float_backend.md:14
+msgid "Treat branch-sensitive functions such as `arg`, `log`, `sqrt`, and inverse trigonometric functions as part of this package's observable contract."
+msgstr "`arg`、`log`、`sqrt`、逆三角関数などの分岐に敏感な関数は、このパッケージの可観測契約として扱う。"
+
+#: manual/tutorial/float_backend.md:15
+msgid "Use the backend traits only when writing new floating backend code."
+msgstr "バックエンド trait は、新しい浮動小数点バックエンドコードを書く場合だけ直接使う。"
+
+#~ msgid "Use this subsystem when you need logarithmic, trigonometric, or hyperbolic helpers specialized for `Complex[Double]`."
+#~ msgstr "`Complex[Double]` に特化した対数・三角・双曲線関数が必要な場合は、このサブパッケージを使います。"
+
+#~ msgid "The split is intentional: once real-function and transcendental trait constraints exist, they can replace the `Double` extension layer without changing the generic core."
+#~ msgstr "この分割は意図的なものです。実関数・超越関数の trait 制約が用意されれば、汎用コアを変えずに `Double` 拡張層を置き換えられます。"
