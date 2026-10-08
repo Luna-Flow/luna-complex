@@ -44,12 +44,12 @@ pub impl[T : Mul + Add + Sub] Mul for Complex[T] with fn mul(
 
 ///|
 pub impl[T : Zero] Zero for Complex[T] with fn zero() -> Complex[T] {
-  Complex::new(T::zero(), T::zero())
+  Complex::new(Zero::zero(), Zero::zero())
 }
 
 ///|
 pub impl[T : One + Zero] One for Complex[T] with fn one() -> Complex[T] {
-  Complex::new(T::one(), T::zero())
+  Complex::new(One::one(), Zero::zero())
 }
 
 ///|
@@ -64,7 +64,7 @@ pub impl[T : Field] Div for Complex[T] with fn div(
   self : Complex[T],
   other : Complex[T],
 ) -> Complex[T] {
-  let denom_inv = (other.re * other.re + other.im * other.im).inv()
+  let denom_inv = Inverse::inv(other.re * other.re + other.im * other.im)
   Complex::new(
     (self.re * other.re + self.im * other.im) * denom_inv,
     (self.im * other.re - self.re * other.im) * denom_inv,
@@ -75,7 +75,7 @@ pub impl[T : Field] Div for Complex[T] with fn div(
 pub impl[T : Field] Inverse for Complex[T] with fn inv(self : Complex[T]) -> Complex[
   T,
 ] {
-  let denom_inv = (self.re * self.re + self.im * self.im).inv()
+  let denom_inv = Inverse::inv(self.re * self.re + self.im * self.im)
   Complex::new(self.re * denom_inv, -self.im * denom_inv)
 }
 
