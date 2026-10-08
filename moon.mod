@@ -3,9 +3,9 @@ name = "Luna-Flow/luna-complex"
 version = "0.2.0"
 
 import {
+  "Luna-Flow/arithmetic@0.2.2",
   "Kaida-Amethyst/math@0.1.20",
-  "Luna-Flow/luna-generic@0.3.1",
-  "Luna-Flow/arithmetic@0.1.0",
+  "Luna-Flow/luna-generic@0.3.3",
 }
 
 readme = "README.md"
