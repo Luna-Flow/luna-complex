@@ -278,8 +278,8 @@ $$
 and $\operatorname{atan} z = \frac{1}{2i}\operatorname{Log} q$ gives
 
 $$
-\operatorname{atan} z = \tfrac12\operatorname{atan2}(2x, 1 - x^2 - y^2)
-+ \tfrac{i}{4}\ln\frac{x^2 + (1 + y)^2}{x^2 + (1 - y)^2} .
+\operatorname{atan} z = \tfrac12\operatorname{atan2}(2x, 1 - x^2 - y^2) +
+\tfrac{i}{4}\ln\frac{x^2 + (1 + y)^2}{x^2 + (1 - y)^2} .
 $$
 
 The ratio inside the logarithm equals $(1 + u)/(1 - u)$ with $u =
@@ -293,8 +293,8 @@ switches to $\operatorname{log1p}$ when $|4x/((1 - x)^2 + y^2)| < 1/4$.
 ### Inverse hyperbolic cosine by Kahan's formula
 
 `acosh` uses $2\operatorname{Log}\big(\sqrt{(z + 1)/2} + \sqrt{(z -
-1)/2}\big)$, built from the stable square root. Unlike $\operatorname{Log}(z
-+ \sqrt{z^2 - 1})$, it has the correct cut $(-\infty, 1)$ without extra
+1)/2}\big)$, built from the stable square root. Unlike
+$\operatorname{Log}(z + \sqrt{z^2 - 1})$, it has the correct cut $(-\infty, 1)$ without extra
 sign adjustments, because each square root has its cut where its argument
 is negative real.
 
@@ -332,12 +332,12 @@ principal value needs $\pi$:
 | Function and input | Returned | Principal value |
 | --- | --- | --- |
 | `arg(z)`, $y = \pm 0$, $x < 0$ | $2\pi$ | $\pi$ (C99: $\pm\pi$ by the sign of $y$) |
-| `log(z)`, same inputs | $\ln|x| + 2\pi i$ | $\ln|x| + \pi i$ |
+| `log(z)`, same inputs | $\ln\lvert x\rvert  + 2\pi i$ | $\ln\lvert x\rvert  + \pi i$ |
 | `pow`, `pow_real`, negative real base, non-integer exponent | angle $2\pi$ | angle $\pi$ |
 | `acos(z)`, $x < 0$, $y \ne 0$ | $2\pi - \rho + \dots$ | $\pi - \rho + \dots$ |
-| `acos_real(x)`, $x < -1$ | $2\pi - i\operatorname{acosh}|x|$ | $\pi - i\operatorname{acosh}|x|$ |
-| `asec_real(x)`, $-1 < x < 0$ | $2\pi - i\operatorname{acosh}|1/x|$ | $\pi - i\operatorname{acosh}|1/x|$ |
-| `acosh_real(x)`, $x < -1$ | $\operatorname{acosh}|x| + 2\pi i$ | $\operatorname{acosh}|x| + \pi i$ |
+| `acos_real(x)`, $x < -1$ | $2\pi - i\operatorname{acosh}\lvert x\rvert $ | $\pi - i\operatorname{acosh}\lvert x\rvert $ |
+| `asec_real(x)`, $-1 < x < 0$ | $2\pi - i\operatorname{acosh}\lvert 1/x\rvert $ | $\pi - i\operatorname{acosh}\lvert 1/x\rvert $ |
+| `acosh_real(x)`, $x < -1$ | $\operatorname{acosh}\lvert x\rvert  + 2\pi i$ | $\operatorname{acosh}\lvert x\rvert  + \pi i$ |
 
 Because $e^{2\pi i} = 1$ while $e^{\pi i} = -1$, these values are not even
 logarithms or inverses of the input: `exp(log(-1))` is $1$, and

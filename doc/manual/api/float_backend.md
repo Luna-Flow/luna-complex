@@ -394,7 +394,7 @@ The cases are tried in order:
 | $z = 0$, otherwise | NaN + NaN$i$ |
 | $w = 1$ | $z$ |
 | $w = -1$ | `z.inv()` (aborts if $z = 0$, which the first rows exclude) |
-| $w$ real integer, $|w| \le 2^{31} - 1$ | binary powering; negative exponents invert $z$ first |
+| $w$ real integer, $\lvert w\rvert  \le 2^{31} - 1$ | binary powering; negative exponents invert $z$ first |
 | otherwise | $e^{w\log z}$ in polar form |
 
 The polar form computes $\rho = e^{\operatorname{Re} w \ln|z| - \operatorname{Im} w \arg z}$
@@ -729,8 +729,8 @@ pub fn atanh(Complex[Double]) -> Complex[Double]
 ```
 
 The real part is $\tfrac14\ln\frac{(1+x)^2 + y^2}{(1-x)^2 + y^2}$ (with
-`log1p` near zero), the imaginary part $\tfrac12\operatorname{atan2}(2y, 1
-- x^2 - y^2)$, rescaled for large inputs. Infinite inputs return $0 \pm
+`log1p` near zero), the imaginary part
+$\tfrac12\operatorname{atan2}(2y, 1 - x^2 - y^2)$, rescaled for large inputs. Infinite inputs return $0 \pm
 i\pi/2$.
 
 ### `atanh_real`
