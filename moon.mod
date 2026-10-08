@@ -18,6 +18,4 @@ keywords = [ "complex-numbers", "math" ]
 
 description = "Generic complex-number types and algebraic operations for LunaFlow, with Double-specific analytic functions in the double_ext subpackage."
 
-options(
-  source: "src",
-)
+source = "src"
