@@ -4,7 +4,19 @@ This tutorial uses the generic `Complex[T]` type for complex arithmetic. You
 will build and print complex numbers, compute with them over `Double` and
 over the integers, write generic code that accepts complex numbers through
 the `luna-generic` traits, and update values in place. The algebra behind
-it is in the [core design](../design/core.md).
+it is in the [core design](../design/core.md). Every example is a test that
+you can paste into a `_test.mbt` file and run with `moon test`; the expected
+output is written in the `inspect` calls.
+
+| I want to | Use |
+| --- | --- |
+| build a complex number | `@complex.Complex::new(re, im)` |
+| add, subtract, multiply, divide | `+`, `-`, `*`, `/` |
+| conjugate or invert | `z.conjugate()`, `z.inv()` |
+| compute exactly with Gaussian integers | `Complex[Int]` or `Complex[BigInt]` |
+| pass complex numbers to generic code | a `luna-generic` bound such as `T : @lg.Ring` |
+| update a value in place | `z.set(re, im)`, `z.set_re(re)`, `z.set_im(im)` |
+| take roots, logarithms, sines | the [float_backend](float_backend.md) package |
 
 ## Quick start
 
@@ -12,26 +24,26 @@ it is in the [core design](../design/core.md).
 moon add Luna-Flow/luna-complex@0.2.0
 ```
 
+Import the root package in the `moon.pkg` of the package that uses it. The
+generic example below also uses `Luna-Flow/luna-generic` as `@lg`:
+
 ```moonbit nocheck
 import {
   "Luna-Flow/luna-complex" @complex,
+  "Luna-Flow/luna-generic" @lg,
 }
 ```
+
+The smallest useful program builds two numbers and combines them:
 
 ```moonbit
-fn main {
+test "quick start" {
   let z = @complex.Complex::new(1.0, 2.0)
   let w = @complex.Complex::new(3.0, -1.0)
-  println("z + w = \{z + w}")
-  println("z * w = \{z * w}")
-  println("z / w = \{z / w}")
+  inspect(z + w, content="4 + 1i")
+  inspect(z * w, content="5 + 5i")
+  inspect(z / w, content="0.1 + 0.7000000000000001i")
 }
-```
-
-```text
-z + w = 4 + 1i
-z * w = 5 + 5i
-z / w = 0.1 + 0.7000000000000001i
 ```
 
 ## Everyday tasks
@@ -41,17 +53,11 @@ z / w = 0.1 + 0.7000000000000001i
 $z\bar z = |z|^2$ is real:
 
 ```moonbit
-fn main {
+test "conjugate and modulus" {
   let z = @complex.Complex::new(3.0, 4.0)
-  let n = z * z.conjugate()
-  println("z * conj(z) = \{n}")
-  println("1 / z = \{z.inv()}")
+  inspect(z * z.conjugate(), content="25 + 0i")
+  inspect(z.inv(), content="0.12 + -0.16i")
 }
-```
-
-```text
-z * conj(z) = 25 + 0i
-1 / z = 0.12 + -0.16i
 ```
 
 ### Gaussian integers
@@ -60,21 +66,16 @@ Over `Int`, `Complex[Int]` is the ring $\mathbb Z[i]$ of Gaussian integers.
 Everything except division works, and results are exact:
 
 ```moonbit
-fn main {
+test "gaussian integers" {
   let a = @complex.Complex::new(2, 1)
   let b = @complex.Complex::new(2, -1)
-  println("(2 + i)(2 - i) = \{a * b}")
+  inspect(a * b, content="5 + 0i")
   let mut p = @complex.Complex::one()
   for _ in 0..<4 {
     p = p * @complex.Complex::new(1, 1)
   }
-  println("(1 + i)^4 = \{p}")
+  inspect(p, content="-4 + 0i")
 }
-```
-
-```text
-(2 + i)(2 - i) = 5 + 0i
-(1 + i)^4 = -4 + 0i
 ```
 
 $5 = (2 + i)(2 - i)$ shows that $5$ is not prime in $\mathbb Z[i]$.
@@ -93,18 +94,13 @@ fn[T : @lg.Ring] horner(coefficients : Array[T], x : T) -> T {
   acc
 }
 
-fn main {
+test "horner" {
   let one : @complex.Complex[Double] = @complex.Complex::one()
   let zero : @complex.Complex[Double] = @complex.Complex::zero()
   let i = @complex.Complex::new(0.0, 1.0)
-  println("p(i) = \{horner([one, zero, one], i)}")
-  println("p(2) = \{horner([1.0, 0.0, 1.0], 2.0)}")
+  inspect(horner([one, zero, one], i), content="0 + 0i")
+  inspect(horner([1.0, 0.0, 1.0], 2.0), content="5")
 }
-```
-
-```text
-p(i) = 0 + 0i
-p(2) = 5
 ```
 
 ### Update in place
@@ -113,21 +109,16 @@ p(2) = 5
 the change:
 
 ```moonbit
-fn main {
+test "update in place" {
   let acc = @complex.Complex::new(0.0, 0.0)
   let shared = acc
   for k in 1..=3 {
     let kd = k.to_double()
     acc.set(acc.re + kd, acc.im - kd)
   }
-  println("acc    = \{acc}")
-  println("shared = \{shared}")
+  inspect(acc, content="6 + -6i")
+  inspect(shared, content="6 + -6i")
 }
-```
-
-```text
-acc    = 6 + -6i
-shared = 6 + -6i
 ```
 
 ## Going further
@@ -138,17 +129,14 @@ shared = 6 + -6i
 `Complex[Double]` itself:
 
 ```moonbit
-fn main {
+test "nested complex numbers" {
   let a = @complex.Complex::new(1.0, 2.0)
   let b = @complex.Complex::new(-0.5, 0.25)
   let z = @complex.Complex::new(a, b)
   let w = z * z.inv()
-  println("z * z^-1 = (\{w.re}) + (\{w.im})j")
+  inspect(w.re, content="1.0000000000000002 + 5.204170427930421e-17i")
+  inspect(w.im, content="0 + 0i")
 }
-```
-
-```text
-z * z^-1 = (1.0000000000000002 + 5.204170427930421e-17i) + (0 + 0i)j
 ```
 
 The product is $1$ up to rounding, because the squared modulus $a^2 + b^2$
@@ -165,10 +153,11 @@ The core has no `sqrt`, `exp` or `sin`. Import
 
 - **Division by zero aborts.** `z / w` and `w.inv()` call
   `Inverse::inv` on $c^2 + d^2$; for `Double` that aborts when the value is
-  zero, also when it underflows for $|w| \lesssim 10^{-162}$. Use
-  `@fb.div` from `float_backend` for robust division.
+  zero, also when it underflows for $|w| \lesssim 10^{-162}$, and gives
+  infinite or NaN parts for $|w| \lesssim 10^{-154}$. Use `@fb.div` from
+  `float_backend` for robust division.
 - **Large values overflow in division.** $c^2 + d^2$ overflows for $|w|
-  \gtrsim 10^{154}$.
+  \gtrsim 10^{154}$, and the quotient becomes zero or NaN.
 - **Shared mutation.** `let shared = z` does not copy; the setters change
   every alias.
 - **Text form.** Negative imaginary parts print as `+ -2i`; use

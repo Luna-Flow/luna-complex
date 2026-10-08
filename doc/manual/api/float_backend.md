@@ -1,5 +1,7 @@
 # float_backend API
 
+## Purpose
+
 The `float_backend` package provides the analytic functions of
 `Complex[Double]`: modulus and argument, division, roots, exponentials and
 logarithms, powers, and the trigonometric and hyperbolic functions with
@@ -31,10 +33,28 @@ does not let a package add methods to a type of another package).
 - **Special values.** NaN and infinities are handled where stated
   (`div`, `atan`, `atanh`, `acosh`, `abs_log`, `pow`); elsewhere they
   propagate through ordinary `Double` arithmetic and may produce NaN parts.
-- **Reciprocal functions abort at poles.** `sec`, `csc`, `cot`, `sech`,
-  `csch`, `coth`, `asec`, `acsc`, `asech`, `acsch`, `acoth` and the exponent
-  $-1$ of `pow` use `Complex::inv`, which aborts with
-  `Double::inv: division by zero` on a zero modulus.
+  In particular `exp`, `sin`, `cos`, `sinh` and `cosh` form products such as
+  $e^{x}\sin y$ or $\cosh x \sin y$, so a factor that overflows times a
+  factor that is exactly zero gives NaN: `exp(710 + 0i)`, `cosh(800 + 0i)`
+  and `sinh(800 + 0i)` have a NaN imaginary part, `sin(800i)` a NaN real
+  part.
+- **Signed zeros are ignored.** Functions test `y == 0.0` and `x == 0.0`,
+  which do not distinguish $+0$ from $-0$, so both sides of a branch cut
+  that runs along an axis get the same value. The
+  [design](../design/float_backend.md#values-on-the-branch-cuts) lists which
+  side each function takes.
+- **Reciprocal functions go through `Complex::inv`.** `sec`, `csc`, `cot`,
+  `sech`, `csch`, `coth`, `asec`, `acsc`, `asech`, `acsch`, `acoth` and the
+  negative integer exponents of `pow` and `pow_real` use the unscaled
+  [`Complex::inv`](core.md#complexinv) of the core. It aborts when the
+  modulus of its argument is $0$ or below about $1.5 \times 10^{-162}$, and
+  returns infinite or NaN parts for moduli below about $10^{-154}$ or above
+  about $1.3 \times 10^{154}$. So `csc(0)`, `csc(1e-170)` and
+  `pow_real(1e-200 + 0i, -2.0)` abort, `csc(1e-160)` is
+  $\infty + \mathrm{NaN}\,i$, and `csc(800i)` is NaN $+$ NaN$i$. A true
+  pole such as $\pi/2$ for `sec` is not hit exactly, because
+  `cos(@math.PI / 2.0)` is about $6 \times 10^{-17}$, not $0$; `sec` returns
+  about $1.6 \times 10^{16}$ there.
 
 > [!WARNING]
 > Several functions return an angle exactly $\pi$ larger than the principal
@@ -44,8 +64,11 @@ does not let a package add methods to a type of another package).
 > of `acos` for $\operatorname{Re} z < 0$ and of `acos_real` and `asec_real`
 > for negative arguments, and the imaginary part of `acosh_real` for
 > $x < -1$. For those inputs `cos(acos(z))` returns $-z$ and
-> `cosh(acosh_real(x))` returns $-x$. The values documented below are the
-> values the code returns.
+> `cosh(acosh_real(x))` returns $-x$. The same holds for the functions built on
+> them: `log_10`, `log_b`, `asec` for $\operatorname{Re} z < 0$, and `acosh`
+> and `asech` on the affected real inputs. In particular `exp(log(-1))` is
+> $1$, and `pow_real(-4 + 0i, 0.5)` is $-2$ rather than $2i$. The values
+> documented below are the values the code returns.
 
 ## Capability traits
 
@@ -83,8 +106,14 @@ pub impl FloatingSpecialValues for Float
 pub impl FloatingSpecialValues for Double
 ```
 
-`is_negative_zero(x)` is `is_neg_inf(1.0 / x)`, so it is true exactly for
-$-0$.
+`is_negative_zero(x)` is `is_neg_inf(1.0 / x)`.
+
+> [!WARNING]
+> `is_negative_zero` is also true for negative subnormal numbers close to
+> zero, because $1/x$ overflows to $-\infty$ there: for `Double` when
+> $-5.6 \times 10^{-309} < x < 0$ (for example `-1.0e-310`), for `Float`
+> when $-2.9 \times 10^{-39} < x < 0$. Test `x == 0.0` first when you need
+> exactly $-0$; the package's own functions use a private helper that does.
 
 ### `FloatingBackendScalar`
 
@@ -112,7 +141,8 @@ pub impl FloatingBackendScalar for Double
 | `log1p` | $\ln(1 + x)$ | `@math.log1p` | `ln(1.0 + x)` |
 
 The `Float` `log1p` is the direct formula, which loses relative accuracy for
-$|x| \ll 1$. No public function of this package is generic over these
+$|x| \ll 1$ and returns $0$ for $|x|$ below about $6 \times 10^{-8}$
+(`log1p(1.0e-10)` is `0`). No public function of this package is generic over these
 traits yet; the `Complex[Double]` functions below call the `Double`
 primitives directly.
 
@@ -135,6 +165,8 @@ test "special values" {
   let nan : Float = @fb.FloatingSpecialValues::nan()
   assert_eq(classify(nan), "nan")
   assert_eq(@fb.FloatingBackendScalar::hypot(3.0, 4.0), 5.0)
+  // defect: a tiny negative subnormal also counts as -0
+  assert_true(@fb.FloatingSpecialValues::is_negative_zero(-1.0e-310))
 }
 ```
 
@@ -230,7 +262,10 @@ pub fn abs_log(Complex[Double]) -> Double
 ```
 
 It is finite for every finite non-zero $z$, even when $|z|$ itself would
-overflow. `abs_log(0)` is $-\infty$.
+overflow. `abs_log(0)` is $-\infty$. The term $\ln(1 + t^2)$ is evaluated
+directly, not with `log1p`, so the absolute error is small but the relative
+error is large when $|z|$ is close to $1$: `abs_log(1 + 1e-10i)` returns $0$
+instead of $5 \times 10^{-21}$, and so does the real part of `log` there.
 
 ### `arg`
 
@@ -255,6 +290,8 @@ test "modulus and argument" {
   let huge = @complex.Complex::new(1.0e300, 1.0e300)
   assert_true(@fb.abs_sqr(huge).is_inf())
   assert_true(@fb.abs_log(huge) < 692.0) // ln(sqrt 2 * 1e300) is about 691.1
+  // defect: the negative real axis gets 2 pi, not pi
+  assert_eq(@fb.arg(@complex.Complex::new(-1.0, 0.0)), 2.0 * @math.PI)
 }
 ```
 
@@ -278,7 +315,14 @@ $$
 so no square of $c$ or $d$ is formed. When $z$ has no NaN part and $w$ has
 an infinite part, the result is computed from the signs of the infinities:
 a finite $z$ gives $\pm 0$ parts, an infinite $z$ gives the quotient of the
-sign patterns. Division by $0 + 0i$ produces infinities or NaN (no abort).
+sign patterns, so $\infty / \infty$ is $1$ (C99 gives NaN). Division by
+$0 + 0i$ returns NaN $+$ NaN$i$ (no abort).
+
+> [!WARNING]
+> `div` computes $1/c$ (or $1/d$) explicitly. When the larger part of $w$ is
+> a subnormal number below about $5.6 \times 10^{-309}$, $1/c$ overflows and
+> the result is NaN $+$ NaN$i$ even when the quotient is finite:
+> `div(1e-10 + 0i, 1e-310 + 0i)` is NaN instead of $10^{300}$.
 
 ```moonbit
 test "robust division" {
@@ -288,6 +332,9 @@ test "robust division" {
   assert_true(q.re > 4.9e299 && q.im < -4.9e299)
   let z = @fb.div(@complex.Complex::new(1.0, 2.0), @complex.Complex::new(@double.infinity, 0.0))
   assert_eq(z.re, 0.0)
+  // defect: 1/c overflows for a subnormal divisor
+  let sub = @fb.div(@complex.Complex::new(1.0e-10, 0.0), @complex.Complex::new(1.0e-310, 0.0))
+  assert_true(sub.re.is_nan())
 }
 ```
 
@@ -347,7 +394,7 @@ pub fn log(Complex[Double]) -> Complex[Double]
 ```
 
 The imaginary part follows `arg`, so it is $2\pi$ on the negative real
-axis. `log(0)` is $-\infty + 0i$.
+axis, and `exp(log(-1))` is $1$, not $-1$. `log(0)` is $-\infty + 0i$.
 
 ### `log_10`
 
@@ -393,13 +440,15 @@ The cases are tried in order:
 | $z = 0$, $w$ real and positive | $0$ |
 | $z = 0$, otherwise | NaN + NaN$i$ |
 | $w = 1$ | $z$ |
-| $w = -1$ | `z.inv()` (aborts if $z = 0$, which the first rows exclude) |
-| $w$ real integer, $\lvert w\rvert  \le 2^{31} - 1$ | binary powering; negative exponents invert $z$ first |
+| $w = -1$ | `z.inv()` (aborts for non-zero $\lvert z\rvert < 1.5 \times 10^{-162}$) |
+| $w$ real integer, $\lvert w\rvert  \le 2^{31} - 1$ | binary powering; negative exponents invert $z$ first with `z.inv()` |
 | otherwise | $e^{w\log z}$ in polar form |
 
 The polar form computes $\rho = e^{\operatorname{Re} w \ln|z| - \operatorname{Im} w \arg z}$
 and $\beta = \operatorname{Re} w \arg z + \operatorname{Im} w \ln|z|$ and
-returns $\rho(\cos\beta + i\sin\beta)$.
+returns $\rho(\cos\beta + i\sin\beta)$. It uses `arg`, so a negative real
+base takes the angle $2\pi$: `pow_real(-8 + 0i, 1.0 / 3.0)` is
+$-1 + 1.732i$ instead of the principal $1 + 1.732i$.
 
 ### `pow_real`
 
@@ -481,7 +530,8 @@ $\pm i$ without overflow (see the design).
 
 ### `sec`
 
-Returns $1/\cos z$; aborts where $\cos z = 0$.
+Returns $1/\cos z$ through `Complex::inv`; see the conventions for when it
+aborts.
 
 ```mbti
 pub fn sec(Complex[Double]) -> Complex[Double]
@@ -489,7 +539,8 @@ pub fn sec(Complex[Double]) -> Complex[Double]
 
 ### `csc`
 
-Returns $1/\sin z$; aborts at $z = k\pi$.
+Returns $1/\sin z$; aborts at $z = 0$ and where
+$|\sin z| < 1.5 \times 10^{-162}$.
 
 ```mbti
 pub fn csc(Complex[Double]) -> Complex[Double]
@@ -497,7 +548,8 @@ pub fn csc(Complex[Double]) -> Complex[Double]
 
 ### `cot`
 
-Returns $1/\tan z$; aborts at $z = k\pi$.
+Returns $1/\tan z$; aborts at $z = 0$ and where
+$|\tan z| < 1.5 \times 10^{-162}$.
 
 ```mbti
 pub fn cot(Complex[Double]) -> Complex[Double]
@@ -530,7 +582,11 @@ Real inputs go to `asin_real`, purely imaginary inputs to $i\operatorname{asinh}
 y$, inputs with a part above $10^{150}$ to the asymptotic form
 $\operatorname{atan2}(|x|, |y|) + i(\ln 2 + \ln|z|)$, and all others to the Hull–Fairgrieve–Tang algorithm (see the
 design). The result is odd in each part: the signs of $x$ and $y$ are
-copied to the real and imaginary parts.
+copied to the real and imaginary parts. Close to the branch points $\pm 1$
+the imaginary part loses accuracy, because this branch evaluates
+$\sqrt{A^2 - 1}$ instead of $\sqrt{(A - 1)(A + 1)}$: at $1 + 10^{-10}i$
+its relative error is about $4 \times 10^{-8}$, while `acos` there is
+accurate.
 
 ### `asin_real`
 
@@ -554,7 +610,10 @@ imaginary part has the sign opposite to $y$. For $x < 0$ the imaginary part
 is the principal one, but the real part is $2\pi - \rho$ instead of the
 principal $\pi - \rho$, where $\rho \in [0, \pi/2]$ is the real part of
 $\arccos(-z)$ (see the warning above). Purely imaginary inputs give $\pi/2 -
-i\operatorname{asinh} y$, and real inputs go to `acos_real`.
+i\operatorname{asinh} y$, and real inputs go to `acos_real`. Inputs with a
+part above $10^{150}$ use $\pi/2 - \operatorname{asin} z$ and get the
+principal value for every $x$, so the real part jumps by $\pi$ at that
+threshold when $x < 0$.
 
 ### `acos_real`
 
@@ -582,7 +641,9 @@ the sign of $y$. Infinite inputs return $\pm\pi/2 + 0i$.
 
 ### `asec`
 
-Returns $\operatorname{acos}(1/z)$; aborts at $z = 0$.
+Returns $\operatorname{acos}(1/z)$; aborts at $z = 0$. It inherits the
+`acos` deviation wherever $\operatorname{Re}(1/z) < 0$, that is for
+$\operatorname{Re} z < 0$ off the real interval $(-\infty, -1]$.
 
 ```mbti
 pub fn asec(Complex[Double]) -> Complex[Double]
@@ -592,7 +653,9 @@ pub fn asec(Complex[Double]) -> Complex[Double]
 
 Arcsecant of a real number: $\arccos(1/x)$ for $|x| \ge 1$,
 $-i\operatorname{acosh}(1/x)$ for $0 \le x < 1$, $2\pi -
-i\operatorname{acosh}(-1/x)$ for $-1 < x < 0$.
+i\operatorname{acosh}(-1/x)$ for $-1 < x < 0$. `asec_real(0)` is
+$0 - \infty i$ (no abort, unlike `asec`). There is no NaN check: NaN falls
+into the last case and gives $2\pi + \mathrm{NaN}\,i$.
 
 ```mbti
 pub fn asec_real(Double) -> Complex[Double]
@@ -609,7 +672,9 @@ pub fn acsc(Complex[Double]) -> Complex[Double]
 ### `acsc_real`
 
 Arccosecant of a real number: $\arcsin(1/x)$ for $|x| \ge 1$, $\pm\pi/2 +
-i\operatorname{acosh}|1/x|$ for $|x| < 1$.
+i\operatorname{acosh}|1/x|$ for $|x| < 1$. `acsc_real(0)` is
+$\pi/2 + \infty i$ (no abort, unlike `acsc`); NaN gives
+$-\pi/2 + \mathrm{NaN}\,i$.
 
 ```mbti
 pub fn acsc_real(Double) -> Complex[Double]
@@ -662,7 +727,8 @@ pub fn tanh(Complex[Double]) -> Complex[Double]
 
 ### `sech`
 
-Returns $1/\cosh z$; aborts where $\cosh z = 0$.
+Returns $1/\cosh z$ through `Complex::inv`; like `sec`, it does not hit the
+poles $i(\pi/2 + k\pi)$ exactly.
 
 ```mbti
 pub fn sech(Complex[Double]) -> Complex[Double]
@@ -670,7 +736,8 @@ pub fn sech(Complex[Double]) -> Complex[Double]
 
 ### `csch`
 
-Returns $1/\sinh z$; aborts at $z = k\pi i$.
+Returns $1/\sinh z$; aborts at $z = 0$ and where
+$|\sinh z| < 1.5 \times 10^{-162}$.
 
 ```mbti
 pub fn csch(Complex[Double]) -> Complex[Double]
@@ -678,7 +745,8 @@ pub fn csch(Complex[Double]) -> Complex[Double]
 
 ### `coth`
 
-Returns $1/\tanh z$; aborts at $z = k\pi i$.
+Returns $1/\tanh z$; aborts at $z = 0$ and where
+$|\tanh z| < 1.5 \times 10^{-162}$.
 
 ```mbti
 pub fn coth(Complex[Double]) -> Complex[Double]
@@ -745,7 +813,9 @@ pub fn atanh_real(Double) -> Complex[Double]
 
 ### `asech`
 
-Returns $\operatorname{acosh}(1/z)$; aborts at $z = 0$.
+Returns $\operatorname{acosh}(1/z)$; aborts at $z = 0$. For real
+$-1 < x < 0$ it goes through `acosh_real(1/x)` and returns the imaginary part
+$2\pi$ instead of $\pi$.
 
 ```mbti
 pub fn asech(Complex[Double]) -> Complex[Double]

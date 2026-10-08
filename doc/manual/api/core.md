@@ -1,5 +1,7 @@
 # core API
 
+## Purpose
+
 The root package `Luna-Flow/luna-complex` defines `Complex[T]`, the complex
 numbers $a + bi$ over any scalar type `T`, with construction, in-place
 mutation, conjugation, the arithmetic operators and the `luna-generic`
@@ -168,11 +170,20 @@ pub impl[T : @luna-generic.Field] Div for Complex[T]
 ```
 
 It computes $n = c^2 + d^2$, then `Inverse::inv(n)`, and multiplies both
-parts of $z\bar w$ by it. The formula is not scaled: for `Double`, $c^2 + d^2$
-overflows for $|w| \gtrsim 10^{154}$ and underflows for $|w| \lesssim
-10^{-162}$, and `Inverse::inv` of `Double` aborts with
-`Double::inv: division by zero` when $n$ is zero, including after underflow.
-Use [`@fb.div`](float_backend.md#div) for robust floating-point division.
+parts of $z\bar w$ by it. The formula is not scaled, so for `Double` the
+result depends on the size of $|w|$:
+
+| $\lvert w\rvert$ (about) | $n$ | Result |
+| --- | --- | --- |
+| above $1.3 \times 10^{154}$ | overflows to $\infty$ | $n^{-1} = 0$: zero parts, or NaN where a part of $z\bar w$ is also infinite |
+| $10^{-154}$ to $10^{154}$ | in range | the quotient, up to rounding |
+| $1.5 \times 10^{-162}$ to $10^{-154}$ | subnormal | inaccurate; below about $7.5 \times 10^{-155}$, $n^{-1}$ overflows and the parts become $\pm\infty$ or NaN |
+| below $1.5 \times 10^{-162}$, or $w = 0$ | $0$ | **aborts** |
+
+The abort comes from `Inverse::inv` of `Double` in `luna-generic`, which
+rejects zero. For example `Complex::new(1e200, 0.0) / Complex::new(1e200,
+0.0)` is NaN $+ 0i$, and dividing by $10^{-170}$ aborts. Use
+[`@fb.div`](float_backend.md#div) for robust floating-point division.
 
 ```moonbit
 test "complex arithmetic" {
@@ -206,8 +217,9 @@ pub fn[T : @luna-generic.Field] Complex::inv(Complex[T]) -> Complex[T]
 pub impl[T : @luna-generic.Field] @luna-generic.Inverse for Complex[T]
 ```
 
-It has the same unscaled formula and the same abort on a zero modulus as
-`Complex::div`.
+It has the same unscaled formula, the same size ranges and the same abort
+on a zero or underflowed modulus as `Complex::div`: `inv` of $10^{-160}$ is
+$\infty + \mathrm{NaN}\,i$, and `inv` of $10^{-170}$ aborts.
 
 ```moonbit
 test "conjugate and inverse" {
@@ -273,6 +285,13 @@ bounds below. The [core design](../design/core.md) derives each law.
 > $1 + i\,j$ (with $i$ the inner and $j$ the outer unit) has squared modulus
 > $1 + i^2 = 0$, so `inv` aborts. The `Field` instance is still provided for
 > every `T : Field`; see the [core design](../design/core.md#when-the-construction-is-a-field).
+
+For `T = Double` the laws hold only up to rounding, and the field law
+$z z^{-1} = 1$ for $z \ne 0$ fails outside the range of the table under
+`Complex::div`: `inv` aborts for non-zero $|z| < 1.5 \times 10^{-162}$ and
+returns $0$ for $|z| > 1.3 \times 10^{154}$. The
+[core design](../design/core.md#floating-point-instances) derives these
+limits.
 
 ```moonbit
 fn[T : @lg.Field] average(a : T, b : T) -> T {

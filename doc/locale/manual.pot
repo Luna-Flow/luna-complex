@@ -16,198 +16,262 @@ msgid "core API"
 msgstr ""
 
 #: manual/api/core.md:3
+#: manual/api/float_backend.md:3
+msgid "Purpose"
+msgstr ""
+
+#: manual/api/core.md:5
 msgid "The root package `Luna-Flow/luna-complex` defines `Complex[T]`, the complex numbers $a + bi$ over any scalar type `T`, with construction, in-place mutation, conjugation, the arithmetic operators and the `luna-generic` structure traits. It contains no analytic functions; those are in [`float_backend`](float_backend.md). The algebra behind the instances is in the [core design](../design/core.md)."
 msgstr ""
 
-#: manual/api/core.md:10
+#: manual/api/core.md:12
 msgid "Source: [`src/complex.mbt`](../../../src/complex.mbt), [`src/complex_traits.mbt`](../../../src/complex_traits.mbt) and [`src/extends.mbt`](../../../src/extends.mbt)."
 msgstr ""
 
-#: manual/api/core.md:14
-#: manual/api/float_backend.md:14
+#: manual/api/core.md:16
+#: manual/api/float_backend.md:16
 msgid "Importing"
 msgstr ""
 
-#: manual/api/core.md:22
+#: manual/api/core.md:24
 msgid "The examples use the alias `@complex`."
 msgstr ""
 
-#: manual/api/core.md:24
+#: manual/api/core.md:26
 msgid "The type"
 msgstr ""
 
-#: manual/api/core.md:28
+#: manual/api/core.md:30
 msgid "A complex number with a real part `re` and an imaginary part `im`."
 msgstr ""
 
-#: manual/api/core.md:37
+#: manual/api/core.md:39
 msgid "The value is $\\texttt{re} + \\texttt{im}\\,i$ with $i^2 = -1$. Both fields are public and mutable, and the struct is `pub(all)`, so code outside the package can read, write and construct it with a record literal. `Complex[T]` is a reference type: two bindings to the same value see each other's updates."
 msgstr ""
 
-#: manual/api/core.md:43
+#: manual/api/core.md:45
 msgid "`derive(Eq)` compares both parts with `T`'s equality (for `Double`, `0.0 == -0.0` and NaN is unequal to itself). `derive(Debug)` prints the record form `{ re: …, im: … }`."
 msgstr ""
 
-#: manual/api/core.md:47
+#: manual/api/core.md:49
 msgid "Construction and mutation"
 msgstr ""
 
-#: manual/api/core.md:51
+#: manual/api/core.md:53
 msgid "Builds $re + im\\,i$."
 msgstr ""
 
-#: manual/api/core.md:59
+#: manual/api/core.md:61
 msgid "Overwrites both parts in place."
 msgstr ""
 
-#: manual/api/core.md:67
+#: manual/api/core.md:69
 msgid "Overwrites the real part in place."
 msgstr ""
 
-#: manual/api/core.md:75
+#: manual/api/core.md:77
 msgid "Overwrites the imaginary part in place."
 msgstr ""
 
-#: manual/api/core.md:91
+#: manual/api/core.md:93
 msgid "Identities"
 msgstr ""
 
-#: manual/api/core.md:95
+#: manual/api/core.md:97
 msgid "Returns $0 + 0i$."
 msgstr ""
 
-#: manual/api/core.md:103
+#: manual/api/core.md:105
 msgid "Returns $1 + 0i$."
 msgstr ""
 
-#: manual/api/core.md:109
+#: manual/api/core.md:111
 msgid "Both are the promoted methods of the `Zero` and `One` instances."
 msgstr ""
 
-#: manual/api/core.md:111
+#: manual/api/core.md:113
 msgid "Arithmetic"
 msgstr ""
 
-#: manual/api/core.md:113
+#: manual/api/core.md:115
 msgid "Each operator is available as an operator and as a promoted method."
 msgstr ""
 
-#: manual/api/core.md:115
+#: manual/api/core.md:117
 msgid "Item"
 msgstr ""
 
-#: manual/api/core.md:115
+#: manual/api/core.md:117
 msgid "Operator"
 msgstr ""
 
-#: manual/api/core.md:115
-#: manual/api/float_backend.md:243
-#: manual/api/float_backend.md:390
+#: manual/api/core.md:117
+#: manual/api/core.md:176
+#: manual/api/float_backend.md:278
+#: manual/api/float_backend.md:437
 msgid "Result"
 msgstr ""
 
-#: manual/api/core.md:115
-#: manual/api/core.md:255
+#: manual/api/core.md:117
+#: manual/api/core.md:267
 msgid "Bound on `T`"
 msgstr ""
 
-#: manual/api/core.md:123
+#: manual/api/core.md:125
 msgid "Here $z = a + bi$ and $w = c + di$."
 msgstr ""
 
-#: manual/api/core.md:127
+#: manual/api/core.md:129
 msgid "Adds componentwise."
 msgstr ""
 
-#: manual/api/core.md:136
+#: manual/api/core.md:138
 msgid "Subtracts componentwise."
 msgstr ""
 
-#: manual/api/core.md:145
+#: manual/api/core.md:147
 msgid "Negates both parts."
 msgstr ""
 
-#: manual/api/core.md:154
+#: manual/api/core.md:156
 msgid "Multiplies with $i^2 = -1$, using four multiplications."
 msgstr ""
 
-#: manual/api/core.md:163
+#: manual/api/core.md:165
 msgid "Divides by multiplying with the inverse of the squared modulus."
 msgstr ""
 
-#: manual/api/core.md:170
-msgid "It computes $n = c^2 + d^2$, then `Inverse::inv(n)`, and multiplies both parts of $z\\bar w$ by it. The formula is not scaled: for `Double`, $c^2 + d^2$ overflows for $|w| \\gtrsim 10^{154}$ and underflows for $|w| \\lesssim 10^{-162}$, and `Inverse::inv` of `Double` aborts with `Double::inv: division by zero` when $n$ is zero, including after underflow. Use [`@fb.div`](float_backend.md#div) for robust floating-point division."
+#: manual/api/core.md:172
+msgid "It computes $n = c^2 + d^2$, then `Inverse::inv(n)`, and multiplies both parts of $z\\bar w$ by it. The formula is not scaled, so for `Double` the result depends on the size of $|w|$:"
 msgstr ""
 
-#: manual/api/core.md:189
+#: manual/api/core.md:176
+msgid "$\\lvert w\\rvert$ (about)"
+msgstr ""
+
+#: manual/api/core.md:178
+msgid "above $1.3 \\times 10^{154}$"
+msgstr ""
+
+#: manual/api/core.md:178
+msgid "overflows to $\\infty$"
+msgstr ""
+
+#: manual/api/core.md:178
+msgid "$n^{-1} = 0$: zero parts, or NaN where a part of $z\\bar w$ is also infinite"
+msgstr ""
+
+#: manual/api/core.md:179
+msgid "$10^{-154}$ to $10^{154}$"
+msgstr ""
+
+#: manual/api/core.md:179
+msgid "in range"
+msgstr ""
+
+#: manual/api/core.md:179
+msgid "the quotient, up to rounding"
+msgstr ""
+
+#: manual/api/core.md:180
+msgid "$1.5 \\times 10^{-162}$ to $10^{-154}$"
+msgstr ""
+
+#: manual/api/core.md:180
+msgid "subnormal"
+msgstr ""
+
+#: manual/api/core.md:180
+msgid "inaccurate; below about $7.5 \\times 10^{-155}$, $n^{-1}$ overflows and the parts become $\\pm\\infty$ or NaN"
+msgstr ""
+
+#: manual/api/core.md:181
+msgid "below $1.5 \\times 10^{-162}$, or $w = 0$"
+msgstr ""
+
+#: manual/api/core.md:181
+msgid "**aborts**"
+msgstr ""
+
+#: manual/api/core.md:183
+msgid "The abort comes from `Inverse::inv` of `Double` in `luna-generic`, which rejects zero. For example `Complex::new(1e200, 0.0) / Complex::new(1e200, 0.0)` is NaN $+ 0i$, and dividing by $10^{-170}$ aborts. Use [`@fb.div`](float_backend.md#div) for robust floating-point division."
+msgstr ""
+
+#: manual/api/core.md:200
 msgid "Conjugate and inverse"
 msgstr ""
 
-#: manual/api/core.md:193
+#: manual/api/core.md:204
 msgid "Returns $\\bar z = a - bi$."
 msgstr ""
 
-#: manual/api/core.md:202
+#: manual/api/core.md:213
 msgid "Returns $z^{-1} = \\bar z / (a^2 + b^2)$."
 msgstr ""
 
-#: manual/api/core.md:209
-msgid "It has the same unscaled formula and the same abort on a zero modulus as `Complex::div`."
-msgstr ""
-
-#: manual/api/core.md:221
-msgid "Equality and text"
-msgstr ""
-
-#: manual/api/core.md:225
-msgid "Compares both parts; the promoted method of the derived `Eq`. Prefer `==`."
+#: manual/api/core.md:220
+msgid "It has the same unscaled formula, the same size ranges and the same abort on a zero or underflowed modulus as `Complex::div`: `inv` of $10^{-160}$ is $\\infty + \\mathrm{NaN}\\,i$, and `inv` of $10^{-170}$ aborts."
 msgstr ""
 
 #: manual/api/core.md:233
+msgid "Equality and text"
+msgstr ""
+
+#: manual/api/core.md:237
+msgid "Compares both parts; the promoted method of the derived `Eq`. Prefer `==`."
+msgstr ""
+
+#: manual/api/core.md:245
 msgid "Formats $z$ as `\"<re> + <im>i\"` using `T`'s `Show`."
 msgstr ""
 
-#: manual/api/core.md:240
+#: manual/api/core.md:252
 msgid "The sign of the imaginary part is printed by `T`, so $1 - 2i$ prints as `1 + -2i`. String interpolation `\"\\{z}\"` uses the same text."
 msgstr ""
 
-#: manual/api/core.md:250
+#: manual/api/core.md:262
 msgid "Structure instances"
 msgstr ""
 
-#: manual/api/core.md:252
+#: manual/api/core.md:264
 msgid "`Complex[T]` implements the `luna-generic` structure traits under the bounds below. The [core design](../design/core.md) derives each law."
 msgstr ""
 
-#: manual/api/core.md:255
+#: manual/api/core.md:267
 msgid "Instance"
 msgstr ""
 
-#: manual/api/core.md:269
+#: manual/api/core.md:281
 msgid "[!WARNING] `Complex[T]` is a field only when $-1$ is not a square in `T`. That holds for the real-number types `Float` and `Double`, but not for `Complex[Double]`: in `Complex[Complex[Double]]` the non-zero value $1 + i\\,j$ (with $i$ the inner and $j$ the outer unit) has squared modulus $1 + i^2 = 0$, so `inv` aborts. The `Field` instance is still provided for every `T : Field`; see the [core design](../design/core.md#when-the-construction-is-a-field)."
 msgstr ""
 
 #: manual/api/core.md:289
+msgid ""
+"For `T = Double` the laws hold only up to rounding, and the field law $z z^{-1} = 1$ for $z \\n"
+"e 0$ fails outside the range of the table under `Complex::div`: `inv` aborts for non-zero $|z| < 1.5 \\times 10^{-162}$ and returns $0$ for $|z| > 1.3 \\times 10^{154}$. The [core design](../design/core.md#floating-point-instances) derives these limits."
+msgstr ""
+
+#: manual/api/core.md:308
 msgid "Deprecated"
 msgstr ""
 
-#: manual/api/core.md:291
+#: manual/api/core.md:310
 msgid "These method forms come from the trait instances and are hidden from the interface file; they warn when used outside the package."
 msgstr ""
 
-#: manual/api/core.md:294
+#: manual/api/core.md:313
 msgid "Deprecated method"
 msgstr ""
 
-#: manual/api/core.md:294
+#: manual/api/core.md:313
 msgid "Replacement"
 msgstr ""
 
-#: manual/api/core.md:297
+#: manual/api/core.md:316
 msgid "`z.to_string()` or `\"\\{z}\"`"
 msgstr ""
 
-#: manual/api/core.md:298
+#: manual/api/core.md:317
 msgid "`Repr(z)` or `@debug.Debug::to_repr(z)`"
 msgstr ""
 
@@ -215,456 +279,468 @@ msgstr ""
 msgid "float_backend API"
 msgstr ""
 
-#: manual/api/float_backend.md:3
+#: manual/api/float_backend.md:5
 msgid "The `float_backend` package provides the analytic functions of `Complex[Double]`: modulus and argument, division, roots, exponentials and logarithms, powers, and the trigonometric and hyperbolic functions with their inverses. It also defines three capability traits for floating-point scalars, implemented for `Float` and `Double`. The derivations of the formulas and the branch cuts are in the [float_backend design](../design/float_backend.md)."
 msgstr ""
 
-#: manual/api/float_backend.md:10
+#: manual/api/float_backend.md:12
 msgid "Source: [`src/float_backend/`](../../../src/float_backend/float_backend_traits.mbt) (`float_backend_traits.mbt`, `complex_elementary.mbt`, `complex_trigonometric.mbt`, `complex_hyperbolic.mbt`)."
 msgstr ""
 
-#: manual/api/float_backend.md:22
+#: manual/api/float_backend.md:24
 msgid "The examples use `@fb` for this package and `@complex` for the root package. All functions are free functions over `Complex[Double]` (MoonBit does not let a package add methods to a type of another package)."
 msgstr ""
 
-#: manual/api/float_backend.md:26
+#: manual/api/float_backend.md:28
 msgid "Conventions"
 msgstr ""
 
-#: manual/api/float_backend.md:28
+#: manual/api/float_backend.md:30
 msgid "**Principal values.** Multi-valued functions return one value of a fixed branch, described per function. `arg` returns values in $(-\\pi, \\pi]$ except on the negative real axis (see the warning below)."
 msgstr ""
 
-#: manual/api/float_backend.md:31
-msgid "**Special values.** NaN and infinities are handled where stated (`div`, `atan`, `atanh`, `acosh`, `abs_log`, `pow`); elsewhere they propagate through ordinary `Double` arithmetic and may produce NaN parts."
+#: manual/api/float_backend.md:33
+msgid "**Special values.** NaN and infinities are handled where stated (`div`, `atan`, `atanh`, `acosh`, `abs_log`, `pow`); elsewhere they propagate through ordinary `Double` arithmetic and may produce NaN parts. In particular `exp`, `sin`, `cos`, `sinh` and `cosh` form products such as $e^{x}\\sin y$ or $\\cosh x \\sin y$, so a factor that overflows times a factor that is exactly zero gives NaN: `exp(710 + 0i)`, `cosh(800 + 0i)` and `sinh(800 + 0i)` have a NaN imaginary part, `sin(800i)` a NaN real part."
 msgstr ""
 
-#: manual/api/float_backend.md:34
-msgid "**Reciprocal functions abort at poles.** `sec`, `csc`, `cot`, `sech`, `csch`, `coth`, `asec`, `acsc`, `asech`, `acsch`, `acoth` and the exponent $-1$ of `pow` use `Complex::inv`, which aborts with `Double::inv: division by zero` on a zero modulus."
+#: manual/api/float_backend.md:41
+msgid "**Signed zeros are ignored.** Functions test `y == 0.0` and `x == 0.0`, which do not distinguish $+0$ from $-0$, so both sides of a branch cut that runs along an axis get the same value. The [design](../design/float_backend.md#values-on-the-branch-cuts) lists which side each function takes."
 msgstr ""
 
-#: manual/api/float_backend.md:39
-msgid "[!WARNING] Several functions return an angle exactly $\\pi$ larger than the principal value, because the code uses $2\\pi$ where the principal value has $\\pi$: `arg` on the negative real axis ($2\\pi$ instead of $\\pi$, so `log(-1)` is $2\\pi i$ and `pow` of a negative real base uses that angle), the real part of `acos` for $\\operatorname{Re} z < 0$ and of `acos_real` and `asec_real` for negative arguments, and the imaginary part of `acosh_real` for $x < -1$. For those inputs `cos(acos(z))` returns $-z$ and `cosh(acosh_real(x))` returns $-x$. The values documented below are the values the code returns."
+#: manual/api/float_backend.md:46
+msgid "**Reciprocal functions go through `Complex::inv`.** `sec`, `csc`, `cot`, `sech`, `csch`, `coth`, `asec`, `acsc`, `asech`, `acsch`, `acoth` and the negative integer exponents of `pow` and `pow_real` use the unscaled [`Complex::inv`](core.md#complexinv) of the core. It aborts when the modulus of its argument is $0$ or below about $1.5 \\times 10^{-162}$, and returns infinite or NaN parts for moduli below about $10^{-154}$ or above about $1.3 \\times 10^{154}$. So `csc(0)`, `csc(1e-170)` and `pow_real(1e-200 + 0i, -2.0)` abort, `csc(1e-160)` is $\\infty + \\mathrm{NaN}\\,i$, and `csc(800i)` is NaN $+$ NaN$i$. A true pole such as $\\pi/2$ for `sec` is not hit exactly, because `cos(@math.PI / 2.0)` is about $6 \\times 10^{-17}$, not $0$; `sec` returns about $1.6 \\times 10^{16}$ there."
 msgstr ""
 
-#: manual/api/float_backend.md:50
+#: manual/api/float_backend.md:59
+msgid "[!WARNING] Several functions return an angle exactly $\\pi$ larger than the principal value, because the code uses $2\\pi$ where the principal value has $\\pi$: `arg` on the negative real axis ($2\\pi$ instead of $\\pi$, so `log(-1)` is $2\\pi i$ and `pow` of a negative real base uses that angle), the real part of `acos` for $\\operatorname{Re} z < 0$ and of `acos_real` and `asec_real` for negative arguments, and the imaginary part of `acosh_real` for $x < -1$. For those inputs `cos(acos(z))` returns $-z$ and `cosh(acosh_real(x))` returns $-x$. The same holds for the functions built on them: `log_10`, `log_b`, `asec` for $\\operatorname{Re} z < 0$, and `acosh` and `asech` on the affected real inputs. In particular `exp(log(-1))` is $1$, and `pow_real(-4 + 0i, 0.5)` is $-2$ rather than $2i$. The values documented below are the values the code returns."
+msgstr ""
+
+#: manual/api/float_backend.md:73
 msgid "Capability traits"
 msgstr ""
 
-#: manual/api/float_backend.md:54
+#: manual/api/float_backend.md:77
 msgid "The algebraic and analytic capabilities an analytic backend needs from its real scalar."
 msgstr ""
 
-#: manual/api/float_backend.md:64
+#: manual/api/float_backend.md:87
 msgid "It has no methods of its own: it names the composition of `luna-generic` and `arithmetic` traits."
 msgstr ""
 
-#: manual/api/float_backend.md:69
+#: manual/api/float_backend.md:92
 msgid "IEEE 754 special values and their tests."
 msgstr ""
 
-#: manual/api/float_backend.md:86
-msgid "`is_negative_zero(x)` is `is_neg_inf(1.0 / x)`, so it is true exactly for $-0$."
-msgstr ""
-
-#: manual/api/float_backend.md:91
-msgid "The primitives the numerically stable algorithms use, on top of the two traits above."
-msgstr ""
-
-#: manual/api/float_backend.md:106
-msgid "Method"
-msgstr ""
-
-#: manual/api/float_backend.md:106
-msgid "Meaning"
-msgstr ""
-
-#: manual/api/float_backend.md:108
-msgid "convert a `Double` constant"
-msgstr ""
-
-#: manual/api/float_backend.md:108
-msgid "identity"
-msgstr ""
-
 #: manual/api/float_backend.md:109
-msgid "round towards zero"
-msgstr ""
-
-#: manual/api/float_backend.md:110
-msgid "convert to `Int`"
+msgid "`is_negative_zero(x)` is `is_neg_inf(1.0 / x)`."
 msgstr ""
 
 #: manual/api/float_backend.md:111
+msgid "[!WARNING] `is_negative_zero` is also true for negative subnormal numbers close to zero, because $1/x$ overflows to $-\\infty$ there: for `Double` when $-5.6 \\times 10^{-309} < x < 0$ (for example `-1.0e-310`), for `Float` when $-2.9 \\times 10^{-39} < x < 0$. Test `x == 0.0` first when you need exactly $-0$; the package's own functions use a private helper that does."
+msgstr ""
+
+#: manual/api/float_backend.md:120
+msgid "The primitives the numerically stable algorithms use, on top of the two traits above."
+msgstr ""
+
+#: manual/api/float_backend.md:135
+msgid "Method"
+msgstr ""
+
+#: manual/api/float_backend.md:135
+msgid "Meaning"
+msgstr ""
+
+#: manual/api/float_backend.md:137
+msgid "convert a `Double` constant"
+msgstr ""
+
+#: manual/api/float_backend.md:137
+msgid "identity"
+msgstr ""
+
+#: manual/api/float_backend.md:138
+msgid "round towards zero"
+msgstr ""
+
+#: manual/api/float_backend.md:139
+msgid "convert to `Int`"
+msgstr ""
+
+#: manual/api/float_backend.md:140
 msgid "$\\sqrt{x^2 + y^2}$ without overflow"
 msgstr ""
 
-#: manual/api/float_backend.md:114
-msgid "The `Float` `log1p` is the direct formula, which loses relative accuracy for $|x| \\ll 1$. No public function of this package is generic over these traits yet; the `Complex[Double]` functions below call the `Double` primitives directly."
+#: manual/api/float_backend.md:143
+msgid "The `Float` `log1p` is the direct formula, which loses relative accuracy for $|x| \\ll 1$ and returns $0$ for $|x|$ below about $6 \\times 10^{-8}$ (`log1p(1.0e-10)` is `0`). No public function of this package is generic over these traits yet; the `Complex[Double]` functions below call the `Double` primitives directly."
 msgstr ""
 
-#: manual/api/float_backend.md:141
+#: manual/api/float_backend.md:173
 msgid "Re-exported type"
 msgstr ""
 
-#: manual/api/float_backend.md:145
+#: manual/api/float_backend.md:177
 msgid "`@fb.Complex` is `@complex.Complex`; see the [core API](core.md)."
 msgstr ""
 
-#: manual/api/float_backend.md:151
+#: manual/api/float_backend.md:183
 msgid "Construction and storage"
 msgstr ""
 
-#: manual/api/float_backend.md:155
+#: manual/api/float_backend.md:187
 msgid "Builds $r e^{i\\theta} = r\\cos\\theta + i\\,r\\sin\\theta$."
 msgstr ""
 
-#: manual/api/float_backend.md:161
+#: manual/api/float_backend.md:193
 msgid "No normalization is applied: a negative $r$ or any real $\\theta$ is accepted."
 msgstr ""
 
-#: manual/api/float_backend.md:166
+#: manual/api/float_backend.md:198
 msgid "Writes $z$ into an interleaved buffer `[re0, im0, re1, im1, …]` at complex index `offset`."
 msgstr ""
 
-#: manual/api/float_backend.md:175
+#: manual/api/float_backend.md:207
 msgid "Writes a real and an imaginary part into an interleaved buffer."
 msgstr ""
 
-#: manual/api/float_backend.md:181
+#: manual/api/float_backend.md:213
 msgid "The buffer length must be even. If `offset` equals the number of complex entries (`arr.length() / 2`), the pair is appended; otherwise it overwrites entry `offset`. An odd length aborts with `native_pack: buffer length must be even`, an offset outside `0..=arr.length() / 2` with `native_pack: offset out of bounds`."
 msgstr ""
 
-#: manual/api/float_backend.md:199
+#: manual/api/float_backend.md:231
 msgid "Modulus and argument"
 msgstr ""
 
-#: manual/api/float_backend.md:203
+#: manual/api/float_backend.md:235
 msgid "Returns $|z| = \\sqrt{x^2 + y^2}$ with `hypot`, without intermediate overflow or underflow."
 msgstr ""
 
-#: manual/api/float_backend.md:212
+#: manual/api/float_backend.md:244
 msgid "Returns $|z|^2$, computed as $m^2\\big((x/m)^2 + (y/m)^2\\big)$ with $m = \\max(|x|, |y|)$."
 msgstr ""
 
-#: manual/api/float_backend.md:219
+#: manual/api/float_backend.md:251
 msgid "The scaling avoids spurious underflow of the squares; the result itself overflows to infinity when $|z|^2$ exceeds the `Double` range. $0$ maps to $0$."
 msgstr ""
 
-#: manual/api/float_backend.md:225
+#: manual/api/float_backend.md:257
 msgid "Returns $\\ln|z|$ as $\\ln m + \\tfrac12\\ln(1 + t^2)$ with $m = \\max(|x|,|y|)$ and $t = \\min/\\max$."
 msgstr ""
 
-#: manual/api/float_backend.md:232
-msgid "It is finite for every finite non-zero $z$, even when $|z|$ itself would overflow. `abs_log(0)` is $-\\infty$."
+#: manual/api/float_backend.md:264
+msgid "It is finite for every finite non-zero $z$, even when $|z|$ itself would overflow. `abs_log(0)` is $-\\infty$. The term $\\ln(1 + t^2)$ is evaluated directly, not with `log1p`, so the absolute error is small but the relative error is large when $|z|$ is close to $1$: `abs_log(1 + 1e-10i)` returns $0$ instead of $5 \\times 10^{-21}$, and so does the real part of `log` there."
 msgstr ""
 
-#: manual/api/float_backend.md:237
+#: manual/api/float_backend.md:272
 msgid "Returns the argument $\\theta$ with $z = |z| e^{i\\theta}$."
 msgstr ""
 
-#: manual/api/float_backend.md:243
+#: manual/api/float_backend.md:278
 msgid "Input"
 msgstr ""
 
-#: manual/api/float_backend.md:245
+#: manual/api/float_backend.md:280
 msgid "$z = 0$ (either zero sign)"
 msgstr ""
 
-#: manual/api/float_backend.md:246
+#: manual/api/float_backend.md:281
 msgid "$2\\pi$ (see the warning above)"
 msgstr ""
 
-#: manual/api/float_backend.md:247
-#: manual/api/float_backend.md:398
+#: manual/api/float_backend.md:282
+#: manual/api/float_backend.md:445
 msgid "otherwise"
 msgstr ""
 
-#: manual/api/float_backend.md:261
+#: manual/api/float_backend.md:298
 msgid "Division"
 msgstr ""
 
-#: manual/api/float_backend.md:265
+#: manual/api/float_backend.md:302
 msgid "Divides $z / w$ with Smith's scaling and IEEE special-value handling."
 msgstr ""
 
-#: manual/api/float_backend.md:271
+#: manual/api/float_backend.md:308
 msgid "For finite $w$ it divides by the larger of $|c|, |d|$ first (with $r = d/c$ when $|c| \\ge |d|$):"
 msgstr ""
 
-#: manual/api/float_backend.md:278
-msgid "so no square of $c$ or $d$ is formed. When $z$ has no NaN part and $w$ has an infinite part, the result is computed from the signs of the infinities: a finite $z$ gives $\\pm 0$ parts, an infinite $z$ gives the quotient of the sign patterns. Division by $0 + 0i$ produces infinities or NaN (no abort)."
+#: manual/api/float_backend.md:315
+msgid "so no square of $c$ or $d$ is formed. When $z$ has no NaN part and $w$ has an infinite part, the result is computed from the signs of the infinities: a finite $z$ gives $\\pm 0$ parts, an infinite $z$ gives the quotient of the sign patterns, so $\\infty / \\infty$ is $1$ (C99 gives NaN). Division by $0 + 0i$ returns NaN $+$ NaN$i$ (no abort)."
 msgstr ""
 
-#: manual/api/float_backend.md:294
+#: manual/api/float_backend.md:321
+msgid "[!WARNING] `div` computes $1/c$ (or $1/d$) explicitly. When the larger part of $w$ is a subnormal number below about $5.6 \\times 10^{-309}$, $1/c$ overflows and the result is NaN $+$ NaN$i$ even when the quotient is finite: `div(1e-10 + 0i, 1e-310 + 0i)` is NaN instead of $10^{300}$."
+msgstr ""
+
+#: manual/api/float_backend.md:341
 msgid "Roots"
 msgstr ""
 
-#: manual/api/float_backend.md:298
+#: manual/api/float_backend.md:345
 msgid "Returns the principal square root: $\\operatorname{Re}\\sqrt z \\ge 0$, with the branch cut along the negative real axis."
 msgstr ""
 
-#: manual/api/float_backend.md:305
+#: manual/api/float_backend.md:352
 msgid "It computes $w = \\sqrt{(|x| + |z|)/2}$ in a scaled form and returns $w + \\frac{y}{2w} i$ for $x \\ge 0$, and $\\frac{|y|}{2w} \\pm w\\,i$ for $x < 0$ with the sign of $y$. On the cut ($y = \\pm 0$, $x < 0$) the result is $+\\sqrt{|x|}\\,i$ for both zero signs. `sqrt(0)` is $0$."
 msgstr ""
 
-#: manual/api/float_backend.md:312
+#: manual/api/float_backend.md:359
 msgid "Square root of a real number as a complex number: $\\sqrt x$ for $x \\ge 0$, $i\\sqrt{-x}$ for $x < 0$."
 msgstr ""
 
-#: manual/api/float_backend.md:327
+#: manual/api/float_backend.md:374
 msgid "Exponential and logarithms"
 msgstr ""
 
-#: manual/api/float_backend.md:331
+#: manual/api/float_backend.md:378
 msgid "Returns $e^z = e^x(\\cos y + i\\sin y)$."
 msgstr ""
 
-#: manual/api/float_backend.md:337
+#: manual/api/float_backend.md:384
 msgid "$e^x$ is computed first, so it overflows for $x > 709.78$ even when a part of the result would be finite, and `exp(710 + 0i)` has a NaN imaginary part ($\\infty \\cdot 0$)."
 msgstr ""
 
-#: manual/api/float_backend.md:343
+#: manual/api/float_backend.md:390
 msgid "Returns $\\ln|z| + i\\arg z$ with `abs_log` and `arg`."
 msgstr ""
 
-#: manual/api/float_backend.md:349
-msgid "The imaginary part follows `arg`, so it is $2\\pi$ on the negative real axis. `log(0)` is $-\\infty + 0i$."
+#: manual/api/float_backend.md:396
+msgid "The imaginary part follows `arg`, so it is $2\\pi$ on the negative real axis, and `exp(log(-1))` is $1$, not $-1$. `log(0)` is $-\\infty + 0i$."
 msgstr ""
 
-#: manual/api/float_backend.md:354
+#: manual/api/float_backend.md:401
 msgid "Returns $\\log_{10} z = \\log z / \\ln 10$."
 msgstr ""
 
-#: manual/api/float_backend.md:362
+#: manual/api/float_backend.md:409
 msgid "Returns $\\log_b z = \\log z / \\log b$, divided with `div`."
 msgstr ""
 
-#: manual/api/float_backend.md:378
+#: manual/api/float_backend.md:425
 msgid "Powers"
 msgstr ""
 
-#: manual/api/float_backend.md:382
+#: manual/api/float_backend.md:429
 msgid "Returns $z^w$."
 msgstr ""
 
-#: manual/api/float_backend.md:388
+#: manual/api/float_backend.md:435
 msgid "The cases are tried in order:"
 msgstr ""
 
-#: manual/api/float_backend.md:390
+#: manual/api/float_backend.md:437
 msgid "Case"
 msgstr ""
 
-#: manual/api/float_backend.md:393
+#: manual/api/float_backend.md:440
 msgid "$z = 0$, $w$ real and positive"
 msgstr ""
 
-#: manual/api/float_backend.md:394
+#: manual/api/float_backend.md:441
 msgid "$z = 0$, otherwise"
 msgstr ""
 
-#: manual/api/float_backend.md:394
+#: manual/api/float_backend.md:441
 msgid "NaN + NaN$i$"
 msgstr ""
 
-#: manual/api/float_backend.md:396
-msgid "`z.inv()` (aborts if $z = 0$, which the first rows exclude)"
+#: manual/api/float_backend.md:443
+msgid "`z.inv()` (aborts for non-zero $\\lvert z\\rvert < 1.5 \\times 10^{-162}$)"
 msgstr ""
 
-#: manual/api/float_backend.md:397
+#: manual/api/float_backend.md:444
 msgid "$w$ real integer, $\\lvert w\\rvert  \\le 2^{31} - 1$"
 msgstr ""
 
-#: manual/api/float_backend.md:397
-msgid "binary powering; negative exponents invert $z$ first"
+#: manual/api/float_backend.md:444
+msgid "binary powering; negative exponents invert $z$ first with `z.inv()`"
 msgstr ""
 
-#: manual/api/float_backend.md:398
+#: manual/api/float_backend.md:445
 msgid "$e^{w\\log z}$ in polar form"
 msgstr ""
 
-#: manual/api/float_backend.md:400
-msgid "The polar form computes $\\rho = e^{\\operatorname{Re} w \\ln|z| - \\operatorname{Im} w \\arg z}$ and $\\beta = \\operatorname{Re} w \\arg z + \\operatorname{Im} w \\ln|z|$ and returns $\\rho(\\cos\\beta + i\\sin\\beta)$."
+#: manual/api/float_backend.md:447
+msgid "The polar form computes $\\rho = e^{\\operatorname{Re} w \\ln|z| - \\operatorname{Im} w \\arg z}$ and $\\beta = \\operatorname{Re} w \\arg z + \\operatorname{Im} w \\ln|z|$ and returns $\\rho(\\cos\\beta + i\\sin\\beta)$. It uses `arg`, so a negative real base takes the angle $2\\pi$: `pow_real(-8 + 0i, 1.0 / 3.0)` is $-1 + 1.732i$ instead of the principal $1 + 1.732i$."
 msgstr ""
 
-#: manual/api/float_backend.md:406
+#: manual/api/float_backend.md:455
 msgid "Returns $z^p$ for a real exponent $p$, with the same zero, integer and polar cases as `pow`."
 msgstr ""
 
-#: manual/api/float_backend.md:423
+#: manual/api/float_backend.md:472
 msgid "Scalar operands"
 msgstr ""
 
-#: manual/api/float_backend.md:427
+#: manual/api/float_backend.md:476
 msgid "Applies a binary complex function with a real second operand $x + 0i$."
 msgstr ""
 
-#: manual/api/float_backend.md:435
+#: manual/api/float_backend.md:484
 msgid "Applies a binary complex function with an imaginary second operand $0 + yi$."
 msgstr ""
 
-#: manual/api/float_backend.md:450
+#: manual/api/float_backend.md:499
 msgid "Trigonometric functions"
 msgstr ""
 
-#: manual/api/float_backend.md:454
+#: manual/api/float_backend.md:503
 msgid "Returns $\\sin z = \\sin x\\cosh y + i\\cos x\\sinh y$; for $y = 0$ exactly, the real $\\sin x$."
 msgstr ""
 
-#: manual/api/float_backend.md:463
+#: manual/api/float_backend.md:512
 msgid "Returns $\\cos z = \\cos x\\cosh y - i\\sin x\\sinh y$; for $y = 0$ exactly, the real $\\cos x$."
 msgstr ""
 
-#: manual/api/float_backend.md:472
+#: manual/api/float_backend.md:521
 msgid "Returns $\\tan z$."
 msgstr ""
 
-#: manual/api/float_backend.md:478
+#: manual/api/float_backend.md:527
 msgid "For $|y| < 1$ it uses $\\dfrac{\\sin 2x + i\\sinh 2y}{2(\\cos^2 x + \\sinh^2 y)}$; for $|y| \\ge 1$ a form scaled by $e^{-2|y|}$ that tends to $\\pm i$ without overflow (see the design)."
 msgstr ""
 
-#: manual/api/float_backend.md:484
-msgid "Returns $1/\\cos z$; aborts where $\\cos z = 0$."
+#: manual/api/float_backend.md:533
+msgid "Returns $1/\\cos z$ through `Complex::inv`; see the conventions for when it aborts."
 msgstr ""
 
-#: manual/api/float_backend.md:492
-msgid "Returns $1/\\sin z$; aborts at $z = k\\pi$."
+#: manual/api/float_backend.md:542
+msgid "Returns $1/\\sin z$; aborts at $z = 0$ and where $|\\sin z| < 1.5 \\times 10^{-162}$."
 msgstr ""
 
-#: manual/api/float_backend.md:500
-msgid "Returns $1/\\tan z$; aborts at $z = k\\pi$."
-msgstr ""
-
-#: manual/api/float_backend.md:518
-msgid "Inverse trigonometric functions"
-msgstr ""
-
-#: manual/api/float_backend.md:522
-msgid "Returns the principal arcsine, with branch cuts on the real axis outside $[-1, 1]$; $\\operatorname{Re}$ lies in $[-\\pi/2, \\pi/2]$."
-msgstr ""
-
-#: manual/api/float_backend.md:529
-msgid "Real inputs go to `asin_real`, purely imaginary inputs to $i\\operatorname{asinh} y$, inputs with a part above $10^{150}$ to the asymptotic form $\\operatorname{atan2}(|x|, |y|) + i(\\ln 2 + \\ln|z|)$, and all others to the Hull–Fairgrieve–Tang algorithm (see the design). The result is odd in each part: the signs of $x$ and $y$ are copied to the real and imaginary parts."
-msgstr ""
-
-#: manual/api/float_backend.md:537
-msgid "Arcsine of a real number: $\\arcsin x$ for $|x| \\le 1$, $\\pm\\pi/2 + i\\operatorname{acosh}|x|$ for $|x| > 1$ (sign of $x$), NaN for NaN."
-msgstr ""
-
-#: manual/api/float_backend.md:546
-msgid "Returns the arccosine, with branch cuts on the real axis outside $[-1, 1]$."
-msgstr ""
-
-#: manual/api/float_backend.md:552
-msgid "For $x \\ge 0$ the real part is the principal value in $[0, \\pi/2]$ and the imaginary part has the sign opposite to $y$. For $x < 0$ the imaginary part is the principal one, but the real part is $2\\pi - \\rho$ instead of the principal $\\pi - \\rho$, where $\\rho \\in [0, \\pi/2]$ is the real part of $\\arccos(-z)$ (see the warning above). Purely imaginary inputs give $\\pi/2 - i\\operatorname{asinh} y$, and real inputs go to `acos_real`."
-msgstr ""
-
-#: manual/api/float_backend.md:561
-msgid "Arccosine of a real number: $\\arccos x$ for $|x| \\le 1$, $-i\\operatorname{acosh} x$ for $x > 1$, and $2\\pi - i\\operatorname{acosh}(-x)$ for $x < -1$."
+#: manual/api/float_backend.md:551
+msgid "Returns $1/\\tan z$; aborts at $z = 0$ and where $|\\tan z| < 1.5 \\times 10^{-162}$."
 msgstr ""
 
 #: manual/api/float_backend.md:570
-msgid "Returns the principal arctangent, with branch cuts on the imaginary axis outside $[-i, i]$."
+msgid "Inverse trigonometric functions"
 msgstr ""
 
-#: manual/api/float_backend.md:577
-msgid "The imaginary part is $\\tfrac14\\ln\\frac{x^2 + (1+y)^2}{x^2 + (1-y)^2}$, computed with `log1p` when the ratio is close to $1$; the real part is $\\tfrac12\\operatorname{atan2}(2x, 1 - x^2 - y^2)$, rescaled for large inputs. On the cut ($x = 0$, $|y| > 1$) the real part is $\\pm\\pi/2$ with the sign of $y$. Infinite inputs return $\\pm\\pi/2 + 0i$."
+#: manual/api/float_backend.md:574
+msgid "Returns the principal arcsine, with branch cuts on the real axis outside $[-1, 1]$; $\\operatorname{Re}$ lies in $[-\\pi/2, \\pi/2]$."
 msgstr ""
 
-#: manual/api/float_backend.md:585
-msgid "Returns $\\operatorname{acos}(1/z)$; aborts at $z = 0$."
+#: manual/api/float_backend.md:581
+msgid "Real inputs go to `asin_real`, purely imaginary inputs to $i\\operatorname{asinh} y$, inputs with a part above $10^{150}$ to the asymptotic form $\\operatorname{atan2}(|x|, |y|) + i(\\ln 2 + \\ln|z|)$, and all others to the Hull–Fairgrieve–Tang algorithm (see the design). The result is odd in each part: the signs of $x$ and $y$ are copied to the real and imaginary parts. Close to the branch points $\\pm 1$ the imaginary part loses accuracy, because this branch evaluates $\\sqrt{A^2 - 1}$ instead of $\\sqrt{(A - 1)(A + 1)}$: at $1 + 10^{-10}i$ its relative error is about $4 \\times 10^{-8}$, while `acos` there is accurate."
 msgstr ""
 
 #: manual/api/float_backend.md:593
-msgid "Arcsecant of a real number: $\\arccos(1/x)$ for $|x| \\ge 1$, $-i\\operatorname{acosh}(1/x)$ for $0 \\le x < 1$, $2\\pi - i\\operatorname{acosh}(-1/x)$ for $-1 < x < 0$."
+msgid "Arcsine of a real number: $\\arcsin x$ for $|x| \\le 1$, $\\pm\\pi/2 + i\\operatorname{acosh}|x|$ for $|x| > 1$ (sign of $x$), NaN for NaN."
 msgstr ""
 
-#: manual/api/float_backend.md:603
-msgid "Returns $\\operatorname{asin}(1/z)$; aborts at $z = 0$."
+#: manual/api/float_backend.md:602
+msgid "Returns the arccosine, with branch cuts on the real axis outside $[-1, 1]$."
 msgstr ""
 
-#: manual/api/float_backend.md:611
-msgid "Arccosecant of a real number: $\\arcsin(1/x)$ for $|x| \\ge 1$, $\\pm\\pi/2 + i\\operatorname{acosh}|1/x|$ for $|x| < 1$."
+#: manual/api/float_backend.md:608
+msgid "For $x \\ge 0$ the real part is the principal value in $[0, \\pi/2]$ and the imaginary part has the sign opposite to $y$. For $x < 0$ the imaginary part is the principal one, but the real part is $2\\pi - \\rho$ instead of the principal $\\pi - \\rho$, where $\\rho \\in [0, \\pi/2]$ is the real part of $\\arccos(-z)$ (see the warning above). Purely imaginary inputs give $\\pi/2 - i\\operatorname{asinh} y$, and real inputs go to `acos_real`. Inputs with a part above $10^{150}$ use $\\pi/2 - \\operatorname{asin} z$ and get the principal value for every $x$, so the real part jumps by $\\pi$ at that threshold when $x < 0$."
 msgstr ""
 
 #: manual/api/float_backend.md:620
-msgid "Returns $\\operatorname{atan}(1/z)$, and $\\pi/2$ at $z = 0$."
+msgid "Arccosine of a real number: $\\arccos x$ for $|x| \\le 1$, $-i\\operatorname{acosh} x$ for $x > 1$, and $2\\pi - i\\operatorname{acosh}(-x)$ for $x < -1$."
+msgstr ""
+
+#: manual/api/float_backend.md:629
+msgid "Returns the principal arctangent, with branch cuts on the imaginary axis outside $[-i, i]$."
 msgstr ""
 
 #: manual/api/float_backend.md:636
+msgid "The imaginary part is $\\tfrac14\\ln\\frac{x^2 + (1+y)^2}{x^2 + (1-y)^2}$, computed with `log1p` when the ratio is close to $1$; the real part is $\\tfrac12\\operatorname{atan2}(2x, 1 - x^2 - y^2)$, rescaled for large inputs. On the cut ($x = 0$, $|y| > 1$) the real part is $\\pm\\pi/2$ with the sign of $y$. Infinite inputs return $\\pm\\pi/2 + 0i$."
+msgstr ""
+
+#: manual/api/float_backend.md:644
+msgid "Returns $\\operatorname{acos}(1/z)$; aborts at $z = 0$. It inherits the `acos` deviation wherever $\\operatorname{Re}(1/z) < 0$, that is for $\\operatorname{Re} z < 0$ off the real interval $(-\\infty, -1]$."
+msgstr ""
+
+#: manual/api/float_backend.md:654
+msgid "Arcsecant of a real number: $\\arccos(1/x)$ for $|x| \\ge 1$, $-i\\operatorname{acosh}(1/x)$ for $0 \\le x < 1$, $2\\pi - i\\operatorname{acosh}(-1/x)$ for $-1 < x < 0$. `asec_real(0)` is $0 - \\infty i$ (no abort, unlike `asec`). There is no NaN check: NaN falls into the last case and gives $2\\pi + \\mathrm{NaN}\\,i$."
+msgstr ""
+
+#: manual/api/float_backend.md:666
+msgid "Returns $\\operatorname{asin}(1/z)$; aborts at $z = 0$."
+msgstr ""
+
+#: manual/api/float_backend.md:674
+msgid "Arccosecant of a real number: $\\arcsin(1/x)$ for $|x| \\ge 1$, $\\pm\\pi/2 + i\\operatorname{acosh}|1/x|$ for $|x| < 1$. `acsc_real(0)` is $\\pi/2 + \\infty i$ (no abort, unlike `acsc`); NaN gives $-\\pi/2 + \\mathrm{NaN}\\,i$."
+msgstr ""
+
+#: manual/api/float_backend.md:685
+msgid "Returns $\\operatorname{atan}(1/z)$, and $\\pi/2$ at $z = 0$."
+msgstr ""
+
+#: manual/api/float_backend.md:701
 msgid "Hyperbolic functions"
 msgstr ""
 
-#: manual/api/float_backend.md:640
+#: manual/api/float_backend.md:705
 msgid "Returns $\\sinh z = \\sinh x\\cos y + i\\cosh x\\sin y$."
 msgstr ""
 
-#: manual/api/float_backend.md:648
+#: manual/api/float_backend.md:713
 msgid "Returns $\\cosh z = \\cosh x\\cos y + i\\sinh x\\sin y$."
 msgstr ""
 
-#: manual/api/float_backend.md:656
+#: manual/api/float_backend.md:721
 msgid "Returns $\\tanh z$; for $|x| \\ge 1$ a form scaled by $e^{-2|x|}$ that tends to $\\pm 1$ without overflow."
 msgstr ""
 
-#: manual/api/float_backend.md:665
-msgid "Returns $1/\\cosh z$; aborts where $\\cosh z = 0$."
+#: manual/api/float_backend.md:730
+msgid "Returns $1/\\cosh z$ through `Complex::inv`; like `sec`, it does not hit the poles $i(\\pi/2 + k\\pi)$ exactly."
 msgstr ""
 
-#: manual/api/float_backend.md:673
-msgid "Returns $1/\\sinh z$; aborts at $z = k\\pi i$."
-msgstr ""
-
-#: manual/api/float_backend.md:681
-msgid "Returns $1/\\tanh z$; aborts at $z = k\\pi i$."
-msgstr ""
-
-#: manual/api/float_backend.md:687
-msgid "Inverse hyperbolic functions"
-msgstr ""
-
-#: manual/api/float_backend.md:691
-msgid "Returns $\\operatorname{asinh} z = -i\\operatorname{asin}(iz)$, with branch cuts on the imaginary axis outside $[-i, i]$."
-msgstr ""
-
-#: manual/api/float_backend.md:698
-msgid "Real inputs use the real `asinh`; purely imaginary inputs $iy$ give $i\\arcsin y$ for $|y| \\le 1$ and $\\pm(\\operatorname{acosh}|y| + i\\pi/2)$ otherwise."
-msgstr ""
-
-#: manual/api/float_backend.md:703
-msgid "Returns $\\operatorname{acosh} z = 2\\ln\\Big(\\sqrt{\\tfrac{z+1}{2}} + \\sqrt{\\tfrac{z-1}{2}}\\Big)$, with the branch cut on the real axis below $1$."
-msgstr ""
-
-#: manual/api/float_backend.md:710
-msgid "Real inputs go to `acosh_real`; an infinite part gives $\\infty + i\\arg z$."
-msgstr ""
-
-#: manual/api/float_backend.md:714
-msgid "Inverse hyperbolic cosine of a real number: $\\operatorname{acosh} x$ for $x \\ge 1$, $i\\arccos x$ for $-1 \\le x < 1$, $\\operatorname{acosh}(-x) + 2\\pi i$ for $x < -1$."
-msgstr ""
-
-#: manual/api/float_backend.md:724
-msgid "Returns $\\operatorname{atanh} z$, with branch cuts on the real axis outside $[-1, 1]$."
-msgstr ""
-
-#: manual/api/float_backend.md:731
-msgid "The real part is $\\tfrac14\\ln\\frac{(1+x)^2 + y^2}{(1-x)^2 + y^2}$ (with `log1p` near zero), the imaginary part $\\tfrac12\\operatorname{atan2}(2y, 1 - x^2 - y^2)$, rescaled for large inputs. Infinite inputs return $0 \\pm i\\pi/2$."
-msgstr ""
-
-#: manual/api/float_backend.md:738
-msgid "Inverse hyperbolic tangent of a real number: $\\operatorname{atanh} x$ for $|x| < 1$, $\\pm\\infty$ at $\\pm 1$, and $\\operatorname{atanh}(1/x) + i\\pi/2$ for $|x| > 1$."
+#: manual/api/float_backend.md:739
+msgid "Returns $1/\\sinh z$; aborts at $z = 0$ and where $|\\sinh z| < 1.5 \\times 10^{-162}$."
 msgstr ""
 
 #: manual/api/float_backend.md:748
-msgid "Returns $\\operatorname{acosh}(1/z)$; aborts at $z = 0$."
+msgid "Returns $1/\\tanh z$; aborts at $z = 0$ and where $|\\tanh z| < 1.5 \\times 10^{-162}$."
 msgstr ""
 
-#: manual/api/float_backend.md:756
+#: manual/api/float_backend.md:755
+msgid "Inverse hyperbolic functions"
+msgstr ""
+
+#: manual/api/float_backend.md:759
+msgid "Returns $\\operatorname{asinh} z = -i\\operatorname{asin}(iz)$, with branch cuts on the imaginary axis outside $[-i, i]$."
+msgstr ""
+
+#: manual/api/float_backend.md:766
+msgid "Real inputs use the real `asinh`; purely imaginary inputs $iy$ give $i\\arcsin y$ for $|y| \\le 1$ and $\\pm(\\operatorname{acosh}|y| + i\\pi/2)$ otherwise."
+msgstr ""
+
+#: manual/api/float_backend.md:771
+msgid "Returns $\\operatorname{acosh} z = 2\\ln\\Big(\\sqrt{\\tfrac{z+1}{2}} + \\sqrt{\\tfrac{z-1}{2}}\\Big)$, with the branch cut on the real axis below $1$."
+msgstr ""
+
+#: manual/api/float_backend.md:778
+msgid "Real inputs go to `acosh_real`; an infinite part gives $\\infty + i\\arg z$."
+msgstr ""
+
+#: manual/api/float_backend.md:782
+msgid "Inverse hyperbolic cosine of a real number: $\\operatorname{acosh} x$ for $x \\ge 1$, $i\\arccos x$ for $-1 \\le x < 1$, $\\operatorname{acosh}(-x) + 2\\pi i$ for $x < -1$."
+msgstr ""
+
+#: manual/api/float_backend.md:792
+msgid "Returns $\\operatorname{atanh} z$, with branch cuts on the real axis outside $[-1, 1]$."
+msgstr ""
+
+#: manual/api/float_backend.md:799
+msgid "The real part is $\\tfrac14\\ln\\frac{(1+x)^2 + y^2}{(1-x)^2 + y^2}$ (with `log1p` near zero), the imaginary part $\\tfrac12\\operatorname{atan2}(2y, 1 - x^2 - y^2)$, rescaled for large inputs. Infinite inputs return $0 \\pm i\\pi/2$."
+msgstr ""
+
+#: manual/api/float_backend.md:806
+msgid "Inverse hyperbolic tangent of a real number: $\\operatorname{atanh} x$ for $|x| < 1$, $\\pm\\infty$ at $\\pm 1$, and $\\operatorname{atanh}(1/x) + i\\pi/2$ for $|x| > 1$."
+msgstr ""
+
+#: manual/api/float_backend.md:816
+msgid "Returns $\\operatorname{acosh}(1/z)$; aborts at $z = 0$. For real $-1 < x < 0$ it goes through `acosh_real(1/x)` and returns the imaginary part $2\\pi$ instead of $\\pi$."
+msgstr ""
+
+#: manual/api/float_backend.md:826
 msgid "Returns $\\operatorname{asinh}(1/z)$; aborts at $z = 0$."
 msgstr ""
 
-#: manual/api/float_backend.md:764
+#: manual/api/float_backend.md:834
 msgid "Returns $\\operatorname{atanh}(1/z)$; aborts at $z = 0$."
 msgstr ""
 
@@ -811,216 +887,277 @@ msgstr ""
 
 #: manual/design/core.md:15
 #: manual/design/float_backend.md:16
-msgid "Mathematical background"
+msgid "Constraints"
 msgstr ""
 
 #: manual/design/core.md:17
-msgid "The construction"
+msgid "`T` ranges over exact rings (`Int`, `BigInt`, exact rationals), the floating-point types `Float` and `Double`, and other complex types, so the core may use only the operations of the `luna-generic` traits: no order, no absolute value, no special values."
 msgstr ""
 
-#: manual/design/core.md:19
-msgid "For a commutative ring $R$, the complex numbers over $R$ are the quotient of the polynomial ring by the ideal generated by $x^2 + 1$:"
+#: manual/design/core.md:21
+msgid "An instance must not claim more structure than the construction has under its bound."
 msgstr ""
 
-#: manual/design/core.md:26
-msgid "Division by the monic polynomial $x^2 + 1$ leaves a unique remainder of degree below two, so every element is $a + bi$ with unique $a, b \\in R$: the pair `(re, im)`. Computing with polynomials and reducing $i^2 = -1$ gives the operations of the package:"
+#: manual/design/core.md:23
+msgid "A package cannot add methods or trait instances to a type of another package, so whatever needs floating-point semantics has to live in a separate package as free functions."
 msgstr ""
 
-#: manual/design/core.md:38
-msgid "As a quotient of a commutative ring, $R[i]$ is a commutative ring, with zero $0 + 0i$ and one $1 + 0i$; $R$ embeds as $a \\mapsto a + 0i$."
+#: manual/design/core.md:27
+#: manual/design/float_backend.md:30
+msgid "Main design decisions"
+msgstr ""
+
+#: manual/design/core.md:29
+msgid "One generic `Complex[T]` with public mutable fields."
+msgstr ""
+
+#: manual/design/core.md:30
+msgid "Instances follow the structure of `T`: componentwise operations need only the matching operations of `T`, multiplication needs `T : Ring`, inverses need `T : Field`."
+msgstr ""
+
+#: manual/design/core.md:33
+msgid "The schoolbook product with four multiplications."
+msgstr ""
+
+#: manual/design/core.md:34
+msgid "Textbook division through `Inverse::inv` of the norm, because a generic field has nothing else."
+msgstr ""
+
+#: manual/design/core.md:36
+msgid "No analytic functions in the core; `float_backend` provides them for `Double`."
+msgstr ""
+
+#: manual/design/core.md:39
+#: manual/design/float_backend.md:42
+msgid "Mathematical background"
 msgstr ""
 
 #: manual/design/core.md:41
-msgid "Conjugation and the norm"
+msgid "The construction"
 msgstr ""
 
 #: manual/design/core.md:43
-msgid "$\\overline{a + bi} = a - bi$ is the map induced by $x \\mapsto -x$, which fixes the ideal $(x^2 + 1)$, so it is a ring automorphism of order two:"
+msgid "For a ring $R$, the complex numbers over $R$ are the quotient of the polynomial ring in a central indeterminate $x$ by the two-sided ideal generated by $x^2 + 1$:"
 msgstr ""
 
 #: manual/design/core.md:51
+msgid "Division by the monic polynomial $x^2 + 1$ leaves a unique remainder of degree below two, so every element is $a + bi$ with unique $a, b \\in R$: the pair `(re, im)`. Computing with polynomials and reducing $i^2 = -1$ gives the operations of the package:"
+msgstr ""
+
+#: manual/design/core.md:63
+msgid "As a quotient of a ring by a two-sided ideal, $R[i]$ is a ring, with zero $0 + 0i$ and one $1 + 0i$; $R$ embeds as $a \\mapsto a + 0i$. The product formula keeps the factors of $R$ in their order ($ac$, $ad$, $bc$, $bd$) and moves only $i$, which commutes with everything because $x$ is central. So the formula is associative and distributive even when $R$ is not commutative, which is why `MulMonoid`, `Semiring` and `Ring` need only `T : Ring`. $R[i]$ is commutative exactly when $R$ is."
+msgstr ""
+
+#: manual/design/core.md:71
+msgid "The rest of this page assumes $R$ commutative: the norm below lies in $R$ only then. For $z = a + bi$ over a non-commutative $R$, $z\\bar z = (a^2 + b^2) + (ba - ab)i$."
+msgstr ""
+
+#: manual/design/core.md:75
+msgid "Conjugation and the norm"
+msgstr ""
+
+#: manual/design/core.md:77
+msgid "$\\overline{a + bi} = a - bi$ is the map induced by $x \\mapsto -x$, which fixes the ideal $(x^2 + 1)$, so it is a ring automorphism of order two:"
+msgstr ""
+
+#: manual/design/core.md:85
 msgid "The norm $N(z) = z\\bar z = (a + bi)(a - bi) = a^2 + b^2$ lies in $R$ and is multiplicative, $N(zw) = zw\\,\\bar z\\bar w = N(z)N(w)$."
 msgstr ""
 
-#: manual/design/core.md:54
+#: manual/design/core.md:88
 msgid "Inverses and division"
 msgstr ""
 
-#: manual/design/core.md:56
+#: manual/design/core.md:90
 msgid "If $N(z)$ is invertible in $R$, then $z \\cdot \\bar z\\,N(z)^{-1} = 1$, so"
 msgstr ""
 
-#: manual/design/core.md:64
+#: manual/design/core.md:98
 msgid "Conversely, if $z$ is invertible then $N(z)N(z^{-1}) = N(1) = 1$, so $N(z)$ is invertible. Hence $z$ is a unit exactly when $a^2 + b^2$ is."
 msgstr ""
 
-#: manual/design/core.md:67
+#: manual/design/core.md:101
 msgid "When the construction is a field"
 msgstr ""
 
-#: manual/design/core.md:69
+#: manual/design/core.md:103
 msgid ""
 "Let $K$ be a field. $K[x]/(x^2 + 1)$ is a field exactly when $x^2 + 1$ is irreducible over $K$, that is when $-1$ is not a square in $K$. Directly: a non-zero $z$ with $N(z) = a^2 + b^2 = 0$ must have $b \\n"
 "e 0$, and then $(a/b)^2 = -1$. Conversely, if $s^2 = -1$ then $(s + i)(s - i) = s^2 + 1 = 0$ exhibits zero divisors."
 msgstr ""
 
-#: manual/design/core.md:75
+#: manual/design/core.md:109
 msgid "For $K = \\mathbb R$ (`Float`, `Double`), $-1$ is not a square and $\\mathbb R[i] = \\mathbb C$ is a field."
 msgstr ""
 
-#: manual/design/core.md:77
+#: manual/design/core.md:111
 msgid "For $K = \\mathbb C$ (`Complex[Double]`), $-1 = i^2$ is a square, so `Complex[Complex[Double]]` $\\cong \\mathbb C[j]/(j^2 + 1) \\cong \\mathbb C \\times \\mathbb C$ is a ring with zero divisors, such as $(1 + ij)(1 - ij) = 1 - i^2 j^2 = 0$."
 msgstr ""
 
-#: manual/design/core.md:82
-#: manual/design/float_backend.md:89
-msgid "Design decisions"
+#: manual/design/core.md:116
+#: manual/design/float_backend.md:115
+msgid "Decisions in detail"
 msgstr ""
 
-#: manual/design/core.md:84
+#: manual/design/core.md:118
 msgid "Instances follow the structure of `T`"
 msgstr ""
 
-#: manual/design/core.md:86
+#: manual/design/core.md:120
 msgid "**Problem.** Which `luna-generic` traits may `Complex[T]` implement?"
 msgstr ""
 
-#: manual/design/core.md:88
+#: manual/design/core.md:122
 msgid "**Choice.** `Zero`, `One`, `AddMonoid` and `AddGroup` need only the corresponding operations of `T`, because they act componentwise. `MulMonoid`, `Semiring` and `Ring` need `T : Ring`, because the product uses subtraction ($ac - bd$) and the ring laws of $R[i]$ need those of $R$. `Inverse`, `MulGroup`, `Field` and the `Div` operator need `T : Field` for $N(z)^{-1}$. `Conjugate` needs only `Neg`."
 msgstr ""
 
-#: manual/design/core.md:95
+#: manual/design/core.md:129
 msgid "The `Field` instance is declared for every `T : Field`. By the previous section that is lawful when $-1$ is not a square in `T`, which covers the real scalar types; for `T = Complex[Double]` it is not, and `inv` aborts on non-zero zero divisors. A trait bound cannot express \"−1 is not a square\", so the instance trusts the caller here.[^honesty]"
 msgstr ""
 
-#: manual/design/core.md:101
+#: manual/design/core.md:135
 msgid "This is a known gap in the \"implement only lawful instances\" rule of Luna Flow. The test suite uses nested complex numbers only on values with an invertible norm."
 msgstr ""
 
-#: manual/design/core.md:105
+#: manual/design/core.md:139
 msgid "Four multiplications"
 msgstr ""
 
-#: manual/design/core.md:107
+#: manual/design/core.md:141
 msgid "**Options.** The schoolbook product $(ac - bd) + (ad + bc)i$ with four multiplications; Gauss's three-multiplication form $k_1 = c(a + b)$, $k_2 = a(d - c)$, $k_3 = b(c + d)$, product $(k_1 - k_3) + (k_1 + k_2)i$."
 msgstr ""
 
-#: manual/design/core.md:111
+#: manual/design/core.md:145
 msgid "**Choice.** Four multiplications. Over floating point the schoolbook form has a normwise relative error of at most $\\sqrt5\\,u$,[^bpz] while the three-multiplication form adds cancellation-prone sums such as $a + b$ and $d - c$ and is less accurate componentwise; and for generic `T` a multiplication is not necessarily more expensive than an addition."
 msgstr ""
 
-#: manual/design/core.md:117
+#: manual/design/core.md:151
 msgid "R. Brent, C. Percival and P. Zimmermann, \"Error bounds on complex floating-point multiplication\", *Mathematics of Computation* 76 (2007)."
 msgstr ""
 
-#: manual/design/core.md:120
+#: manual/design/core.md:154
 msgid "Componentwise, $\\mathrm{fl}(ac - bd) = ac(1 + \\theta_2) - bd(1 + \\theta_2')$ with $|\\theta_2| \\le \\gamma_2 = 2u/(1 - 2u)$, so"
 msgstr ""
 
-#: manual/design/core.md:127
+#: manual/design/core.md:161
 msgid "which is small relative to the result unless $ac$ and $bd$ cancel."
 msgstr ""
 
-#: manual/design/core.md:129
+#: manual/design/core.md:163
 msgid "Textbook division in the generic core"
 msgstr ""
 
-#: manual/design/core.md:131
+#: manual/design/core.md:165
 msgid "**Problem.** Division needs $N(w)^{-1}$; for floating point, $c^2 + d^2$ overflows or underflows long before $c + di$ does."
 msgstr ""
 
-#: manual/design/core.md:134
+#: manual/design/core.md:168
 msgid "**Options.** Scaled algorithms (Smith's, or rescaling by a power of two) need comparisons and absolute values that a generic field does not have; the textbook formula needs only field operations."
 msgstr ""
 
-#: manual/design/core.md:138
+#: manual/design/core.md:172
 msgid "**Choice.** The generic `Div` and `Inverse` use the textbook formula with `Inverse::inv` of `T`. It is exact for exact fields. For `Double` it is correct while $c^2 + d^2$ stays in range, and `Inverse` of `Double` aborts on zero, including an underflowed norm. Scaled, special-value-aware division lives in [`float_backend`](float_backend.md#smiths-division)."
 msgstr ""
 
-#: manual/design/core.md:144
+#: manual/design/core.md:178
 msgid "Mutable fields"
 msgstr ""
 
-#: manual/design/core.md:146
+#: manual/design/core.md:180
 msgid "**Problem.** Complex values are often updated in loops (accumulators, recurrences), where allocating a new value per step is wasteful."
 msgstr ""
 
-#: manual/design/core.md:149
+#: manual/design/core.md:183
 msgid "**Choice.** `Complex[T]` is a `pub(all)` struct with `mut re` and `mut im` plus `set`, `set_re` and `set_im`. Every operation returns a new value and never mutates its inputs, so code that does not call the setters can treat complex numbers as values. Callers that do mutate must remember that the struct is shared by reference."
 msgstr ""
 
-#: manual/design/core.md:155
+#: manual/design/core.md:189
 msgid "No analytic functions in the core"
 msgstr ""
 
-#: manual/design/core.md:157
+#: manual/design/core.md:191
 msgid "$\\sqrt z$, $\\log z$ or $\\sin z$ need an order, absolute values, transcendental functions of the real scalar, a choice of branch, and IEEE special values. None of these exist for a generic field. The root package therefore stops at algebra, and the [float_backend](float_backend.md) package supplies analysis for `Double`."
 msgstr ""
 
-#: manual/design/core.md:163
+#: manual/design/core.md:197
 msgid "Text and debug forms"
 msgstr ""
 
-#: manual/design/core.md:165
+#: manual/design/core.md:199
 msgid "`Show` prints `re + imi` using `T`'s text (`1 + -2i` for $1 - 2i$), which is the canonical text of the type and the reason `to_string` stays a promoted method. `Debug` prints the record form for tests and diagnostics. MoonBit 0.10 promotion of the other trait methods is explicit in [`src/extends.mbt`](../../../src/extends.mbt)."
 msgstr ""
 
-#: manual/design/core.md:171
-#: manual/design/float_backend.md:317
+#: manual/design/core.md:205
+#: manual/design/float_backend.md:394
 msgid "Correctness and invariants"
 msgstr ""
 
-#: manual/design/core.md:173
+#: manual/design/core.md:207
 msgid "Ring laws hold for `T : Ring` because $R[i]$ is a quotient ring; the test suite checks associativity, identities and $\\overline{zw} = \\bar z\\bar w$ on integers."
 msgstr ""
 
-#: manual/design/core.md:176
+#: manual/design/core.md:210
 msgid "`z * z.conjugate()` equals $N(z) + 0i$ exactly for exact `T`."
 msgstr ""
 
-#: manual/design/core.md:177
+#: manual/design/core.md:211
 msgid "`z * w / w == z` and `z.inv() * z == 1` hold for exact fields when $N(w)$, $N(z)$ are units, and up to rounding for `Double` within range."
 msgstr ""
 
-#: manual/design/core.md:179
+#: manual/design/core.md:213
 msgid "No operation mutates its arguments; only the three setters do."
 msgstr ""
 
-#: manual/design/core.md:181
-#: manual/design/float_backend.md:360
+#: manual/design/core.md:215
+msgid "Floating-point instances"
+msgstr ""
+
+#: manual/design/core.md:217
+msgid "For `T = Double` every law holds only up to rounding, and the unscaled norm adds hard limits. Let $\\Omega \\approx 1.80 \\times 10^{308}$ be the largest finite `Double`, $\\lambda = 2^{-1022} \\approx 2.2 \\times 10^{-308}$ the smallest normal one and $\\mu = 2^{-1074} \\approx 4.9 \\times 10^{-324}$ the smallest subnormal one. The norm $n = \\mathrm{fl}(c^2 + d^2)$ of $w = c + di$ behaves as follows:"
+msgstr ""
+
+#: manual/design/core.md:236
+msgid ""
+"The last line uses that a square below half the smallest subnormal rounds to zero. In the first case $n^{-1} = 0$ and `inv` returns zero parts, so $z z^{-1} = 0 \\n"
+"e 1$; in the third the parts are $\\pm\\infty$ or NaN; in the fourth `Inverse::inv` of `Double` aborts. The field law $z z^{-1} = 1$ for every $z \\n"
+"e 0$ therefore fails outside roughly $10^{-154} \\le |z| \\le 10^{154}$, which is the honest domain of the `Field` instance for `Complex[Double]`. [`float_backend`](float_backend.md#smiths-division) divides without forming $c^2 + d^2$."
+msgstr ""
+
+#: manual/design/core.md:245
+#: manual/design/float_backend.md:491
 msgid "Alternatives rejected"
 msgstr ""
 
-#: manual/design/core.md:183
+#: manual/design/core.md:247
 msgid "**A `Double`-only complex type.** It would duplicate the type for `Float`, integers (Gaussian integers) and exact rationals."
 msgstr ""
 
-#: manual/design/core.md:185
+#: manual/design/core.md:249
 msgid "**Immutable fields.** Cleaner value semantics, but a breaking change for existing callers that update `re` and `im` in place."
 msgstr ""
 
-#: manual/design/core.md:187
+#: manual/design/core.md:251
 msgid "**Scaled division in the core.** It needs order and magnitude operations that generic fields lack."
 msgstr ""
 
-#: manual/design/core.md:190
-#: manual/design/float_backend.md:373
+#: manual/design/core.md:254
+#: manual/design/float_backend.md:504
 msgid "Boundaries"
 msgstr ""
 
-#: manual/design/core.md:192
+#: manual/design/core.md:256
 msgid "No analytic or transcendental functions, no special-value handling, no branch cuts; see [float_backend](float_backend.md)."
 msgstr ""
 
-#: manual/design/core.md:194
+#: manual/design/core.md:258
 msgid "No polar representation in the core."
 msgstr ""
 
-#: manual/design/core.md:195
+#: manual/design/core.md:259
 msgid "No check that `T` makes $R[i]$ a field; the `Field` instance trusts it."
 msgstr ""
 
-#: manual/design/core.md:196
+#: manual/design/core.md:260
 msgid "No overflow-safe division for floating-point `T`."
 msgstr ""
 
@@ -1037,350 +1174,491 @@ msgid "Provide the elementary functions of $\\mathbb C$ for `Complex[Double]` wi
 msgstr ""
 
 #: manual/design/float_backend.md:18
-#: manual/tutorial/float_backend.md:39
+msgid "The functions must work over the whole `Double` range: $x^2 + y^2$ overflows for $|z| > 1.34 \\times 10^{154}$ and underflows for $|z| < 1.5 \\times 10^{-162}$, although $z$ and most results are representable."
+msgstr ""
+
+#: manual/design/float_backend.md:22
+msgid "Near the branch points and the branch cuts the textbook formulas cancel catastrophically."
+msgstr ""
+
+#: manual/design/float_backend.md:24
+msgid "The package cannot add methods to `Complex[T]`, which belongs to the core package."
+msgstr ""
+
+#: manual/design/float_backend.md:26
+msgid "The real elementary functions come from `arithmetic` and `Kaida-Amethyst/math`; the package does not implement real transcendental functions itself."
+msgstr ""
+
+#: manual/design/float_backend.md:32
+msgid "Free functions over `Complex[Double]`, with `_real` variants that take a `Double`."
+msgstr ""
+
+#: manual/design/float_backend.md:34
+msgid "Scaled formulas for the modulus, the square root, division, the tangent and the inverse functions; the Hull–Fairgrieve–Tang algorithm for the arcsine and arccosine; Kahan's formula for the inverse hyperbolic cosine."
+msgstr ""
+
+#: manual/design/float_backend.md:37
+msgid "Binary powering for integer exponents."
+msgstr ""
+
+#: manual/design/float_backend.md:38
+msgid "Reciprocal functions as compositions with `Complex::inv` of the core."
+msgstr ""
+
+#: manual/design/float_backend.md:39
+msgid "Three capability traits for the real scalar, none of which a public function uses yet."
+msgstr ""
+
+#: manual/design/float_backend.md:44
+#: manual/tutorial/float_backend.md:49
 msgid "Polar form"
 msgstr ""
 
-#: manual/design/float_backend.md:20
+#: manual/design/float_backend.md:46
 msgid ""
 "Every $z = x + iy \\n"
 "e 0$ has a polar form $z = r e^{i\\theta}$ with $r = |z| = \\sqrt{x^2 + y^2}$. The angle $\\theta$ is determined modulo $2\\pi$; the principal argument $\\operatorname{Arg} z$ is the representative in $(-\\pi, \\pi]$, which equals $\\operatorname{atan2}(y, x)$ off the negative real axis."
 msgstr ""
 
-#: manual/design/float_backend.md:26
+#: manual/design/float_backend.md:52
 msgid "The principal logarithm and its branch cut"
 msgstr ""
 
-#: manual/design/float_backend.md:28
+#: manual/design/float_backend.md:54
 msgid "The solutions of $e^w = z$ are $w = \\ln|z| + i(\\operatorname{Arg} z + 2k\\pi)$. The principal logarithm takes $k = 0$:"
 msgstr ""
 
-#: manual/design/float_backend.md:35
+#: manual/design/float_backend.md:61
 msgid "$\\operatorname{Arg}$ jumps by $2\\pi$ across the negative real axis, so $\\operatorname{Log}$ is analytic on $\\mathbb C \\setminus (-\\infty, 0]$ and $(-\\infty, 0]$ is its *branch cut*. All other multi-valued functions are defined through $\\operatorname{Log}$ and inherit cuts from it.[^kahan]"
 msgstr ""
 
-#: manual/design/float_backend.md:40
+#: manual/design/float_backend.md:66
 msgid "W. Kahan, \"Branch cuts for complex elementary functions, or much ado about nothing's sign bit\", in *The State of the Art in Numerical Analysis*, Clarendon Press, 1987. It also discusses how a signed zero can select the side of a cut."
 msgstr ""
 
-#: manual/design/float_backend.md:45
+#: manual/design/float_backend.md:71
 msgid "Principal values of the other functions"
 msgstr ""
 
-#: manual/design/float_backend.md:60
+#: manual/design/float_backend.md:86
+#: manual/design/float_backend.md:414
 msgid "Function"
 msgstr ""
 
-#: manual/design/float_backend.md:60
-#: manual/tutorial/float_backend.md:148
+#: manual/design/float_backend.md:86
+#: manual/tutorial/float_backend.md:146
 msgid "Branch cuts"
 msgstr ""
 
-#: manual/design/float_backend.md:60
+#: manual/design/float_backend.md:86
 msgid "Principal range"
 msgstr ""
 
-#: manual/design/float_backend.md:64
+#: manual/design/float_backend.md:90
 msgid "$(-\\infty, 0]$ in $z$ (non-integer $w$)"
 msgstr ""
 
-#: manual/design/float_backend.md:64
+#: manual/design/float_backend.md:90
 msgid "from $\\operatorname{Log}$"
 msgstr ""
 
-#: manual/design/float_backend.md:72
+#: manual/design/float_backend.md:98
 msgid "The reciprocal functions are compositions: $\\sec z = 1/\\cos z$, $\\operatorname{asec} z = \\operatorname{acos}(1/z)$, and so on."
 msgstr ""
 
-#: manual/design/float_backend.md:75
+#: manual/design/float_backend.md:101
 msgid "Real and imaginary parts"
 msgstr ""
 
-#: manual/design/float_backend.md:77
+#: manual/design/float_backend.md:103
 msgid "The trigonometric and hyperbolic functions split by the addition theorems with $\\cos(iy) = \\cosh y$ and $\\sin(iy) = i\\sinh y$:"
 msgstr ""
 
-#: manual/design/float_backend.md:91
+#: manual/design/float_backend.md:117
 msgid "Three capability traits"
 msgstr ""
 
-#: manual/design/float_backend.md:93
+#: manual/design/float_backend.md:119
 msgid "**Problem.** The algorithms need more from the real scalar than `luna-generic` and `arithmetic` traits, but not every scalar type has every extra capability."
 msgstr ""
 
-#: manual/design/float_backend.md:97
+#: manual/design/float_backend.md:123
 msgid "**Options.** One large \"floating real\" trait; no traits (hard-code `Double`); a layered set."
 msgstr ""
 
-#: manual/design/float_backend.md:100
+#: manual/design/float_backend.md:126
 msgid "**Choice.** Three traits, each a separate concern:"
 msgstr ""
 
-#: manual/design/float_backend.md:102
+#: manual/design/float_backend.md:128
 msgid "`FloatingAnalyticScalar` names the algebraic and analytic capabilities (a `Field` with `Num`, `Compare`, constants and the real elementary functions and their inverses). It assumes nothing about IEEE 754, so an exact or interval type could satisfy it."
 msgstr ""
 
-#: manual/design/float_backend.md:106
+#: manual/design/float_backend.md:132
 msgid "`FloatingSpecialValues` names the IEEE 754 layer: NaN, signed infinities and the sign of zero. These have no meaning for a type without them, so they are not part of the analytic trait."
 msgstr ""
 
-#: manual/design/float_backend.md:109
+#: manual/design/float_backend.md:135
 msgid "`FloatingBackendScalar` combines both and adds the primitives the stable algorithms below use: `hypot` (modulus without overflow), `log1p` (logarithms near one), `trunc` and `to_int` (detecting integer exponents in `pow`) and `from_double` (constants)."
 msgstr ""
 
-#: manual/design/float_backend.md:114
+#: manual/design/float_backend.md:140
 msgid "Code can then require the smallest trait that states its needs, as Luna Flow prefers over a single \"real number\" trait. All three are implemented for `Float` and `Double`. The public functions are still written for `Complex[Double]` and call the `Double` primitives directly; no function is generic over the traits yet."
 msgstr ""
 
-#: manual/design/float_backend.md:120
+#: manual/design/float_backend.md:146
 msgid "Free functions"
 msgstr ""
 
-#: manual/design/float_backend.md:122
+#: manual/design/float_backend.md:148
 msgid "MoonBit does not allow a package to add methods or trait instances to a type defined in another package, so the analytic functions cannot be methods of `Complex[T]`. They are free functions, `@fb.log(z)`, and the generic core stays free of floating-point semantics."
 msgstr ""
 
-#: manual/design/float_backend.md:127
+#: manual/design/float_backend.md:153
 msgid "Modulus without overflow"
 msgstr ""
 
-#: manual/design/float_backend.md:129
+#: manual/design/float_backend.md:155
 msgid "The direct $\\sqrt{x^2 + y^2}$ overflows when $|x| > 1.34 \\times 10^{154}$, although $|z|$ is representable, and underflows for tiny inputs. With $m = \\max(|x|, |y|)$ and $t = \\min(|x|, |y|)/m \\in [0, 1]$:"
 msgstr ""
 
-#: manual/design/float_backend.md:139
+#: manual/design/float_backend.md:165
 msgid "`abs` delegates to `hypot`, which uses this kind of scaling; `abs_log` uses the second form, so $\\ln|z|$ is finite for every finite non-zero $z$; and `abs_sqr` uses the third, which only overflows when $|z|^2$ itself does."
 msgstr ""
 
-#: manual/design/float_backend.md:143
+#: manual/design/float_backend.md:169
 msgid "Stable square root"
 msgstr ""
 
-#: manual/design/float_backend.md:145
+#: manual/design/float_backend.md:171
 msgid "The textbook formulas"
 msgstr ""
 
-#: manual/design/float_backend.md:152
+#: manual/design/float_backend.md:178
 msgid "cancel catastrophically: for $x > 0$ and $|y| \\ll x$, $|z| - x$ loses all digits, and for $x < 0$, $|z| + x$ does. The package computes only the cancellation-free quantity"
 msgstr ""
 
-#: manual/design/float_backend.md:164
+#: manual/design/float_backend.md:190
 msgid "where the scaled forms avoid overflow, and recovers the other part from $\\operatorname{Re}\\sqrt z \\cdot \\operatorname{Im}\\sqrt z = y/2$. For $x \\ge 0$ the root is $w + \\frac{y}{2w}i$; indeed, with $w^2 = (x + |z|)/2$,"
 msgstr ""
 
-#: manual/design/float_backend.md:174
+#: manual/design/float_backend.md:200
 msgid "For $x < 0$ the root is $\\frac{|y|}{2w} \\pm wi$ with the sign of $y$, by the same computation with $|x|$. The real part is never negative, as the principal branch requires. On the cut, $y = -0$ is treated like $y = +0$, so both sides map to $+\\sqrt{|x|}\\,i$."
 msgstr ""
 
-#: manual/design/float_backend.md:179
+#: manual/design/float_backend.md:205
 msgid "Smith's division"
 msgstr ""
 
-#: manual/design/float_backend.md:181
+#: manual/design/float_backend.md:207
 msgid "The textbook quotient divides by $c^2 + d^2$, with the overflow problems of the [core design](core.md#textbook-division-in-the-generic-core). Smith's method divides by the larger component first.[^smith] For $|c| \\ge |d|$ let $r = d/c$, so $|r| \\le 1$:"
 msgstr ""
 
-#: manual/design/float_backend.md:193
-msgid "and symmetrically with $r = c/d$ when $|d| > |c|$. Only $r^2 \\le 1$ is squared, so the denominator overflows only if the quotient does. `div` computes $1/c$ once and multiplies by it. If $w$ has an infinite part and $z$ has no NaN part, `div` follows C99 Annex G: a finite numerator gives a zero result, and an infinite one the quotient of the infinity signs."
+#: manual/design/float_backend.md:219
+msgid "and symmetrically with $r = c/d$ when $|d| > |c|$. Only $r^2 \\le 1$ is squared, so $1 \\le 1 + r^2 \\le 2$ never overflows. `div` computes the reciprocal $s = 1/c$ once and returns"
 msgstr ""
 
-#: manual/design/float_backend.md:199
-msgid "R. L. Smith, \"Algorithm 116: Complex division\", *Communications of the ACM* 5(8), 1962."
-msgstr ""
-
-#: manual/design/float_backend.md:202
-msgid "Exact integer powers"
-msgstr ""
-
-#: manual/design/float_backend.md:204
-msgid "$z^n$ through $e^{n\\operatorname{Log} z}$ rounds the angle $n\\theta$ and the modulus $e^{n\\ln|z|}$, so even $(1 + i)^2$ would not come out as exactly $2i$. For a real integer exponent with $|n| \\le 2^{31} - 1$, `pow` and `pow_real` use binary powering instead: $O(\\log |n|)$ complex multiplications, exact for small Gaussian integers, and $z^{-n} = (z^{-1})^n$. Other exponents use the polar form of $e^{w\\operatorname{Log} z}$: with $\\ell = \\ln|z|$ from `abs_log` and $\\theta = \\arg z$,"
-msgstr ""
-
-#: manual/design/float_backend.md:217
-msgid "At $z = 0$, $0^0 = 1$, $0^w = 0$ for real $w > 0$, and every other exponent gives NaN."
-msgstr ""
-
-#: manual/design/float_backend.md:220
-msgid "Overflow-free tangent"
-msgstr ""
-
-#: manual/design/float_backend.md:222
-msgid "$\\tan(x + iy) = \\dfrac{\\sin 2x + i\\sinh 2y}{\\cos 2x + \\cosh 2y}$, using $\\cos^2 x + \\sinh^2 y = \\frac12(\\cos 2x + \\cosh 2y)$. For large $|y|$ both $\\sinh 2y$ and $\\cosh 2y$ overflow while $\\tan z \\to \\pm i$. Multiplying numerator and denominator by $2d$ with $d = e^{-2|y|}$, and using $2d\\cosh 2y = 1 + d^2$, $2d\\sinh 2y = \\operatorname{sign}(y)(1 - d^2)$:"
-msgstr ""
-
-#: manual/design/float_backend.md:232
-msgid "`tan` uses this form for $|y| \\ge 1$ and the direct form below, where it is accurate. `tanh` applies the same derivation with the roles of $x$ and $y$ exchanged."
+#: manual/design/float_backend.md:227
+msgid "which avoids forming $c(1 + r^2)$, a product that could overflow for $|c| > \\Omega/2$, where $\\Omega \\approx 1.8 \\times 10^{308}$ is the largest finite `Double`. The reciprocal has its own limits: for $|c| < 1/\\Omega \\approx 5.6 \\times 10^{-309}$ it overflows to $\\infty$, and the result becomes NaN even when the quotient is finite (the [API](../api/float_backend.md#div) gives an example); for $|c| > 2^{1022}$ it is subnormal and loses a few bits. Dividing $a$ and $b$ by $c$ directly, instead of multiplying them by $s$, would avoid both."
 msgstr ""
 
 #: manual/design/float_backend.md:236
-msgid "The arcsine algorithm of Hull, Fairgrieve and Tang"
+msgid "If $w$ has an infinite part and $z$ has no NaN part, `div` replaces every part of $w$ by its infinity sign ($\\pm 1$, or $0$ for a finite part). A finite numerator then gives zero parts, as C99 Annex G requires. An infinite numerator gives the quotient of the sign patterns, so $\\infty/\\infty = 1$, where C99 returns NaN."
 msgstr ""
 
-#: manual/design/float_backend.md:238
-msgid "For $x, y \\ge 0$, let $r = |z + 1|$, $s = |z - 1|$, $A = \\frac{r + s}{2} \\ge 1$ and $B = x/A \\le 1$. Then[^hft]"
+#: manual/design/float_backend.md:242
+msgid "R. L. Smith, \"Algorithm 116: Complex division\", *Communications of the ACM* 5(8), 1962."
+msgstr ""
+
+#: manual/design/float_backend.md:245
+msgid "Exact integer powers"
 msgstr ""
 
 #: manual/design/float_backend.md:247
-msgid "and the other quadrants follow from oddness in each part. Both formulas lose accuracy in two regions, which the algorithm treats separately:"
+msgid "$z^n$ through $e^{n\\operatorname{Log} z}$ rounds the angle $n\\theta$ and the modulus $e^{n\\ln|z|}$, so even $(1 + i)^2$ would not come out as exactly $2i$. For a real integer exponent with $|n| \\le 2^{31} - 1$, `pow` and `pow_real` use binary powering instead: $O(\\log |n|)$ complex multiplications, exact for small Gaussian integers, and $z^{-n} = (z^{-1})^n$. Other exponents use the polar form of $e^{w\\operatorname{Log} z}$: with $\\ell = \\ln|z|$ from `abs_log` and $\\theta = \\arg z$,"
 msgstr ""
 
-#: manual/design/float_backend.md:250
-msgid "When $B$ is close to $1$ ($B > 0.6417$), $\\arcsin B$ is ill-conditioned. The real part is computed as $\\arctan(x/\\sqrt D)$ with a quantity $D$ formed from $r + x + 1$ and $s \\pm (1 - x)$ without subtraction."
-msgstr ""
-
-#: manual/design/float_backend.md:253
-msgid "When $A$ is close to $1$ ($A \\le 1.5$), $\\ln(A + \\sqrt{A^2 - 1})$ suffers from $A^2 - 1$. The algorithm computes $A - 1$ without cancellation from $y^2/(r + x + 1)$ and $s \\pm (1 - x)$ and uses $\\operatorname{log1p}\\big((A - 1) + \\sqrt{(A - 1)(A + 1)}\\big)$."
-msgstr ""
-
-#: manual/design/float_backend.md:258
-msgid "For $|x|$ or $|y|$ above $10^{150}$, where $r$ and $s$ would overflow, `asin` uses the asymptotic form $\\operatorname{asin} z \\approx \\operatorname{atan2}(x, y) + i(\\ln 2 + \\ln|z|)$, from $\\sqrt{1 - z^2} \\approx -iz$. `acos` uses $\\pi/2 - \\operatorname{asin} z$ there."
+#: manual/design/float_backend.md:260
+msgid "At $z = 0$, $0^0 = 1$, $0^w = 0$ for real $w > 0$, and every other exponent gives NaN."
 msgstr ""
 
 #: manual/design/float_backend.md:263
-msgid "T. E. Hull, T. F. Fairgrieve and P. T. P. Tang, \"Implementing the complex arcsine and arccosine functions using exception handling\", *ACM Transactions on Mathematical Software* 23(3), 1997. The crossover values $1.5$ and $0.6417$ are theirs."
+msgid "Overflow-free tangent"
 msgstr ""
 
-#: manual/design/float_backend.md:268
-msgid "Arctangent and inverse hyperbolic tangent"
+#: manual/design/float_backend.md:265
+msgid "$\\tan(x + iy) = \\dfrac{\\sin 2x + i\\sinh 2y}{\\cos 2x + \\cosh 2y}$, using $\\cos^2 x + \\sinh^2 y = \\frac12(\\cos 2x + \\cosh 2y)$. For large $|y|$ both $\\sinh 2y$ and $\\cosh 2y$ overflow while $\\tan z \\to \\pm i$. Multiplying numerator and denominator by $2d$ with $d = e^{-2|y|}$, and using $2d\\cosh 2y = 1 + d^2$, $2d\\sinh 2y = \\operatorname{sign}(y)(1 - d^2)$:"
 msgstr ""
 
-#: manual/design/float_backend.md:270
-msgid "Writing $q = (1 + iz)/(1 - iz)$ with $z = x + iy$:"
+#: manual/design/float_backend.md:275
+msgid "`tan` uses this form for $|y| \\ge 1$ and the direct form below, where it is accurate. `tanh` applies the same derivation with the roles of $x$ and $y$ exchanged."
 msgstr ""
 
-#: manual/design/float_backend.md:278
-msgid "and $\\operatorname{atan} z = \\frac{1}{2i}\\operatorname{Log} q$ gives"
+#: manual/design/float_backend.md:279
+msgid "The arcsine algorithm of Hull, Fairgrieve and Tang"
 msgstr ""
 
-#: manual/design/float_backend.md:285
-msgid "The ratio inside the logarithm equals $(1 + u)/(1 - u)$ with $u = 2y/(1 + |z|^2)$; for $|u| < 0.1$ the package evaluates it as $\\operatorname{log1p}(u) - \\operatorname{log1p}(-u)$ to keep accuracy near the real axis. For large $|z|$ the real part is evaluated on $x/m, y/m$ with $m = \\max(|x|, |y|)$. `atanh` is the same computation with $x$ and $y$ exchanged, from $\\operatorname{atanh} z = -i\\operatorname{atan}(iz)$, and switches to $\\operatorname{log1p}$ when $|4x/((1 - x)^2 + y^2)| < 1/4$."
+#: manual/design/float_backend.md:281
+msgid "For $x, y \\ge 0$, let $r = |z + 1|$, $s = |z - 1|$, $A = \\frac{r + s}{2} \\ge 1$ and $B = x/A \\le 1$. Then[^hft]"
+msgstr ""
+
+#: manual/design/float_backend.md:290
+msgid "and the other quadrants follow from oddness in each part. Both formulas lose accuracy in two regions, which the algorithm treats separately:"
 msgstr ""
 
 #: manual/design/float_backend.md:293
-msgid "Inverse hyperbolic cosine by Kahan's formula"
+msgid "When $B$ is close to $1$ ($B > 0.6417$), $\\arcsin B$ is ill-conditioned. The real part is computed as $\\arctan(x/\\sqrt D)$ with a quantity $D$ formed from $r + x + 1$ and $s \\pm (1 - x)$ without subtraction."
 msgstr ""
 
-#: manual/design/float_backend.md:295
-msgid "`acosh` uses $2\\operatorname{Log}\\big(\\sqrt{(z + 1)/2} + \\sqrt{(z - 1)/2}\\big)$, built from the stable square root. Unlike $\\operatorname{Log}(z + \\sqrt{z^2 - 1})$, it has the correct cut $(-\\infty, 1)$ without extra sign adjustments, because each square root has its cut where its argument is negative real."
+#: manual/design/float_backend.md:296
+msgid "When $A$ is close to $1$ ($A \\le 1.5$), $\\ln(A + \\sqrt{A^2 - 1})$ suffers from $A^2 - 1$. The algorithm computes $A - 1$ without cancellation from $y^2/(r + x + 1)$ and $s \\pm (1 - x)$ and uses $\\operatorname{log1p}\\big((A - 1) + \\sqrt{(A - 1)(A + 1)}\\big)$."
 msgstr ""
 
 #: manual/design/float_backend.md:301
-msgid "Exact real fast paths"
+msgid "For $|x|$ or $|y|$ above $10^{150}$, where $r$ and $s$ would overflow, `asin` uses the asymptotic form $\\operatorname{asin} z \\approx \\operatorname{atan2}(x, y) + i(\\ln 2 + \\ln|z|)$. To derive it for $x, y \\ge 0$, note that the leading terms of $iz + \\sqrt{1 - z^2}$ cancel, because $\\sqrt{1 - z^2} \\approx -iz$ there. Use instead"
 msgstr ""
 
-#: manual/design/float_backend.md:303
-msgid "`sin` and `cos` return the real function for $y = 0$ exactly; `asin`, `acos`, `asinh`, `acosh` and `atanh` dispatch real inputs to the `_real` functions and purely imaginary inputs to the real inverse functions of $y$. This keeps results on the real line exactly real, and the `_real` functions also serve callers who start from a `Double`."
-msgstr ""
-
-#: manual/design/float_backend.md:309
-msgid "Reciprocal functions through the core inverse"
-msgstr ""
-
-#: manual/design/float_backend.md:311
-msgid "`sec`, `csc`, `cot`, their hyperbolic counterparts and the inverse reciprocal functions are compositions with `Complex::inv` of the [core](core.md). They inherit its unscaled formula and its abort on a zero modulus, instead of producing infinities at poles. `acot` special-cases $z = 0$ to return $\\pi/2$."
-msgstr ""
-
-#: manual/design/float_backend.md:319
-msgid "Identities checked by the test suite"
+#: manual/design/float_backend.md:313
+msgid "Then $\\operatorname{Log}\\frac{i}{2z} = -\\ln(2|z|) + i\\big(\\tfrac{\\pi}{2} - \\arg z\\big)$, and multiplying by $-i$ gives"
 msgstr ""
 
 #: manual/design/float_backend.md:321
-msgid "`exp(log z) = z`, `sin(asin z) = z`, `cos(acos z) = z`, `tan(atan z) = z`, `sinh(asinh z) = z` and `tanh(atanh z) = z` at sample points in the first quadrant, with tolerances $10^{-10}$ to $10^{-12}$; `sqrt(-3 + 4i) = 1 + 2i`; regressions for huge `asin` arguments, the `atan` cut, infinite `atanh` and `acosh` inputs, division by infinity and $0^0$, $0^{-1}$."
+msgid "using $\\pi/2 - \\operatorname{atan2}(y, x) = \\operatorname{atan2}(x, y)$ in the first quadrant. For $|z| > 10^{150}$ the neglected term is below $10^{-300}$. `acos` uses $\\pi/2 - \\operatorname{asin} z$ there, which gives the principal value in every quadrant."
 msgstr ""
 
-#: manual/design/float_backend.md:327
-msgid "Known deviations from the principal values"
+#: manual/design/float_backend.md:326
+msgid "T. E. Hull, T. F. Fairgrieve and P. T. P. Tang, \"Implementing the complex arcsine and arccosine functions using exception handling\", *ACM Transactions on Mathematical Software* 23(3), 1997. The crossover values $1.5$ and $0.6417$ are theirs."
 msgstr ""
 
-#: manual/design/float_backend.md:329
-msgid "The implementation uses the constant $2\\pi$ (`tau`) in places where the principal value needs $\\pi$:"
+#: manual/design/float_backend.md:331
+msgid "Arctangent and inverse hyperbolic tangent"
 msgstr ""
 
-#: manual/design/float_backend.md:332
-msgid "Function and input"
+#: manual/design/float_backend.md:333
+msgid "Writing $q = (1 + iz)/(1 - iz)$ with $z = x + iy$:"
 msgstr ""
 
-#: manual/design/float_backend.md:332
-msgid "Returned"
-msgstr ""
-
-#: manual/design/float_backend.md:332
-msgid "Principal value"
-msgstr ""
-
-#: manual/design/float_backend.md:334
-msgid "$\\pi$ (C99: $\\pm\\pi$ by the sign of $y$)"
-msgstr ""
-
-#: manual/design/float_backend.md:335
-msgid "`log(z)`, same inputs"
-msgstr ""
-
-#: manual/design/float_backend.md:336
-msgid "`pow`, `pow_real`, negative real base, non-integer exponent"
-msgstr ""
-
-#: manual/design/float_backend.md:336
-msgid "angle $2\\pi$"
-msgstr ""
-
-#: manual/design/float_backend.md:336
-msgid "angle $\\pi$"
-msgstr ""
-
-#: manual/design/float_backend.md:342
-msgid "Because $e^{2\\pi i} = 1$ while $e^{\\pi i} = -1$, these values are not even logarithms or inverses of the input: `exp(log(-1))` is $1$, and `cos(acos(z))` is $-z$ for $x < 0$. The test suite currently asserts the $2\\pi$ value of `arg` on the negative axis. These are defects to be fixed in the implementation; this manual records the current behaviour."
+#: manual/design/float_backend.md:341
+msgid "and $\\operatorname{atan} z = \\frac{1}{2i}\\operatorname{Log} q$ gives"
 msgstr ""
 
 #: manual/design/float_backend.md:348
-msgid "Other accuracy notes"
+msgid "The ratio inside the logarithm equals $(1 + u)/(1 - u)$ with $u = 2y/(1 + |z|^2)$; for $|u| < 0.1$ the package evaluates it as $\\operatorname{log1p}(u) - \\operatorname{log1p}(-u)$ to keep accuracy near the real axis. For large $|z|$ the real part is evaluated on $x/m, y/m$ with $m = \\max(|x|, |y|)$. `atanh` is the same computation with $x$ and $y$ exchanged, from $\\operatorname{atanh} z = -i\\operatorname{atan}(iz)$, and switches to $\\operatorname{log1p}$ when $|4x/((1 - x)^2 + y^2)| < 1/4$."
 msgstr ""
 
-#: manual/design/float_backend.md:350
-msgid "`asin` evaluates $\\sqrt{A^2 - 1}$ in its $A \\le 1.5$ branch where the Hull–Fairgrieve–Tang algorithm (and `acos` here) uses $\\sqrt{(A - 1)(A + 1)}$. Close to the branch points $\\pm1$ this loses digits: at $1 + 10^{-10}i$ the imaginary part has a relative error near $4 \\times 10^{-8}$."
+#: manual/design/float_backend.md:356
+msgid "Inverse hyperbolic cosine by Kahan's formula"
 msgstr ""
 
-#: manual/design/float_backend.md:355
-msgid "`exp` overflows in $e^x$ before multiplying by $\\cos y$ and $\\sin y$, so `exp(710 + 0i)` has a NaN imaginary part ($\\infty \\cdot 0$)."
+#: manual/design/float_backend.md:358
+msgid "`acosh` uses $2\\operatorname{Log}\\big(\\sqrt{(z + 1)/2} + \\sqrt{(z - 1)/2}\\big)$, built from the stable square root. Unlike $\\operatorname{Log}(z + \\sqrt{z^2 - 1})$, it has the correct cut $(-\\infty, 1)$ without extra sign adjustments. The first root has its cut on $(-\\infty, -1)$ and the second on $(-\\infty, 1)$, so together they cut exactly $(-\\infty, 1)$. The logarithm adds no cut of its own: both principal roots have a non-negative real part, so their sum $S$ has $\\operatorname{Re} S \\ge 0$ and never lies on $(-\\infty, 0]$ unless $S = 0$, which would need $(z + 1)/2 = (z - 1)/2 = 0$. The identity itself follows from squaring: $S^2 = z + 2\\sqrt{(z+1)/2}\\sqrt{(z-1)/2}$, so $S^2 = z + \\sqrt{z^2 - 1}$ for the branch of $\\sqrt{z^2 - 1}$ that this product selects, and $2\\operatorname{Log} S = \\operatorname{Log} S^2$ because $|\\arg S| \\le \\pi/2$."
 msgstr ""
 
-#: manual/design/float_backend.md:357
-msgid "The `Float` instance of `log1p` is $\\ln(1 + x)$ and loses relative accuracy for $|x| \\ll 1$; no public function uses it yet."
+#: manual/design/float_backend.md:372
+msgid "Exact real fast paths"
 msgstr ""
 
-#: manual/design/float_backend.md:362
-msgid "**Methods on `Complex`.** Not possible from a separate package, and moving the functions into the core would bring IEEE semantics into the generic type."
-msgstr ""
-
-#: manual/design/float_backend.md:365
-msgid "**A single floating-real trait.** It would force IEEE special values on every analytic scalar."
-msgstr ""
-
-#: manual/design/float_backend.md:367
-msgid "**Textbook formulas everywhere.** Simpler, but they overflow for $|z| \\gtrsim 10^{154}$ and cancel near the branch cuts, as derived above."
-msgstr ""
-
-#: manual/design/float_backend.md:369
-msgid "**Full C99 Annex G special-value tables.** Only the cases listed in the API are handled; the remaining infinities and NaN propagate through ordinary arithmetic."
-msgstr ""
-
-#: manual/design/float_backend.md:375
-msgid "Analytic functions for `Complex[Double]` only; no `Complex[Float]` functions, although the traits are implemented for `Float`."
-msgstr ""
-
-#: manual/design/float_backend.md:377
-msgid "No signed-zero selection of the side of a branch cut, except in `arg`."
-msgstr ""
-
-#: manual/design/float_backend.md:378
-msgid "Reciprocal functions abort at poles instead of returning infinities."
-msgstr ""
-
-#: manual/design/float_backend.md:379
-msgid "No error bounds are certified; accuracy is checked by regression tests."
+#: manual/design/float_backend.md:374
+msgid "`sin` and `cos` return the real function for $y = 0$ exactly; `asin`, `acos`, `asinh`, `acosh` and `atanh` dispatch real inputs to the `_real` functions and purely imaginary inputs to the real inverse functions of $y$. This keeps results on the real line exactly real, and the `_real` functions also serve callers who start from a `Double`."
 msgstr ""
 
 #: manual/design/float_backend.md:380
+msgid "Reciprocal functions through the core inverse"
+msgstr ""
+
+#: manual/design/float_backend.md:382
+msgid "`sec`, `csc`, `cot`, their hyperbolic counterparts and the inverse reciprocal functions are compositions with `Complex::inv` of the [core](core.md#floating-point-instances). They inherit its unscaled formula and its limits, instead of producing infinities at poles: an abort when the modulus of the argument is below about $1.5 \\times 10^{-162}$ (which in practice happens at $0$ for `csc`, `cot`, `csch`, `coth` and the inverse reciprocal functions), infinite or NaN parts for moduli below about $10^{-154}$, and NaN parts for moduli above about $1.3 \\times 10^{154}$. The other poles, such as $\\pi/2$ for `sec`, are not representable exactly, and the computed $\\cos$ there is about $6 \\times 10^{-17}$, so `sec` returns a large finite value. `acot` special-cases $z = 0$ to return $\\pi/2$."
+msgstr ""
+
+#: manual/design/float_backend.md:396
+msgid "Identities checked by the test suite"
+msgstr ""
+
+#: manual/design/float_backend.md:398
+msgid "`exp(log z) = z`, `sin(asin z) = z`, `cos(acos z) = z`, `tan(atan z) = z`, `sinh(asinh z) = z` and `tanh(atanh z) = z` at sample points in the first quadrant, with tolerances $10^{-10}$ to $10^{-12}$; `sqrt(-3 + 4i) = 1 + 2i`; regressions for huge `asin` arguments, the `atan` cut, infinite `atanh` and `acosh` inputs, division by infinity and $0^0$, $0^{-1}$."
+msgstr ""
+
+#: manual/design/float_backend.md:404
+msgid "Values on the branch cuts"
+msgstr ""
+
+#: manual/design/float_backend.md:406
+msgid "A function is discontinuous across its cut, so the value on the cut has to agree with one side. With signed zeros a library can let the sign of a zero part pick the side (C99 Annex G does). This package ignores the sign of zero: it tests `y == 0.0` or `x == 0.0` and sends exact real or imaginary inputs to fast paths. The value on each cut therefore matches one fixed side, measured by comparing $f(p)$ with $f(p \\pm 10^{-9} i)$ (real-axis cuts) or $f(p \\pm 10^{-9})$ (imaginary-axis cuts):"
+msgstr ""
+
+#: manual/design/float_backend.md:414
+msgid "Cut"
+msgstr ""
+
+#: manual/design/float_backend.md:414
+msgid "Value on the cut matches"
+msgstr ""
+
+#: manual/design/float_backend.md:416
+msgid "the upper side ($y > 0$)"
+msgstr ""
+
+#: manual/design/float_backend.md:417
+#: manual/design/float_backend.md:418
+msgid "$x > 1$ and $x < -1$"
+msgstr ""
+
+#: manual/design/float_backend.md:417
+#: manual/design/float_backend.md:418
+#: manual/design/float_backend.md:419
+msgid "the upper side"
+msgstr ""
+
+#: manual/design/float_backend.md:420
+msgid "the right side ($x > 0$)"
+msgstr ""
+
+#: manual/design/float_backend.md:421
+msgid "the left side ($x < 0$)"
+msgstr ""
+
+#: manual/design/float_backend.md:422
+msgid "$x < 0$, resp. $x < -1$ for `acosh`"
+msgstr ""
+
+#: manual/design/float_backend.md:422
+msgid "neither side (the $2\\pi$ defect below)"
+msgstr ""
+
+#: manual/design/float_backend.md:424
+msgid "The real-axis cuts thus behave like C99 with $y = +0$. On the imaginary-axis cuts `atan` and `asinh` attach the upper cut to the right half-plane and the lower cut to the left one. That keeps them odd on the cuts ($f(-z) = -f(z)$), but differs from C99 with $x = +0$ on the lower cut: C99 gives `casinh(+0 - 2i)` $= 1.317 - i\\pi/2$, this package $-1.317 - i\\pi/2$."
+msgstr ""
+
+#: manual/design/float_backend.md:431
+msgid "Known deviations from the principal values"
+msgstr ""
+
+#: manual/design/float_backend.md:433
+msgid "The implementation uses the constant $2\\pi$ (`tau`) in places where the principal value needs $\\pi$:"
+msgstr ""
+
+#: manual/design/float_backend.md:436
+msgid "Function and input"
+msgstr ""
+
+#: manual/design/float_backend.md:436
+msgid "Returned"
+msgstr ""
+
+#: manual/design/float_backend.md:436
+msgid "Principal value"
+msgstr ""
+
+#: manual/design/float_backend.md:438
+msgid "$\\pi$ (C99: $\\pm\\pi$ by the sign of $y$)"
+msgstr ""
+
+#: manual/design/float_backend.md:439
+msgid "`log(z)`, same inputs"
+msgstr ""
+
+#: manual/design/float_backend.md:440
+msgid "`pow`, `pow_real`, negative real base, non-integer exponent"
+msgstr ""
+
+#: manual/design/float_backend.md:440
+msgid "angle $2\\pi$"
+msgstr ""
+
+#: manual/design/float_backend.md:440
+msgid "angle $\\pi$"
+msgstr ""
+
+#: manual/design/float_backend.md:444
+msgid "`acosh_real(x)` and `acosh(x + 0i)`, $x < -1$"
+msgstr ""
+
+#: manual/design/float_backend.md:445
+msgid "`asec(z)`, $\\operatorname{Re} z < 0$ except real $z \\le -1$"
+msgstr ""
+
+#: manual/design/float_backend.md:445
+msgid "through `acos`: real part $+\\pi$"
+msgstr ""
+
+#: manual/design/float_backend.md:445
+#: manual/design/float_backend.md:447
+msgid "principal"
+msgstr ""
+
+#: manual/design/float_backend.md:447
+msgid "through `log`"
+msgstr ""
+
+#: manual/design/float_backend.md:449
+msgid "Because $e^{2\\pi i} = 1$ while $e^{\\pi i} = -1$, these values are not even logarithms or inverses of the input: `exp(log(-1))` is $1$, and `cos(acos(z))` is $-z$ for $x < 0$. For powers the error is a rotation by $e^{i\\pi w}$: $(-4)^{1/2}$ comes out as $2e^{i\\pi} = -2$ instead of $2i$, and $(-8)^{1/3}$ as $2e^{2\\pi i/3} = -1 + 1.732i$ instead of $1 + 1.732i$. Only the mid-range branch of `acos` is affected: for a part above $10^{150}$, `acos` uses $\\pi/2 - \\operatorname{asin} z$ and returns the principal value, so its real part jumps by $\\pi$ at that threshold. The test suite currently asserts the $2\\pi$ value of `arg` on the negative axis. These are defects to be fixed in the implementation; this manual records the current behaviour."
+msgstr ""
+
+#: manual/design/float_backend.md:461
+msgid "Other accuracy notes"
+msgstr ""
+
+#: manual/design/float_backend.md:463
+msgid "`asin` evaluates $\\sqrt{A^2 - 1}$ in its $A \\le 1.5$ branch where the Hull–Fairgrieve–Tang algorithm (and `acos` here) uses $\\sqrt{(A - 1)(A + 1)}$. Close to the branch points $\\pm1$ this loses digits: at $1 + 10^{-10}i$ the imaginary part has a relative error near $4 \\times 10^{-8}$."
+msgstr ""
+
+#: manual/design/float_backend.md:468
+msgid "`exp` overflows in $e^x$ before multiplying by $\\cos y$ and $\\sin y$, so `exp(710 + 0i)` has a NaN imaginary part ($\\infty \\cdot 0$). `sin`, `cos`, `sinh` and `cosh` have the same product structure: `sin(800i)` has a NaN real part, `cosh(800 + 0i)` and `sinh(800 + 0i)` a NaN imaginary part. Testing for an exactly zero factor before multiplying would give the C99 values."
+msgstr ""
+
+#: manual/design/float_backend.md:474
+msgid "`abs_log` evaluates $\\tfrac12\\ln(1 + t^2)$ with `ln`, not `log1p`. For $t^2$ below the unit roundoff, $1 + t^2$ rounds to $1$ and the term vanishes, so the relative error of $\\ln|z|$ is large when $|z|$ is close to $1$: `abs_log(1 + 1e-10i)` is $0$ instead of $5 \\times 10^{-21}$. The absolute error stays below about $10^{-16}$."
+msgstr ""
+
+#: manual/design/float_backend.md:479
+msgid "`div` multiplies by $1/c$, which overflows for a subnormal $c$; see [Smith's division](#smiths-division)."
+msgstr ""
+
+#: manual/design/float_backend.md:481
+msgid "The trait method `FloatingSpecialValues::is_negative_zero` is `is_neg_inf(1.0 / x)` without a test for zero, so it is also true for negative subnormal numbers whose reciprocal overflows. The package's own functions use a private helper that tests `x == 0.0` first."
+msgstr ""
+
+#: manual/design/float_backend.md:485
+msgid "The `Float` instance of `log1p` is $\\ln(1 + x)$, which loses relative accuracy for $|x| \\ll 1$ and returns $0$ below about $6 \\times 10^{-8}$; no public function uses it yet."
+msgstr ""
+
+#: manual/design/float_backend.md:488
+msgid "`asec_real` and `acsc_real` have no NaN check, so a NaN argument gives a finite real part ($2\\pi$, resp. $-\\pi/2$) with a NaN imaginary part."
+msgstr ""
+
+#: manual/design/float_backend.md:493
+msgid "**Methods on `Complex`.** Not possible from a separate package, and moving the functions into the core would bring IEEE semantics into the generic type."
+msgstr ""
+
+#: manual/design/float_backend.md:496
+msgid "**A single floating-real trait.** It would force IEEE special values on every analytic scalar."
+msgstr ""
+
+#: manual/design/float_backend.md:498
+msgid "**Textbook formulas everywhere.** Simpler, but they overflow for $|z| \\gtrsim 10^{154}$ and cancel near the branch cuts, as derived above."
+msgstr ""
+
+#: manual/design/float_backend.md:500
+msgid "**Full C99 Annex G special-value tables.** Only the cases listed in the API are handled; the remaining infinities and NaN propagate through ordinary arithmetic."
+msgstr ""
+
+#: manual/design/float_backend.md:506
+msgid "Analytic functions for `Complex[Double]` only; no `Complex[Float]` functions, although the traits are implemented for `Float`."
+msgstr ""
+
+#: manual/design/float_backend.md:508
+msgid "No signed-zero selection of the side of a branch cut; `arg` also returns the same value for $y = +0$ and $y = -0$."
+msgstr ""
+
+#: manual/design/float_backend.md:510
+msgid "Reciprocal functions abort at poles instead of returning infinities."
+msgstr ""
+
+#: manual/design/float_backend.md:511
+msgid "No error bounds are certified; accuracy is checked by regression tests."
+msgstr ""
+
+#: manual/design/float_backend.md:512
 msgid "No checked or contextual (`Result`) variants."
 msgstr ""
 
@@ -1389,83 +1667,155 @@ msgid "luna-complex"
 msgstr ""
 
 #: manual/index.md:3
+msgid "This manual documents the code of `Luna-Flow/luna-complex` at version `0.2.0` (the version in `moon.mod`) on MoonBit 0.10, including the unreleased changes listed in [CHANGELOG.md](../../CHANGELOG.md)."
+msgstr ""
+
+#: manual/index.md:7
+msgid "Overview"
+msgstr ""
+
+#: manual/index.md:9
 msgid "`Luna-Flow/luna-complex` provides complex numbers for Luna Flow. The root package defines the generic type `Complex[T]`, the ring $T[i]/(i^2 + 1)$ over any scalar `T`, with its arithmetic and `luna-generic` structure instances. The `float_backend` package adds the analytic functions of `Complex[Double]` (roots, logarithms, powers, trigonometric and hyperbolic functions and their inverses) with numerically stable formulas, and the capability traits for floating-point scalars."
 msgstr ""
 
-#: manual/index.md:11
-msgid "This manual documents the code of version `0.2.0` (the version in `moon.mod`) on MoonBit 0.10."
+#: manual/index.md:17
+msgid "[!WARNING] On the negative real axis `arg` returns $2\\pi$ instead of $\\pi$, so `log(-1)` is $2\\pi i$, `pow_real(-4 + 0i, 0.5)` is $-2$ instead of $2i$, and `acos`, `acosh` and the functions built on them return values off by $\\pi$ for some negative inputs. The [float_backend design](design/float_backend.md#known-deviations-from-the-principal-values) lists every affected case."
 msgstr ""
 
-#: manual/index.md:14
-msgid "Packages"
+#: manual/index.md:25
+msgid "Install"
 msgstr ""
 
-#: manual/index.md:16
-msgid "Package"
-msgstr ""
-
-#: manual/index.md:16
-msgid "Import path"
-msgstr ""
-
-#: manual/index.md:16
-msgid "Role"
-msgstr ""
-
-#: manual/index.md:16
-msgid "Pages"
-msgstr ""
-
-#: manual/index.md:18
-msgid "generic `Complex[T]`: construction, mutation, arithmetic, conjugation, structure instances"
-msgstr ""
-
-#: manual/index.md:18
-msgid "[API](api/core.md) · [tutorial](tutorial/core.md) · [design](design/core.md)"
-msgstr ""
-
-#: manual/index.md:19
-msgid "analytic functions of `Complex[Double]`; `FloatingAnalyticScalar`, `FloatingSpecialValues`, `FloatingBackendScalar`"
-msgstr ""
-
-#: manual/index.md:19
-msgid "[API](api/float_backend.md) · [tutorial](tutorial/float_backend.md) · [design](design/float_backend.md)"
-msgstr ""
-
-#: manual/index.md:21
-msgid "The root package is documented under the name `core`. `float_backend` replaces the former `double_ext` package."
-msgstr ""
-
-#: manual/index.md:24
-msgid "Reading paths"
-msgstr ""
-
-#: manual/index.md:26
-msgid "**First steps.** Read the [core tutorial](tutorial/core.md) for arithmetic, then the [float_backend tutorial](tutorial/float_backend.md) for `sqrt`, `log`, `sin` and the other functions."
-msgstr ""
-
-#: manual/index.md:30
-msgid "**Using the library.** Keep the [core API](api/core.md) and the [float_backend API](api/float_backend.md) at hand; the latter states the branch, special-value and abort behaviour of every function, including the known deviations on the negative real axis."
-msgstr ""
-
-#: manual/index.md:35
-msgid "**Contributing.** Read the [core design](design/core.md) for the algebra and the lawfulness of the instances, the [float_backend design](design/float_backend.md) for the derivations of the stable formulas and the branch cuts, and the [contribution guide](contributing.md)."
+#: manual/index.md:31
+msgid "Then import the packages you need in your `moon.pkg`. The examples in this manual use these aliases:"
 msgstr ""
 
 #: manual/index.md:41
-msgid "Installation"
+msgid "The packages need the MoonBit toolchain 0.10 or later (`moonc` ≥ 0.10) with `moon.mod` / `moon.pkg` manifests; the tests run on `wasm-gc`, `wasm`, `js` and `native`. They depend on `Luna-Flow/luna-generic` 0.3.3, `Luna-Flow/arithmetic` 0.2.2 and `Kaida-Amethyst/math`."
+msgstr ""
+
+#: manual/index.md:46
+msgid "Pages"
+msgstr ""
+
+#: manual/index.md:48
+msgid "The root package is documented under the name `core`. `float_backend` replaces the former `double_ext` package."
+msgstr ""
+
+#: manual/index.md:51
+msgid "Part"
+msgstr ""
+
+#: manual/index.md:51
+msgid "Tutorial"
+msgstr ""
+
+#: manual/index.md:51
+msgid "API"
+msgstr ""
+
+#: manual/index.md:51
+msgid "Design"
+msgstr ""
+
+#: manual/index.md:53
+msgid "`core` (`Luna-Flow/luna-complex`): generic `Complex[T]`, arithmetic, structure instances"
+msgstr ""
+
+#: manual/index.md:53
+msgid "[tutorial](tutorial/core.md)"
+msgstr ""
+
+#: manual/index.md:53
+msgid "[API](api/core.md)"
+msgstr ""
+
+#: manual/index.md:53
+msgid "[design](design/core.md)"
 msgstr ""
 
 #: manual/index.md:54
-msgid "Toolchain"
+msgid "`float_backend` (`Luna-Flow/luna-complex/float_backend`): analytic functions of `Complex[Double]`, floating-point capability traits"
+msgstr ""
+
+#: manual/index.md:54
+msgid "[tutorial](tutorial/float_backend.md)"
+msgstr ""
+
+#: manual/index.md:54
+msgid "[API](api/float_backend.md)"
+msgstr ""
+
+#: manual/index.md:54
+msgid "[design](design/float_backend.md)"
 msgstr ""
 
 #: manual/index.md:56
-msgid "MoonBit `moonc` 0.10 or newer with `moon.mod` / `moon.pkg` manifests. The tests run on `wasm-gc`, `wasm`, `js` and `native`."
+msgid "The [contribution guide](contributing.md) collects the rules for changing the code and the manual."
 msgstr ""
 
 #: manual/index.md:59
+msgid "Exported items"
+msgstr ""
+
+#: manual/index.md:61
+msgid "`core`: the type `Complex[T]` with `new`, `set`, `set_re`, `set_im`, `zero`, `one`, `add`, `sub`, `neg`, `mul`, `div`, `conjugate`, `inv`, `equal` and `to_string`"
+msgstr ""
+
+#: manual/index.md:64
+msgid "`core` instances: `Add`, `Sub`, `Neg`, `Mul`, `Div`, `Show`, and the `luna-generic` traits `Zero`, `One`, `AddMonoid`, `AddGroup`, `MulMonoid`, `Semiring`, `Ring`, `Inverse`, `MulGroup`, `Field` and `Conjugate`"
+msgstr ""
+
+#: manual/index.md:68
+msgid "`float_backend` modulus and argument: `abs`, `abs_sqr`, `abs_log`, `arg`, `polar`"
+msgstr ""
+
+#: manual/index.md:70
+msgid "`float_backend` arithmetic: `div`, `sqrt`, `sqrt_real`, `exp`, `log`, `log_10`, `log_b`, `pow`, `pow_real`, `op_bin_re`, `op_bin_im`"
+msgstr ""
+
+#: manual/index.md:72
+msgid "`float_backend` trigonometric and hyperbolic functions: `sin`, `cos`, `tan`, `sec`, `csc`, `cot`, `sinh`, `cosh`, `tanh`, `sech`, `csch`, `coth`"
+msgstr ""
+
+#: manual/index.md:75
+msgid "`float_backend` inverse functions: `asin`, `acos`, `atan`, `asec`, `acsc`, `acot`, `asinh`, `acosh`, `atanh`, `asech`, `acsch`, `acoth`, and the real-argument forms `asin_real`, `acos_real`, `asec_real`, `acsc_real`, `acosh_real`, `atanh_real`"
+msgstr ""
+
+#: manual/index.md:79
+msgid "`float_backend` storage: `pack`, `native_pack`"
+msgstr ""
+
+#: manual/index.md:80
+msgid "`float_backend` traits: `FloatingAnalyticScalar`, `FloatingSpecialValues`, `FloatingBackendScalar`, and the re-exported type `Complex`"
+msgstr ""
+
+#: manual/index.md:83
+msgid "Where to read next"
+msgstr ""
+
+#: manual/index.md:85
+msgid "The [core tutorial](tutorial/core.md) computes with `Complex[T]`, and the [float_backend tutorial](tutorial/float_backend.md) adds roots, logarithms and trigonometry. The API pages state the branch, special-value and abort behaviour of every item, and the design pages derive the algebra and the stable formulas."
+msgstr ""
+
+#: manual/index.md:91
+msgid "New to the package: read the [core tutorial](tutorial/core.md), then the [float_backend tutorial](tutorial/float_backend.md)."
+msgstr ""
+
+#: manual/index.md:93
+msgid "Using it in a library: keep the [core API](api/core.md) and the [float_backend API](api/float_backend.md) at hand; the latter states the branch, special-value and abort behaviour of every function, including the known deviations on the negative real axis."
+msgstr ""
+
+#: manual/index.md:97
+msgid "Contributing: read the [core design](design/core.md) for the algebra and the lawfulness of the instances, the [float_backend design](design/float_backend.md) for the derivations of the stable formulas and the branch cuts, and the [contribution guide](contributing.md)."
+msgstr ""
+
+#: manual/index.md:103
 msgid "Validation"
+msgstr ""
+
+#: manual/index.md:105
+msgid "Recommended release checks:"
 msgstr ""
 
 #: manual/tutorial/core.md:1
@@ -1473,123 +1823,181 @@ msgid "core tutorial"
 msgstr ""
 
 #: manual/tutorial/core.md:3
-msgid "This tutorial uses the generic `Complex[T]` type for complex arithmetic. You will build and print complex numbers, compute with them over `Double` and over the integers, write generic code that accepts complex numbers through the `luna-generic` traits, and update values in place. The algebra behind it is in the [core design](../design/core.md)."
+msgid "This tutorial uses the generic `Complex[T]` type for complex arithmetic. You will build and print complex numbers, compute with them over `Double` and over the integers, write generic code that accepts complex numbers through the `luna-generic` traits, and update values in place. The algebra behind it is in the [core design](../design/core.md). Every example is a test that you can paste into a `_test.mbt` file and run with `moon test`; the expected output is written in the `inspect` calls."
 msgstr ""
 
-#: manual/tutorial/core.md:9
-#: manual/tutorial/float_backend.md:9
+#: manual/tutorial/core.md:11
+#: manual/tutorial/float_backend.md:11
+msgid "I want to"
+msgstr ""
+
+#: manual/tutorial/core.md:11
+#: manual/tutorial/float_backend.md:11
+msgid "Use"
+msgstr ""
+
+#: manual/tutorial/core.md:13
+msgid "build a complex number"
+msgstr ""
+
+#: manual/tutorial/core.md:14
+msgid "add, subtract, multiply, divide"
+msgstr ""
+
+#: manual/tutorial/core.md:15
+msgid "conjugate or invert"
+msgstr ""
+
+#: manual/tutorial/core.md:16
+msgid "compute exactly with Gaussian integers"
+msgstr ""
+
+#: manual/tutorial/core.md:16
+msgid "`Complex[Int]` or `Complex[BigInt]`"
+msgstr ""
+
+#: manual/tutorial/core.md:17
+msgid "pass complex numbers to generic code"
+msgstr ""
+
+#: manual/tutorial/core.md:17
+msgid "a `luna-generic` bound such as `T : @lg.Ring`"
+msgstr ""
+
+#: manual/tutorial/core.md:18
+msgid "update a value in place"
+msgstr ""
+
+#: manual/tutorial/core.md:19
+msgid "take roots, logarithms, sines"
+msgstr ""
+
+#: manual/tutorial/core.md:19
+msgid "the [float_backend](float_backend.md) package"
+msgstr ""
+
+#: manual/tutorial/core.md:21
+#: manual/tutorial/float_backend.md:21
 msgid "Quick start"
 msgstr ""
 
+#: manual/tutorial/core.md:27
+msgid "Import the root package in the `moon.pkg` of the package that uses it. The generic example below also uses `Luna-Flow/luna-generic` as `@lg`:"
+msgstr ""
+
 #: manual/tutorial/core.md:37
-#: manual/tutorial/float_backend.md:37
+msgid "The smallest useful program builds two numbers and combines them:"
+msgstr ""
+
+#: manual/tutorial/core.md:49
+#: manual/tutorial/float_backend.md:47
 msgid "Everyday tasks"
 msgstr ""
 
-#: manual/tutorial/core.md:39
+#: manual/tutorial/core.md:51
 msgid "Conjugate and squared modulus"
 msgstr ""
 
-#: manual/tutorial/core.md:41
+#: manual/tutorial/core.md:53
 msgid "$z\\bar z = |z|^2$ is real:"
 msgstr ""
 
-#: manual/tutorial/core.md:57
+#: manual/tutorial/core.md:63
 msgid "Gaussian integers"
 msgstr ""
 
-#: manual/tutorial/core.md:59
+#: manual/tutorial/core.md:65
 msgid "Over `Int`, `Complex[Int]` is the ring $\\mathbb Z[i]$ of Gaussian integers. Everything except division works, and results are exact:"
 msgstr ""
 
-#: manual/tutorial/core.md:80
+#: manual/tutorial/core.md:81
 msgid "$5 = (2 + i)(2 - i)$ shows that $5$ is not prime in $\\mathbb Z[i]$."
 msgstr ""
 
-#: manual/tutorial/core.md:82
+#: manual/tutorial/core.md:83
 msgid "Generic code over a ring"
 msgstr ""
 
-#: manual/tutorial/core.md:84
+#: manual/tutorial/core.md:85
 msgid "Code written against `luna-generic` traits accepts complex numbers. Here a Horner evaluation of $p(x) = x^2 + 1$:"
 msgstr ""
 
-#: manual/tutorial/core.md:110
+#: manual/tutorial/core.md:106
 msgid "Update in place"
 msgstr ""
 
-#: manual/tutorial/core.md:112
+#: manual/tutorial/core.md:108
 msgid "`set`, `set_re` and `set_im` overwrite a value. Every binding to it sees the change:"
 msgstr ""
 
-#: manual/tutorial/core.md:133
-#: manual/tutorial/float_backend.md:146
+#: manual/tutorial/core.md:124
+#: manual/tutorial/float_backend.md:144
 msgid "Going further"
 msgstr ""
 
-#: manual/tutorial/core.md:135
+#: manual/tutorial/core.md:126
 msgid "Nested complex numbers"
 msgstr ""
 
-#: manual/tutorial/core.md:137
+#: manual/tutorial/core.md:128
 msgid "`Complex[T]` works for any `T` with the required traits, including `Complex[Double]` itself:"
 msgstr ""
 
-#: manual/tutorial/core.md:154
+#: manual/tutorial/core.md:142
 msgid "The product is $1$ up to rounding, because the squared modulus $a^2 + b^2$ of this $z$ is invertible. In general `Complex[Complex[Double]]` is not a field; see the pitfalls below."
 msgstr ""
 
-#: manual/tutorial/core.md:158
+#: manual/tutorial/core.md:146
 msgid "Analytic functions"
 msgstr ""
 
-#: manual/tutorial/core.md:160
+#: manual/tutorial/core.md:148
 msgid "The core has no `sqrt`, `exp` or `sin`. Import `Luna-Flow/luna-complex/float_backend` for `Complex[Double]`; the [float_backend tutorial](float_backend.md) shows how."
 msgstr ""
 
-#: manual/tutorial/core.md:164
-#: manual/tutorial/float_backend.md:195
+#: manual/tutorial/core.md:152
+#: manual/tutorial/float_backend.md:187
 msgid "Common pitfalls"
 msgstr ""
 
-#: manual/tutorial/core.md:166
-msgid "**Division by zero aborts.** `z / w` and `w.inv()` call `Inverse::inv` on $c^2 + d^2$; for `Double` that aborts when the value is zero, also when it underflows for $|w| \\lesssim 10^{-162}$. Use `@fb.div` from `float_backend` for robust division."
+#: manual/tutorial/core.md:154
+msgid "**Division by zero aborts.** `z / w` and `w.inv()` call `Inverse::inv` on $c^2 + d^2$; for `Double` that aborts when the value is zero, also when it underflows for $|w| \\lesssim 10^{-162}$, and gives infinite or NaN parts for $|w| \\lesssim 10^{-154}$. Use `@fb.div` from `float_backend` for robust division."
 msgstr ""
 
-#: manual/tutorial/core.md:170
-msgid "**Large values overflow in division.** $c^2 + d^2$ overflows for $|w| \\gtrsim 10^{154}$."
+#: manual/tutorial/core.md:159
+msgid "**Large values overflow in division.** $c^2 + d^2$ overflows for $|w| \\gtrsim 10^{154}$, and the quotient becomes zero or NaN."
 msgstr ""
 
-#: manual/tutorial/core.md:172
+#: manual/tutorial/core.md:161
 msgid "**Shared mutation.** `let shared = z` does not copy; the setters change every alias."
 msgstr ""
 
-#: manual/tutorial/core.md:174
+#: manual/tutorial/core.md:163
 msgid "**Text form.** Negative imaginary parts print as `+ -2i`; use `debug_inspect` or your own formatting when you need another form."
 msgstr ""
 
-#: manual/tutorial/core.md:176
+#: manual/tutorial/core.md:165
 msgid "**Nested types are not fields.** In `Complex[Complex[Double]]`, values such as $1 + i\\,j$ have a zero squared modulus and `inv` aborts."
 msgstr ""
 
-#: manual/tutorial/core.md:179
-#: manual/tutorial/float_backend.md:211
+#: manual/tutorial/core.md:168
+#: manual/tutorial/float_backend.md:209
 msgid "Next steps"
 msgstr ""
 
-#: manual/tutorial/core.md:181
+#: manual/tutorial/core.md:170
 msgid "The [core API](../api/core.md) lists every method and instance."
 msgstr ""
 
-#: manual/tutorial/core.md:182
+#: manual/tutorial/core.md:171
 msgid "The [core design](../design/core.md) derives the construction and the field condition."
 msgstr ""
 
-#: manual/tutorial/core.md:184
+#: manual/tutorial/core.md:173
 msgid "The [float_backend tutorial](float_backend.md) adds the analytic functions."
 msgstr ""
 
-#: manual/tutorial/core.md:186
+#: manual/tutorial/core.md:175
 msgid "[luna-generic](https://lunaflow.cn/en/luna-generic/) documents the traits used in generic code."
 msgstr ""
 
@@ -1598,85 +2006,133 @@ msgid "float_backend tutorial"
 msgstr ""
 
 #: manual/tutorial/float_backend.md:3
-msgid "This tutorial computes with the analytic functions of `Complex[Double]`. You will convert between Cartesian and polar form, take roots and logarithms, solve a quadratic equation, evaluate trigonometric functions and their inverses, and learn where the branch cuts are. The formulas and their numerical treatment are in the [float_backend design](../design/float_backend.md)."
+msgid "This tutorial computes with the analytic functions of `Complex[Double]`. You will convert between Cartesian and polar form, take roots and logarithms, solve a quadratic equation, evaluate trigonometric functions and their inverses, and learn where the branch cuts are. The formulas and their numerical treatment are in the [float_backend design](../design/float_backend.md). Every example is a test that you can paste into a `_test.mbt` file and run with `moon test`; the expected output is written in the `inspect` calls."
 msgstr ""
 
-#: manual/tutorial/float_backend.md:56
+#: manual/tutorial/float_backend.md:13
+msgid "get the modulus or the angle"
+msgstr ""
+
+#: manual/tutorial/float_backend.md:14
+msgid "divide safely, also with huge or tiny values"
+msgstr ""
+
+#: manual/tutorial/float_backend.md:15
+msgid "take a square root or a logarithm"
+msgstr ""
+
+#: manual/tutorial/float_backend.md:16
+msgid "raise to a power"
+msgstr ""
+
+#: manual/tutorial/float_backend.md:17
+msgid "evaluate sine, cosine, tangent and their inverses"
+msgstr ""
+
+#: manual/tutorial/float_backend.md:18
+msgid "start from a real number outside the real domain"
+msgstr ""
+
+#: manual/tutorial/float_backend.md:19
+msgid "write helpers generic over `Float` and `Double`"
+msgstr ""
+
+#: manual/tutorial/float_backend.md:27
+msgid "Import both packages in the `moon.pkg` of the package that uses them:"
+msgstr ""
+
+#: manual/tutorial/float_backend.md:36
+msgid "The smallest useful program applies three functions to one number:"
+msgstr ""
+
+#: manual/tutorial/float_backend.md:62
 msgid "Solve a quadratic equation"
 msgstr ""
 
-#: manual/tutorial/float_backend.md:58
+#: manual/tutorial/float_backend.md:64
 msgid "The roots of $az^2 + bz + c$ are $(-b \\pm \\sqrt{b^2 - 4ac})/(2a)$. With `sqrt` and `div` the formula works for complex coefficients and negative discriminants:"
 msgstr ""
 
-#: manual/tutorial/float_backend.md:81
+#: manual/tutorial/float_backend.md:82
 msgid "Logarithms and powers"
 msgstr ""
 
-#: manual/tutorial/float_backend.md:100
+#: manual/tutorial/float_backend.md:94
 msgid "$i^i = e^{i \\cdot i\\pi/2} = e^{-\\pi/2}$ is real. Integer exponents use exact binary powering, so $i^2$ is exactly $-1$."
 msgstr ""
 
-#: manual/tutorial/float_backend.md:103
+#: manual/tutorial/float_backend.md:97
+msgid "Do not take non-integer powers of negative real numbers yet. `arg` returns $2\\pi$ instead of $\\pi$ on the negative real axis, so the angle of the result is wrong:"
+msgstr ""
+
+#: manual/tutorial/float_backend.md:111
+msgid "Use `sqrt` for square roots, and for other exponents compute $|z|^p e^{i\\pi p}$ yourself until the defect is fixed."
+msgstr ""
+
+#: manual/tutorial/float_backend.md:114
 msgid "Trigonometric functions and their inverses"
 msgstr ""
 
-#: manual/tutorial/float_backend.md:121
+#: manual/tutorial/float_backend.md:126
 msgid "`asin_real` takes a `Double` and returns a complex result outside $[-1, 1]$."
 msgstr ""
 
-#: manual/tutorial/float_backend.md:124
+#: manual/tutorial/float_backend.md:129
 msgid "Large arguments"
 msgstr ""
 
-#: manual/tutorial/float_backend.md:126
+#: manual/tutorial/float_backend.md:131
 msgid "The formulas are scaled, so huge or tiny inputs do not overflow:"
 msgstr ""
 
-#: manual/tutorial/float_backend.md:150
+#: manual/tutorial/float_backend.md:148
 msgid "Multi-valued functions jump across their branch cuts. `sqrt` has its cut on the negative real axis; approaching it from above and below gives roots of opposite sign:"
 msgstr ""
 
-#: manual/tutorial/float_backend.md:168
-msgid "On the cut itself the root is $+2i$. The [design](../design/float_backend.md#principal-values-of-the-other-functions) lists the cuts of every function."
+#: manual/tutorial/float_backend.md:161
+msgid "On the cut itself the root is $+2i$, also for a negative zero imaginary part: the functions do not look at the sign of a zero. The [design](../design/float_backend.md#principal-values-of-the-other-functions) lists the cuts of every function."
 msgstr ""
 
-#: manual/tutorial/float_backend.md:171
+#: manual/tutorial/float_backend.md:165
 msgid "Writing scalar-generic helpers"
 msgstr ""
 
-#: manual/tutorial/float_backend.md:173
+#: manual/tutorial/float_backend.md:167
 msgid "The capability traits let helpers state what they need from a real scalar. For example, a function that only inspects special values asks for `FloatingSpecialValues` and works for `Float` and `Double`:"
 msgstr ""
 
-#: manual/tutorial/float_backend.md:197
-msgid "**The negative real axis.** `arg` and `log` currently return $2\\pi$ instead of $\\pi$ there (`log(-1)` is $2\\pi i$), and powers of negative real numbers with non-integer exponents inherit that angle; `acos`, `acos_real`, `asec_real` and `acosh_real` are affected for negative inputs. See the warning in the [float_backend API](../api/float_backend.md#conventions)."
+#: manual/tutorial/float_backend.md:184
+msgid "`is_negative_zero` is also true for tiny negative subnormal numbers such as `-1.0e-310`; test `x == 0.0` first when you need exactly $-0$."
 msgstr ""
 
-#: manual/tutorial/float_backend.md:202
-msgid "**Reciprocal functions abort at poles.** `cot(0)`, `csc(0)`, `asec(0)` and the like stop the program instead of returning infinity."
+#: manual/tutorial/float_backend.md:189
+msgid "**The negative real axis.** `arg` and `log` currently return $2\\pi$ instead of $\\pi$ there (`log(-1)` is $2\\pi i$, and `exp(log(-1))` is $1$), and powers of negative real numbers with non-integer exponents inherit that angle; `acos`, `acos_real`, `asec`, `asec_real`, `acosh`, `acosh_real` and `asech` are affected for some negative inputs. See the warning in the [float_backend API](../api/float_backend.md#conventions)."
 msgstr ""
 
-#: manual/tutorial/float_backend.md:204
-msgid "**Use `@fb.div`, not `/`, for extreme values.** The core operator forms $c^2 + d^2$ and aborts if it underflows to zero."
+#: manual/tutorial/float_backend.md:195
+msgid "**Reciprocal functions abort near zero.** `cot(0)`, `csc(0)`, `asec(0)`, `pow_real(z, -2.0)` for a tiny $z$ and the like stop the program instead of returning infinity, because they go through the core `inv`."
+msgstr ""
+
+#: manual/tutorial/float_backend.md:199
+msgid "**Use `@fb.div`, not `/`, for extreme values.** The core operator forms $c^2 + d^2$ and aborts if it underflows to zero. `@fb.div` itself returns NaN when the divisor is a subnormal number below about $5.6 \\times 10^{-309}$."
+msgstr ""
+
+#: manual/tutorial/float_backend.md:203
+msgid "**`exp` overflows early.** `exp(z)` for $\\operatorname{Re} z > 709.78$ has infinite or NaN parts; `sin`, `cos`, `sinh` and `cosh` produce NaN parts in the same way for arguments beyond about $710$."
 msgstr ""
 
 #: manual/tutorial/float_backend.md:206
-msgid "**`exp` overflows early.** `exp(z)` for $\\operatorname{Re} z > 709.78$ has infinite or NaN parts."
-msgstr ""
-
-#: manual/tutorial/float_backend.md:208
 msgid "**Only `Complex[Double]`.** The analytic functions do not accept `Complex[Float]`."
 msgstr ""
 
-#: manual/tutorial/float_backend.md:213
+#: manual/tutorial/float_backend.md:211
 msgid "The [float_backend API](../api/float_backend.md) documents every function and its special cases."
 msgstr ""
 
-#: manual/tutorial/float_backend.md:215
+#: manual/tutorial/float_backend.md:213
 msgid "The [float_backend design](../design/float_backend.md) derives the stable formulas and lists the known deviations."
 msgstr ""
 
-#: manual/tutorial/float_backend.md:217
+#: manual/tutorial/float_backend.md:215
 msgid "The [core tutorial](core.md) covers the generic arithmetic."
 msgstr ""
