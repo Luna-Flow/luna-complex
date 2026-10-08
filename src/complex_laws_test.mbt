@@ -1,11 +1,11 @@
 ///|
 test "generic complex algebraic laws over ints" {
-  let z = Complex::new(3, -4)
-  let w = Complex::new(-2, 5)
-  let u = Complex::new(1, 7)
+  let z = @luna-complex.Complex::new(3, -4)
+  let w = @luna-complex.Complex::new(-2, 5)
+  let u = @luna-complex.Complex::new(1, 7)
 
-  assert_true(z + Complex::zero() == z)
-  assert_true(z * Complex::one() == z)
+  assert_true(z + @luna-complex.Complex::zero() == z)
+  assert_true(z * @luna-complex.Complex::one() == z)
   assert_true(z.conjugate().conjugate() == z)
   assert_true(z + w + u == z + (w + u))
   assert_true(z * w * u == z * (w * u))
