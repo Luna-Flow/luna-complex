@@ -3,11 +3,11 @@
 pub(all) struct Complex[T] {
   mut re : T
   mut im : T
-} derive(Eq)
+} derive(Eq, Debug)
 
 ///|
 pub fn[T] Complex::new(re : T, im : T) -> Complex[T] {
-  Complex::{ re, im }
+  Complex::{ re, im, }
 }
 
 ///|

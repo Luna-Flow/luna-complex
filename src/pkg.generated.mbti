@@ -3,6 +3,7 @@ package "Luna-Flow/luna-complex"
 
 import {
   "Luna-Flow/luna-generic",
+  "moonbitlang/core/debug",
 }
 
 // Values
@@ -13,11 +14,22 @@ import {
 pub(all) struct Complex[T] {
   mut re : T
   mut im : T
-} derive(Eq)
+} derive(Eq, @debug.Debug)
+pub fn[T : Add] Complex::add(Self[T], Self[T]) -> Self[T]
+pub fn[T : Neg] Complex::conjugate(Self[T]) -> Self[T]
+pub fn[T : @luna-generic.Field] Complex::div(Self[T], Self[T]) -> Self[T]
+pub fn[T : Eq] Complex::equal(Self[T], Self[T]) -> Bool
+pub fn[T : @luna-generic.Field] Complex::inv(Self[T]) -> Self[T]
+pub fn[T : Mul + Add + Sub] Complex::mul(Self[T], Self[T]) -> Self[T]
+pub fn[T : Neg] Complex::neg(Self[T]) -> Self[T]
 pub fn[T] Complex::new(T, T) -> Self[T]
+pub fn[T : @luna-generic.One + @luna-generic.Zero] Complex::one() -> Self[T]
 pub fn[T] Complex::set(Self[T], T, T) -> Unit
 pub fn[T] Complex::set_im(Self[T], T) -> Unit
 pub fn[T] Complex::set_re(Self[T], T) -> Unit
+pub fn[T : Sub] Complex::sub(Self[T], Self[T]) -> Self[T]
+pub fn[T : Show] Complex::to_string(Self[T]) -> String
+pub fn[T : @luna-generic.Zero] Complex::zero() -> Self[T]
 pub impl[T : Add + @luna-generic.Zero + Neg + Sub] @luna-generic.AddGroup for Complex[T]
 pub impl[T : Add + @luna-generic.Zero] @luna-generic.AddMonoid for Complex[T]
 pub impl[T : Neg] @luna-generic.Conjugate for Complex[T]
@@ -39,4 +51,3 @@ pub impl[T : Sub] Sub for Complex[T]
 // Type aliases
 
 // Traits
-
