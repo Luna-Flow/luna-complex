@@ -1,8 +1,10 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "Luna-Flow/luna-complex/double_ext"
+package "Luna-Flow/luna-complex/float_backend"
 
 import {
+  "Luna-Flow/arithmetic",
   "Luna-Flow/luna-complex",
+  "Luna-Flow/luna-generic",
 }
 
 // Values
@@ -110,4 +112,30 @@ pub fn tanh(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
 pub using @luna-complex {type Complex}
 
 // Traits
+pub(open) trait FloatingAnalyticScalar : @luna-generic.Field + @luna-generic.Num + Compare + @arithmetic.Constants + @arithmetic.Sqrt + @arithmetic.Exponential + @arithmetic.Logarithmic + @arithmetic.Trigonometric + @arithmetic.InverseTrigonometric + @arithmetic.Hyperbolic + @arithmetic.InverseHyperbolic {
+}
+pub impl FloatingAnalyticScalar for Float
+pub impl FloatingAnalyticScalar for Double
 
+pub(open) trait FloatingBackendScalar : FloatingAnalyticScalar + FloatingSpecialValues {
+  fn from_double(Double) -> Self
+  fn trunc(Self) -> Self
+  fn to_int(Self) -> Int
+  fn hypot(Self, Self) -> Self
+  fn log1p(Self) -> Self
+}
+pub impl FloatingBackendScalar for Float
+pub impl FloatingBackendScalar for Double
+
+pub(open) trait FloatingSpecialValues {
+  fn nan() -> Self
+  fn infinity() -> Self
+  fn neg_infinity() -> Self
+  fn is_nan(Self) -> Bool
+  fn is_inf(Self) -> Bool
+  fn is_pos_inf(Self) -> Bool
+  fn is_neg_inf(Self) -> Bool
+  fn is_negative_zero(Self) -> Bool
+}
+pub impl FloatingSpecialValues for Float
+pub impl FloatingSpecialValues for Double

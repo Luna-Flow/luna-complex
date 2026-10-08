@@ -8,12 +8,16 @@ pub fn native_pack(
   arr : Array[Double],
   offset : Int,
 ) -> Unit {
-  guard arr.length() % 2 == 0
+  guard arr.length() % 2 == 0 else {
+    abort("native_pack: buffer length must be even")
+  }
   if offset == arr.length() / 2 {
     arr.push(re)
     arr.push(im)
   } else {
-    guard offset >= 0 && offset < arr.length() / 2
+    guard offset >= 0 && offset < arr.length() / 2 else {
+      abort("native_pack: offset out of bounds")
+    }
     arr[2 * offset] = re
     arr[2 * offset + 1] = im
   }

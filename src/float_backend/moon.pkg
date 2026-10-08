@@ -1,6 +1,7 @@
 import {
   "moonbitlang/core/cmp",
   "moonbitlang/core/double",
+  "moonbitlang/core/float",
   "Kaida-Amethyst/math" @lm,
   "Luna-Flow/arithmetic" @arith,
   "Luna-Flow/luna-generic",

@@ -16,6 +16,6 @@ license = "Apache-2.0"
 
 keywords = [ "complex-numbers", "math" ]
 
-description = "Generic complex-number types and algebraic operations for LunaFlow, with Double-specific analytic functions in the double_ext subpackage."
+description = "Generic complex-number types and algebraic operations for LunaFlow, with floating analytic backend functions in the float_backend subpackage."
 
 source = "src"
