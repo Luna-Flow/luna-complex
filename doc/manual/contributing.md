@@ -1,51 +1,73 @@
-# Contribution Guidelines
+# Contribution guidelines
 
-## Code Style
+This guide collects the rules for changing `luna-complex`. Run
+`./ready_to_pr.sh` before opening a pull request.
+
+## Code style
 
 - Format all code with `moon fmt`.
-- Prefer the shared aliases imported in `src/alias.mbt` instead of scattering repeated fully-qualified calls across implementation files.
-- Keep comments short and technical. Comments should explain numerical stability choices, branch selection, or non-obvious contracts, not restate the code.
+- Prefer the shared `using` imports in `src/alias.mbt` and
+  `src/float_backend/alias.mbt` over repeated fully qualified calls.
+- Keep comments short and technical. Comments explain numerical stability
+  choices, branch selection or non-obvious contracts; they do not restate
+  the code.
+- Promote trait methods explicitly in `src/extends.mbt`; deprecated method
+  forms stay there with `#deprecated` and `#doc(hidden)`.
 
-## Naming Conventions
+## Naming
 
-- Bindings and functions: lowercase with underscores, such as `scaled_re` or `pow_real`.
-- Types and traits: PascalCase, such as `Complex`.
-- Files: lowercase with underscores, and named after a specific behavior rather than a vague bucket.
-- If an error code is introduced later, use uppercase with underscores and an `E_` prefix.
+- Bindings and functions: lowercase with underscores, such as `pow_real`.
+- Types and traits: PascalCase, such as `Complex` or
+  `FloatingBackendScalar`.
+- Files: lowercase with underscores, named after the behaviour they own.
+  Avoid catch-all files such as `utils.mbt`.
 
-## File Organization
+## Package boundaries
 
-- Organize files by package boundary first, then by behavior.
-  In this repository, the root package owns the generic `Complex[T]` core, while `src/float_backend` owns floating backend traits and the current `Complex[Double]` analytic layer.
-- Inside each package, keep core data operations, elementary functions, trigonometric functions, hyperbolic functions, and tests in separate files.
-- Avoid catch-all files such as `utils.mbt`. New files should describe the behavior they own.
-- Keep public API changes deliberate. Internal helpers should remain internal unless the package genuinely needs to expose them.
-- Do not assume the `float_backend` package can add methods to `Complex[T]`.
-  Under current MoonBit rules, subpackages cannot attach methods or trait impls to a type defined in another package, so `float_backend` uses free functions.
+- The root package owns the generic `Complex[T]`: construction, mutation,
+  algebraic operations and `luna-generic` instances. It contains no
+  floating-point semantics.
+- `src/float_backend` owns the floating-point capability traits and the
+  analytic functions. Under current MoonBit rules a package cannot add
+  methods or trait instances to a type of another package, so these are
+  free functions.
+- Add an instance to `Complex[T]` only when the construction satisfies its
+  laws under the stated bound; see the [core design](design/core.md).
+- Keep public API changes deliberate; internal helpers stay private.
+
+## Numerical changes
+
+- State the formula and the reason for any rescaling or special case in
+  the [float_backend design](design/float_backend.md), and the observable
+  branch and special-value behaviour in the
+  [float_backend API](api/float_backend.md).
+- Add regression tests for every changed numerical behaviour: identities
+  such as `exp(log z) = z`, values on and near branch cuts, huge and tiny
+  inputs, and special values.
 
 ## Testing
 
-- Add or update tests whenever changing numerical behavior.
-- Prefer a mix of regression examples and algebraic identity checks.
-- Preserve coverage for both layers:
-  generic algebraic behavior in the root package and floating analytic behavior in `float_backend`.
-- Use `moon test --enable-coverage` before submitting changes.
-- Regenerate `pkg.generated.mbti` with `moon info` whenever the public API changes.
+- Black-box tests live in `*_test.mbt` next to the code and use qualified
+  names such as `@luna-complex.Complex::new`.
+- Run `moon test` on all targets you change behaviour for, and
+  `moon test --enable-coverage` before submitting.
+- Regenerate `pkg.generated.mbti` with `moon info` whenever the public API
+  changes, and review its diff.
 
-## Commit Guidelines
+## Documentation
 
-- Run `./ready_to_pr.sh` before committing when the change affects code or public API.
-- Use concise English Conventional Commit messages such as `fix: stabilize inverse trigonometric branches`.
+- The manual lives in `doc/manual`. After changing English pages, run
+  `lunadoc update` and update the Chinese and Japanese catalogs in
+  `doc/locale`.
+- Code examples in the manual must compile against the current code.
+
+## Commits and releases
+
+- Use English Conventional Commits, such as
+  `fix(float_backend): use pi on the negative real axis`.
 - Keep each commit focused on one logical change.
-
-## Release Checklist
-
-- Update `moon.mod` before publishing a new package version.
-- Ensure `README.md` reflects the current package state.
-- Run `moon check` and `moon test --enable-coverage`.
-- When triggering GitHub Actions `publish-package`, provide the exact version from `moon.mod`.
-
-## Code Review
-
-- If you are not a maintainer or collaborator, contact them before changing dependency or version declarations in `moon.mod`.
-- Reviews should focus on correctness, numerical stability, API clarity, tests, and maintainability.
+- Before publishing, update the version in `moon.mod`, update `README.md`
+  and `CHANGELOG.md`, run `moon check` and `moon test --enable-coverage`,
+  and trigger the publish workflow with the exact version from `moon.mod`.
+- If you are not a maintainer, ask before changing dependency or version
+  declarations in `moon.mod`.
