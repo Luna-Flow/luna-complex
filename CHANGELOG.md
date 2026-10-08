@@ -22,7 +22,12 @@ project uses semantic versioning.
   and trait methods are promoted explicitly in `src/extends.mbt`.
 - Generic code calls trait methods in qualified form (`Zero::zero()`,
   `One::one()`, `Inverse::inv(..)`).
-- Dependencies: `luna-generic` 0.3.3 and `arithmetic` 0.2.2.
+- Dependencies: `luna-generic` 0.4.0 (from 0.3.3) and `arithmetic` 0.5.0
+  (from 0.2.2). No code changes were needed. Under luna-generic 0.4.0,
+  `Inverse::inv` of `Float` and `Double` aborts with
+  `Float::inv: division by zero` / `Double::inv: division by zero`, so
+  `Complex` division and `inv` on a zero (or underflowed) squared modulus
+  now abort with that message instead of a bare abort.
 - `update_deps.sh` upgrades every dependency listed in `moon.mod`.
 - Tests use package-qualified names.
 
