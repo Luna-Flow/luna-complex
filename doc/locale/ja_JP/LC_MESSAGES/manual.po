@@ -16,198 +16,264 @@ msgid "core API"
 msgstr "core API"
 
 #: manual/api/core.md:3
+#: manual/api/float_backend.md:3
+msgid "Purpose"
+msgstr "役割"
+
+#: manual/api/core.md:5
 msgid "The root package `Luna-Flow/luna-complex` defines `Complex[T]`, the complex numbers $a + bi$ over any scalar type `T`, with construction, in-place mutation, conjugation, the arithmetic operators and the `luna-generic` structure traits. It contains no analytic functions; those are in [`float_backend`](float_backend.md). The algebra behind the instances is in the [core design](../design/core.md)."
 msgstr "ルートパッケージ `Luna-Flow/luna-complex` は、任意のスカラー型 `T` 上の複素数 $a + bi$ である `Complex[T]` を定義し、構築、インプレースでの変更、共役、算術演算子、`luna-generic` の代数構造トレイトを提供します。解析関数は含まず、それらは [`float_backend`](float_backend.md) にあります。各インスタンスの背後にある代数は [core の設計](../design/core.md) で説明しています。"
 
-#: manual/api/core.md:10
+#: manual/api/core.md:12
 msgid "Source: [`src/complex.mbt`](../../../src/complex.mbt), [`src/complex_traits.mbt`](../../../src/complex_traits.mbt) and [`src/extends.mbt`](../../../src/extends.mbt)."
 msgstr "ソース: [`src/complex.mbt`](../../../src/complex.mbt)、[`src/complex_traits.mbt`](../../../src/complex_traits.mbt)、[`src/extends.mbt`](../../../src/extends.mbt)。"
 
-#: manual/api/core.md:14
-#: manual/api/float_backend.md:14
+#: manual/api/core.md:16
+#: manual/api/float_backend.md:16
 msgid "Importing"
 msgstr "インポート"
 
-#: manual/api/core.md:22
+#: manual/api/core.md:24
 msgid "The examples use the alias `@complex`."
 msgstr "例ではエイリアス `@complex` を使います。"
 
-#: manual/api/core.md:24
+#: manual/api/core.md:26
 msgid "The type"
 msgstr "型"
 
-#: manual/api/core.md:28
+#: manual/api/core.md:30
 msgid "A complex number with a real part `re` and an imaginary part `im`."
 msgstr "実部 `re` と虚部 `im` を持つ複素数です。"
 
-#: manual/api/core.md:37
+#: manual/api/core.md:39
 msgid "The value is $\\texttt{re} + \\texttt{im}\\,i$ with $i^2 = -1$. Both fields are public and mutable, and the struct is `pub(all)`, so code outside the package can read, write and construct it with a record literal. `Complex[T]` is a reference type: two bindings to the same value see each other's updates."
 msgstr "値は $i^2 = -1$ のもとでの $\\texttt{re} + \\texttt{im}\\,i$ です。両フィールドとも公開かつ可変で、構造体は `pub(all)` なので、パッケージ外のコードからも読み書きでき、レコードリテラルで構築できます。`Complex[T]` は参照型であり、同じ値への 2 つの束縛は互いの更新を観測します。"
 
-#: manual/api/core.md:43
+#: manual/api/core.md:45
 msgid "`derive(Eq)` compares both parts with `T`'s equality (for `Double`, `0.0 == -0.0` and NaN is unequal to itself). `derive(Debug)` prints the record form `{ re: …, im: … }`."
 msgstr "`derive(Eq)` は両方の部分を `T` の等価性で比較します(`Double` では `0.0 == -0.0` であり、NaN は自分自身と等しくありません)。`derive(Debug)` はレコード形式 `{ re: …, im: … }` を出力します。"
 
-#: manual/api/core.md:47
+#: manual/api/core.md:49
 msgid "Construction and mutation"
 msgstr "構築と変更"
 
-#: manual/api/core.md:51
+#: manual/api/core.md:53
 msgid "Builds $re + im\\,i$."
 msgstr "$re + im\\,i$ を構築します。"
 
-#: manual/api/core.md:59
+#: manual/api/core.md:61
 msgid "Overwrites both parts in place."
 msgstr "両方の部分をインプレースで上書きします。"
 
-#: manual/api/core.md:67
+#: manual/api/core.md:69
 msgid "Overwrites the real part in place."
 msgstr "実部をインプレースで上書きします。"
 
-#: manual/api/core.md:75
+#: manual/api/core.md:77
 msgid "Overwrites the imaginary part in place."
 msgstr "虚部をインプレースで上書きします。"
 
-#: manual/api/core.md:91
+#: manual/api/core.md:93
 msgid "Identities"
 msgstr "単位元"
 
-#: manual/api/core.md:95
+#: manual/api/core.md:97
 msgid "Returns $0 + 0i$."
 msgstr "$0 + 0i$ を返します。"
 
-#: manual/api/core.md:103
+#: manual/api/core.md:105
 msgid "Returns $1 + 0i$."
 msgstr "$1 + 0i$ を返します。"
 
-#: manual/api/core.md:109
+#: manual/api/core.md:111
 msgid "Both are the promoted methods of the `Zero` and `One` instances."
 msgstr "どちらも `Zero` および `One` インスタンスから昇格されたメソッドです。"
 
-#: manual/api/core.md:111
+#: manual/api/core.md:113
 msgid "Arithmetic"
 msgstr "算術"
 
-#: manual/api/core.md:113
+#: manual/api/core.md:115
 msgid "Each operator is available as an operator and as a promoted method."
 msgstr "各演算は演算子としても、昇格されたメソッドとしても利用できます。"
 
-#: manual/api/core.md:115
+#: manual/api/core.md:117
 msgid "Item"
 msgstr "項目"
 
-#: manual/api/core.md:115
+#: manual/api/core.md:117
 msgid "Operator"
 msgstr "演算子"
 
-#: manual/api/core.md:115
-#: manual/api/float_backend.md:243
-#: manual/api/float_backend.md:390
+#: manual/api/core.md:117
+#: manual/api/core.md:176
+#: manual/api/float_backend.md:278
+#: manual/api/float_backend.md:437
 msgid "Result"
 msgstr "結果"
 
-#: manual/api/core.md:115
-#: manual/api/core.md:255
+#: manual/api/core.md:117
+#: manual/api/core.md:267
 msgid "Bound on `T`"
 msgstr "`T` への制約"
 
-#: manual/api/core.md:123
+#: manual/api/core.md:125
 msgid "Here $z = a + bi$ and $w = c + di$."
 msgstr "ここで $z = a + bi$、$w = c + di$ とします。"
 
-#: manual/api/core.md:127
+#: manual/api/core.md:129
 msgid "Adds componentwise."
 msgstr "成分ごとに加算します。"
 
-#: manual/api/core.md:136
+#: manual/api/core.md:138
 msgid "Subtracts componentwise."
 msgstr "成分ごとに減算します。"
 
-#: manual/api/core.md:145
+#: manual/api/core.md:147
 msgid "Negates both parts."
 msgstr "両方の部分の符号を反転します。"
 
-#: manual/api/core.md:154
+#: manual/api/core.md:156
 msgid "Multiplies with $i^2 = -1$, using four multiplications."
 msgstr "$i^2 = -1$ を用いて、4 回の乗算で乗算します。"
 
-#: manual/api/core.md:163
+#: manual/api/core.md:165
 msgid "Divides by multiplying with the inverse of the squared modulus."
 msgstr "絶対値の 2 乗の逆数を掛けることで除算します。"
 
-#: manual/api/core.md:170
-msgid "It computes $n = c^2 + d^2$, then `Inverse::inv(n)`, and multiplies both parts of $z\\bar w$ by it. The formula is not scaled: for `Double`, $c^2 + d^2$ overflows for $|w| \\gtrsim 10^{154}$ and underflows for $|w| \\lesssim 10^{-162}$, and `Inverse::inv` of `Double` aborts with `Double::inv: division by zero` when $n$ is zero, including after underflow. Use [`@fb.div`](float_backend.md#div) for robust floating-point division."
-msgstr "$n = c^2 + d^2$ を計算し、次に `Inverse::inv(n)` を求め、$z\\bar w$ の両方の部分にそれを掛けます。この式はスケーリングされていません。`Double` では $|w| \\gtrsim 10^{154}$ で $c^2 + d^2$ がオーバーフローし、$|w| \\lesssim 10^{-162}$ でアンダーフローします。また `Double` の `Inverse::inv` は、$n$ がゼロのとき(アンダーフローの結果ゼロになった場合を含む)`Double::inv: division by zero` で中断します。堅牢な浮動小数点除算には [`@fb.div`](float_backend.md#div) を使ってください。"
+#: manual/api/core.md:172
+msgid "It computes $n = c^2 + d^2$, then `Inverse::inv(n)`, and multiplies both parts of $z\\bar w$ by it. The formula is not scaled, so for `Double` the result depends on the size of $|w|$:"
+msgstr "まず $n = c^2 + d^2$ を、次に `Inverse::inv(n)` を計算し、それを $z\\bar w$ の両方の部分に掛けます。この式はスケーリングされていないため、`Double` では結果が $|w|$ の大きさによって変わります。"
 
-#: manual/api/core.md:189
+#: manual/api/core.md:176
+msgid "$\\lvert w\\rvert$ (about)"
+msgstr "$\\lvert w\\rvert$(おおよそ)"
+
+#: manual/api/core.md:178
+msgid "above $1.3 \\times 10^{154}$"
+msgstr "$1.3 \\times 10^{154}$ より大きい"
+
+#: manual/api/core.md:178
+msgid "overflows to $\\infty$"
+msgstr "$\\infty$ へオーバーフロー"
+
+#: manual/api/core.md:178
+msgid "$n^{-1} = 0$: zero parts, or NaN where a part of $z\\bar w$ is also infinite"
+msgstr "$n^{-1} = 0$:部分はゼロ。$z\\bar w$ の部分も無限大なら NaN"
+
+#: manual/api/core.md:179
+msgid "$10^{-154}$ to $10^{154}$"
+msgstr "$10^{-154}$ から $10^{154}$"
+
+#: manual/api/core.md:179
+msgid "in range"
+msgstr "範囲内"
+
+#: manual/api/core.md:179
+msgid "the quotient, up to rounding"
+msgstr "丸め誤差の範囲で商"
+
+#: manual/api/core.md:180
+msgid "$1.5 \\times 10^{-162}$ to $10^{-154}$"
+msgstr "$1.5 \\times 10^{-162}$ から $10^{-154}$"
+
+#: manual/api/core.md:180
+msgid "subnormal"
+msgstr "非正規化数"
+
+#: manual/api/core.md:180
+msgid "inaccurate; below about $7.5 \\times 10^{-155}$, $n^{-1}$ overflows and the parts become $\\pm\\infty$ or NaN"
+msgstr "不正確。約 $7.5 \\times 10^{-155}$ 未満では $n^{-1}$ がオーバーフローし、部分は $\\pm\\infty$ または NaN になる"
+
+#: manual/api/core.md:181
+msgid "below $1.5 \\times 10^{-162}$, or $w = 0$"
+msgstr "$1.5 \\times 10^{-162}$ 未満、または $w = 0$"
+
+#: manual/api/core.md:181
+msgid "**aborts**"
+msgstr "**中断する**"
+
+#: manual/api/core.md:183
+msgid "The abort comes from `Inverse::inv` of `Double` in `luna-generic`, which rejects zero. For example `Complex::new(1e200, 0.0) / Complex::new(1e200, 0.0)` is NaN $+ 0i$, and dividing by $10^{-170}$ aborts. Use [`@fb.div`](float_backend.md#div) for robust floating-point division."
+msgstr "中断は `luna-generic` の `Double` の `Inverse::inv` がゼロを拒否することによります。例えば `Complex::new(1e200, 0.0) / Complex::new(1e200, 0.0)` は NaN $+ 0i$ になり、$10^{-170}$ による除算は中断します。堅牢な浮動小数点除算には [`@fb.div`](float_backend.md#div) を使ってください。"
+
+#: manual/api/core.md:200
 msgid "Conjugate and inverse"
 msgstr "共役と逆数"
 
-#: manual/api/core.md:193
+#: manual/api/core.md:204
 msgid "Returns $\\bar z = a - bi$."
 msgstr "$\\bar z = a - bi$ を返します。"
 
-#: manual/api/core.md:202
+#: manual/api/core.md:213
 msgid "Returns $z^{-1} = \\bar z / (a^2 + b^2)$."
 msgstr "$z^{-1} = \\bar z / (a^2 + b^2)$ を返します。"
 
-#: manual/api/core.md:209
-msgid "It has the same unscaled formula and the same abort on a zero modulus as `Complex::div`."
-msgstr "`Complex::div` と同じくスケーリングされていない式を使い、絶対値がゼロのときに同じく中断します。"
+#: manual/api/core.md:220
+msgid "It has the same unscaled formula, the same size ranges and the same abort on a zero or underflowed modulus as `Complex::div`: `inv` of $10^{-160}$ is $\\infty + \\mathrm{NaN}\\,i$, and `inv` of $10^{-170}$ aborts."
+msgstr "`Complex::div` と同じくスケーリングされていない式を使い、同じ大きさの範囲を持ち、絶対値がゼロまたはアンダーフローしたときに同じく中断します。$10^{-160}$ の `inv` は $\\infty + \\mathrm{NaN}\\,i$ になり、$10^{-170}$ の `inv` は中断します。"
 
-#: manual/api/core.md:221
+#: manual/api/core.md:233
 msgid "Equality and text"
 msgstr "等価性とテキスト"
 
-#: manual/api/core.md:225
+#: manual/api/core.md:237
 msgid "Compares both parts; the promoted method of the derived `Eq`. Prefer `==`."
 msgstr "両方の部分を比較します。derive された `Eq` から昇格されたメソッドです。`==` を使うことを推奨します。"
 
-#: manual/api/core.md:233
+#: manual/api/core.md:245
 msgid "Formats $z$ as `\"<re> + <im>i\"` using `T`'s `Show`."
 msgstr "`T` の `Show` を使って $z$ を `\"<re> + <im>i\"` の形式に整形します。"
 
-#: manual/api/core.md:240
+#: manual/api/core.md:252
 msgid "The sign of the imaginary part is printed by `T`, so $1 - 2i$ prints as `1 + -2i`. String interpolation `\"\\{z}\"` uses the same text."
 msgstr "虚部の符号は `T` が出力するため、$1 - 2i$ は `1 + -2i` と出力されます。文字列補間 `\"\\{z}\"` も同じテキストを使います。"
 
-#: manual/api/core.md:250
+#: manual/api/core.md:262
 msgid "Structure instances"
 msgstr "構造インスタンス"
 
-#: manual/api/core.md:252
+#: manual/api/core.md:264
 msgid "`Complex[T]` implements the `luna-generic` structure traits under the bounds below. The [core design](../design/core.md) derives each law."
 msgstr "`Complex[T]` は以下の制約のもとで `luna-generic` の代数構造トレイトを実装します。各法則の導出は [core の設計](../design/core.md) にあります。"
 
-#: manual/api/core.md:255
+#: manual/api/core.md:267
 msgid "Instance"
 msgstr "インスタンス"
 
-#: manual/api/core.md:269
+#: manual/api/core.md:281
 msgid "[!WARNING] `Complex[T]` is a field only when $-1$ is not a square in `T`. That holds for the real-number types `Float` and `Double`, but not for `Complex[Double]`: in `Complex[Complex[Double]]` the non-zero value $1 + i\\,j$ (with $i$ the inner and $j$ the outer unit) has squared modulus $1 + i^2 = 0$, so `inv` aborts. The `Field` instance is still provided for every `T : Field`; see the [core design](../design/core.md#when-the-construction-is-a-field)."
 msgstr "[!WARNING] `Complex[T]` が体になるのは、`T` において $-1$ が平方数でない場合に限ります。これは実数型 `Float` と `Double` では成り立ちますが、`Complex[Double]` では成り立ちません。`Complex[Complex[Double]]` では、ゼロでない値 $1 + i\\,j$($i$ は内側、$j$ は外側の虚数単位)の絶対値の 2 乗が $1 + i^2 = 0$ となるため、`inv` が中断します。それでも `Field` インスタンスはすべての `T : Field` に対して提供されます。[core の設計](../design/core.md#when-the-construction-is-a-field) を参照してください。"
 
 #: manual/api/core.md:289
+msgid ""
+"For `T = Double` the laws hold only up to rounding, and the field law $z z^{-1} = 1$ for $z \\n"
+"e 0$ fails outside the range of the table under `Complex::div`: `inv` aborts for non-zero $|z| < 1.5 \\times 10^{-162}$ and returns $0$ for $|z| > 1.3 \\times 10^{154}$. The [core design](../design/core.md#floating-point-instances) derives these limits."
+msgstr ""
+"`T = Double` では法則は丸め誤差の範囲でしか成り立たず、$z \\n"
+"e 0$ に対する体の法則 $z z^{-1} = 1$ は `Complex::div` の表の範囲外で成り立ちません。ゼロでない $|z| < 1.5 \\times 10^{-162}$ では `inv` が中断し、$|z| > 1.3 \\times 10^{154}$ では $0$ を返します。これらの限界は [core の設計](../design/core.md#floating-point-instances) で導出しています。"
+
+#: manual/api/core.md:308
 msgid "Deprecated"
 msgstr "非推奨"
 
-#: manual/api/core.md:291
+#: manual/api/core.md:310
 msgid "These method forms come from the trait instances and are hidden from the interface file; they warn when used outside the package."
 msgstr "これらのメソッド形式はトレイトインスタンスに由来し、インターフェースファイルからは隠されています。パッケージ外で使うと警告が出ます。"
 
-#: manual/api/core.md:294
+#: manual/api/core.md:313
 msgid "Deprecated method"
 msgstr "非推奨のメソッド"
 
-#: manual/api/core.md:294
+#: manual/api/core.md:313
 msgid "Replacement"
 msgstr "代替"
 
-#: manual/api/core.md:297
+#: manual/api/core.md:316
 msgid "`z.to_string()` or `\"\\{z}\"`"
 msgstr "`z.to_string()` または `\"\\{z}\"`"
 
-#: manual/api/core.md:298
+#: manual/api/core.md:317
 msgid "`Repr(z)` or `@debug.Debug::to_repr(z)`"
 msgstr "`Repr(z)` または `@debug.Debug::to_repr(z)`"
 
@@ -215,456 +281,468 @@ msgstr "`Repr(z)` または `@debug.Debug::to_repr(z)`"
 msgid "float_backend API"
 msgstr "float_backend API"
 
-#: manual/api/float_backend.md:3
+#: manual/api/float_backend.md:5
 msgid "The `float_backend` package provides the analytic functions of `Complex[Double]`: modulus and argument, division, roots, exponentials and logarithms, powers, and the trigonometric and hyperbolic functions with their inverses. It also defines three capability traits for floating-point scalars, implemented for `Float` and `Double`. The derivations of the formulas and the branch cuts are in the [float_backend design](../design/float_backend.md)."
 msgstr "`float_backend` パッケージは `Complex[Double]` の解析関数を提供します。絶対値と偏角、除算、根、指数関数と対数、べき乗、そして三角関数・双曲線関数とその逆関数です。また、浮動小数点スカラー向けに 3 つの能力トレイトを定義し、`Float` と `Double` に対して実装しています。式の導出と分岐切断については [float_backend の設計](../design/float_backend.md) で説明しています。"
 
-#: manual/api/float_backend.md:10
+#: manual/api/float_backend.md:12
 msgid "Source: [`src/float_backend/`](../../../src/float_backend/float_backend_traits.mbt) (`float_backend_traits.mbt`, `complex_elementary.mbt`, `complex_trigonometric.mbt`, `complex_hyperbolic.mbt`)."
 msgstr "ソース: [`src/float_backend/`](../../../src/float_backend/float_backend_traits.mbt)(`float_backend_traits.mbt`、`complex_elementary.mbt`、`complex_trigonometric.mbt`、`complex_hyperbolic.mbt`)。"
 
-#: manual/api/float_backend.md:22
+#: manual/api/float_backend.md:24
 msgid "The examples use `@fb` for this package and `@complex` for the root package. All functions are free functions over `Complex[Double]` (MoonBit does not let a package add methods to a type of another package)."
 msgstr "例では、このパッケージに `@fb`、ルートパッケージに `@complex` を使います。すべての関数は `Complex[Double]` 上の自由関数です(MoonBit では、パッケージが他のパッケージの型にメソッドを追加できないため)。"
 
-#: manual/api/float_backend.md:26
+#: manual/api/float_backend.md:28
 msgid "Conventions"
 msgstr "規約"
 
-#: manual/api/float_backend.md:28
+#: manual/api/float_backend.md:30
 msgid "**Principal values.** Multi-valued functions return one value of a fixed branch, described per function. `arg` returns values in $(-\\pi, \\pi]$ except on the negative real axis (see the warning below)."
 msgstr "**主値。** 多価関数は、関数ごとに説明する固定された分枝の値を 1 つ返します。`arg` は負の実軸上を除き $(-\\pi, \\pi]$ の値を返します(下の警告を参照)。"
 
-#: manual/api/float_backend.md:31
-msgid "**Special values.** NaN and infinities are handled where stated (`div`, `atan`, `atanh`, `acosh`, `abs_log`, `pow`); elsewhere they propagate through ordinary `Double` arithmetic and may produce NaN parts."
-msgstr "**特殊値。** NaN と無限大は明記された箇所(`div`、`atan`、`atanh`、`acosh`、`abs_log`、`pow`)で処理されます。それ以外では通常の `Double` 算術を通じて伝播し、NaN の部分を生じることがあります。"
+#: manual/api/float_backend.md:33
+msgid "**Special values.** NaN and infinities are handled where stated (`div`, `atan`, `atanh`, `acosh`, `abs_log`, `pow`); elsewhere they propagate through ordinary `Double` arithmetic and may produce NaN parts. In particular `exp`, `sin`, `cos`, `sinh` and `cosh` form products such as $e^{x}\\sin y$ or $\\cosh x \\sin y$, so a factor that overflows times a factor that is exactly zero gives NaN: `exp(710 + 0i)`, `cosh(800 + 0i)` and `sinh(800 + 0i)` have a NaN imaginary part, `sin(800i)` a NaN real part."
+msgstr "**特殊値。** NaN と無限大は明記した箇所(`div`、`atan`、`atanh`、`acosh`、`abs_log`、`pow`)でのみ扱われます。それ以外では通常の `Double` 演算を通じて伝播し、NaN の部分を生じることがあります。特に `exp`、`sin`、`cos`、`sinh`、`cosh` は $e^{x}\\sin y$ や $\\cosh x \\sin y$ のような積を作るので、オーバーフローした因子とちょうどゼロの因子の積は NaN になります。`exp(710 + 0i)`、`cosh(800 + 0i)`、`sinh(800 + 0i)` は虚部が NaN、`sin(800i)` は実部が NaN です。"
 
-#: manual/api/float_backend.md:34
-msgid "**Reciprocal functions abort at poles.** `sec`, `csc`, `cot`, `sech`, `csch`, `coth`, `asec`, `acsc`, `asech`, `acsch`, `acoth` and the exponent $-1$ of `pow` use `Complex::inv`, which aborts with `Double::inv: division by zero` on a zero modulus."
-msgstr "**逆数系の関数は極で中断します。** `sec`、`csc`、`cot`、`sech`、`csch`、`coth`、`asec`、`acsc`、`asech`、`acsch`、`acoth`、および `pow` の指数 $-1$ は `Complex::inv` を使うため、絶対値がゼロのときに `Double::inv: division by zero` で中断します。"
+#: manual/api/float_backend.md:41
+msgid "**Signed zeros are ignored.** Functions test `y == 0.0` and `x == 0.0`, which do not distinguish $+0$ from $-0$, so both sides of a branch cut that runs along an axis get the same value. The [design](../design/float_backend.md#values-on-the-branch-cuts) lists which side each function takes."
+msgstr "**ゼロの符号は無視されます。** 関数は `y == 0.0` や `x == 0.0` で判定しますが、これは $+0$ と $-0$ を区別しないため、座標軸に沿った分岐切断の両側で同じ値になります。各関数がどちらの側をとるかは [設計](../design/float_backend.md#values-on-the-branch-cuts) に一覧があります。"
 
-#: manual/api/float_backend.md:39
-msgid "[!WARNING] Several functions return an angle exactly $\\pi$ larger than the principal value, because the code uses $2\\pi$ where the principal value has $\\pi$: `arg` on the negative real axis ($2\\pi$ instead of $\\pi$, so `log(-1)` is $2\\pi i$ and `pow` of a negative real base uses that angle), the real part of `acos` for $\\operatorname{Re} z < 0$ and of `acos_real` and `asec_real` for negative arguments, and the imaginary part of `acosh_real` for $x < -1$. For those inputs `cos(acos(z))` returns $-z$ and `cosh(acosh_real(x))` returns $-x$. The values documented below are the values the code returns."
-msgstr "[!WARNING] いくつかの関数は、主値よりちょうど $\\pi$ 大きい角度を返します。主値では $\\pi$ となるところでコードが $2\\pi$ を使っているためです。該当するのは、負の実軸上の `arg`($\\pi$ ではなく $2\\pi$ になるため、`log(-1)` は $2\\pi i$ となり、負の実数を底とする `pow` もこの角度を使います)、$\\operatorname{Re} z < 0$ のときの `acos` の実部、負の引数に対する `acos_real` と `asec_real` の実部、そして $x < -1$ のときの `acosh_real` の虚部です。これらの入力では `cos(acos(z))` は $-z$ を、`cosh(acosh_real(x))` は $-x$ を返します。以下に記載する値は、コードが実際に返す値です。"
+#: manual/api/float_backend.md:46
+msgid "**Reciprocal functions go through `Complex::inv`.** `sec`, `csc`, `cot`, `sech`, `csch`, `coth`, `asec`, `acsc`, `asech`, `acsch`, `acoth` and the negative integer exponents of `pow` and `pow_real` use the unscaled [`Complex::inv`](core.md#complexinv) of the core. It aborts when the modulus of its argument is $0$ or below about $1.5 \\times 10^{-162}$, and returns infinite or NaN parts for moduli below about $10^{-154}$ or above about $1.3 \\times 10^{154}$. So `csc(0)`, `csc(1e-170)` and `pow_real(1e-200 + 0i, -2.0)` abort, `csc(1e-160)` is $\\infty + \\mathrm{NaN}\\,i$, and `csc(800i)` is NaN $+$ NaN$i$. A true pole such as $\\pi/2$ for `sec` is not hit exactly, because `cos(@math.PI / 2.0)` is about $6 \\times 10^{-17}$, not $0$; `sec` returns about $1.6 \\times 10^{16}$ there."
+msgstr "**逆数系の関数は `Complex::inv` を経由します。** `sec`、`csc`、`cot`、`sech`、`csch`、`coth`、`asec`、`acsc`、`asech`、`acsch`、`acoth`、および `pow` と `pow_real` の負の整数指数は、コアのスケーリングされていない [`Complex::inv`](core.md#complexinv) を使います。これは引数の絶対値が $0$ または約 $1.5 \\times 10^{-162}$ 未満のときに中断し、約 $10^{-154}$ 未満または約 $1.3 \\times 10^{154}$ を超えるときには無限大や NaN の部分を返します。したがって `csc(0)`、`csc(1e-170)`、`pow_real(1e-200 + 0i, -2.0)` は中断し、`csc(1e-160)` は $\\infty + \\mathrm{NaN}\\,i$、`csc(800i)` は NaN $+$ NaN$i$ になります。`sec` の $\\pi/2$ のような本当の極にはちょうど当たりません。`cos(@math.PI / 2.0)` は $0$ ではなく約 $6 \\times 10^{-17}$ なので、`sec` はそこで約 $1.6 \\times 10^{16}$ を返します。"
 
-#: manual/api/float_backend.md:50
+#: manual/api/float_backend.md:59
+msgid "[!WARNING] Several functions return an angle exactly $\\pi$ larger than the principal value, because the code uses $2\\pi$ where the principal value has $\\pi$: `arg` on the negative real axis ($2\\pi$ instead of $\\pi$, so `log(-1)` is $2\\pi i$ and `pow` of a negative real base uses that angle), the real part of `acos` for $\\operatorname{Re} z < 0$ and of `acos_real` and `asec_real` for negative arguments, and the imaginary part of `acosh_real` for $x < -1$. For those inputs `cos(acos(z))` returns $-z$ and `cosh(acosh_real(x))` returns $-x$. The same holds for the functions built on them: `log_10`, `log_b`, `asec` for $\\operatorname{Re} z < 0$, and `acosh` and `asech` on the affected real inputs. In particular `exp(log(-1))` is $1$, and `pow_real(-4 + 0i, 0.5)` is $-2$ rather than $2i$. The values documented below are the values the code returns."
+msgstr "[!WARNING] いくつかの関数は、主値よりちょうど $\\pi$ 大きい角度を返します。主値では $\\pi$ となるところでコードが $2\\pi$ を使っているためです。該当するのは、負の実軸上の `arg`($\\pi$ ではなく $2\\pi$ になるため、`log(-1)` は $2\\pi i$ となり、負の実数を底とする `pow` もこの角度を使います)、$\\operatorname{Re} z < 0$ のときの `acos` の実部、負の引数に対する `acos_real` と `asec_real` の実部、そして $x < -1$ のときの `acosh_real` の虚部です。これらの入力では `cos(acos(z))` は $-z$ を、`cosh(acosh_real(x))` は $-x$ を返します。これらの上に作られた関数、つまり `log_10`、`log_b`、$\\operatorname{Re} z < 0$ での `asec`、影響を受ける実数入力での `acosh` と `asech` も同様です。特に `exp(log(-1))` は $1$ であり、`pow_real(-4 + 0i, 0.5)` は $2i$ ではなく $-2$ です。以下に記載する値は、コードが実際に返す値です。"
+
+#: manual/api/float_backend.md:73
 msgid "Capability traits"
 msgstr "能力トレイト"
 
-#: manual/api/float_backend.md:54
+#: manual/api/float_backend.md:77
 msgid "The algebraic and analytic capabilities an analytic backend needs from its real scalar."
 msgstr "解析バックエンドが実スカラーに求める代数的・解析的な能力です。"
 
-#: manual/api/float_backend.md:64
+#: manual/api/float_backend.md:87
 msgid "It has no methods of its own: it names the composition of `luna-generic` and `arithmetic` traits."
 msgstr "独自のメソッドは持たず、`luna-generic` と `arithmetic` のトレイトの合成に名前を付けたものです。"
 
-#: manual/api/float_backend.md:69
+#: manual/api/float_backend.md:92
 msgid "IEEE 754 special values and their tests."
 msgstr "IEEE 754 の特殊値とその判定です。"
 
-#: manual/api/float_backend.md:86
-msgid "`is_negative_zero(x)` is `is_neg_inf(1.0 / x)`, so it is true exactly for $-0$."
-msgstr "`is_negative_zero(x)` は `is_neg_inf(1.0 / x)` なので、ちょうど $-0$ のときに真になります。"
+#: manual/api/float_backend.md:109
+msgid "`is_negative_zero(x)` is `is_neg_inf(1.0 / x)`."
+msgstr "`is_negative_zero(x)` は `is_neg_inf(1.0 / x)` です。"
 
-#: manual/api/float_backend.md:91
+#: manual/api/float_backend.md:111
+msgid "[!WARNING] `is_negative_zero` is also true for negative subnormal numbers close to zero, because $1/x$ overflows to $-\\infty$ there: for `Double` when $-5.6 \\times 10^{-309} < x < 0$ (for example `-1.0e-310`), for `Float` when $-2.9 \\times 10^{-39} < x < 0$. Test `x == 0.0` first when you need exactly $-0$; the package's own functions use a private helper that does."
+msgstr "[!WARNING] `is_negative_zero` はゼロに近い負の非正規化数でも真になります。そこでは $1/x$ が $-\\infty$ へオーバーフローするためです。`Double` では $-5.6 \\times 10^{-309} < x < 0$(例えば `-1.0e-310`)、`Float` では $-2.9 \\times 10^{-39} < x < 0$ が該当します。ちょうど $-0$ を判定したいときは、先に `x == 0.0` を確かめてください。パッケージ自身の関数は、そうするプライベートな補助関数を使っています。"
+
+#: manual/api/float_backend.md:120
 msgid "The primitives the numerically stable algorithms use, on top of the two traits above."
 msgstr "上記 2 つのトレイトに加えて、数値的に安定なアルゴリズムが使うプリミティブです。"
 
-#: manual/api/float_backend.md:106
+#: manual/api/float_backend.md:135
 msgid "Method"
 msgstr "メソッド"
 
-#: manual/api/float_backend.md:106
+#: manual/api/float_backend.md:135
 msgid "Meaning"
 msgstr "意味"
 
-#: manual/api/float_backend.md:108
+#: manual/api/float_backend.md:137
 msgid "convert a `Double` constant"
 msgstr "`Double` 定数を変換"
 
-#: manual/api/float_backend.md:108
+#: manual/api/float_backend.md:137
 msgid "identity"
 msgstr "恒等関数"
 
-#: manual/api/float_backend.md:109
+#: manual/api/float_backend.md:138
 msgid "round towards zero"
 msgstr "ゼロ方向への丸め"
 
-#: manual/api/float_backend.md:110
+#: manual/api/float_backend.md:139
 msgid "convert to `Int`"
 msgstr "`Int` へ変換"
 
-#: manual/api/float_backend.md:111
+#: manual/api/float_backend.md:140
 msgid "$\\sqrt{x^2 + y^2}$ without overflow"
 msgstr "オーバーフローしない $\\sqrt{x^2 + y^2}$"
 
-#: manual/api/float_backend.md:114
-msgid "The `Float` `log1p` is the direct formula, which loses relative accuracy for $|x| \\ll 1$. No public function of this package is generic over these traits yet; the `Complex[Double]` functions below call the `Double` primitives directly."
-msgstr "`Float` の `log1p` は直接の式であり、$|x| \\ll 1$ で相対精度が失われます。このパッケージの公開関数で、これらのトレイトについてジェネリックなものはまだありません。以下の `Complex[Double]` 関数は `Double` のプリミティブを直接呼び出します。"
+#: manual/api/float_backend.md:143
+msgid "The `Float` `log1p` is the direct formula, which loses relative accuracy for $|x| \\ll 1$ and returns $0$ for $|x|$ below about $6 \\times 10^{-8}$ (`log1p(1.0e-10)` is `0`). No public function of this package is generic over these traits yet; the `Complex[Double]` functions below call the `Double` primitives directly."
+msgstr "`Float` の `log1p` は直接の式であり、$|x| \\ll 1$ で相対精度が失われ、$|x|$ が約 $6 \\times 10^{-8}$ 未満では $0$ を返します(`log1p(1.0e-10)` は `0`)。このパッケージの公開関数で、これらのトレイトについてジェネリックなものはまだありません。以下の `Complex[Double]` 関数は `Double` のプリミティブを直接呼び出します。"
 
-#: manual/api/float_backend.md:141
+#: manual/api/float_backend.md:173
 msgid "Re-exported type"
 msgstr "再エクスポートされる型"
 
-#: manual/api/float_backend.md:145
+#: manual/api/float_backend.md:177
 msgid "`@fb.Complex` is `@complex.Complex`; see the [core API](core.md)."
 msgstr "`@fb.Complex` は `@complex.Complex` です。[core API](core.md) を参照してください。"
 
-#: manual/api/float_backend.md:151
+#: manual/api/float_backend.md:183
 msgid "Construction and storage"
 msgstr "構築と格納"
 
-#: manual/api/float_backend.md:155
+#: manual/api/float_backend.md:187
 msgid "Builds $r e^{i\\theta} = r\\cos\\theta + i\\,r\\sin\\theta$."
 msgstr "$r e^{i\\theta} = r\\cos\\theta + i\\,r\\sin\\theta$ を構築します。"
 
-#: manual/api/float_backend.md:161
+#: manual/api/float_backend.md:193
 msgid "No normalization is applied: a negative $r$ or any real $\\theta$ is accepted."
 msgstr "正規化は行いません。負の $r$ や任意の実数 $\\theta$ も受け付けます。"
 
-#: manual/api/float_backend.md:166
+#: manual/api/float_backend.md:198
 msgid "Writes $z$ into an interleaved buffer `[re0, im0, re1, im1, …]` at complex index `offset`."
 msgstr "インターリーブされたバッファ `[re0, im0, re1, im1, …]` の複素インデックス `offset` の位置に $z$ を書き込みます。"
 
-#: manual/api/float_backend.md:175
+#: manual/api/float_backend.md:207
 msgid "Writes a real and an imaginary part into an interleaved buffer."
 msgstr "実部と虚部をインターリーブされたバッファに書き込みます。"
 
-#: manual/api/float_backend.md:181
+#: manual/api/float_backend.md:213
 msgid "The buffer length must be even. If `offset` equals the number of complex entries (`arr.length() / 2`), the pair is appended; otherwise it overwrites entry `offset`. An odd length aborts with `native_pack: buffer length must be even`, an offset outside `0..=arr.length() / 2` with `native_pack: offset out of bounds`."
 msgstr "バッファの長さは偶数でなければなりません。`offset` が複素要素の個数(`arr.length() / 2`)に等しい場合はペアを追加し、そうでなければ要素 `offset` を上書きします。長さが奇数の場合は `native_pack: buffer length must be even` で、オフセットが `0..=arr.length() / 2` の範囲外の場合は `native_pack: offset out of bounds` で中断します。"
 
-#: manual/api/float_backend.md:199
+#: manual/api/float_backend.md:231
 msgid "Modulus and argument"
 msgstr "絶対値と偏角"
 
-#: manual/api/float_backend.md:203
+#: manual/api/float_backend.md:235
 msgid "Returns $|z| = \\sqrt{x^2 + y^2}$ with `hypot`, without intermediate overflow or underflow."
 msgstr "`hypot` を使い、途中でオーバーフローやアンダーフローを起こさずに $|z| = \\sqrt{x^2 + y^2}$ を返します。"
 
-#: manual/api/float_backend.md:212
+#: manual/api/float_backend.md:244
 msgid "Returns $|z|^2$, computed as $m^2\\big((x/m)^2 + (y/m)^2\\big)$ with $m = \\max(|x|, |y|)$."
 msgstr "$m = \\max(|x|, |y|)$ として $m^2\\big((x/m)^2 + (y/m)^2\\big)$ で計算した $|z|^2$ を返します。"
 
-#: manual/api/float_backend.md:219
+#: manual/api/float_backend.md:251
 msgid "The scaling avoids spurious underflow of the squares; the result itself overflows to infinity when $|z|^2$ exceeds the `Double` range. $0$ maps to $0$."
 msgstr "スケーリングにより 2 乗の見かけ上のアンダーフローを避けますが、$|z|^2$ が `Double` の範囲を超える場合は結果自体が無限大にオーバーフローします。$0$ は $0$ に写ります。"
 
-#: manual/api/float_backend.md:225
+#: manual/api/float_backend.md:257
 msgid "Returns $\\ln|z|$ as $\\ln m + \\tfrac12\\ln(1 + t^2)$ with $m = \\max(|x|,|y|)$ and $t = \\min/\\max$."
 msgstr "$m = \\max(|x|,|y|)$、$t = \\min/\\max$ として、$\\ln m + \\tfrac12\\ln(1 + t^2)$ により $\\ln|z|$ を返します。"
 
-#: manual/api/float_backend.md:232
-msgid "It is finite for every finite non-zero $z$, even when $|z|$ itself would overflow. `abs_log(0)` is $-\\infty$."
-msgstr "$|z|$ 自体がオーバーフローする場合でも、ゼロでない有限の $z$ すべてに対して有限です。`abs_log(0)` は $-\\infty$ です。"
+#: manual/api/float_backend.md:264
+msgid "It is finite for every finite non-zero $z$, even when $|z|$ itself would overflow. `abs_log(0)` is $-\\infty$. The term $\\ln(1 + t^2)$ is evaluated directly, not with `log1p`, so the absolute error is small but the relative error is large when $|z|$ is close to $1$: `abs_log(1 + 1e-10i)` returns $0$ instead of $5 \\times 10^{-21}$, and so does the real part of `log` there."
+msgstr "有限でゼロでないすべての $z$ に対して有限であり、$|z|$ 自体がオーバーフローする場合でも同様です。`abs_log(0)` は $-\\infty$ です。$\\ln(1 + t^2)$ の項は `log1p` を使わず直接計算するので、絶対誤差は小さいものの、$|z|$ が $1$ に近いと相対誤差が大きくなります。`abs_log(1 + 1e-10i)` は $5 \\times 10^{-21}$ ではなく $0$ を返し、そこでの `log` の実部も同じです。"
 
-#: manual/api/float_backend.md:237
+#: manual/api/float_backend.md:272
 msgid "Returns the argument $\\theta$ with $z = |z| e^{i\\theta}$."
 msgstr "$z = |z| e^{i\\theta}$ となる偏角 $\\theta$ を返します。"
 
-#: manual/api/float_backend.md:243
+#: manual/api/float_backend.md:278
 msgid "Input"
 msgstr "入力"
 
-#: manual/api/float_backend.md:245
+#: manual/api/float_backend.md:280
 msgid "$z = 0$ (either zero sign)"
 msgstr "$z = 0$(ゼロの符号はどちらでも)"
 
-#: manual/api/float_backend.md:246
+#: manual/api/float_backend.md:281
 msgid "$2\\pi$ (see the warning above)"
 msgstr "$2\\pi$(上の警告を参照)"
 
-#: manual/api/float_backend.md:247
-#: manual/api/float_backend.md:398
+#: manual/api/float_backend.md:282
+#: manual/api/float_backend.md:445
 msgid "otherwise"
 msgstr "それ以外"
 
-#: manual/api/float_backend.md:261
+#: manual/api/float_backend.md:298
 msgid "Division"
 msgstr "除算"
 
-#: manual/api/float_backend.md:265
+#: manual/api/float_backend.md:302
 msgid "Divides $z / w$ with Smith's scaling and IEEE special-value handling."
 msgstr "Smith のスケーリングと IEEE の特殊値処理を用いて $z / w$ を計算します。"
 
-#: manual/api/float_backend.md:271
+#: manual/api/float_backend.md:308
 msgid "For finite $w$ it divides by the larger of $|c|, |d|$ first (with $r = d/c$ when $|c| \\ge |d|$):"
 msgstr "有限の $w$ に対しては、まず $|c|, |d|$ の大きい方で割ります($|c| \\ge |d|$ のときは $r = d/c$):"
 
-#: manual/api/float_backend.md:278
-msgid "so no square of $c$ or $d$ is formed. When $z$ has no NaN part and $w$ has an infinite part, the result is computed from the signs of the infinities: a finite $z$ gives $\\pm 0$ parts, an infinite $z$ gives the quotient of the sign patterns. Division by $0 + 0i$ produces infinities or NaN (no abort)."
-msgstr "そのため $c$ や $d$ の 2 乗は計算されません。$z$ に NaN の部分がなく、$w$ に無限大の部分がある場合、結果は無限大の符号から計算されます。有限の $z$ は $\\pm 0$ の部分を与え、無限大の $z$ は符号パターンの商を与えます。$0 + 0i$ による除算は無限大または NaN を生じます(中断はしません)。"
+#: manual/api/float_backend.md:315
+msgid "so no square of $c$ or $d$ is formed. When $z$ has no NaN part and $w$ has an infinite part, the result is computed from the signs of the infinities: a finite $z$ gives $\\pm 0$ parts, an infinite $z$ gives the quotient of the sign patterns, so $\\infty / \\infty$ is $1$ (C99 gives NaN). Division by $0 + 0i$ returns NaN $+$ NaN$i$ (no abort)."
+msgstr "そのため $c$ や $d$ の 2 乗は計算されません。$z$ に NaN の部分がなく、$w$ に無限大の部分がある場合、結果は無限大の符号から計算されます。有限の $z$ は $\\pm 0$ の部分を与え、無限大の $z$ は符号パターンの商を与えるので、$\\infty / \\infty$ は $1$ になります(C99 では NaN)。$0 + 0i$ による除算は NaN $+$ NaN$i$ を返します(中断はしません)。"
 
-#: manual/api/float_backend.md:294
+#: manual/api/float_backend.md:321
+msgid "[!WARNING] `div` computes $1/c$ (or $1/d$) explicitly. When the larger part of $w$ is a subnormal number below about $5.6 \\times 10^{-309}$, $1/c$ overflows and the result is NaN $+$ NaN$i$ even when the quotient is finite: `div(1e-10 + 0i, 1e-310 + 0i)` is NaN instead of $10^{300}$."
+msgstr "[!WARNING] `div` は $1/c$(または $1/d$)を明示的に計算します。$w$ の大きいほうの部分が約 $5.6 \\times 10^{-309}$ 未満の非正規化数のとき、$1/c$ がオーバーフローし、商が有限であっても結果は NaN $+$ NaN$i$ になります。`div(1e-10 + 0i, 1e-310 + 0i)` は $10^{300}$ ではなく NaN です。"
+
+#: manual/api/float_backend.md:341
 msgid "Roots"
 msgstr "根"
 
-#: manual/api/float_backend.md:298
+#: manual/api/float_backend.md:345
 msgid "Returns the principal square root: $\\operatorname{Re}\\sqrt z \\ge 0$, with the branch cut along the negative real axis."
 msgstr "主値の平方根を返します。$\\operatorname{Re}\\sqrt z \\ge 0$ で、分岐切断は負の実軸に沿っています。"
 
-#: manual/api/float_backend.md:305
+#: manual/api/float_backend.md:352
 msgid "It computes $w = \\sqrt{(|x| + |z|)/2}$ in a scaled form and returns $w + \\frac{y}{2w} i$ for $x \\ge 0$, and $\\frac{|y|}{2w} \\pm w\\,i$ for $x < 0$ with the sign of $y$. On the cut ($y = \\pm 0$, $x < 0$) the result is $+\\sqrt{|x|}\\,i$ for both zero signs. `sqrt(0)` is $0$."
 msgstr "スケーリングした形で $w = \\sqrt{(|x| + |z|)/2}$ を計算し、$x \\ge 0$ のときは $w + \\frac{y}{2w} i$ を、$x < 0$ のときは $y$ の符号に応じて $\\frac{|y|}{2w} \\pm w\\,i$ を返します。分岐切断上($y = \\pm 0$、$x < 0$)では、ゼロの符号によらず結果は $+\\sqrt{|x|}\\,i$ です。`sqrt(0)` は $0$ です。"
 
-#: manual/api/float_backend.md:312
+#: manual/api/float_backend.md:359
 msgid "Square root of a real number as a complex number: $\\sqrt x$ for $x \\ge 0$, $i\\sqrt{-x}$ for $x < 0$."
 msgstr "実数の平方根を複素数として返します。$x \\ge 0$ では $\\sqrt x$、$x < 0$ では $i\\sqrt{-x}$ です。"
 
-#: manual/api/float_backend.md:327
+#: manual/api/float_backend.md:374
 msgid "Exponential and logarithms"
 msgstr "指数関数と対数"
 
-#: manual/api/float_backend.md:331
+#: manual/api/float_backend.md:378
 msgid "Returns $e^z = e^x(\\cos y + i\\sin y)$."
 msgstr "$e^z = e^x(\\cos y + i\\sin y)$ を返します。"
 
-#: manual/api/float_backend.md:337
+#: manual/api/float_backend.md:384
 msgid "$e^x$ is computed first, so it overflows for $x > 709.78$ even when a part of the result would be finite, and `exp(710 + 0i)` has a NaN imaginary part ($\\infty \\cdot 0$)."
 msgstr "$e^x$ を先に計算するため、結果の一部が有限になる場合でも $x > 709.78$ でオーバーフローし、`exp(710 + 0i)` の虚部は NaN になります($\\infty \\cdot 0$)。"
 
-#: manual/api/float_backend.md:343
+#: manual/api/float_backend.md:390
 msgid "Returns $\\ln|z| + i\\arg z$ with `abs_log` and `arg`."
 msgstr "`abs_log` と `arg` を使って $\\ln|z| + i\\arg z$ を返します。"
 
-#: manual/api/float_backend.md:349
-msgid "The imaginary part follows `arg`, so it is $2\\pi$ on the negative real axis. `log(0)` is $-\\infty + 0i$."
-msgstr "虚部は `arg` に従うため、負の実軸上では $2\\pi$ になります。`log(0)` は $-\\infty + 0i$ です。"
+#: manual/api/float_backend.md:396
+msgid "The imaginary part follows `arg`, so it is $2\\pi$ on the negative real axis, and `exp(log(-1))` is $1$, not $-1$. `log(0)` is $-\\infty + 0i$."
+msgstr "虚部は `arg` に従うため、負の実軸上では $2\\pi$ になり、`exp(log(-1))` は $-1$ ではなく $1$ です。`log(0)` は $-\\infty + 0i$ です。"
 
-#: manual/api/float_backend.md:354
+#: manual/api/float_backend.md:401
 msgid "Returns $\\log_{10} z = \\log z / \\ln 10$."
 msgstr "$\\log_{10} z = \\log z / \\ln 10$ を返します。"
 
-#: manual/api/float_backend.md:362
+#: manual/api/float_backend.md:409
 msgid "Returns $\\log_b z = \\log z / \\log b$, divided with `div`."
 msgstr "`div` で除算して $\\log_b z = \\log z / \\log b$ を返します。"
 
-#: manual/api/float_backend.md:378
+#: manual/api/float_backend.md:425
 msgid "Powers"
 msgstr "べき乗"
 
-#: manual/api/float_backend.md:382
+#: manual/api/float_backend.md:429
 msgid "Returns $z^w$."
 msgstr "$z^w$ を返します。"
 
-#: manual/api/float_backend.md:388
+#: manual/api/float_backend.md:435
 msgid "The cases are tried in order:"
 msgstr "次のケースが順に試されます:"
 
-#: manual/api/float_backend.md:390
+#: manual/api/float_backend.md:437
 msgid "Case"
 msgstr "ケース"
 
-#: manual/api/float_backend.md:393
+#: manual/api/float_backend.md:440
 msgid "$z = 0$, $w$ real and positive"
 msgstr "$z = 0$、$w$ が正の実数"
 
-#: manual/api/float_backend.md:394
+#: manual/api/float_backend.md:441
 msgid "$z = 0$, otherwise"
 msgstr "$z = 0$、それ以外"
 
-#: manual/api/float_backend.md:394
+#: manual/api/float_backend.md:441
 msgid "NaN + NaN$i$"
 msgstr "NaN + NaN$i$"
 
-#: manual/api/float_backend.md:396
-msgid "`z.inv()` (aborts if $z = 0$, which the first rows exclude)"
-msgstr "`z.inv()`($z = 0$ のとき中断するが、最初の行で除外済み)"
+#: manual/api/float_backend.md:443
+msgid "`z.inv()` (aborts for non-zero $\\lvert z\\rvert < 1.5 \\times 10^{-162}$)"
+msgstr "`z.inv()`(ゼロでない $\\lvert z\\rvert < 1.5 \\times 10^{-162}$ では中断)"
 
-#: manual/api/float_backend.md:397
+#: manual/api/float_backend.md:444
 msgid "$w$ real integer, $\\lvert w\\rvert  \\le 2^{31} - 1$"
 msgstr "$w$ が実整数で $\\lvert w\\rvert  \\le 2^{31} - 1$"
 
-#: manual/api/float_backend.md:397
-msgid "binary powering; negative exponents invert $z$ first"
-msgstr "二進累乗法。負の指数ではまず $z$ の逆数をとる"
+#: manual/api/float_backend.md:444
+msgid "binary powering; negative exponents invert $z$ first with `z.inv()`"
+msgstr "二進累乗法。負の指数ではまず `z.inv()` で $z$ の逆数をとる"
 
-#: manual/api/float_backend.md:398
+#: manual/api/float_backend.md:445
 msgid "$e^{w\\log z}$ in polar form"
 msgstr "極形式での $e^{w\\log z}$"
 
-#: manual/api/float_backend.md:400
-msgid "The polar form computes $\\rho = e^{\\operatorname{Re} w \\ln|z| - \\operatorname{Im} w \\arg z}$ and $\\beta = \\operatorname{Re} w \\arg z + \\operatorname{Im} w \\ln|z|$ and returns $\\rho(\\cos\\beta + i\\sin\\beta)$."
-msgstr "極形式では $\\rho = e^{\\operatorname{Re} w \\ln|z| - \\operatorname{Im} w \\arg z}$ と $\\beta = \\operatorname{Re} w \\arg z + \\operatorname{Im} w \\ln|z|$ を計算し、$\\rho(\\cos\\beta + i\\sin\\beta)$ を返します。"
+#: manual/api/float_backend.md:447
+msgid "The polar form computes $\\rho = e^{\\operatorname{Re} w \\ln|z| - \\operatorname{Im} w \\arg z}$ and $\\beta = \\operatorname{Re} w \\arg z + \\operatorname{Im} w \\ln|z|$ and returns $\\rho(\\cos\\beta + i\\sin\\beta)$. It uses `arg`, so a negative real base takes the angle $2\\pi$: `pow_real(-8 + 0i, 1.0 / 3.0)` is $-1 + 1.732i$ instead of the principal $1 + 1.732i$."
+msgstr "極形式では $\\rho = e^{\\operatorname{Re} w \\ln|z| - \\operatorname{Im} w \\arg z}$ と $\\beta = \\operatorname{Re} w \\arg z + \\operatorname{Im} w \\ln|z|$ を計算し、$\\rho(\\cos\\beta + i\\sin\\beta)$ を返します。`arg` を使うため、負の実数の底は角度 $2\\pi$ をとります。`pow_real(-8 + 0i, 1.0 / 3.0)` は主値 $1 + 1.732i$ ではなく $-1 + 1.732i$ です。"
 
-#: manual/api/float_backend.md:406
+#: manual/api/float_backend.md:455
 msgid "Returns $z^p$ for a real exponent $p$, with the same zero, integer and polar cases as `pow`."
 msgstr "実数の指数 $p$ に対して $z^p$ を返します。ゼロ、整数、極形式のケースは `pow` と同じです。"
 
-#: manual/api/float_backend.md:423
+#: manual/api/float_backend.md:472
 msgid "Scalar operands"
 msgstr "スカラーオペランド"
 
-#: manual/api/float_backend.md:427
+#: manual/api/float_backend.md:476
 msgid "Applies a binary complex function with a real second operand $x + 0i$."
 msgstr "2 番目のオペランドを実数 $x + 0i$ として 2 項複素関数を適用します。"
 
-#: manual/api/float_backend.md:435
+#: manual/api/float_backend.md:484
 msgid "Applies a binary complex function with an imaginary second operand $0 + yi$."
 msgstr "2 番目のオペランドを純虚数 $0 + yi$ として 2 項複素関数を適用します。"
 
-#: manual/api/float_backend.md:450
+#: manual/api/float_backend.md:499
 msgid "Trigonometric functions"
 msgstr "三角関数"
 
-#: manual/api/float_backend.md:454
+#: manual/api/float_backend.md:503
 msgid "Returns $\\sin z = \\sin x\\cosh y + i\\cos x\\sinh y$; for $y = 0$ exactly, the real $\\sin x$."
 msgstr "$\\sin z = \\sin x\\cosh y + i\\cos x\\sinh y$ を返します。$y = 0$ ちょうどのときは実数の $\\sin x$ を返します。"
 
-#: manual/api/float_backend.md:463
+#: manual/api/float_backend.md:512
 msgid "Returns $\\cos z = \\cos x\\cosh y - i\\sin x\\sinh y$; for $y = 0$ exactly, the real $\\cos x$."
 msgstr "$\\cos z = \\cos x\\cosh y - i\\sin x\\sinh y$ を返します。$y = 0$ ちょうどのときは実数の $\\cos x$ を返します。"
 
-#: manual/api/float_backend.md:472
+#: manual/api/float_backend.md:521
 msgid "Returns $\\tan z$."
 msgstr "$\\tan z$ を返します。"
 
-#: manual/api/float_backend.md:478
+#: manual/api/float_backend.md:527
 msgid "For $|y| < 1$ it uses $\\dfrac{\\sin 2x + i\\sinh 2y}{2(\\cos^2 x + \\sinh^2 y)}$; for $|y| \\ge 1$ a form scaled by $e^{-2|y|}$ that tends to $\\pm i$ without overflow (see the design)."
 msgstr "$|y| < 1$ では $\\dfrac{\\sin 2x + i\\sinh 2y}{2(\\cos^2 x + \\sinh^2 y)}$ を使い、$|y| \\ge 1$ では $e^{-2|y|}$ でスケーリングした、オーバーフローせずに $\\pm i$ へ収束する形を使います(設計を参照)。"
 
-#: manual/api/float_backend.md:484
-msgid "Returns $1/\\cos z$; aborts where $\\cos z = 0$."
-msgstr "$1/\\cos z$ を返します。$\\cos z = 0$ となる点で中断します。"
+#: manual/api/float_backend.md:533
+msgid "Returns $1/\\cos z$ through `Complex::inv`; see the conventions for when it aborts."
+msgstr "`Complex::inv` を通じて $1/\\cos z$ を返します。いつ中断するかは規約の節を参照してください。"
 
-#: manual/api/float_backend.md:492
-msgid "Returns $1/\\sin z$; aborts at $z = k\\pi$."
-msgstr "$1/\\sin z$ を返します。$z = k\\pi$ で中断します。"
+#: manual/api/float_backend.md:542
+msgid "Returns $1/\\sin z$; aborts at $z = 0$ and where $|\\sin z| < 1.5 \\times 10^{-162}$."
+msgstr "$1/\\sin z$ を返します。$z = 0$ と $|\\sin z| < 1.5 \\times 10^{-162}$ となる点で中断します。"
 
-#: manual/api/float_backend.md:500
-msgid "Returns $1/\\tan z$; aborts at $z = k\\pi$."
-msgstr "$1/\\tan z$ を返します。$z = k\\pi$ で中断します。"
+#: manual/api/float_backend.md:551
+msgid "Returns $1/\\tan z$; aborts at $z = 0$ and where $|\\tan z| < 1.5 \\times 10^{-162}$."
+msgstr "$1/\\tan z$ を返します。$z = 0$ と $|\\tan z| < 1.5 \\times 10^{-162}$ となる点で中断します。"
 
-#: manual/api/float_backend.md:518
+#: manual/api/float_backend.md:570
 msgid "Inverse trigonometric functions"
 msgstr "逆三角関数"
 
-#: manual/api/float_backend.md:522
+#: manual/api/float_backend.md:574
 msgid "Returns the principal arcsine, with branch cuts on the real axis outside $[-1, 1]$; $\\operatorname{Re}$ lies in $[-\\pi/2, \\pi/2]$."
 msgstr "主値の逆正弦を返します。分岐切断は実軸上の $[-1, 1]$ の外側にあり、$\\operatorname{Re}$ は $[-\\pi/2, \\pi/2]$ に入ります。"
 
-#: manual/api/float_backend.md:529
-msgid "Real inputs go to `asin_real`, purely imaginary inputs to $i\\operatorname{asinh} y$, inputs with a part above $10^{150}$ to the asymptotic form $\\operatorname{atan2}(|x|, |y|) + i(\\ln 2 + \\ln|z|)$, and all others to the Hull–Fairgrieve–Tang algorithm (see the design). The result is odd in each part: the signs of $x$ and $y$ are copied to the real and imaginary parts."
-msgstr "実数の入力は `asin_real` へ、純虚数の入力は $i\\operatorname{asinh} y$ へ、いずれかの部分が $10^{150}$ を超える入力は漸近形 $\\operatorname{atan2}(|x|, |y|) + i(\\ln 2 + \\ln|z|)$ へ、それ以外はすべて Hull–Fairgrieve–Tang アルゴリズムへ送られます(設計を参照)。結果は各部分について奇関数であり、$x$ と $y$ の符号がそれぞれ実部と虚部にコピーされます。"
+#: manual/api/float_backend.md:581
+msgid "Real inputs go to `asin_real`, purely imaginary inputs to $i\\operatorname{asinh} y$, inputs with a part above $10^{150}$ to the asymptotic form $\\operatorname{atan2}(|x|, |y|) + i(\\ln 2 + \\ln|z|)$, and all others to the Hull–Fairgrieve–Tang algorithm (see the design). The result is odd in each part: the signs of $x$ and $y$ are copied to the real and imaginary parts. Close to the branch points $\\pm 1$ the imaginary part loses accuracy, because this branch evaluates $\\sqrt{A^2 - 1}$ instead of $\\sqrt{(A - 1)(A + 1)}$: at $1 + 10^{-10}i$ its relative error is about $4 \\times 10^{-8}$, while `acos` there is accurate."
+msgstr "実数の入力は `asin_real` へ、純虚数の入力は $i\\operatorname{asinh} y$ へ、いずれかの部分が $10^{150}$ を超える入力は漸近形 $\\operatorname{atan2}(|x|, |y|) + i(\\ln 2 + \\ln|z|)$ へ、それ以外はすべて Hull–Fairgrieve–Tang アルゴリズムへ送られます(設計を参照)。結果は各部分について奇関数であり、$x$ と $y$ の符号がそれぞれ実部と虚部にコピーされます。分岐点 $\\pm 1$ の近くでは虚部の精度が落ちます。この分岐では $\\sqrt{(A - 1)(A + 1)}$ ではなく $\\sqrt{A^2 - 1}$ を計算するためです。$1 + 10^{-10}i$ での相対誤差は約 $4 \\times 10^{-8}$ で、そこでの `acos` は正確です。"
 
-#: manual/api/float_backend.md:537
+#: manual/api/float_backend.md:593
 msgid "Arcsine of a real number: $\\arcsin x$ for $|x| \\le 1$, $\\pm\\pi/2 + i\\operatorname{acosh}|x|$ for $|x| > 1$ (sign of $x$), NaN for NaN."
 msgstr "実数の逆正弦です。$|x| \\le 1$ では $\\arcsin x$、$|x| > 1$ では $\\pm\\pi/2 + i\\operatorname{acosh}|x|$($x$ の符号)、NaN に対しては NaN です。"
 
-#: manual/api/float_backend.md:546
+#: manual/api/float_backend.md:602
 msgid "Returns the arccosine, with branch cuts on the real axis outside $[-1, 1]$."
 msgstr "逆余弦を返します。分岐切断は実軸上の $[-1, 1]$ の外側にあります。"
 
-#: manual/api/float_backend.md:552
-msgid "For $x \\ge 0$ the real part is the principal value in $[0, \\pi/2]$ and the imaginary part has the sign opposite to $y$. For $x < 0$ the imaginary part is the principal one, but the real part is $2\\pi - \\rho$ instead of the principal $\\pi - \\rho$, where $\\rho \\in [0, \\pi/2]$ is the real part of $\\arccos(-z)$ (see the warning above). Purely imaginary inputs give $\\pi/2 - i\\operatorname{asinh} y$, and real inputs go to `acos_real`."
-msgstr "$x \\ge 0$ では、実部は $[0, \\pi/2]$ の主値で、虚部は $y$ と逆の符号を持ちます。$x < 0$ では虚部は主値ですが、実部は主値の $\\pi - \\rho$ ではなく $2\\pi - \\rho$ になります。ここで $\\rho \\in [0, \\pi/2]$ は $\\arccos(-z)$ の実部です(上の警告を参照)。純虚数の入力は $\\pi/2 - i\\operatorname{asinh} y$ を与え、実数の入力は `acos_real` へ送られます。"
+#: manual/api/float_backend.md:608
+msgid "For $x \\ge 0$ the real part is the principal value in $[0, \\pi/2]$ and the imaginary part has the sign opposite to $y$. For $x < 0$ the imaginary part is the principal one, but the real part is $2\\pi - \\rho$ instead of the principal $\\pi - \\rho$, where $\\rho \\in [0, \\pi/2]$ is the real part of $\\arccos(-z)$ (see the warning above). Purely imaginary inputs give $\\pi/2 - i\\operatorname{asinh} y$, and real inputs go to `acos_real`. Inputs with a part above $10^{150}$ use $\\pi/2 - \\operatorname{asin} z$ and get the principal value for every $x$, so the real part jumps by $\\pi$ at that threshold when $x < 0$."
+msgstr "$x \\ge 0$ では、実部は $[0, \\pi/2]$ の主値で、虚部は $y$ と逆の符号を持ちます。$x < 0$ では虚部は主値ですが、実部は主値の $\\pi - \\rho$ ではなく $2\\pi - \\rho$ になります。ここで $\\rho \\in [0, \\pi/2]$ は $\\arccos(-z)$ の実部です(上の警告を参照)。純虚数の入力は $\\pi/2 - i\\operatorname{asinh} y$ を与え、実数の入力は `acos_real` へ送られます。いずれかの部分が $10^{150}$ を超える入力は $\\pi/2 - \\operatorname{asin} z$ を使い、どの $x$ でも主値を得るので、$x < 0$ ではその閾値で実部が $\\pi$ だけ跳びます。"
 
-#: manual/api/float_backend.md:561
+#: manual/api/float_backend.md:620
 msgid "Arccosine of a real number: $\\arccos x$ for $|x| \\le 1$, $-i\\operatorname{acosh} x$ for $x > 1$, and $2\\pi - i\\operatorname{acosh}(-x)$ for $x < -1$."
 msgstr "実数の逆余弦です。$|x| \\le 1$ では $\\arccos x$、$x > 1$ では $-i\\operatorname{acosh} x$、$x < -1$ では $2\\pi - i\\operatorname{acosh}(-x)$ です。"
 
-#: manual/api/float_backend.md:570
+#: manual/api/float_backend.md:629
 msgid "Returns the principal arctangent, with branch cuts on the imaginary axis outside $[-i, i]$."
 msgstr "主値の逆正接を返します。分岐切断は虚軸上の $[-i, i]$ の外側にあります。"
 
-#: manual/api/float_backend.md:577
+#: manual/api/float_backend.md:636
 msgid "The imaginary part is $\\tfrac14\\ln\\frac{x^2 + (1+y)^2}{x^2 + (1-y)^2}$, computed with `log1p` when the ratio is close to $1$; the real part is $\\tfrac12\\operatorname{atan2}(2x, 1 - x^2 - y^2)$, rescaled for large inputs. On the cut ($x = 0$, $|y| > 1$) the real part is $\\pm\\pi/2$ with the sign of $y$. Infinite inputs return $\\pm\\pi/2 + 0i$."
 msgstr "虚部は $\\tfrac14\\ln\\frac{x^2 + (1+y)^2}{x^2 + (1-y)^2}$ で、比が $1$ に近いときは `log1p` で計算します。実部は $\\tfrac12\\operatorname{atan2}(2x, 1 - x^2 - y^2)$ で、大きな入力に対してはスケーリングし直します。分岐切断上($x = 0$、$|y| > 1$)では、実部は $y$ の符号を持つ $\\pm\\pi/2$ です。無限大の入力は $\\pm\\pi/2 + 0i$ を返します。"
 
-#: manual/api/float_backend.md:585
-msgid "Returns $\\operatorname{acos}(1/z)$; aborts at $z = 0$."
-msgstr "$\\operatorname{acos}(1/z)$ を返します。$z = 0$ で中断します。"
+#: manual/api/float_backend.md:644
+msgid "Returns $\\operatorname{acos}(1/z)$; aborts at $z = 0$. It inherits the `acos` deviation wherever $\\operatorname{Re}(1/z) < 0$, that is for $\\operatorname{Re} z < 0$ off the real interval $(-\\infty, -1]$."
+msgstr "$\\operatorname{acos}(1/z)$ を返します。$z = 0$ で中断します。$\\operatorname{Re}(1/z) < 0$ となるところ、つまり実区間 $(-\\infty, -1]$ 以外で $\\operatorname{Re} z < 0$ となるところでは、`acos` の逸脱を引き継ぎます。"
 
-#: manual/api/float_backend.md:593
-msgid "Arcsecant of a real number: $\\arccos(1/x)$ for $|x| \\ge 1$, $-i\\operatorname{acosh}(1/x)$ for $0 \\le x < 1$, $2\\pi - i\\operatorname{acosh}(-1/x)$ for $-1 < x < 0$."
-msgstr "実数の逆正割です。$|x| \\ge 1$ では $\\arccos(1/x)$、$0 \\le x < 1$ では $-i\\operatorname{acosh}(1/x)$、$-1 < x < 0$ では $2\\pi - i\\operatorname{acosh}(-1/x)$ です。"
+#: manual/api/float_backend.md:654
+msgid "Arcsecant of a real number: $\\arccos(1/x)$ for $|x| \\ge 1$, $-i\\operatorname{acosh}(1/x)$ for $0 \\le x < 1$, $2\\pi - i\\operatorname{acosh}(-1/x)$ for $-1 < x < 0$. `asec_real(0)` is $0 - \\infty i$ (no abort, unlike `asec`). There is no NaN check: NaN falls into the last case and gives $2\\pi + \\mathrm{NaN}\\,i$."
+msgstr "実数の逆正割です。$|x| \\ge 1$ では $\\arccos(1/x)$、$0 \\le x < 1$ では $-i\\operatorname{acosh}(1/x)$、$-1 < x < 0$ では $2\\pi - i\\operatorname{acosh}(-1/x)$ です。`asec_real(0)` は $0 - \\infty i$ です(`asec` と違って中断しません)。NaN の判定はなく、NaN は最後の場合に入って $2\\pi + \\mathrm{NaN}\\,i$ になります。"
 
-#: manual/api/float_backend.md:603
+#: manual/api/float_backend.md:666
 msgid "Returns $\\operatorname{asin}(1/z)$; aborts at $z = 0$."
 msgstr "$\\operatorname{asin}(1/z)$ を返します。$z = 0$ で中断します。"
 
-#: manual/api/float_backend.md:611
-msgid "Arccosecant of a real number: $\\arcsin(1/x)$ for $|x| \\ge 1$, $\\pm\\pi/2 + i\\operatorname{acosh}|1/x|$ for $|x| < 1$."
-msgstr "実数の逆余割です。$|x| \\ge 1$ では $\\arcsin(1/x)$、$|x| < 1$ では $\\pm\\pi/2 + i\\operatorname{acosh}|1/x|$ です。"
+#: manual/api/float_backend.md:674
+msgid "Arccosecant of a real number: $\\arcsin(1/x)$ for $|x| \\ge 1$, $\\pm\\pi/2 + i\\operatorname{acosh}|1/x|$ for $|x| < 1$. `acsc_real(0)` is $\\pi/2 + \\infty i$ (no abort, unlike `acsc`); NaN gives $-\\pi/2 + \\mathrm{NaN}\\,i$."
+msgstr "実数の逆余割です。$|x| \\ge 1$ では $\\arcsin(1/x)$、$|x| < 1$ では $\\pm\\pi/2 + i\\operatorname{acosh}|1/x|$ です。`acsc_real(0)` は $\\pi/2 + \\infty i$ です(`acsc` と違って中断しません)。NaN は $-\\pi/2 + \\mathrm{NaN}\\,i$ になります。"
 
-#: manual/api/float_backend.md:620
+#: manual/api/float_backend.md:685
 msgid "Returns $\\operatorname{atan}(1/z)$, and $\\pi/2$ at $z = 0$."
 msgstr "$\\operatorname{atan}(1/z)$ を返し、$z = 0$ では $\\pi/2$ を返します。"
 
-#: manual/api/float_backend.md:636
+#: manual/api/float_backend.md:701
 msgid "Hyperbolic functions"
 msgstr "双曲線関数"
 
-#: manual/api/float_backend.md:640
+#: manual/api/float_backend.md:705
 msgid "Returns $\\sinh z = \\sinh x\\cos y + i\\cosh x\\sin y$."
 msgstr "$\\sinh z = \\sinh x\\cos y + i\\cosh x\\sin y$ を返します。"
 
-#: manual/api/float_backend.md:648
+#: manual/api/float_backend.md:713
 msgid "Returns $\\cosh z = \\cosh x\\cos y + i\\sinh x\\sin y$."
 msgstr "$\\cosh z = \\cosh x\\cos y + i\\sinh x\\sin y$ を返します。"
 
-#: manual/api/float_backend.md:656
+#: manual/api/float_backend.md:721
 msgid "Returns $\\tanh z$; for $|x| \\ge 1$ a form scaled by $e^{-2|x|}$ that tends to $\\pm 1$ without overflow."
 msgstr "$\\tanh z$ を返します。$|x| \\ge 1$ では $e^{-2|x|}$ でスケーリングした、オーバーフローせずに $\\pm 1$ へ収束する形を使います。"
 
-#: manual/api/float_backend.md:665
-msgid "Returns $1/\\cosh z$; aborts where $\\cosh z = 0$."
-msgstr "$1/\\cosh z$ を返します。$\\cosh z = 0$ となる点で中断します。"
+#: manual/api/float_backend.md:730
+msgid "Returns $1/\\cosh z$ through `Complex::inv`; like `sec`, it does not hit the poles $i(\\pi/2 + k\\pi)$ exactly."
+msgstr "`Complex::inv` を通じて $1/\\cosh z$ を返します。`sec` と同じく、極 $i(\\pi/2 + k\\pi)$ にはちょうど当たりません。"
 
-#: manual/api/float_backend.md:673
-msgid "Returns $1/\\sinh z$; aborts at $z = k\\pi i$."
-msgstr "$1/\\sinh z$ を返します。$z = k\\pi i$ で中断します。"
+#: manual/api/float_backend.md:739
+msgid "Returns $1/\\sinh z$; aborts at $z = 0$ and where $|\\sinh z| < 1.5 \\times 10^{-162}$."
+msgstr "$1/\\sinh z$ を返します。$z = 0$ と $|\\sinh z| < 1.5 \\times 10^{-162}$ となる点で中断します。"
 
-#: manual/api/float_backend.md:681
-msgid "Returns $1/\\tanh z$; aborts at $z = k\\pi i$."
-msgstr "$1/\\tanh z$ を返します。$z = k\\pi i$ で中断します。"
+#: manual/api/float_backend.md:748
+msgid "Returns $1/\\tanh z$; aborts at $z = 0$ and where $|\\tanh z| < 1.5 \\times 10^{-162}$."
+msgstr "$1/\\tanh z$ を返します。$z = 0$ と $|\\tanh z| < 1.5 \\times 10^{-162}$ となる点で中断します。"
 
-#: manual/api/float_backend.md:687
+#: manual/api/float_backend.md:755
 msgid "Inverse hyperbolic functions"
 msgstr "逆双曲線関数"
 
-#: manual/api/float_backend.md:691
+#: manual/api/float_backend.md:759
 msgid "Returns $\\operatorname{asinh} z = -i\\operatorname{asin}(iz)$, with branch cuts on the imaginary axis outside $[-i, i]$."
 msgstr "$\\operatorname{asinh} z = -i\\operatorname{asin}(iz)$ を返します。分岐切断は虚軸上の $[-i, i]$ の外側にあります。"
 
-#: manual/api/float_backend.md:698
+#: manual/api/float_backend.md:766
 msgid "Real inputs use the real `asinh`; purely imaginary inputs $iy$ give $i\\arcsin y$ for $|y| \\le 1$ and $\\pm(\\operatorname{acosh}|y| + i\\pi/2)$ otherwise."
 msgstr "実数の入力には実数の `asinh` を使います。純虚数の入力 $iy$ は、$|y| \\le 1$ では $i\\arcsin y$ を、それ以外では $\\pm(\\operatorname{acosh}|y| + i\\pi/2)$ を与えます。"
 
-#: manual/api/float_backend.md:703
+#: manual/api/float_backend.md:771
 msgid "Returns $\\operatorname{acosh} z = 2\\ln\\Big(\\sqrt{\\tfrac{z+1}{2}} + \\sqrt{\\tfrac{z-1}{2}}\\Big)$, with the branch cut on the real axis below $1$."
 msgstr "$\\operatorname{acosh} z = 2\\ln\\Big(\\sqrt{\\tfrac{z+1}{2}} + \\sqrt{\\tfrac{z-1}{2}}\\Big)$ を返します。分岐切断は実軸上の $1$ より下の部分にあります。"
 
-#: manual/api/float_backend.md:710
+#: manual/api/float_backend.md:778
 msgid "Real inputs go to `acosh_real`; an infinite part gives $\\infty + i\\arg z$."
 msgstr "実数の入力は `acosh_real` へ送られます。無限大の部分があると $\\infty + i\\arg z$ を与えます。"
 
-#: manual/api/float_backend.md:714
+#: manual/api/float_backend.md:782
 msgid "Inverse hyperbolic cosine of a real number: $\\operatorname{acosh} x$ for $x \\ge 1$, $i\\arccos x$ for $-1 \\le x < 1$, $\\operatorname{acosh}(-x) + 2\\pi i$ for $x < -1$."
 msgstr "実数の逆双曲線余弦です。$x \\ge 1$ では $\\operatorname{acosh} x$、$-1 \\le x < 1$ では $i\\arccos x$、$x < -1$ では $\\operatorname{acosh}(-x) + 2\\pi i$ です。"
 
-#: manual/api/float_backend.md:724
+#: manual/api/float_backend.md:792
 msgid "Returns $\\operatorname{atanh} z$, with branch cuts on the real axis outside $[-1, 1]$."
 msgstr "$\\operatorname{atanh} z$ を返します。分岐切断は実軸上の $[-1, 1]$ の外側にあります。"
 
-#: manual/api/float_backend.md:731
+#: manual/api/float_backend.md:799
 msgid "The real part is $\\tfrac14\\ln\\frac{(1+x)^2 + y^2}{(1-x)^2 + y^2}$ (with `log1p` near zero), the imaginary part $\\tfrac12\\operatorname{atan2}(2y, 1 - x^2 - y^2)$, rescaled for large inputs. Infinite inputs return $0 \\pm i\\pi/2$."
 msgstr "実部は $\\tfrac14\\ln\\frac{(1+x)^2 + y^2}{(1-x)^2 + y^2}$(ゼロ付近では `log1p` を使用)、虚部は $\\tfrac12\\operatorname{atan2}(2y, 1 - x^2 - y^2)$ で、大きな入力では再スケーリングされます。無限大の入力は $0 \\pm i\\pi/2$ を返します。"
 
-#: manual/api/float_backend.md:738
+#: manual/api/float_backend.md:806
 msgid "Inverse hyperbolic tangent of a real number: $\\operatorname{atanh} x$ for $|x| < 1$, $\\pm\\infty$ at $\\pm 1$, and $\\operatorname{atanh}(1/x) + i\\pi/2$ for $|x| > 1$."
 msgstr "実数の逆双曲線正接です。$|x| < 1$ では $\\operatorname{atanh} x$、$\\pm 1$ では $\\pm\\infty$、$|x| > 1$ では $\\operatorname{atanh}(1/x) + i\\pi/2$ です。"
 
-#: manual/api/float_backend.md:748
-msgid "Returns $\\operatorname{acosh}(1/z)$; aborts at $z = 0$."
-msgstr "$\\operatorname{acosh}(1/z)$ を返します。$z = 0$ で中断します。"
+#: manual/api/float_backend.md:816
+msgid "Returns $\\operatorname{acosh}(1/z)$; aborts at $z = 0$. For real $-1 < x < 0$ it goes through `acosh_real(1/x)` and returns the imaginary part $2\\pi$ instead of $\\pi$."
+msgstr "$\\operatorname{acosh}(1/z)$ を返します。$z = 0$ で中断します。実数 $-1 < x < 0$ では `acosh_real(1/x)` を経由し、虚部として $\\pi$ ではなく $2\\pi$ を返します。"
 
-#: manual/api/float_backend.md:756
+#: manual/api/float_backend.md:826
 msgid "Returns $\\operatorname{asinh}(1/z)$; aborts at $z = 0$."
 msgstr "$\\operatorname{asinh}(1/z)$ を返します。$z = 0$ で中断します。"
 
-#: manual/api/float_backend.md:764
+#: manual/api/float_backend.md:834
 msgid "Returns $\\operatorname{atanh}(1/z)$; aborts at $z = 0$."
 msgstr "$\\operatorname{atanh}(1/z)$ を返します。$z = 0$ で中断します。"
 
@@ -811,54 +889,100 @@ msgstr "エコシステムのあらゆるスカラーに対する単一のジェ
 
 #: manual/design/core.md:15
 #: manual/design/float_backend.md:16
+msgid "Constraints"
+msgstr "制約"
+
+#: manual/design/core.md:17
+msgid "`T` ranges over exact rings (`Int`, `BigInt`, exact rationals), the floating-point types `Float` and `Double`, and other complex types, so the core may use only the operations of the `luna-generic` traits: no order, no absolute value, no special values."
+msgstr "`T` は正確な環(`Int`、`BigInt`、正確な有理数)、浮動小数点型 `Float` と `Double`、そして他の複素数型にわたるので、コアは `luna-generic` トレイトの演算しか使えません。順序も絶対値も特殊値もありません。"
+
+#: manual/design/core.md:21
+msgid "An instance must not claim more structure than the construction has under its bound."
+msgstr "インスタンスは、その境界のもとで構成が実際に持つ以上の構造を主張してはなりません。"
+
+#: manual/design/core.md:23
+msgid "A package cannot add methods or trait instances to a type of another package, so whatever needs floating-point semantics has to live in a separate package as free functions."
+msgstr "パッケージは他のパッケージの型にメソッドやトレイトのインスタンスを追加できないので、浮動小数点の意味論を必要とするものはすべて、自由関数として別のパッケージに置く必要があります。"
+
+#: manual/design/core.md:27
+#: manual/design/float_backend.md:30
+msgid "Main design decisions"
+msgstr "主な設計判断"
+
+#: manual/design/core.md:29
+msgid "One generic `Complex[T]` with public mutable fields."
+msgstr "公開された可変フィールドを持つ、一つのジェネリックな `Complex[T]`。"
+
+#: manual/design/core.md:30
+msgid "Instances follow the structure of `T`: componentwise operations need only the matching operations of `T`, multiplication needs `T : Ring`, inverses need `T : Field`."
+msgstr "インスタンスは `T` の構造に従います。成分ごとの演算は `T` の対応する演算だけを、乗算は `T : Ring` を、逆元は `T : Field` を必要とします。"
+
+#: manual/design/core.md:33
+msgid "The schoolbook product with four multiplications."
+msgstr "4 回の乗算による教科書どおりの積。"
+
+#: manual/design/core.md:34
+msgid "Textbook division through `Inverse::inv` of the norm, because a generic field has nothing else."
+msgstr "ノルムの `Inverse::inv` による教科書どおりの除算。ジェネリックな体には他に手段がないためです。"
+
+#: manual/design/core.md:36
+msgid "No analytic functions in the core; `float_backend` provides them for `Double`."
+msgstr "コアには解析関数を置かず、`float_backend` が `Double` 向けに提供します。"
+
+#: manual/design/core.md:39
+#: manual/design/float_backend.md:42
 msgid "Mathematical background"
 msgstr "数学的背景"
 
-#: manual/design/core.md:17
+#: manual/design/core.md:41
 msgid "The construction"
 msgstr "構成"
 
-#: manual/design/core.md:19
-msgid "For a commutative ring $R$, the complex numbers over $R$ are the quotient of the polynomial ring by the ideal generated by $x^2 + 1$:"
-msgstr "可換環 $R$ に対し、$R$ 上の複素数は多項式環を $x^2 + 1$ で生成されるイデアルで割った剰余環です:"
+#: manual/design/core.md:43
+msgid "For a ring $R$, the complex numbers over $R$ are the quotient of the polynomial ring in a central indeterminate $x$ by the two-sided ideal generated by $x^2 + 1$:"
+msgstr "環 $R$ に対し、$R$ 上の複素数は、中心的な不定元 $x$ による多項式環を $x^2 + 1$ で生成される両側イデアルで割った剰余環です:"
 
-#: manual/design/core.md:26
+#: manual/design/core.md:51
 msgid "Division by the monic polynomial $x^2 + 1$ leaves a unique remainder of degree below two, so every element is $a + bi$ with unique $a, b \\in R$: the pair `(re, im)`. Computing with polynomials and reducing $i^2 = -1$ gives the operations of the package:"
 msgstr "モニック多項式 $x^2 + 1$ で割ると次数 2 未満の剰余が一意に残るため、すべての元は一意な $a, b \\in R$ によって $a + bi$ と表されます。これがペア `(re, im)` です。多項式として計算し $i^2 = -1$ で簡約すると、このパッケージの演算が得られます:"
 
-#: manual/design/core.md:38
-msgid "As a quotient of a commutative ring, $R[i]$ is a commutative ring, with zero $0 + 0i$ and one $1 + 0i$; $R$ embeds as $a \\mapsto a + 0i$."
-msgstr "可換環の剰余環として、$R[i]$ は零元 $0 + 0i$、単位元 $1 + 0i$ を持つ可換環であり、$R$ は $a \\mapsto a + 0i$ によって埋め込まれます。"
+#: manual/design/core.md:63
+msgid "As a quotient of a ring by a two-sided ideal, $R[i]$ is a ring, with zero $0 + 0i$ and one $1 + 0i$; $R$ embeds as $a \\mapsto a + 0i$. The product formula keeps the factors of $R$ in their order ($ac$, $ad$, $bc$, $bd$) and moves only $i$, which commutes with everything because $x$ is central. So the formula is associative and distributive even when $R$ is not commutative, which is why `MulMonoid`, `Semiring` and `Ring` need only `T : Ring`. $R[i]$ is commutative exactly when $R$ is."
+msgstr "環を両側イデアルで割った剰余として、$R[i]$ は零元 $0 + 0i$ と単位元 $1 + 0i$ を持つ環であり、$R$ は $a \\mapsto a + 0i$ で埋め込まれます。積の式は $R$ の因子の順序($ac$、$ad$、$bc$、$bd$)を保ち、$i$ だけを動かします。$x$ が中心的なので $i$ はすべての元と可換です。したがって $R$ が非可換でもこの式は結合法則と分配法則を満たし、これが `MulMonoid`、`Semiring`、`Ring` が `T : Ring` しか必要としない理由です。$R[i]$ が可換になるのは $R$ が可換なときに限ります。"
 
-#: manual/design/core.md:41
+#: manual/design/core.md:71
+msgid "The rest of this page assumes $R$ commutative: the norm below lies in $R$ only then. For $z = a + bi$ over a non-commutative $R$, $z\\bar z = (a^2 + b^2) + (ba - ab)i$."
+msgstr "このページの残りでは $R$ が可換であると仮定します。そのときに限り、以下のノルムが $R$ に属するからです。非可換な $R$ 上の $z = a + bi$ では $z\\bar z = (a^2 + b^2) + (ba - ab)i$ です。"
+
+#: manual/design/core.md:75
 msgid "Conjugation and the norm"
 msgstr "共役とノルム"
 
-#: manual/design/core.md:43
+#: manual/design/core.md:77
 msgid "$\\overline{a + bi} = a - bi$ is the map induced by $x \\mapsto -x$, which fixes the ideal $(x^2 + 1)$, so it is a ring automorphism of order two:"
 msgstr "$\\overline{a + bi} = a - bi$ は $x \\mapsto -x$ から誘導される写像で、イデアル $(x^2 + 1)$ を保つため、位数 2 の環自己同型です:"
 
-#: manual/design/core.md:51
+#: manual/design/core.md:85
 msgid "The norm $N(z) = z\\bar z = (a + bi)(a - bi) = a^2 + b^2$ lies in $R$ and is multiplicative, $N(zw) = zw\\,\\bar z\\bar w = N(z)N(w)$."
 msgstr "ノルム $N(z) = z\\bar z = (a + bi)(a - bi) = a^2 + b^2$ は $R$ に属し、乗法的です: $N(zw) = zw\\,\\bar z\\bar w = N(z)N(w)$。"
 
-#: manual/design/core.md:54
+#: manual/design/core.md:88
 msgid "Inverses and division"
 msgstr "逆元と除算"
 
-#: manual/design/core.md:56
+#: manual/design/core.md:90
 msgid "If $N(z)$ is invertible in $R$, then $z \\cdot \\bar z\\,N(z)^{-1} = 1$, so"
 msgstr "$N(z)$ が $R$ で可逆ならば $z \\cdot \\bar z\\,N(z)^{-1} = 1$ なので、"
 
-#: manual/design/core.md:64
+#: manual/design/core.md:98
 msgid "Conversely, if $z$ is invertible then $N(z)N(z^{-1}) = N(1) = 1$, so $N(z)$ is invertible. Hence $z$ is a unit exactly when $a^2 + b^2$ is."
 msgstr "逆に、$z$ が可逆ならば $N(z)N(z^{-1}) = N(1) = 1$ なので、$N(z)$ は可逆です。したがって $z$ が単元であるのは、$a^2 + b^2$ が単元であるときに限ります。"
 
-#: manual/design/core.md:67
+#: manual/design/core.md:101
 msgid "When the construction is a field"
 msgstr "構成が体になる場合"
 
-#: manual/design/core.md:69
+#: manual/design/core.md:103
 msgid ""
 "Let $K$ be a field. $K[x]/(x^2 + 1)$ is a field exactly when $x^2 + 1$ is irreducible over $K$, that is when $-1$ is not a square in $K$. Directly: a non-zero $z$ with $N(z) = a^2 + b^2 = 0$ must have $b \\n"
 "e 0$, and then $(a/b)^2 = -1$. Conversely, if $s^2 = -1$ then $(s + i)(s - i) = s^2 + 1 = 0$ exhibits zero divisors."
@@ -866,163 +990,181 @@ msgstr ""
 "$K$ を体とします。$K[x]/(x^2 + 1)$ が体になるのは、$x^2 + 1$ が $K$ 上既約であるとき、すなわち $K$ において $-1$ が平方数でないときに限ります。直接確かめると、$N(z) = a^2 + b^2 = 0$ となるゼロでない $z$ は $b \\n"
 "e 0$ でなければならず、そのとき $(a/b)^2 = -1$ です。逆に $s^2 = -1$ ならば、$(s + i)(s - i) = s^2 + 1 = 0$ が零因子を与えます。"
 
-#: manual/design/core.md:75
+#: manual/design/core.md:109
 msgid "For $K = \\mathbb R$ (`Float`, `Double`), $-1$ is not a square and $\\mathbb R[i] = \\mathbb C$ is a field."
 msgstr "$K = \\mathbb R$(`Float`、`Double`)では $-1$ は平方数ではなく、$\\mathbb R[i] = \\mathbb C$ は体です。"
 
-#: manual/design/core.md:77
+#: manual/design/core.md:111
 msgid "For $K = \\mathbb C$ (`Complex[Double]`), $-1 = i^2$ is a square, so `Complex[Complex[Double]]` $\\cong \\mathbb C[j]/(j^2 + 1) \\cong \\mathbb C \\times \\mathbb C$ is a ring with zero divisors, such as $(1 + ij)(1 - ij) = 1 - i^2 j^2 = 0$."
 msgstr "$K = \\mathbb C$(`Complex[Double]`)では $-1 = i^2$ は平方数なので、`Complex[Complex[Double]]` $\\cong \\mathbb C[j]/(j^2 + 1) \\cong \\mathbb C \\times \\mathbb C$ は零因子を持つ環です。例えば $(1 + ij)(1 - ij) = 1 - i^2 j^2 = 0$ です。"
 
-#: manual/design/core.md:82
-#: manual/design/float_backend.md:89
-msgid "Design decisions"
-msgstr "設計上の決定"
+#: manual/design/core.md:116
+#: manual/design/float_backend.md:115
+msgid "Decisions in detail"
+msgstr "判断の詳細"
 
-#: manual/design/core.md:84
+#: manual/design/core.md:118
 msgid "Instances follow the structure of `T`"
 msgstr "インスタンスは `T` の構造に従う"
 
-#: manual/design/core.md:86
+#: manual/design/core.md:120
 msgid "**Problem.** Which `luna-generic` traits may `Complex[T]` implement?"
 msgstr "**問題。** `Complex[T]` はどの `luna-generic` トレイトを実装してよいか?"
 
-#: manual/design/core.md:88
+#: manual/design/core.md:122
 msgid "**Choice.** `Zero`, `One`, `AddMonoid` and `AddGroup` need only the corresponding operations of `T`, because they act componentwise. `MulMonoid`, `Semiring` and `Ring` need `T : Ring`, because the product uses subtraction ($ac - bd$) and the ring laws of $R[i]$ need those of $R$. `Inverse`, `MulGroup`, `Field` and the `Div` operator need `T : Field` for $N(z)^{-1}$. `Conjugate` needs only `Neg`."
 msgstr "**選択。** `Zero`、`One`、`AddMonoid`、`AddGroup` は成分ごとに作用するため、`T` の対応する演算だけを必要とします。`MulMonoid`、`Semiring`、`Ring` は `T : Ring` を必要とします。積が減算($ac - bd$)を使い、$R[i]$ の環の法則が $R$ の環の法則を必要とするためです。`Inverse`、`MulGroup`、`Field`、`Div` 演算子は $N(z)^{-1}$ のために `T : Field` を必要とします。`Conjugate` は `Neg` だけを必要とします。"
 
-#: manual/design/core.md:95
+#: manual/design/core.md:129
 msgid "The `Field` instance is declared for every `T : Field`. By the previous section that is lawful when $-1$ is not a square in `T`, which covers the real scalar types; for `T = Complex[Double]` it is not, and `inv` aborts on non-zero zero divisors. A trait bound cannot express \"−1 is not a square\", so the instance trusts the caller here.[^honesty]"
 msgstr "`Field` インスタンスはすべての `T : Field` に対して宣言されています。前節により、これが法則を満たすのは `T` において $-1$ が平方数でない場合で、実スカラー型はこれに該当します。`T = Complex[Double]` では該当せず、`inv` はゼロでない零因子に対して中断します。トレイト制約では「−1 は平方数でない」を表現できないため、このインスタンスはここで呼び出し側を信頼します。[^honesty]"
 
-#: manual/design/core.md:101
+#: manual/design/core.md:135
 msgid "This is a known gap in the \"implement only lawful instances\" rule of Luna Flow. The test suite uses nested complex numbers only on values with an invertible norm."
 msgstr "これは Luna Flow の「法則を満たすインスタンスだけを実装する」というルールにおける既知の欠落です。テストスイートでは、入れ子の複素数はノルムが可逆な値に対してのみ使っています。"
 
-#: manual/design/core.md:105
+#: manual/design/core.md:139
 msgid "Four multiplications"
 msgstr "4 回の乗算"
 
-#: manual/design/core.md:107
+#: manual/design/core.md:141
 msgid "**Options.** The schoolbook product $(ac - bd) + (ad + bc)i$ with four multiplications; Gauss's three-multiplication form $k_1 = c(a + b)$, $k_2 = a(d - c)$, $k_3 = b(c + d)$, product $(k_1 - k_3) + (k_1 + k_2)i$."
 msgstr "**選択肢。** 4 回の乗算による教科書どおりの積 $(ac - bd) + (ad + bc)i$。あるいは Gauss の 3 回乗算形式 $k_1 = c(a + b)$、$k_2 = a(d - c)$、$k_3 = b(c + d)$ による積 $(k_1 - k_3) + (k_1 + k_2)i$。"
 
-#: manual/design/core.md:111
+#: manual/design/core.md:145
 msgid "**Choice.** Four multiplications. Over floating point the schoolbook form has a normwise relative error of at most $\\sqrt5\\,u$,[^bpz] while the three-multiplication form adds cancellation-prone sums such as $a + b$ and $d - c$ and is less accurate componentwise; and for generic `T` a multiplication is not necessarily more expensive than an addition."
 msgstr "**選択。** 4 回の乗算。浮動小数点では、教科書どおりの形式のノルム相対誤差は高々 $\\sqrt5\\,u$ です。[^bpz] 一方、3 回乗算形式は $a + b$ や $d - c$ のような桁落ちしやすい和を加えるため、成分ごとの精度が劣ります。また、ジェネリックな `T` では乗算が加算より高コストとは限りません。"
 
-#: manual/design/core.md:117
+#: manual/design/core.md:151
 msgid "R. Brent, C. Percival and P. Zimmermann, \"Error bounds on complex floating-point multiplication\", *Mathematics of Computation* 76 (2007)."
 msgstr "R. Brent, C. Percival and P. Zimmermann, \"Error bounds on complex floating-point multiplication\", *Mathematics of Computation* 76 (2007)."
 
-#: manual/design/core.md:120
+#: manual/design/core.md:154
 msgid "Componentwise, $\\mathrm{fl}(ac - bd) = ac(1 + \\theta_2) - bd(1 + \\theta_2')$ with $|\\theta_2| \\le \\gamma_2 = 2u/(1 - 2u)$, so"
 msgstr "成分ごとに見ると、$|\\theta_2| \\le \\gamma_2 = 2u/(1 - 2u)$ として $\\mathrm{fl}(ac - bd) = ac(1 + \\theta_2) - bd(1 + \\theta_2')$ なので、"
 
-#: manual/design/core.md:127
+#: manual/design/core.md:161
 msgid "which is small relative to the result unless $ac$ and $bd$ cancel."
 msgstr "これは $ac$ と $bd$ が打ち消し合わない限り、結果に比べて小さい値です。"
 
-#: manual/design/core.md:129
+#: manual/design/core.md:163
 msgid "Textbook division in the generic core"
 msgstr "ジェネリックなコアにおける教科書どおりの除算"
 
-#: manual/design/core.md:131
+#: manual/design/core.md:165
 msgid "**Problem.** Division needs $N(w)^{-1}$; for floating point, $c^2 + d^2$ overflows or underflows long before $c + di$ does."
 msgstr "**問題。** 除算には $N(w)^{-1}$ が必要です。浮動小数点では、$c + di$ よりはるかに早く $c^2 + d^2$ がオーバーフローまたはアンダーフローします。"
 
-#: manual/design/core.md:134
+#: manual/design/core.md:168
 msgid "**Options.** Scaled algorithms (Smith's, or rescaling by a power of two) need comparisons and absolute values that a generic field does not have; the textbook formula needs only field operations."
 msgstr "**選択肢。** スケーリングを行うアルゴリズム(Smith の方法や 2 のべきによるスケーリング)は、ジェネリックな体にはない比較と絶対値を必要とします。教科書どおりの式は体の演算だけで済みます。"
 
-#: manual/design/core.md:138
+#: manual/design/core.md:172
 msgid "**Choice.** The generic `Div` and `Inverse` use the textbook formula with `Inverse::inv` of `T`. It is exact for exact fields. For `Double` it is correct while $c^2 + d^2$ stays in range, and `Inverse` of `Double` aborts on zero, including an underflowed norm. Scaled, special-value-aware division lives in [`float_backend`](float_backend.md#smiths-division)."
 msgstr "**選択。** ジェネリックな `Div` と `Inverse` は、`T` の `Inverse::inv` を使った教科書どおりの式を使います。厳密な体では正確です。`Double` では $c^2 + d^2$ が範囲内にある限り正しく、`Double` の `Inverse` はゼロ(アンダーフローしたノルムを含む)で中断します。スケーリングを行い特殊値を考慮した除算は [`float_backend`](float_backend.md#smiths-division) にあります。"
 
-#: manual/design/core.md:144
+#: manual/design/core.md:178
 msgid "Mutable fields"
 msgstr "可変フィールド"
 
-#: manual/design/core.md:146
+#: manual/design/core.md:180
 msgid "**Problem.** Complex values are often updated in loops (accumulators, recurrences), where allocating a new value per step is wasteful."
 msgstr "**問題。** 複素数の値はループ内で更新されることが多く(累積器、漸化式など)、ステップごとに新しい値を割り当てるのは無駄です。"
 
-#: manual/design/core.md:149
+#: manual/design/core.md:183
 msgid "**Choice.** `Complex[T]` is a `pub(all)` struct with `mut re` and `mut im` plus `set`, `set_re` and `set_im`. Every operation returns a new value and never mutates its inputs, so code that does not call the setters can treat complex numbers as values. Callers that do mutate must remember that the struct is shared by reference."
 msgstr "**選択。** `Complex[T]` は `mut re` と `mut im` を持つ `pub(all)` 構造体で、`set`、`set_re`、`set_im` を備えます。すべての演算は新しい値を返し、入力を変更しないため、セッターを呼ばないコードは複素数を値として扱えます。変更を行う呼び出し側は、構造体が参照で共有されることに注意する必要があります。"
 
-#: manual/design/core.md:155
+#: manual/design/core.md:189
 msgid "No analytic functions in the core"
 msgstr "コアに解析関数を置かない"
 
-#: manual/design/core.md:157
+#: manual/design/core.md:191
 msgid "$\\sqrt z$, $\\log z$ or $\\sin z$ need an order, absolute values, transcendental functions of the real scalar, a choice of branch, and IEEE special values. None of these exist for a generic field. The root package therefore stops at algebra, and the [float_backend](float_backend.md) package supplies analysis for `Double`."
 msgstr "$\\sqrt z$、$\\log z$、$\\sin z$ には、順序、絶対値、実スカラーの超越関数、分枝の選択、IEEE の特殊値が必要です。ジェネリックな体にはこれらのどれもありません。そのため、ルートパッケージは代数までにとどめ、[float_backend](float_backend.md) パッケージが `Double` 向けの解析を提供します。"
 
-#: manual/design/core.md:163
+#: manual/design/core.md:197
 msgid "Text and debug forms"
 msgstr "テキスト形式とデバッグ形式"
 
-#: manual/design/core.md:165
+#: manual/design/core.md:199
 msgid "`Show` prints `re + imi` using `T`'s text (`1 + -2i` for $1 - 2i$), which is the canonical text of the type and the reason `to_string` stays a promoted method. `Debug` prints the record form for tests and diagnostics. MoonBit 0.10 promotion of the other trait methods is explicit in [`src/extends.mbt`](../../../src/extends.mbt)."
 msgstr "`Show` は `T` のテキストを使って `re + imi` を出力します($1 - 2i$ なら `1 + -2i`)。これが型の正規のテキストであり、`to_string` が昇格されたメソッドとして残っている理由です。`Debug` はテストと診断のためにレコード形式を出力します。その他のトレイトメソッドの MoonBit 0.10 における昇格は [`src/extends.mbt`](../../../src/extends.mbt) で明示的に行っています。"
 
-#: manual/design/core.md:171
-#: manual/design/float_backend.md:317
+#: manual/design/core.md:205
+#: manual/design/float_backend.md:394
 msgid "Correctness and invariants"
 msgstr "正しさと不変条件"
 
-#: manual/design/core.md:173
+#: manual/design/core.md:207
 msgid "Ring laws hold for `T : Ring` because $R[i]$ is a quotient ring; the test suite checks associativity, identities and $\\overline{zw} = \\bar z\\bar w$ on integers."
 msgstr "$R[i]$ は剰余環なので、`T : Ring` に対して環の法則が成り立ちます。テストスイートでは整数上で結合律、単位元、$\\overline{zw} = \\bar z\\bar w$ を確認しています。"
 
-#: manual/design/core.md:176
+#: manual/design/core.md:210
 msgid "`z * z.conjugate()` equals $N(z) + 0i$ exactly for exact `T`."
 msgstr "厳密な `T` では、`z * z.conjugate()` は $N(z) + 0i$ にちょうど等しくなります。"
 
-#: manual/design/core.md:177
+#: manual/design/core.md:211
 msgid "`z * w / w == z` and `z.inv() * z == 1` hold for exact fields when $N(w)$, $N(z)$ are units, and up to rounding for `Double` within range."
 msgstr "`z * w / w == z` と `z.inv() * z == 1` は、$N(w)$、$N(z)$ が単元であれば厳密な体で成り立ち、`Double` では範囲内であれば丸め誤差の範囲で成り立ちます。"
 
-#: manual/design/core.md:179
+#: manual/design/core.md:213
 msgid "No operation mutates its arguments; only the three setters do."
 msgstr "どの演算も引数を変更しません。変更するのは 3 つのセッターだけです。"
 
-#: manual/design/core.md:181
-#: manual/design/float_backend.md:360
+#: manual/design/core.md:215
+msgid "Floating-point instances"
+msgstr "浮動小数点のインスタンス"
+
+#: manual/design/core.md:217
+msgid "For `T = Double` every law holds only up to rounding, and the unscaled norm adds hard limits. Let $\\Omega \\approx 1.80 \\times 10^{308}$ be the largest finite `Double`, $\\lambda = 2^{-1022} \\approx 2.2 \\times 10^{-308}$ the smallest normal one and $\\mu = 2^{-1074} \\approx 4.9 \\times 10^{-324}$ the smallest subnormal one. The norm $n = \\mathrm{fl}(c^2 + d^2)$ of $w = c + di$ behaves as follows:"
+msgstr "`T = Double` ではすべての法則が丸め誤差の範囲でしか成り立たず、さらにスケーリングされていないノルムが厳しい限界を加えます。$\\Omega \\approx 1.80 \\times 10^{308}$ を最大の有限 `Double`、$\\lambda = 2^{-1022} \\approx 2.2 \\times 10^{-308}$ を最小の正規化数、$\\mu = 2^{-1074} \\approx 4.9 \\times 10^{-324}$ を最小の非正規化数とします。$w = c + di$ のノルム $n = \\mathrm{fl}(c^2 + d^2)$ は次のように振る舞います。"
+
+#: manual/design/core.md:236
+msgid ""
+"The last line uses that a square below half the smallest subnormal rounds to zero. In the first case $n^{-1} = 0$ and `inv` returns zero parts, so $z z^{-1} = 0 \\n"
+"e 1$; in the third the parts are $\\pm\\infty$ or NaN; in the fourth `Inverse::inv` of `Double` aborts. The field law $z z^{-1} = 1$ for every $z \\n"
+"e 0$ therefore fails outside roughly $10^{-154} \\le |z| \\le 10^{154}$, which is the honest domain of the `Field` instance for `Complex[Double]`. [`float_backend`](float_backend.md#smiths-division) divides without forming $c^2 + d^2$."
+msgstr ""
+"最後の行では、最小の非正規化数の半分未満の 2 乗がゼロに丸められることを使っています。第一の場合は $n^{-1} = 0$ で `inv` はゼロの部分を返すので $z z^{-1} = 0 \\n"
+"e 1$、第三の場合は部分が $\\pm\\infty$ または NaN、第四の場合は `Double` の `Inverse::inv` が中断します。したがって、すべての $z \\n"
+"e 0$ に対する体の法則 $z z^{-1} = 1$ はおおよそ $10^{-154} \\le |z| \\le 10^{154}$ の外で成り立たず、これが `Complex[Double]` の `Field` インスタンスの実際の適用範囲です。[`float_backend`](float_backend.md#smiths-division) は $c^2 + d^2$ を作らずに除算します。"
+
+#: manual/design/core.md:245
+#: manual/design/float_backend.md:491
 msgid "Alternatives rejected"
 msgstr "採用しなかった代替案"
 
-#: manual/design/core.md:183
+#: manual/design/core.md:247
 msgid "**A `Double`-only complex type.** It would duplicate the type for `Float`, integers (Gaussian integers) and exact rationals."
 msgstr "**`Double` 専用の複素数型。** `Float`、整数(ガウス整数)、厳密な有理数のために型を重複させることになります。"
 
-#: manual/design/core.md:185
+#: manual/design/core.md:249
 msgid "**Immutable fields.** Cleaner value semantics, but a breaking change for existing callers that update `re` and `im` in place."
 msgstr "**不変フィールド。** 値のセマンティクスはすっきりしますが、`re` と `im` をインプレースで更新している既存の呼び出し側にとっては破壊的変更になります。"
 
-#: manual/design/core.md:187
+#: manual/design/core.md:251
 msgid "**Scaled division in the core.** It needs order and magnitude operations that generic fields lack."
 msgstr "**コアでのスケーリング除算。** ジェネリックな体にはない、順序と大きさの演算が必要になります。"
 
-#: manual/design/core.md:190
-#: manual/design/float_backend.md:373
+#: manual/design/core.md:254
+#: manual/design/float_backend.md:504
 msgid "Boundaries"
 msgstr "範囲外"
 
-#: manual/design/core.md:192
+#: manual/design/core.md:256
 msgid "No analytic or transcendental functions, no special-value handling, no branch cuts; see [float_backend](float_backend.md)."
 msgstr "解析関数や超越関数、特殊値の処理、分岐切断は扱いません。[float_backend](float_backend.md) を参照してください。"
 
-#: manual/design/core.md:194
+#: manual/design/core.md:258
 msgid "No polar representation in the core."
 msgstr "コアには極形式の表現はありません。"
 
-#: manual/design/core.md:195
+#: manual/design/core.md:259
 msgid "No check that `T` makes $R[i]$ a field; the `Field` instance trusts it."
 msgstr "`T` によって $R[i]$ が体になるかどうかは確認しません。`Field` インスタンスはそれを信頼します。"
 
-#: manual/design/core.md:196
+#: manual/design/core.md:260
 msgid "No overflow-safe division for floating-point `T`."
 msgstr "浮動小数点の `T` に対するオーバーフローに安全な除算はありません。"
 
@@ -1039,11 +1181,47 @@ msgid "Provide the elementary functions of $\\mathbb C$ for `Complex[Double]` wi
 msgstr "`Complex[Double]` に対して $\\mathbb C$ の初等関数を提供します。文書化された分岐切断上での主値、`Double` の全範囲で数値的に安定な式、そして重要な箇所での IEEE 特殊値の処理を備え、これらすべてをジェネリックな [core](core.md) から切り離します。"
 
 #: manual/design/float_backend.md:18
-#: manual/tutorial/float_backend.md:39
+msgid "The functions must work over the whole `Double` range: $x^2 + y^2$ overflows for $|z| > 1.34 \\times 10^{154}$ and underflows for $|z| < 1.5 \\times 10^{-162}$, although $z$ and most results are representable."
+msgstr "関数は `Double` の全範囲で動作しなければなりません。$x^2 + y^2$ は $|z| > 1.34 \\times 10^{154}$ でオーバーフローし、$|z| < 1.5 \\times 10^{-162}$ でアンダーフローしますが、$z$ もほとんどの結果も表現可能です。"
+
+#: manual/design/float_backend.md:22
+msgid "Near the branch points and the branch cuts the textbook formulas cancel catastrophically."
+msgstr "分岐点と分岐切断の近くでは、教科書の式は破滅的な桁落ちを起こします。"
+
+#: manual/design/float_backend.md:24
+msgid "The package cannot add methods to `Complex[T]`, which belongs to the core package."
+msgstr "このパッケージは、コアパッケージに属する `Complex[T]` にメソッドを追加できません。"
+
+#: manual/design/float_backend.md:26
+msgid "The real elementary functions come from `arithmetic` and `Kaida-Amethyst/math`; the package does not implement real transcendental functions itself."
+msgstr "実の初等関数は `arithmetic` と `Kaida-Amethyst/math` から来ており、このパッケージ自身は実の超越関数を実装しません。"
+
+#: manual/design/float_backend.md:32
+msgid "Free functions over `Complex[Double]`, with `_real` variants that take a `Double`."
+msgstr "`Complex[Double]` 上の自由関数と、`Double` を受け取る `_real` 版。"
+
+#: manual/design/float_backend.md:34
+msgid "Scaled formulas for the modulus, the square root, division, the tangent and the inverse functions; the Hull–Fairgrieve–Tang algorithm for the arcsine and arccosine; Kahan's formula for the inverse hyperbolic cosine."
+msgstr "絶対値、平方根、除算、正接、逆関数にはスケーリングした式を、逆正弦と逆余弦には Hull–Fairgrieve–Tang アルゴリズムを、逆双曲線余弦には Kahan の式を使います。"
+
+#: manual/design/float_backend.md:37
+msgid "Binary powering for integer exponents."
+msgstr "整数の指数には二進累乗法。"
+
+#: manual/design/float_backend.md:38
+msgid "Reciprocal functions as compositions with `Complex::inv` of the core."
+msgstr "逆数系の関数は、コアの `Complex::inv` との合成。"
+
+#: manual/design/float_backend.md:39
+msgid "Three capability traits for the real scalar, none of which a public function uses yet."
+msgstr "実スカラーのための三つの能力トレイト。公開関数はまだどれも使っていません。"
+
+#: manual/design/float_backend.md:44
+#: manual/tutorial/float_backend.md:49
 msgid "Polar form"
 msgstr "極形式"
 
-#: manual/design/float_backend.md:20
+#: manual/design/float_backend.md:46
 msgid ""
 "Every $z = x + iy \\n"
 "e 0$ has a polar form $z = r e^{i\\theta}$ with $r = |z| = \\sqrt{x^2 + y^2}$. The angle $\\theta$ is determined modulo $2\\pi$; the principal argument $\\operatorname{Arg} z$ is the representative in $(-\\pi, \\pi]$, which equals $\\operatorname{atan2}(y, x)$ off the negative real axis."
@@ -1051,340 +1229,445 @@ msgstr ""
 "すべての $z = x + iy \\n"
 "e 0$ は、$r = |z| = \\sqrt{x^2 + y^2}$ として極形式 $z = r e^{i\\theta}$ を持ちます。角度 $\\theta$ は $2\\pi$ を法として定まります。主偏角 $\\operatorname{Arg} z$ は $(-\\pi, \\pi]$ に入る代表元で、負の実軸以外では $\\operatorname{atan2}(y, x)$ に等しくなります。"
 
-#: manual/design/float_backend.md:26
+#: manual/design/float_backend.md:52
 msgid "The principal logarithm and its branch cut"
 msgstr "主値の対数とその分岐切断"
 
-#: manual/design/float_backend.md:28
+#: manual/design/float_backend.md:54
 msgid "The solutions of $e^w = z$ are $w = \\ln|z| + i(\\operatorname{Arg} z + 2k\\pi)$. The principal logarithm takes $k = 0$:"
 msgstr "$e^w = z$ の解は $w = \\ln|z| + i(\\operatorname{Arg} z + 2k\\pi)$ です。主値の対数は $k = 0$ をとります:"
 
-#: manual/design/float_backend.md:35
+#: manual/design/float_backend.md:61
 msgid "$\\operatorname{Arg}$ jumps by $2\\pi$ across the negative real axis, so $\\operatorname{Log}$ is analytic on $\\mathbb C \\setminus (-\\infty, 0]$ and $(-\\infty, 0]$ is its *branch cut*. All other multi-valued functions are defined through $\\operatorname{Log}$ and inherit cuts from it.[^kahan]"
 msgstr "$\\operatorname{Arg}$ は負の実軸をまたぐと $2\\pi$ だけ跳ぶため、$\\operatorname{Log}$ は $\\mathbb C \\setminus (-\\infty, 0]$ 上で解析的であり、$(-\\infty, 0]$ がその*分岐切断*です。他の多価関数はすべて $\\operatorname{Log}$ を通じて定義され、分岐切断をそこから受け継ぎます。[^kahan]"
 
-#: manual/design/float_backend.md:40
+#: manual/design/float_backend.md:66
 msgid "W. Kahan, \"Branch cuts for complex elementary functions, or much ado about nothing's sign bit\", in *The State of the Art in Numerical Analysis*, Clarendon Press, 1987. It also discusses how a signed zero can select the side of a cut."
 msgstr "W. Kahan, \"Branch cuts for complex elementary functions, or much ado about nothing's sign bit\", in *The State of the Art in Numerical Analysis*, Clarendon Press, 1987. 符号付きゼロによって分岐切断のどちら側かを選べることについても論じています。"
 
-#: manual/design/float_backend.md:45
+#: manual/design/float_backend.md:71
 msgid "Principal values of the other functions"
 msgstr "他の関数の主値"
 
-#: manual/design/float_backend.md:60
+#: manual/design/float_backend.md:86
+#: manual/design/float_backend.md:414
 msgid "Function"
 msgstr "関数"
 
-#: manual/design/float_backend.md:60
-#: manual/tutorial/float_backend.md:148
+#: manual/design/float_backend.md:86
+#: manual/tutorial/float_backend.md:146
 msgid "Branch cuts"
 msgstr "分岐切断"
 
-#: manual/design/float_backend.md:60
+#: manual/design/float_backend.md:86
 msgid "Principal range"
 msgstr "主値の範囲"
 
-#: manual/design/float_backend.md:64
+#: manual/design/float_backend.md:90
 msgid "$(-\\infty, 0]$ in $z$ (non-integer $w$)"
 msgstr "$z$ について $(-\\infty, 0]$($w$ が整数でない場合)"
 
-#: manual/design/float_backend.md:64
+#: manual/design/float_backend.md:90
 msgid "from $\\operatorname{Log}$"
 msgstr "$\\operatorname{Log}$ から"
 
-#: manual/design/float_backend.md:72
+#: manual/design/float_backend.md:98
 msgid "The reciprocal functions are compositions: $\\sec z = 1/\\cos z$, $\\operatorname{asec} z = \\operatorname{acos}(1/z)$, and so on."
 msgstr "逆数系の関数は合成です: $\\sec z = 1/\\cos z$、$\\operatorname{asec} z = \\operatorname{acos}(1/z)$ など。"
 
-#: manual/design/float_backend.md:75
+#: manual/design/float_backend.md:101
 msgid "Real and imaginary parts"
 msgstr "実部と虚部"
 
-#: manual/design/float_backend.md:77
+#: manual/design/float_backend.md:103
 msgid "The trigonometric and hyperbolic functions split by the addition theorems with $\\cos(iy) = \\cosh y$ and $\\sin(iy) = i\\sinh y$:"
 msgstr "三角関数と双曲線関数は、$\\cos(iy) = \\cosh y$ と $\\sin(iy) = i\\sinh y$ を用いた加法定理によって分解されます:"
 
-#: manual/design/float_backend.md:91
+#: manual/design/float_backend.md:117
 msgid "Three capability traits"
 msgstr "3 つの能力トレイト"
 
-#: manual/design/float_backend.md:93
+#: manual/design/float_backend.md:119
 msgid "**Problem.** The algorithms need more from the real scalar than `luna-generic` and `arithmetic` traits, but not every scalar type has every extra capability."
 msgstr "**問題。** アルゴリズムは実スカラーに対して `luna-generic` や `arithmetic` のトレイト以上のものを必要としますが、すべてのスカラー型があらゆる追加能力を持つわけではありません。"
 
-#: manual/design/float_backend.md:97
+#: manual/design/float_backend.md:123
 msgid "**Options.** One large \"floating real\" trait; no traits (hard-code `Double`); a layered set."
 msgstr "**選択肢。** 1 つの大きな「浮動小数点実数」トレイト、トレイトを使わない(`Double` をハードコードする)、階層化されたトレイト群。"
 
-#: manual/design/float_backend.md:100
+#: manual/design/float_backend.md:126
 msgid "**Choice.** Three traits, each a separate concern:"
 msgstr "**選択。** それぞれ別々の関心事を扱う 3 つのトレイト:"
 
-#: manual/design/float_backend.md:102
+#: manual/design/float_backend.md:128
 msgid "`FloatingAnalyticScalar` names the algebraic and analytic capabilities (a `Field` with `Num`, `Compare`, constants and the real elementary functions and their inverses). It assumes nothing about IEEE 754, so an exact or interval type could satisfy it."
 msgstr "`FloatingAnalyticScalar` は代数的・解析的な能力(`Num`、`Compare`、定数、実数の初等関数とその逆関数を備えた `Field`)に名前を付けます。IEEE 754 については何も仮定しないため、厳密な型や区間型でも満たすことができます。"
 
-#: manual/design/float_backend.md:106
+#: manual/design/float_backend.md:132
 msgid "`FloatingSpecialValues` names the IEEE 754 layer: NaN, signed infinities and the sign of zero. These have no meaning for a type without them, so they are not part of the analytic trait."
 msgstr "`FloatingSpecialValues` は IEEE 754 の層に名前を付けます: NaN、符号付き無限大、ゼロの符号です。これらを持たない型にとっては意味がないため、解析トレイトには含めていません。"
 
-#: manual/design/float_backend.md:109
+#: manual/design/float_backend.md:135
 msgid "`FloatingBackendScalar` combines both and adds the primitives the stable algorithms below use: `hypot` (modulus without overflow), `log1p` (logarithms near one), `trunc` and `to_int` (detecting integer exponents in `pow`) and `from_double` (constants)."
 msgstr "`FloatingBackendScalar` は両者を組み合わせ、以下の安定なアルゴリズムが使うプリミティブを追加します: `hypot`(オーバーフローしない絶対値)、`log1p`(1 付近の対数)、`trunc` と `to_int`(`pow` での整数の指数の検出)、`from_double`(定数)。"
 
-#: manual/design/float_backend.md:114
+#: manual/design/float_backend.md:140
 msgid "Code can then require the smallest trait that states its needs, as Luna Flow prefers over a single \"real number\" trait. All three are implemented for `Float` and `Double`. The public functions are still written for `Complex[Double]` and call the `Double` primitives directly; no function is generic over the traits yet."
 msgstr "これにより、コードは自身の要件を表す最小のトレイトを要求できます。Luna Flow は単一の「実数」トレイトよりもこの方式を好みます。3 つとも `Float` と `Double` に対して実装されています。公開関数は依然として `Complex[Double]` 向けに書かれており、`Double` のプリミティブを直接呼び出します。これらのトレイトについてジェネリックな関数はまだありません。"
 
-#: manual/design/float_backend.md:120
+#: manual/design/float_backend.md:146
 msgid "Free functions"
 msgstr "自由関数"
 
-#: manual/design/float_backend.md:122
+#: manual/design/float_backend.md:148
 msgid "MoonBit does not allow a package to add methods or trait instances to a type defined in another package, so the analytic functions cannot be methods of `Complex[T]`. They are free functions, `@fb.log(z)`, and the generic core stays free of floating-point semantics."
 msgstr "MoonBit では、パッケージが他のパッケージで定義された型にメソッドやトレイトインスタンスを追加できないため、解析関数を `Complex[T]` のメソッドにすることはできません。これらは `@fb.log(z)` のような自由関数であり、ジェネリックなコアは浮動小数点のセマンティクスから切り離されたままです。"
 
-#: manual/design/float_backend.md:127
+#: manual/design/float_backend.md:153
 msgid "Modulus without overflow"
 msgstr "オーバーフローしない絶対値"
 
-#: manual/design/float_backend.md:129
+#: manual/design/float_backend.md:155
 msgid "The direct $\\sqrt{x^2 + y^2}$ overflows when $|x| > 1.34 \\times 10^{154}$, although $|z|$ is representable, and underflows for tiny inputs. With $m = \\max(|x|, |y|)$ and $t = \\min(|x|, |y|)/m \\in [0, 1]$:"
 msgstr "直接計算した $\\sqrt{x^2 + y^2}$ は、$|z|$ が表現可能であっても $|x| > 1.34 \\times 10^{154}$ でオーバーフローし、非常に小さい入力ではアンダーフローします。$m = \\max(|x|, |y|)$、$t = \\min(|x|, |y|)/m \\in [0, 1]$ とすると:"
 
-#: manual/design/float_backend.md:139
+#: manual/design/float_backend.md:165
 msgid "`abs` delegates to `hypot`, which uses this kind of scaling; `abs_log` uses the second form, so $\\ln|z|$ is finite for every finite non-zero $z$; and `abs_sqr` uses the third, which only overflows when $|z|^2$ itself does."
 msgstr "`abs` はこの種のスケーリングを使う `hypot` に委譲します。`abs_log` は 2 番目の形を使うため、ゼロでない有限の $z$ すべてに対して $\\ln|z|$ は有限です。`abs_sqr` は 3 番目の形を使い、$|z|^2$ 自体がオーバーフローする場合にのみオーバーフローします。"
 
-#: manual/design/float_backend.md:143
+#: manual/design/float_backend.md:169
 msgid "Stable square root"
 msgstr "安定な平方根"
 
-#: manual/design/float_backend.md:145
+#: manual/design/float_backend.md:171
 msgid "The textbook formulas"
 msgstr "教科書どおりの式"
 
-#: manual/design/float_backend.md:152
+#: manual/design/float_backend.md:178
 msgid "cancel catastrophically: for $x > 0$ and $|y| \\ll x$, $|z| - x$ loses all digits, and for $x < 0$, $|z| + x$ does. The package computes only the cancellation-free quantity"
 msgstr "は壊滅的な桁落ちを起こします: $x > 0$ かつ $|y| \\ll x$ では $|z| - x$ がすべての桁を失い、$x < 0$ では $|z| + x$ が同様になります。このパッケージは桁落ちのない量だけを計算します"
 
-#: manual/design/float_backend.md:164
+#: manual/design/float_backend.md:190
 msgid "where the scaled forms avoid overflow, and recovers the other part from $\\operatorname{Re}\\sqrt z \\cdot \\operatorname{Im}\\sqrt z = y/2$. For $x \\ge 0$ the root is $w + \\frac{y}{2w}i$; indeed, with $w^2 = (x + |z|)/2$,"
 msgstr "ここでスケーリングした形はオーバーフローを避けます。もう一方の部分は $\\operatorname{Re}\\sqrt z \\cdot \\operatorname{Im}\\sqrt z = y/2$ から復元します。$x \\ge 0$ では根は $w + \\frac{y}{2w}i$ です。実際、$w^2 = (x + |z|)/2$ とすると、"
 
-#: manual/design/float_backend.md:174
+#: manual/design/float_backend.md:200
 msgid "For $x < 0$ the root is $\\frac{|y|}{2w} \\pm wi$ with the sign of $y$, by the same computation with $|x|$. The real part is never negative, as the principal branch requires. On the cut, $y = -0$ is treated like $y = +0$, so both sides map to $+\\sqrt{|x|}\\,i$."
 msgstr "$x < 0$ では、$|x|$ を使った同じ計算により、根は $y$ の符号に応じて $\\frac{|y|}{2w} \\pm wi$ です。主枝が要求するとおり、実部が負になることはありません。分岐切断上では $y = -0$ は $y = +0$ と同様に扱われるため、両側とも $+\\sqrt{|x|}\\,i$ に写ります。"
 
-#: manual/design/float_backend.md:179
+#: manual/design/float_backend.md:205
 msgid "Smith's division"
 msgstr "Smith の除算"
 
-#: manual/design/float_backend.md:181
+#: manual/design/float_backend.md:207
 msgid "The textbook quotient divides by $c^2 + d^2$, with the overflow problems of the [core design](core.md#textbook-division-in-the-generic-core). Smith's method divides by the larger component first.[^smith] For $|c| \\ge |d|$ let $r = d/c$, so $|r| \\le 1$:"
 msgstr "教科書どおりの商は $c^2 + d^2$ で割るため、[core の設計](core.md#textbook-division-in-the-generic-core) で述べたオーバーフローの問題があります。Smith の方法は大きい方の成分で先に割ります。[^smith] $|c| \\ge |d|$ のとき $r = d/c$ とすると $|r| \\le 1$ です:"
 
-#: manual/design/float_backend.md:193
-msgid "and symmetrically with $r = c/d$ when $|d| > |c|$. Only $r^2 \\le 1$ is squared, so the denominator overflows only if the quotient does. `div` computes $1/c$ once and multiplies by it. If $w$ has an infinite part and $z$ has no NaN part, `div` follows C99 Annex G: a finite numerator gives a zero result, and an infinite one the quotient of the infinity signs."
-msgstr "$|d| > |c|$ のときは $r = c/d$ として対称的に計算します。2 乗されるのは $r^2 \\le 1$ だけなので、分母がオーバーフローするのは商がオーバーフローする場合に限ります。`div` は $1/c$ を一度だけ計算し、それを掛けます。$w$ に無限大の部分があり、$z$ に NaN の部分がない場合、`div` は C99 Annex G に従います: 有限の分子はゼロの結果を与え、無限大の分子は無限大の符号の商を与えます。"
+#: manual/design/float_backend.md:219
+msgid "and symmetrically with $r = c/d$ when $|d| > |c|$. Only $r^2 \\le 1$ is squared, so $1 \\le 1 + r^2 \\le 2$ never overflows. `div` computes the reciprocal $s = 1/c$ once and returns"
+msgstr "$|d| > |c|$ のときは対称に $r = c/d$ とします。2 乗されるのは $r^2 \\le 1$ だけなので、$1 \\le 1 + r^2 \\le 2$ は決してオーバーフローしません。`div` は逆数 $s = 1/c$ を一度だけ計算し、次を返します。"
 
-#: manual/design/float_backend.md:199
+#: manual/design/float_backend.md:227
+msgid "which avoids forming $c(1 + r^2)$, a product that could overflow for $|c| > \\Omega/2$, where $\\Omega \\approx 1.8 \\times 10^{308}$ is the largest finite `Double`. The reciprocal has its own limits: for $|c| < 1/\\Omega \\approx 5.6 \\times 10^{-309}$ it overflows to $\\infty$, and the result becomes NaN even when the quotient is finite (the [API](../api/float_backend.md#div) gives an example); for $|c| > 2^{1022}$ it is subnormal and loses a few bits. Dividing $a$ and $b$ by $c$ directly, instead of multiplying them by $s$, would avoid both."
+msgstr "これにより、$|c| > \\Omega/2$ でオーバーフローしうる積 $c(1 + r^2)$ を作らずに済みます。ここで $\\Omega \\approx 1.8 \\times 10^{308}$ は最大の有限 `Double` です。逆数自体にも限界があります。$|c| < 1/\\Omega \\approx 5.6 \\times 10^{-309}$ では $\\infty$ へオーバーフローし、商が有限でも結果は NaN になります([API](../api/float_backend.md#div) に例があります)。$|c| > 2^{1022}$ では非正規化数になり、数ビットを失います。$s$ を掛ける代わりに $a$ と $b$ を直接 $c$ で割れば、どちらも避けられます。"
+
+#: manual/design/float_backend.md:236
+msgid "If $w$ has an infinite part and $z$ has no NaN part, `div` replaces every part of $w$ by its infinity sign ($\\pm 1$, or $0$ for a finite part). A finite numerator then gives zero parts, as C99 Annex G requires. An infinite numerator gives the quotient of the sign patterns, so $\\infty/\\infty = 1$, where C99 returns NaN."
+msgstr "$w$ に無限大の部分があり $z$ に NaN の部分がない場合、`div` は $w$ の各部分をその無限大の符号($\\pm 1$、有限の部分は $0$)で置き換えます。すると有限の分子はゼロの部分を与え、これは C99 Annex G の要求どおりです。無限大の分子は符号パターンの商を与えるので $\\infty/\\infty = 1$ となりますが、C99 は NaN を返します。"
+
+#: manual/design/float_backend.md:242
 msgid "R. L. Smith, \"Algorithm 116: Complex division\", *Communications of the ACM* 5(8), 1962."
 msgstr "R. L. Smith, \"Algorithm 116: Complex division\", *Communications of the ACM* 5(8), 1962."
 
-#: manual/design/float_backend.md:202
+#: manual/design/float_backend.md:245
 msgid "Exact integer powers"
 msgstr "厳密な整数べき"
 
-#: manual/design/float_backend.md:204
+#: manual/design/float_backend.md:247
 msgid "$z^n$ through $e^{n\\operatorname{Log} z}$ rounds the angle $n\\theta$ and the modulus $e^{n\\ln|z|}$, so even $(1 + i)^2$ would not come out as exactly $2i$. For a real integer exponent with $|n| \\le 2^{31} - 1$, `pow` and `pow_real` use binary powering instead: $O(\\log |n|)$ complex multiplications, exact for small Gaussian integers, and $z^{-n} = (z^{-1})^n$. Other exponents use the polar form of $e^{w\\operatorname{Log} z}$: with $\\ell = \\ln|z|$ from `abs_log` and $\\theta = \\arg z$,"
 msgstr "$e^{n\\operatorname{Log} z}$ による $z^n$ は角度 $n\\theta$ と絶対値 $e^{n\\ln|z|}$ を丸めるため、$(1 + i)^2$ でさえちょうど $2i$ にはなりません。$|n| \\le 2^{31} - 1$ の実整数の指数に対しては、`pow` と `pow_real` は代わりに二進累乗法を使います: $O(\\log |n|)$ 回の複素乗算で、小さなガウス整数に対しては厳密であり、$z^{-n} = (z^{-1})^n$ です。その他の指数では $e^{w\\operatorname{Log} z}$ の極形式を使います: `abs_log` による $\\ell = \\ln|z|$ と $\\theta = \\arg z$ を用いて、"
 
-#: manual/design/float_backend.md:217
+#: manual/design/float_backend.md:260
 msgid "At $z = 0$, $0^0 = 1$, $0^w = 0$ for real $w > 0$, and every other exponent gives NaN."
 msgstr "$z = 0$ では、$0^0 = 1$、実数 $w > 0$ に対して $0^w = 0$ となり、それ以外の指数はすべて NaN を与えます。"
 
-#: manual/design/float_backend.md:220
+#: manual/design/float_backend.md:263
 msgid "Overflow-free tangent"
 msgstr "オーバーフローしない正接"
 
-#: manual/design/float_backend.md:222
+#: manual/design/float_backend.md:265
 msgid "$\\tan(x + iy) = \\dfrac{\\sin 2x + i\\sinh 2y}{\\cos 2x + \\cosh 2y}$, using $\\cos^2 x + \\sinh^2 y = \\frac12(\\cos 2x + \\cosh 2y)$. For large $|y|$ both $\\sinh 2y$ and $\\cosh 2y$ overflow while $\\tan z \\to \\pm i$. Multiplying numerator and denominator by $2d$ with $d = e^{-2|y|}$, and using $2d\\cosh 2y = 1 + d^2$, $2d\\sinh 2y = \\operatorname{sign}(y)(1 - d^2)$:"
 msgstr "$\\cos^2 x + \\sinh^2 y = \\frac12(\\cos 2x + \\cosh 2y)$ を用いると $\\tan(x + iy) = \\dfrac{\\sin 2x + i\\sinh 2y}{\\cos 2x + \\cosh 2y}$ です。$|y|$ が大きいと、$\\tan z \\to \\pm i$ であるにもかかわらず $\\sinh 2y$ と $\\cosh 2y$ がともにオーバーフローします。$d = e^{-2|y|}$ として分子と分母に $2d$ を掛け、$2d\\cosh 2y = 1 + d^2$、$2d\\sinh 2y = \\operatorname{sign}(y)(1 - d^2)$ を使うと:"
 
-#: manual/design/float_backend.md:232
+#: manual/design/float_backend.md:275
 msgid "`tan` uses this form for $|y| \\ge 1$ and the direct form below, where it is accurate. `tanh` applies the same derivation with the roles of $x$ and $y$ exchanged."
 msgstr "`tan` は $|y| \\ge 1$ でこの形を使い、それ未満では精度のよい直接の形を使います。`tanh` は $x$ と $y$ の役割を入れ替えて同じ導出を適用します。"
 
-#: manual/design/float_backend.md:236
+#: manual/design/float_backend.md:279
 msgid "The arcsine algorithm of Hull, Fairgrieve and Tang"
 msgstr "Hull、Fairgrieve、Tang による逆正弦アルゴリズム"
 
-#: manual/design/float_backend.md:238
+#: manual/design/float_backend.md:281
 msgid "For $x, y \\ge 0$, let $r = |z + 1|$, $s = |z - 1|$, $A = \\frac{r + s}{2} \\ge 1$ and $B = x/A \\le 1$. Then[^hft]"
 msgstr "$x, y \\ge 0$ に対し、$r = |z + 1|$、$s = |z - 1|$、$A = \\frac{r + s}{2} \\ge 1$、$B = x/A \\le 1$ とします。このとき[^hft]"
 
-#: manual/design/float_backend.md:247
+#: manual/design/float_backend.md:290
 msgid "and the other quadrants follow from oddness in each part. Both formulas lose accuracy in two regions, which the algorithm treats separately:"
 msgstr "であり、他の象限は各部分の奇関数性から得られます。どちらの式も 2 つの領域で精度を失うため、アルゴリズムはそれらを別扱いします:"
 
-#: manual/design/float_backend.md:250
+#: manual/design/float_backend.md:293
 msgid "When $B$ is close to $1$ ($B > 0.6417$), $\\arcsin B$ is ill-conditioned. The real part is computed as $\\arctan(x/\\sqrt D)$ with a quantity $D$ formed from $r + x + 1$ and $s \\pm (1 - x)$ without subtraction."
 msgstr "$B$ が $1$ に近い($B > 0.6417$)とき、$\\arcsin B$ は悪条件です。実部は、$r + x + 1$ と $s \\pm (1 - x)$ から減算なしで作った量 $D$ を用いて $\\arctan(x/\\sqrt D)$ として計算します。"
 
-#: manual/design/float_backend.md:253
+#: manual/design/float_backend.md:296
 msgid "When $A$ is close to $1$ ($A \\le 1.5$), $\\ln(A + \\sqrt{A^2 - 1})$ suffers from $A^2 - 1$. The algorithm computes $A - 1$ without cancellation from $y^2/(r + x + 1)$ and $s \\pm (1 - x)$ and uses $\\operatorname{log1p}\\big((A - 1) + \\sqrt{(A - 1)(A + 1)}\\big)$."
 msgstr "$A$ が $1$ に近い($A \\le 1.5$)とき、$\\ln(A + \\sqrt{A^2 - 1})$ は $A^2 - 1$ の影響を受けます。アルゴリズムは $y^2/(r + x + 1)$ と $s \\pm (1 - x)$ から桁落ちなしに $A - 1$ を計算し、$\\operatorname{log1p}\\big((A - 1) + \\sqrt{(A - 1)(A + 1)}\\big)$ を使います。"
 
-#: manual/design/float_backend.md:258
-msgid "For $|x|$ or $|y|$ above $10^{150}$, where $r$ and $s$ would overflow, `asin` uses the asymptotic form $\\operatorname{asin} z \\approx \\operatorname{atan2}(x, y) + i(\\ln 2 + \\ln|z|)$, from $\\sqrt{1 - z^2} \\approx -iz$. `acos` uses $\\pi/2 - \\operatorname{asin} z$ there."
-msgstr "$|x|$ または $|y|$ が $10^{150}$ を超え、$r$ と $s$ がオーバーフローする場合、`asin` は $\\sqrt{1 - z^2} \\approx -iz$ から得られる漸近形 $\\operatorname{asin} z \\approx \\operatorname{atan2}(x, y) + i(\\ln 2 + \\ln|z|)$ を使います。そこでは `acos` は $\\pi/2 - \\operatorname{asin} z$ を使います。"
+#: manual/design/float_backend.md:301
+msgid "For $|x|$ or $|y|$ above $10^{150}$, where $r$ and $s$ would overflow, `asin` uses the asymptotic form $\\operatorname{asin} z \\approx \\operatorname{atan2}(x, y) + i(\\ln 2 + \\ln|z|)$. To derive it for $x, y \\ge 0$, note that the leading terms of $iz + \\sqrt{1 - z^2}$ cancel, because $\\sqrt{1 - z^2} \\approx -iz$ there. Use instead"
+msgstr "$|x|$ または $|y|$ が $10^{150}$ を超え、$r$ と $s$ がオーバーフローする場合、`asin` は漸近形 $\\operatorname{asin} z \\approx \\operatorname{atan2}(x, y) + i(\\ln 2 + \\ln|z|)$ を使います。$x, y \\ge 0$ でこれを導くには、$iz + \\sqrt{1 - z^2}$ の主要項が打ち消し合うことに注意します。そこでは $\\sqrt{1 - z^2} \\approx -iz$ だからです。代わりに次を使います。"
 
-#: manual/design/float_backend.md:263
+#: manual/design/float_backend.md:313
+msgid "Then $\\operatorname{Log}\\frac{i}{2z} = -\\ln(2|z|) + i\\big(\\tfrac{\\pi}{2} - \\arg z\\big)$, and multiplying by $-i$ gives"
+msgstr "すると $\\operatorname{Log}\\frac{i}{2z} = -\\ln(2|z|) + i\\big(\\tfrac{\\pi}{2} - \\arg z\\big)$ となり、$-i$ を掛けると次を得ます。"
+
+#: manual/design/float_backend.md:321
+msgid "using $\\pi/2 - \\operatorname{atan2}(y, x) = \\operatorname{atan2}(x, y)$ in the first quadrant. For $|z| > 10^{150}$ the neglected term is below $10^{-300}$. `acos` uses $\\pi/2 - \\operatorname{asin} z$ there, which gives the principal value in every quadrant."
+msgstr "ここで第一象限での $\\pi/2 - \\operatorname{atan2}(y, x) = \\operatorname{atan2}(x, y)$ を使いました。$|z| > 10^{150}$ では無視した項は $10^{-300}$ 未満です。そこでは `acos` は $\\pi/2 - \\operatorname{asin} z$ を使い、すべての象限で主値を与えます。"
+
+#: manual/design/float_backend.md:326
 msgid "T. E. Hull, T. F. Fairgrieve and P. T. P. Tang, \"Implementing the complex arcsine and arccosine functions using exception handling\", *ACM Transactions on Mathematical Software* 23(3), 1997. The crossover values $1.5$ and $0.6417$ are theirs."
 msgstr "T. E. Hull, T. F. Fairgrieve and P. T. P. Tang, \"Implementing the complex arcsine and arccosine functions using exception handling\", *ACM Transactions on Mathematical Software* 23(3), 1997. 切り替えの値 $1.5$ と $0.6417$ は同論文によるものです。"
 
-#: manual/design/float_backend.md:268
+#: manual/design/float_backend.md:331
 msgid "Arctangent and inverse hyperbolic tangent"
 msgstr "逆正接と逆双曲線正接"
 
-#: manual/design/float_backend.md:270
+#: manual/design/float_backend.md:333
 msgid "Writing $q = (1 + iz)/(1 - iz)$ with $z = x + iy$:"
 msgstr "$z = x + iy$ として $q = (1 + iz)/(1 - iz)$ と書くと:"
 
-#: manual/design/float_backend.md:278
+#: manual/design/float_backend.md:341
 msgid "and $\\operatorname{atan} z = \\frac{1}{2i}\\operatorname{Log} q$ gives"
 msgstr "となり、$\\operatorname{atan} z = \\frac{1}{2i}\\operatorname{Log} q$ から次が得られます"
 
-#: manual/design/float_backend.md:285
+#: manual/design/float_backend.md:348
 msgid "The ratio inside the logarithm equals $(1 + u)/(1 - u)$ with $u = 2y/(1 + |z|^2)$; for $|u| < 0.1$ the package evaluates it as $\\operatorname{log1p}(u) - \\operatorname{log1p}(-u)$ to keep accuracy near the real axis. For large $|z|$ the real part is evaluated on $x/m, y/m$ with $m = \\max(|x|, |y|)$. `atanh` is the same computation with $x$ and $y$ exchanged, from $\\operatorname{atanh} z = -i\\operatorname{atan}(iz)$, and switches to $\\operatorname{log1p}$ when $|4x/((1 - x)^2 + y^2)| < 1/4$."
 msgstr "対数の中の比は、$u = 2y/(1 + |z|^2)$ として $(1 + u)/(1 - u)$ に等しくなります。$|u| < 0.1$ のとき、実軸付近での精度を保つため、このパッケージはこれを $\\operatorname{log1p}(u) - \\operatorname{log1p}(-u)$ として評価します。$|z|$ が大きいときは、$m = \\max(|x|, |y|)$ として実部を $x/m, y/m$ 上で評価します。`atanh` は $\\operatorname{atanh} z = -i\\operatorname{atan}(iz)$ から、$x$ と $y$ を入れ替えた同じ計算であり、$|4x/((1 - x)^2 + y^2)| < 1/4$ のときに $\\operatorname{log1p}$ に切り替えます。"
 
-#: manual/design/float_backend.md:293
+#: manual/design/float_backend.md:356
 msgid "Inverse hyperbolic cosine by Kahan's formula"
 msgstr "Kahan の式による逆双曲線余弦"
 
-#: manual/design/float_backend.md:295
-msgid "`acosh` uses $2\\operatorname{Log}\\big(\\sqrt{(z + 1)/2} + \\sqrt{(z - 1)/2}\\big)$, built from the stable square root. Unlike $\\operatorname{Log}(z + \\sqrt{z^2 - 1})$, it has the correct cut $(-\\infty, 1)$ without extra sign adjustments, because each square root has its cut where its argument is negative real."
-msgstr "`acosh` は安定な平方根から組み立てた $2\\operatorname{Log}\\big(\\sqrt{(z + 1)/2} + \\sqrt{(z - 1)/2}\\big)$ を使います。$\\operatorname{Log}(z + \\sqrt{z^2 - 1})$ とは異なり、各平方根の分岐切断はその引数が負の実数となる場所にあるため、追加の符号調整なしで正しい分岐切断 $(-\\infty, 1)$ を持ちます。"
+#: manual/design/float_backend.md:358
+msgid "`acosh` uses $2\\operatorname{Log}\\big(\\sqrt{(z + 1)/2} + \\sqrt{(z - 1)/2}\\big)$, built from the stable square root. Unlike $\\operatorname{Log}(z + \\sqrt{z^2 - 1})$, it has the correct cut $(-\\infty, 1)$ without extra sign adjustments. The first root has its cut on $(-\\infty, -1)$ and the second on $(-\\infty, 1)$, so together they cut exactly $(-\\infty, 1)$. The logarithm adds no cut of its own: both principal roots have a non-negative real part, so their sum $S$ has $\\operatorname{Re} S \\ge 0$ and never lies on $(-\\infty, 0]$ unless $S = 0$, which would need $(z + 1)/2 = (z - 1)/2 = 0$. The identity itself follows from squaring: $S^2 = z + 2\\sqrt{(z+1)/2}\\sqrt{(z-1)/2}$, so $S^2 = z + \\sqrt{z^2 - 1}$ for the branch of $\\sqrt{z^2 - 1}$ that this product selects, and $2\\operatorname{Log} S = \\operatorname{Log} S^2$ because $|\\arg S| \\le \\pi/2$."
+msgstr "`acosh` は安定な平方根から作った $2\\operatorname{Log}\\big(\\sqrt{(z + 1)/2} + \\sqrt{(z - 1)/2}\\big)$ を使います。$\\operatorname{Log}(z + \\sqrt{z^2 - 1})$ と違い、余分な符号の調整なしに正しい分岐切断 $(-\\infty, 1)$ を持ちます。一つ目の根の分岐切断は $(-\\infty, -1)$、二つ目は $(-\\infty, 1)$ にあり、合わせてちょうど $(-\\infty, 1)$ になります。対数は独自の分岐切断を加えません。二つの主平方根はどちらも実部が非負なので、その和 $S$ は $\\operatorname{Re} S \\ge 0$ を満たし、$S = 0$ でない限り $(-\\infty, 0]$ に乗ることはありません。$S = 0$ には $(z + 1)/2 = (z - 1)/2 = 0$ が必要です。恒等式そのものは 2 乗すると得られます。$S^2 = z + 2\\sqrt{(z+1)/2}\\sqrt{(z-1)/2}$ なので、この積が選ぶ $\\sqrt{z^2 - 1}$ の分枝について $S^2 = z + \\sqrt{z^2 - 1}$ となり、$|\\arg S| \\le \\pi/2$ なので $2\\operatorname{Log} S = \\operatorname{Log} S^2$ です。"
 
-#: manual/design/float_backend.md:301
+#: manual/design/float_backend.md:372
 msgid "Exact real fast paths"
 msgstr "厳密な実数の高速パス"
 
-#: manual/design/float_backend.md:303
+#: manual/design/float_backend.md:374
 msgid "`sin` and `cos` return the real function for $y = 0$ exactly; `asin`, `acos`, `asinh`, `acosh` and `atanh` dispatch real inputs to the `_real` functions and purely imaginary inputs to the real inverse functions of $y$. This keeps results on the real line exactly real, and the `_real` functions also serve callers who start from a `Double`."
 msgstr "`sin` と `cos` は $y = 0$ ちょうどのとき実関数の値を返します。`asin`、`acos`、`asinh`、`acosh`、`atanh` は、実数の入力を `_real` 関数へ、純虚数の入力を $y$ の実逆関数へ振り分けます。これにより実数直線上の結果は厳密に実数のままとなり、`_real` 関数は `Double` から始める呼び出し側にも役立ちます。"
 
-#: manual/design/float_backend.md:309
+#: manual/design/float_backend.md:380
 msgid "Reciprocal functions through the core inverse"
 msgstr "コアの逆数を通じた逆数系の関数"
 
-#: manual/design/float_backend.md:311
-msgid "`sec`, `csc`, `cot`, their hyperbolic counterparts and the inverse reciprocal functions are compositions with `Complex::inv` of the [core](core.md). They inherit its unscaled formula and its abort on a zero modulus, instead of producing infinities at poles. `acot` special-cases $z = 0$ to return $\\pi/2$."
-msgstr "`sec`、`csc`、`cot`、それらの双曲線版、および逆数系の逆関数は、[core](core.md) の `Complex::inv` との合成です。そのスケーリングしない式と、絶対値がゼロのときの中断を受け継ぎ、極で無限大を返すことはありません。`acot` は $z = 0$ を特別扱いして $\\pi/2$ を返します。"
+#: manual/design/float_backend.md:382
+msgid "`sec`, `csc`, `cot`, their hyperbolic counterparts and the inverse reciprocal functions are compositions with `Complex::inv` of the [core](core.md#floating-point-instances). They inherit its unscaled formula and its limits, instead of producing infinities at poles: an abort when the modulus of the argument is below about $1.5 \\times 10^{-162}$ (which in practice happens at $0$ for `csc`, `cot`, `csch`, `coth` and the inverse reciprocal functions), infinite or NaN parts for moduli below about $10^{-154}$, and NaN parts for moduli above about $1.3 \\times 10^{154}$. The other poles, such as $\\pi/2$ for `sec`, are not representable exactly, and the computed $\\cos$ there is about $6 \\times 10^{-17}$, so `sec` returns a large finite value. `acot` special-cases $z = 0$ to return $\\pi/2$."
+msgstr "`sec`、`csc`、`cot`、それらの双曲線版、および逆数系の逆関数は、[コア](core.md#floating-point-instances)の `Complex::inv` との合成です。極で無限大を返す代わりに、そのスケーリングされていない式と限界を受け継ぎます。引数の絶対値が約 $1.5 \\times 10^{-162}$ 未満で中断し(実際には `csc`、`cot`、`csch`、`coth` と逆数系の逆関数で $0$ において起こります)、約 $10^{-154}$ 未満では無限大や NaN の部分を、約 $1.3 \\times 10^{154}$ を超えると NaN の部分を返します。`sec` の $\\pi/2$ のような他の極は正確には表現できず、そこで計算される $\\cos$ は約 $6 \\times 10^{-17}$ なので、`sec` は大きな有限値を返します。`acot` は $z = 0$ を特別扱いして $\\pi/2$ を返します。"
 
-#: manual/design/float_backend.md:319
+#: manual/design/float_backend.md:396
 msgid "Identities checked by the test suite"
 msgstr "テストスイートで確認している恒等式"
 
-#: manual/design/float_backend.md:321
+#: manual/design/float_backend.md:398
 msgid "`exp(log z) = z`, `sin(asin z) = z`, `cos(acos z) = z`, `tan(atan z) = z`, `sinh(asinh z) = z` and `tanh(atanh z) = z` at sample points in the first quadrant, with tolerances $10^{-10}$ to $10^{-12}$; `sqrt(-3 + 4i) = 1 + 2i`; regressions for huge `asin` arguments, the `atan` cut, infinite `atanh` and `acosh` inputs, division by infinity and $0^0$, $0^{-1}$."
 msgstr "第 1 象限のサンプル点における `exp(log z) = z`、`sin(asin z) = z`、`cos(acos z) = z`、`tan(atan z) = z`、`sinh(asinh z) = z`、`tanh(atanh z) = z`(許容誤差 $10^{-10}$ ～ $10^{-12}$)。`sqrt(-3 + 4i) = 1 + 2i`。非常に大きな `asin` の引数、`atan` の分岐切断、無限大の `atanh` と `acosh` の入力、無限大による除算、$0^0$、$0^{-1}$ に対する回帰テスト。"
 
-#: manual/design/float_backend.md:327
+#: manual/design/float_backend.md:404
+msgid "Values on the branch cuts"
+msgstr "分岐切断上の値"
+
+#: manual/design/float_backend.md:406
+msgid "A function is discontinuous across its cut, so the value on the cut has to agree with one side. With signed zeros a library can let the sign of a zero part pick the side (C99 Annex G does). This package ignores the sign of zero: it tests `y == 0.0` or `x == 0.0` and sends exact real or imaginary inputs to fast paths. The value on each cut therefore matches one fixed side, measured by comparing $f(p)$ with $f(p \\pm 10^{-9} i)$ (real-axis cuts) or $f(p \\pm 10^{-9})$ (imaginary-axis cuts):"
+msgstr "関数は分岐切断をまたいで不連続なので、切断上の値はどちらか一方の側と一致しなければなりません。符号付きゼロがあれば、ライブラリはゼロの部分の符号で側を選べます(C99 Annex G はそうしています)。このパッケージはゼロの符号を無視します。`y == 0.0` や `x == 0.0` で判定し、ちょうど実数または純虚数の入力を高速経路へ送ります。そのため各切断上の値は決まった一方の側と一致します。次の表は、$f(p)$ を $f(p \\pm 10^{-9} i)$(実軸上の切断)または $f(p \\pm 10^{-9})$(虚軸上の切断)と比べて測ったものです。"
+
+#: manual/design/float_backend.md:414
+msgid "Cut"
+msgstr "切断"
+
+#: manual/design/float_backend.md:414
+msgid "Value on the cut matches"
+msgstr "切断上の値が一致する側"
+
+#: manual/design/float_backend.md:416
+msgid "the upper side ($y > 0$)"
+msgstr "上側($y > 0$)"
+
+#: manual/design/float_backend.md:417
+#: manual/design/float_backend.md:418
+msgid "$x > 1$ and $x < -1$"
+msgstr "$x > 1$ と $x < -1$"
+
+#: manual/design/float_backend.md:417
+#: manual/design/float_backend.md:418
+#: manual/design/float_backend.md:419
+msgid "the upper side"
+msgstr "上側"
+
+#: manual/design/float_backend.md:420
+msgid "the right side ($x > 0$)"
+msgstr "右側($x > 0$)"
+
+#: manual/design/float_backend.md:421
+msgid "the left side ($x < 0$)"
+msgstr "左側($x < 0$)"
+
+#: manual/design/float_backend.md:422
+msgid "$x < 0$, resp. $x < -1$ for `acosh`"
+msgstr "$x < 0$(`acosh` では $x < -1$)"
+
+#: manual/design/float_backend.md:422
+msgid "neither side (the $2\\pi$ defect below)"
+msgstr "どちらの側とも一致しない(下の $2\\pi$ の欠陥)"
+
+#: manual/design/float_backend.md:424
+msgid "The real-axis cuts thus behave like C99 with $y = +0$. On the imaginary-axis cuts `atan` and `asinh` attach the upper cut to the right half-plane and the lower cut to the left one. That keeps them odd on the cuts ($f(-z) = -f(z)$), but differs from C99 with $x = +0$ on the lower cut: C99 gives `casinh(+0 - 2i)` $= 1.317 - i\\pi/2$, this package $-1.317 - i\\pi/2$."
+msgstr "したがって実軸上の切断は、$y = +0$ とした C99 と同じように振る舞います。虚軸上の切断では、`atan` と `asinh` は上の切断を右半平面に、下の切断を左半平面に付けます。これにより切断上でも奇関数($f(-z) = -f(z)$)のままですが、下の切断では $x = +0$ とした C99 と異なります。C99 は `casinh(+0 - 2i)` $= 1.317 - i\\pi/2$ を与え、このパッケージは $-1.317 - i\\pi/2$ を与えます。"
+
+#: manual/design/float_backend.md:431
 msgid "Known deviations from the principal values"
 msgstr "主値からの既知の逸脱"
 
-#: manual/design/float_backend.md:329
+#: manual/design/float_backend.md:433
 msgid "The implementation uses the constant $2\\pi$ (`tau`) in places where the principal value needs $\\pi$:"
 msgstr "実装は、主値では $\\pi$ が必要な箇所で定数 $2\\pi$(`tau`)を使っています:"
 
-#: manual/design/float_backend.md:332
+#: manual/design/float_backend.md:436
 msgid "Function and input"
 msgstr "関数と入力"
 
-#: manual/design/float_backend.md:332
+#: manual/design/float_backend.md:436
 msgid "Returned"
 msgstr "返される値"
 
-#: manual/design/float_backend.md:332
+#: manual/design/float_backend.md:436
 msgid "Principal value"
 msgstr "主値"
 
-#: manual/design/float_backend.md:334
+#: manual/design/float_backend.md:438
 msgid "$\\pi$ (C99: $\\pm\\pi$ by the sign of $y$)"
 msgstr "$\\pi$(C99: $y$ の符号により $\\pm\\pi$)"
 
-#: manual/design/float_backend.md:335
+#: manual/design/float_backend.md:439
 msgid "`log(z)`, same inputs"
 msgstr "`log(z)`、同じ入力"
 
-#: manual/design/float_backend.md:336
+#: manual/design/float_backend.md:440
 msgid "`pow`, `pow_real`, negative real base, non-integer exponent"
 msgstr "`pow`、`pow_real`、負の実数の底、整数でない指数"
 
-#: manual/design/float_backend.md:336
+#: manual/design/float_backend.md:440
 msgid "angle $2\\pi$"
 msgstr "角度 $2\\pi$"
 
-#: manual/design/float_backend.md:336
+#: manual/design/float_backend.md:440
 msgid "angle $\\pi$"
 msgstr "角度 $\\pi$"
 
-#: manual/design/float_backend.md:342
-msgid "Because $e^{2\\pi i} = 1$ while $e^{\\pi i} = -1$, these values are not even logarithms or inverses of the input: `exp(log(-1))` is $1$, and `cos(acos(z))` is $-z$ for $x < 0$. The test suite currently asserts the $2\\pi$ value of `arg` on the negative axis. These are defects to be fixed in the implementation; this manual records the current behaviour."
-msgstr "$e^{2\\pi i} = 1$ であるのに対し $e^{\\pi i} = -1$ なので、これらの値は入力の対数や逆関数の値ですらありません: `exp(log(-1))` は $1$ であり、$x < 0$ では `cos(acos(z))` は $-z$ です。テストスイートは現在、負の実軸上での `arg` の値 $2\\pi$ を検証しています。これらは実装で修正すべき欠陥であり、このマニュアルは現在の振る舞いを記録しています。"
+#: manual/design/float_backend.md:444
+msgid "`acosh_real(x)` and `acosh(x + 0i)`, $x < -1$"
+msgstr "`acosh_real(x)` と `acosh(x + 0i)`、$x < -1$"
 
-#: manual/design/float_backend.md:348
+#: manual/design/float_backend.md:445
+msgid "`asec(z)`, $\\operatorname{Re} z < 0$ except real $z \\le -1$"
+msgstr "`asec(z)`、$\\operatorname{Re} z < 0$(実数 $z \\le -1$ を除く)"
+
+#: manual/design/float_backend.md:445
+msgid "through `acos`: real part $+\\pi$"
+msgstr "`acos` を経由:実部が $\\pi$ だけ大きい"
+
+#: manual/design/float_backend.md:445
+#: manual/design/float_backend.md:447
+msgid "principal"
+msgstr "主値"
+
+#: manual/design/float_backend.md:447
+msgid "through `log`"
+msgstr "`log` を経由"
+
+#: manual/design/float_backend.md:449
+msgid "Because $e^{2\\pi i} = 1$ while $e^{\\pi i} = -1$, these values are not even logarithms or inverses of the input: `exp(log(-1))` is $1$, and `cos(acos(z))` is $-z$ for $x < 0$. For powers the error is a rotation by $e^{i\\pi w}$: $(-4)^{1/2}$ comes out as $2e^{i\\pi} = -2$ instead of $2i$, and $(-8)^{1/3}$ as $2e^{2\\pi i/3} = -1 + 1.732i$ instead of $1 + 1.732i$. Only the mid-range branch of `acos` is affected: for a part above $10^{150}$, `acos` uses $\\pi/2 - \\operatorname{asin} z$ and returns the principal value, so its real part jumps by $\\pi$ at that threshold. The test suite currently asserts the $2\\pi$ value of `arg` on the negative axis. These are defects to be fixed in the implementation; this manual records the current behaviour."
+msgstr "$e^{2\\pi i} = 1$ であるのに対し $e^{\\pi i} = -1$ なので、これらの値は入力の対数や逆関数の値ですらありません: `exp(log(-1))` は $1$ であり、$x < 0$ では `cos(acos(z))` は $-z$ です。べき乗では誤差は $e^{i\\pi w}$ による回転になります。$(-4)^{1/2}$ は $2i$ ではなく $2e^{i\\pi} = -2$ に、$(-8)^{1/3}$ は $1 + 1.732i$ ではなく $2e^{2\\pi i/3} = -1 + 1.732i$ になります。影響を受けるのは `acos` の中間範囲の分岐だけです。いずれかの部分が $10^{150}$ を超えると `acos` は $\\pi/2 - \\operatorname{asin} z$ を使って主値を返すので、その閾値で実部が $\\pi$ だけ跳びます。テストスイートは現在、負の実軸上での `arg` の値 $2\\pi$ を検証しています。これらは実装で修正すべき欠陥であり、このマニュアルは現在の振る舞いを記録しています。"
+
+#: manual/design/float_backend.md:461
 msgid "Other accuracy notes"
 msgstr "その他の精度に関する注意"
 
-#: manual/design/float_backend.md:350
+#: manual/design/float_backend.md:463
 msgid "`asin` evaluates $\\sqrt{A^2 - 1}$ in its $A \\le 1.5$ branch where the Hull–Fairgrieve–Tang algorithm (and `acos` here) uses $\\sqrt{(A - 1)(A + 1)}$. Close to the branch points $\\pm1$ this loses digits: at $1 + 10^{-10}i$ the imaginary part has a relative error near $4 \\times 10^{-8}$."
 msgstr "`asin` は $A \\le 1.5$ の分岐で $\\sqrt{A^2 - 1}$ を評価しますが、Hull–Fairgrieve–Tang アルゴリズム(およびここでの `acos`)は $\\sqrt{(A - 1)(A + 1)}$ を使います。分岐点 $\\pm1$ の近くではこれにより桁が失われます: $1 + 10^{-10}i$ では虚部の相対誤差が $4 \\times 10^{-8}$ 程度になります。"
 
-#: manual/design/float_backend.md:355
-msgid "`exp` overflows in $e^x$ before multiplying by $\\cos y$ and $\\sin y$, so `exp(710 + 0i)` has a NaN imaginary part ($\\infty \\cdot 0$)."
-msgstr "`exp` は $\\cos y$ と $\\sin y$ を掛ける前に $e^x$ でオーバーフローするため、`exp(710 + 0i)` の虚部は NaN になります($\\infty \\cdot 0$)。"
+#: manual/design/float_backend.md:468
+msgid "`exp` overflows in $e^x$ before multiplying by $\\cos y$ and $\\sin y$, so `exp(710 + 0i)` has a NaN imaginary part ($\\infty \\cdot 0$). `sin`, `cos`, `sinh` and `cosh` have the same product structure: `sin(800i)` has a NaN real part, `cosh(800 + 0i)` and `sinh(800 + 0i)` a NaN imaginary part. Testing for an exactly zero factor before multiplying would give the C99 values."
+msgstr "`exp` は $\\cos y$ と $\\sin y$ を掛ける前に $e^x$ でオーバーフローするので、`exp(710 + 0i)` の虚部は NaN($\\infty \\cdot 0$)になります。`sin`、`cos`、`sinh`、`cosh` も同じ積の構造を持ちます。`sin(800i)` は実部が NaN、`cosh(800 + 0i)` と `sinh(800 + 0i)` は虚部が NaN です。掛ける前にちょうどゼロの因子を判定すれば、C99 の値が得られます。"
 
-#: manual/design/float_backend.md:357
-msgid "The `Float` instance of `log1p` is $\\ln(1 + x)$ and loses relative accuracy for $|x| \\ll 1$; no public function uses it yet."
-msgstr "`log1p` の `Float` インスタンスは $\\ln(1 + x)$ であり、$|x| \\ll 1$ で相対精度が失われます。これを使う公開関数はまだありません。"
+#: manual/design/float_backend.md:474
+msgid "`abs_log` evaluates $\\tfrac12\\ln(1 + t^2)$ with `ln`, not `log1p`. For $t^2$ below the unit roundoff, $1 + t^2$ rounds to $1$ and the term vanishes, so the relative error of $\\ln|z|$ is large when $|z|$ is close to $1$: `abs_log(1 + 1e-10i)` is $0$ instead of $5 \\times 10^{-21}$. The absolute error stays below about $10^{-16}$."
+msgstr "`abs_log` は $\\tfrac12\\ln(1 + t^2)$ を `log1p` ではなく `ln` で計算します。$t^2$ が単位丸め誤差より小さいと $1 + t^2$ は $1$ に丸められて項が消えるため、$|z|$ が $1$ に近いと $\\ln|z|$ の相対誤差が大きくなります。`abs_log(1 + 1e-10i)` は $5 \\times 10^{-21}$ ではなく $0$ です。絶対誤差は約 $10^{-16}$ 未満に収まります。"
 
-#: manual/design/float_backend.md:362
+#: manual/design/float_backend.md:479
+msgid "`div` multiplies by $1/c$, which overflows for a subnormal $c$; see [Smith's division](#smiths-division)."
+msgstr "`div` は $1/c$ を掛けますが、これは $c$ が非正規化数のときにオーバーフローします。[Smith の除算](#smiths-division) を参照してください。"
+
+#: manual/design/float_backend.md:481
+msgid "The trait method `FloatingSpecialValues::is_negative_zero` is `is_neg_inf(1.0 / x)` without a test for zero, so it is also true for negative subnormal numbers whose reciprocal overflows. The package's own functions use a private helper that tests `x == 0.0` first."
+msgstr "トレイトのメソッド `FloatingSpecialValues::is_negative_zero` はゼロの判定を伴わない `is_neg_inf(1.0 / x)` なので、逆数がオーバーフローする負の非正規化数でも真になります。パッケージ自身の関数は、先に `x == 0.0` を確かめるプライベートな補助関数を使っています。"
+
+#: manual/design/float_backend.md:485
+msgid "The `Float` instance of `log1p` is $\\ln(1 + x)$, which loses relative accuracy for $|x| \\ll 1$ and returns $0$ below about $6 \\times 10^{-8}$; no public function uses it yet."
+msgstr "`log1p` の `Float` インスタンスは $\\ln(1 + x)$ であり、$|x| \\ll 1$ で相対精度が失われ、約 $6 \\times 10^{-8}$ 未満では $0$ を返します。これを使う公開関数はまだありません。"
+
+#: manual/design/float_backend.md:488
+msgid "`asec_real` and `acsc_real` have no NaN check, so a NaN argument gives a finite real part ($2\\pi$, resp. $-\\pi/2$) with a NaN imaginary part."
+msgstr "`asec_real` と `acsc_real` には NaN の判定がないため、NaN の引数は有限の実部(それぞれ $2\\pi$ と $-\\pi/2$)と NaN の虚部を与えます。"
+
+#: manual/design/float_backend.md:493
 msgid "**Methods on `Complex`.** Not possible from a separate package, and moving the functions into the core would bring IEEE semantics into the generic type."
 msgstr "**`Complex` のメソッド。** 別パッケージからは不可能であり、関数をコアに移すとジェネリック型に IEEE のセマンティクスが持ち込まれます。"
 
-#: manual/design/float_backend.md:365
+#: manual/design/float_backend.md:496
 msgid "**A single floating-real trait.** It would force IEEE special values on every analytic scalar."
 msgstr "**単一の浮動小数点実数トレイト。** あらゆる解析スカラーに IEEE の特殊値を強制することになります。"
 
-#: manual/design/float_backend.md:367
+#: manual/design/float_backend.md:498
 msgid "**Textbook formulas everywhere.** Simpler, but they overflow for $|z| \\gtrsim 10^{154}$ and cancel near the branch cuts, as derived above."
 msgstr "**どこでも教科書どおりの式。** より単純ですが、上で導出したとおり $|z| \\gtrsim 10^{154}$ でオーバーフローし、分岐切断の近くで桁落ちを起こします。"
 
-#: manual/design/float_backend.md:369
+#: manual/design/float_backend.md:500
 msgid "**Full C99 Annex G special-value tables.** Only the cases listed in the API are handled; the remaining infinities and NaN propagate through ordinary arithmetic."
 msgstr "**C99 Annex G の特殊値表の完全な実装。** API に記載したケースだけを処理し、残りの無限大と NaN は通常の算術を通じて伝播します。"
 
-#: manual/design/float_backend.md:375
+#: manual/design/float_backend.md:506
 msgid "Analytic functions for `Complex[Double]` only; no `Complex[Float]` functions, although the traits are implemented for `Float`."
 msgstr "解析関数は `Complex[Double]` 向けのみです。トレイトは `Float` に対して実装されていますが、`Complex[Float]` 向けの関数はありません。"
 
-#: manual/design/float_backend.md:377
-msgid "No signed-zero selection of the side of a branch cut, except in `arg`."
-msgstr "`arg` を除き、符号付きゼロによる分岐切断の側の選択は行いません。"
+#: manual/design/float_backend.md:508
+msgid "No signed-zero selection of the side of a branch cut; `arg` also returns the same value for $y = +0$ and $y = -0$."
+msgstr "符号付きゼロによって分岐切断の側を選ぶことはしません。`arg` も $y = +0$ と $y = -0$ に同じ値を返します。"
 
-#: manual/design/float_backend.md:378
+#: manual/design/float_backend.md:510
 msgid "Reciprocal functions abort at poles instead of returning infinities."
 msgstr "逆数系の関数は極で無限大を返すのではなく中断します。"
 
-#: manual/design/float_backend.md:379
+#: manual/design/float_backend.md:511
 msgid "No error bounds are certified; accuracy is checked by regression tests."
 msgstr "誤差限界の保証はありません。精度は回帰テストで確認しています。"
 
-#: manual/design/float_backend.md:380
+#: manual/design/float_backend.md:512
 msgid "No checked or contextual (`Result`) variants."
 msgstr "検査付きや文脈付き(`Result`)の版はありません。"
 
@@ -1393,207 +1676,337 @@ msgid "luna-complex"
 msgstr "luna-complex"
 
 #: manual/index.md:3
+msgid "This manual documents the code of `Luna-Flow/luna-complex` at version `0.2.0` (the version in `moon.mod`) on MoonBit 0.10, including the unreleased changes listed in [CHANGELOG.md](../../CHANGELOG.md)."
+msgstr "このマニュアルは、MoonBit 0.10 上の `Luna-Flow/luna-complex` バージョン `0.2.0`(`moon.mod` に記載のバージョン)のコードを、[CHANGELOG.md](../../CHANGELOG.md) に記載した未リリースの変更も含めて説明します。"
+
+#: manual/index.md:7
+msgid "Overview"
+msgstr "概要"
+
+#: manual/index.md:9
 msgid "`Luna-Flow/luna-complex` provides complex numbers for Luna Flow. The root package defines the generic type `Complex[T]`, the ring $T[i]/(i^2 + 1)$ over any scalar `T`, with its arithmetic and `luna-generic` structure instances. The `float_backend` package adds the analytic functions of `Complex[Double]` (roots, logarithms, powers, trigonometric and hyperbolic functions and their inverses) with numerically stable formulas, and the capability traits for floating-point scalars."
 msgstr "`Luna-Flow/luna-complex` は Luna Flow に複素数を提供します。ルートパッケージは、任意のスカラー `T` 上の環 $T[i]/(i^2 + 1)$ であるジェネリック型 `Complex[T]` を、その算術および `luna-generic` の構造インスタンスとともに定義します。`float_backend` パッケージは、`Complex[Double]` の解析関数(根、対数、べき乗、三角関数・双曲線関数とその逆関数)を数値的に安定な式で追加し、浮動小数点スカラー向けの能力トレイトも提供します。"
 
-#: manual/index.md:11
-msgid "This manual documents the code of version `0.2.0` (the version in `moon.mod`) on MoonBit 0.10."
-msgstr "このマニュアルは、MoonBit 0.10 上のバージョン `0.2.0`(`moon.mod` に記載のバージョン)のコードを説明します。"
+#: manual/index.md:17
+msgid "[!WARNING] On the negative real axis `arg` returns $2\\pi$ instead of $\\pi$, so `log(-1)` is $2\\pi i$, `pow_real(-4 + 0i, 0.5)` is $-2$ instead of $2i$, and `acos`, `acosh` and the functions built on them return values off by $\\pi$ for some negative inputs. The [float_backend design](design/float_backend.md#known-deviations-from-the-principal-values) lists every affected case."
+msgstr "[!WARNING] 負の実軸上では `arg` が $\\pi$ ではなく $2\\pi$ を返すため、`log(-1)` は $2\\pi i$、`pow_real(-4 + 0i, 0.5)` は $2i$ ではなく $-2$ になり、`acos`、`acosh` とそれらの上に作られた関数は、一部の負の入力に対して $\\pi$ だけずれた値を返します。影響を受けるすべての場合は [float_backend の設計](design/float_backend.md#known-deviations-from-the-principal-values) に一覧があります。"
 
-#: manual/index.md:14
-msgid "Packages"
-msgstr "パッケージ"
+#: manual/index.md:25
+msgid "Install"
+msgstr "インストール"
 
-#: manual/index.md:16
-msgid "Package"
-msgstr "パッケージ"
+#: manual/index.md:31
+msgid "Then import the packages you need in your `moon.pkg`. The examples in this manual use these aliases:"
+msgstr "続いて、必要なパッケージを `moon.pkg` でインポートします。このマニュアルの例は次の別名を使います。"
 
-#: manual/index.md:16
-msgid "Import path"
-msgstr "インポートパス"
+#: manual/index.md:41
+msgid "The packages need the MoonBit toolchain 0.10 or later (`moonc` ≥ 0.10) with `moon.mod` / `moon.pkg` manifests; the tests run on `wasm-gc`, `wasm`, `js` and `native`. They depend on `Luna-Flow/luna-generic` 0.3.3, `Luna-Flow/arithmetic` 0.2.2 and `Kaida-Amethyst/math`."
+msgstr "これらのパッケージには `moon.mod` / `moon.pkg` マニフェストを使う MoonBit ツールチェーン 0.10 以降(`moonc` ≥ 0.10)が必要です。テストは `wasm-gc`、`wasm`、`js`、`native` で実行されます。依存先は `Luna-Flow/luna-generic` 0.3.3、`Luna-Flow/arithmetic` 0.2.2、`Kaida-Amethyst/math` です。"
 
-#: manual/index.md:16
-msgid "Role"
-msgstr "役割"
-
-#: manual/index.md:16
+#: manual/index.md:46
 msgid "Pages"
 msgstr "ページ"
 
-#: manual/index.md:18
-msgid "generic `Complex[T]`: construction, mutation, arithmetic, conjugation, structure instances"
-msgstr "ジェネリックな `Complex[T]`: 構築、変更、算術、共役、構造インスタンス"
-
-#: manual/index.md:18
-msgid "[API](api/core.md) · [tutorial](tutorial/core.md) · [design](design/core.md)"
-msgstr "[API](api/core.md) · [チュートリアル](tutorial/core.md) · [設計](design/core.md)"
-
-#: manual/index.md:19
-msgid "analytic functions of `Complex[Double]`; `FloatingAnalyticScalar`, `FloatingSpecialValues`, `FloatingBackendScalar`"
-msgstr "`Complex[Double]` の解析関数。`FloatingAnalyticScalar`、`FloatingSpecialValues`、`FloatingBackendScalar`"
-
-#: manual/index.md:19
-msgid "[API](api/float_backend.md) · [tutorial](tutorial/float_backend.md) · [design](design/float_backend.md)"
-msgstr "[API](api/float_backend.md) · [チュートリアル](tutorial/float_backend.md) · [設計](design/float_backend.md)"
-
-#: manual/index.md:21
+#: manual/index.md:48
 msgid "The root package is documented under the name `core`. `float_backend` replaces the former `double_ext` package."
 msgstr "ルートパッケージは `core` という名前で説明しています。`float_backend` は以前の `double_ext` パッケージを置き換えるものです。"
 
-#: manual/index.md:24
-msgid "Reading paths"
-msgstr "読み進め方"
+#: manual/index.md:51
+msgid "Part"
+msgstr "部"
 
-#: manual/index.md:26
-msgid "**First steps.** Read the [core tutorial](tutorial/core.md) for arithmetic, then the [float_backend tutorial](tutorial/float_backend.md) for `sqrt`, `log`, `sin` and the other functions."
-msgstr "**はじめの一歩。** 算術については [core チュートリアル](tutorial/core.md) を、`sqrt`、`log`、`sin` などの関数については続けて [float_backend チュートリアル](tutorial/float_backend.md) を読んでください。"
+#: manual/index.md:51
+msgid "Tutorial"
+msgstr "チュートリアル"
 
-#: manual/index.md:30
-msgid "**Using the library.** Keep the [core API](api/core.md) and the [float_backend API](api/float_backend.md) at hand; the latter states the branch, special-value and abort behaviour of every function, including the known deviations on the negative real axis."
-msgstr "**ライブラリを使う。** [core API](api/core.md) と [float_backend API](api/float_backend.md) を手元に置いてください。後者には、負の実軸上での既知の逸脱を含め、各関数の分枝、特殊値、中断の振る舞いが記載されています。"
+#: manual/index.md:51
+msgid "API"
+msgstr "API"
 
-#: manual/index.md:35
-msgid "**Contributing.** Read the [core design](design/core.md) for the algebra and the lawfulness of the instances, the [float_backend design](design/float_backend.md) for the derivations of the stable formulas and the branch cuts, and the [contribution guide](contributing.md)."
-msgstr "**コントリビュート。** 代数とインスタンスが法則を満たすかについては [core の設計](design/core.md) を、安定な式と分岐切断の導出については [float_backend の設計](design/float_backend.md) を読み、[コントリビューションガイド](contributing.md) も参照してください。"
+#: manual/index.md:51
+msgid "Design"
+msgstr "設計"
 
-#: manual/index.md:41
-msgid "Installation"
-msgstr "インストール"
+#: manual/index.md:53
+msgid "`core` (`Luna-Flow/luna-complex`): generic `Complex[T]`, arithmetic, structure instances"
+msgstr "`core`(`Luna-Flow/luna-complex`):ジェネリックな `Complex[T]`、算術、構造のインスタンス"
+
+#: manual/index.md:53
+msgid "[tutorial](tutorial/core.md)"
+msgstr "[チュートリアル](tutorial/core.md)"
+
+#: manual/index.md:53
+msgid "[API](api/core.md)"
+msgstr "[API](api/core.md)"
+
+#: manual/index.md:53
+msgid "[design](design/core.md)"
+msgstr "[設計](design/core.md)"
 
 #: manual/index.md:54
-msgid "Toolchain"
-msgstr "ツールチェーン"
+msgid "`float_backend` (`Luna-Flow/luna-complex/float_backend`): analytic functions of `Complex[Double]`, floating-point capability traits"
+msgstr "`float_backend`(`Luna-Flow/luna-complex/float_backend`):`Complex[Double]` の解析関数、浮動小数点の能力トレイト"
+
+#: manual/index.md:54
+msgid "[tutorial](tutorial/float_backend.md)"
+msgstr "[チュートリアル](tutorial/float_backend.md)"
+
+#: manual/index.md:54
+msgid "[API](api/float_backend.md)"
+msgstr "[API](api/float_backend.md)"
+
+#: manual/index.md:54
+msgid "[design](design/float_backend.md)"
+msgstr "[設計](design/float_backend.md)"
 
 #: manual/index.md:56
-msgid "MoonBit `moonc` 0.10 or newer with `moon.mod` / `moon.pkg` manifests. The tests run on `wasm-gc`, `wasm`, `js` and `native`."
-msgstr "`moon.mod` / `moon.pkg` マニフェストに対応した MoonBit `moonc` 0.10 以降。テストは `wasm-gc`、`wasm`、`js`、`native` で実行されます。"
+msgid "The [contribution guide](contributing.md) collects the rules for changing the code and the manual."
+msgstr "コードとマニュアルを変更するための規則は [コントリビューションガイド](contributing.md) にまとめてあります。"
 
 #: manual/index.md:59
+msgid "Exported items"
+msgstr "公開項目"
+
+#: manual/index.md:61
+msgid "`core`: the type `Complex[T]` with `new`, `set`, `set_re`, `set_im`, `zero`, `one`, `add`, `sub`, `neg`, `mul`, `div`, `conjugate`, `inv`, `equal` and `to_string`"
+msgstr "`core`:型 `Complex[T]` と、`new`、`set`、`set_re`、`set_im`、`zero`、`one`、`add`、`sub`、`neg`、`mul`、`div`、`conjugate`、`inv`、`equal`、`to_string`"
+
+#: manual/index.md:64
+msgid "`core` instances: `Add`, `Sub`, `Neg`, `Mul`, `Div`, `Show`, and the `luna-generic` traits `Zero`, `One`, `AddMonoid`, `AddGroup`, `MulMonoid`, `Semiring`, `Ring`, `Inverse`, `MulGroup`, `Field` and `Conjugate`"
+msgstr "`core` のインスタンス:`Add`、`Sub`、`Neg`、`Mul`、`Div`、`Show`、および `luna-generic` のトレイト `Zero`、`One`、`AddMonoid`、`AddGroup`、`MulMonoid`、`Semiring`、`Ring`、`Inverse`、`MulGroup`、`Field`、`Conjugate`"
+
+#: manual/index.md:68
+msgid "`float_backend` modulus and argument: `abs`, `abs_sqr`, `abs_log`, `arg`, `polar`"
+msgstr "`float_backend` の絶対値と偏角:`abs`、`abs_sqr`、`abs_log`、`arg`、`polar`"
+
+#: manual/index.md:70
+msgid "`float_backend` arithmetic: `div`, `sqrt`, `sqrt_real`, `exp`, `log`, `log_10`, `log_b`, `pow`, `pow_real`, `op_bin_re`, `op_bin_im`"
+msgstr "`float_backend` の算術:`div`、`sqrt`、`sqrt_real`、`exp`、`log`、`log_10`、`log_b`、`pow`、`pow_real`、`op_bin_re`、`op_bin_im`"
+
+#: manual/index.md:72
+msgid "`float_backend` trigonometric and hyperbolic functions: `sin`, `cos`, `tan`, `sec`, `csc`, `cot`, `sinh`, `cosh`, `tanh`, `sech`, `csch`, `coth`"
+msgstr "`float_backend` の三角関数と双曲線関数:`sin`、`cos`、`tan`、`sec`、`csc`、`cot`、`sinh`、`cosh`、`tanh`、`sech`、`csch`、`coth`"
+
+#: manual/index.md:75
+msgid "`float_backend` inverse functions: `asin`, `acos`, `atan`, `asec`, `acsc`, `acot`, `asinh`, `acosh`, `atanh`, `asech`, `acsch`, `acoth`, and the real-argument forms `asin_real`, `acos_real`, `asec_real`, `acsc_real`, `acosh_real`, `atanh_real`"
+msgstr "`float_backend` の逆関数:`asin`、`acos`、`atan`、`asec`、`acsc`、`acot`、`asinh`、`acosh`、`atanh`、`asech`、`acsch`、`acoth`、および実数の引数をとる `asin_real`、`acos_real`、`asec_real`、`acsc_real`、`acosh_real`、`atanh_real`"
+
+#: manual/index.md:79
+msgid "`float_backend` storage: `pack`, `native_pack`"
+msgstr "`float_backend` の格納:`pack`、`native_pack`"
+
+#: manual/index.md:80
+msgid "`float_backend` traits: `FloatingAnalyticScalar`, `FloatingSpecialValues`, `FloatingBackendScalar`, and the re-exported type `Complex`"
+msgstr "`float_backend` のトレイト:`FloatingAnalyticScalar`、`FloatingSpecialValues`、`FloatingBackendScalar`、および再エクスポートされた型 `Complex`"
+
+#: manual/index.md:83
+msgid "Where to read next"
+msgstr "次に読むもの"
+
+#: manual/index.md:85
+msgid "The [core tutorial](tutorial/core.md) computes with `Complex[T]`, and the [float_backend tutorial](tutorial/float_backend.md) adds roots, logarithms and trigonometry. The API pages state the branch, special-value and abort behaviour of every item, and the design pages derive the algebra and the stable formulas."
+msgstr "[core チュートリアル](tutorial/core.md) は `Complex[T]` で計算し、[float_backend チュートリアル](tutorial/float_backend.md) は根、対数、三角関数を加えます。API ページは各項目の分枝、特殊値、中断の振る舞いを述べ、設計ページは代数と安定な式を導出します。"
+
+#: manual/index.md:91
+msgid "New to the package: read the [core tutorial](tutorial/core.md), then the [float_backend tutorial](tutorial/float_backend.md)."
+msgstr "パッケージが初めての場合:[core チュートリアル](tutorial/core.md) を読み、続いて [float_backend チュートリアル](tutorial/float_backend.md) を読んでください。"
+
+#: manual/index.md:93
+msgid "Using it in a library: keep the [core API](api/core.md) and the [float_backend API](api/float_backend.md) at hand; the latter states the branch, special-value and abort behaviour of every function, including the known deviations on the negative real axis."
+msgstr "ライブラリで使う場合:[core API](api/core.md) と [float_backend API](api/float_backend.md) を手元に置いてください。後者には、負の実軸上での既知の逸脱を含め、各関数の分枝、特殊値、中断の振る舞いが記載されています。"
+
+#: manual/index.md:97
+msgid "Contributing: read the [core design](design/core.md) for the algebra and the lawfulness of the instances, the [float_backend design](design/float_backend.md) for the derivations of the stable formulas and the branch cuts, and the [contribution guide](contributing.md)."
+msgstr "コントリビュートする場合:代数とインスタンスが法則を満たすかについては [core の設計](design/core.md) を、安定な式と分岐切断の導出については [float_backend の設計](design/float_backend.md) を読み、[コントリビューションガイド](contributing.md) も参照してください。"
+
+#: manual/index.md:103
 msgid "Validation"
 msgstr "検証"
+
+#: manual/index.md:105
+msgid "Recommended release checks:"
+msgstr "推奨するリリース前の確認:"
 
 #: manual/tutorial/core.md:1
 msgid "core tutorial"
 msgstr "core チュートリアル"
 
 #: manual/tutorial/core.md:3
-msgid "This tutorial uses the generic `Complex[T]` type for complex arithmetic. You will build and print complex numbers, compute with them over `Double` and over the integers, write generic code that accepts complex numbers through the `luna-generic` traits, and update values in place. The algebra behind it is in the [core design](../design/core.md)."
-msgstr "このチュートリアルでは、ジェネリックな `Complex[T]` 型を使って複素数の算術を行います。複素数を構築して出力し、`Double` 上と整数上で計算し、`luna-generic` トレイトを通じて複素数を受け付けるジェネリックなコードを書き、値をインプレースで更新します。背後にある代数は [core の設計](../design/core.md) にあります。"
+msgid "This tutorial uses the generic `Complex[T]` type for complex arithmetic. You will build and print complex numbers, compute with them over `Double` and over the integers, write generic code that accepts complex numbers through the `luna-generic` traits, and update values in place. The algebra behind it is in the [core design](../design/core.md). Every example is a test that you can paste into a `_test.mbt` file and run with `moon test`; the expected output is written in the `inspect` calls."
+msgstr "このチュートリアルでは、ジェネリックな `Complex[T]` 型を使って複素数の算術を行います。複素数を構築して出力し、`Double` 上と整数上で計算し、`luna-generic` トレイトを通じて複素数を受け付けるジェネリックなコードを書き、値をインプレースで更新します。背後にある代数は [core の設計](../design/core.md) にあります。どの例も `_test.mbt` ファイルに貼り付けて `moon test` で実行できるテストであり、期待される出力は `inspect` の呼び出しに書いてあります。"
 
-#: manual/tutorial/core.md:9
-#: manual/tutorial/float_backend.md:9
+#: manual/tutorial/core.md:11
+#: manual/tutorial/float_backend.md:11
+msgid "I want to"
+msgstr "したいこと"
+
+#: manual/tutorial/core.md:11
+#: manual/tutorial/float_backend.md:11
+msgid "Use"
+msgstr "使うもの"
+
+#: manual/tutorial/core.md:13
+msgid "build a complex number"
+msgstr "複素数を作る"
+
+#: manual/tutorial/core.md:14
+msgid "add, subtract, multiply, divide"
+msgstr "足す、引く、掛ける、割る"
+
+#: manual/tutorial/core.md:15
+msgid "conjugate or invert"
+msgstr "共役または逆数をとる"
+
+#: manual/tutorial/core.md:16
+msgid "compute exactly with Gaussian integers"
+msgstr "ガウス整数で正確に計算する"
+
+#: manual/tutorial/core.md:16
+msgid "`Complex[Int]` or `Complex[BigInt]`"
+msgstr "`Complex[Int]` または `Complex[BigInt]`"
+
+#: manual/tutorial/core.md:17
+msgid "pass complex numbers to generic code"
+msgstr "複素数をジェネリックなコードに渡す"
+
+#: manual/tutorial/core.md:17
+msgid "a `luna-generic` bound such as `T : @lg.Ring`"
+msgstr "`T : @lg.Ring` のような `luna-generic` の境界"
+
+#: manual/tutorial/core.md:18
+msgid "update a value in place"
+msgstr "値をインプレースで更新する"
+
+#: manual/tutorial/core.md:19
+msgid "take roots, logarithms, sines"
+msgstr "根、対数、正弦をとる"
+
+#: manual/tutorial/core.md:19
+msgid "the [float_backend](float_backend.md) package"
+msgstr "[float_backend](float_backend.md) パッケージ"
+
+#: manual/tutorial/core.md:21
+#: manual/tutorial/float_backend.md:21
 msgid "Quick start"
 msgstr "クイックスタート"
 
+#: manual/tutorial/core.md:27
+msgid "Import the root package in the `moon.pkg` of the package that uses it. The generic example below also uses `Luna-Flow/luna-generic` as `@lg`:"
+msgstr "それを使うパッケージの `moon.pkg` でルートパッケージをインポートします。下のジェネリックな例では `Luna-Flow/luna-generic` も `@lg` として使います。"
+
 #: manual/tutorial/core.md:37
-#: manual/tutorial/float_backend.md:37
+msgid "The smallest useful program builds two numbers and combines them:"
+msgstr "最小の役に立つプログラムは、二つの数を作って組み合わせます。"
+
+#: manual/tutorial/core.md:49
+#: manual/tutorial/float_backend.md:47
 msgid "Everyday tasks"
 msgstr "日常的なタスク"
 
-#: manual/tutorial/core.md:39
+#: manual/tutorial/core.md:51
 msgid "Conjugate and squared modulus"
 msgstr "共役と絶対値の 2 乗"
 
-#: manual/tutorial/core.md:41
+#: manual/tutorial/core.md:53
 msgid "$z\\bar z = |z|^2$ is real:"
 msgstr "$z\\bar z = |z|^2$ は実数です:"
 
-#: manual/tutorial/core.md:57
+#: manual/tutorial/core.md:63
 msgid "Gaussian integers"
 msgstr "ガウス整数"
 
-#: manual/tutorial/core.md:59
+#: manual/tutorial/core.md:65
 msgid "Over `Int`, `Complex[Int]` is the ring $\\mathbb Z[i]$ of Gaussian integers. Everything except division works, and results are exact:"
 msgstr "`Int` 上では、`Complex[Int]` はガウス整数の環 $\\mathbb Z[i]$ です。除算以外はすべて動作し、結果は厳密です:"
 
-#: manual/tutorial/core.md:80
+#: manual/tutorial/core.md:81
 msgid "$5 = (2 + i)(2 - i)$ shows that $5$ is not prime in $\\mathbb Z[i]$."
 msgstr "$5 = (2 + i)(2 - i)$ から、$5$ は $\\mathbb Z[i]$ において素数でないことがわかります。"
 
-#: manual/tutorial/core.md:82
+#: manual/tutorial/core.md:83
 msgid "Generic code over a ring"
 msgstr "環上のジェネリックなコード"
 
-#: manual/tutorial/core.md:84
+#: manual/tutorial/core.md:85
 msgid "Code written against `luna-generic` traits accepts complex numbers. Here a Horner evaluation of $p(x) = x^2 + 1$:"
 msgstr "`luna-generic` トレイトに対して書かれたコードは複素数を受け付けます。ここでは $p(x) = x^2 + 1$ を Horner 法で評価します:"
 
-#: manual/tutorial/core.md:110
+#: manual/tutorial/core.md:106
 msgid "Update in place"
 msgstr "インプレースでの更新"
 
-#: manual/tutorial/core.md:112
+#: manual/tutorial/core.md:108
 msgid "`set`, `set_re` and `set_im` overwrite a value. Every binding to it sees the change:"
 msgstr "`set`、`set_re`、`set_im` は値を上書きします。その値へのすべての束縛が変更を観測します:"
 
-#: manual/tutorial/core.md:133
-#: manual/tutorial/float_backend.md:146
+#: manual/tutorial/core.md:124
+#: manual/tutorial/float_backend.md:144
 msgid "Going further"
 msgstr "さらに進んで"
 
-#: manual/tutorial/core.md:135
+#: manual/tutorial/core.md:126
 msgid "Nested complex numbers"
 msgstr "入れ子の複素数"
 
-#: manual/tutorial/core.md:137
+#: manual/tutorial/core.md:128
 msgid "`Complex[T]` works for any `T` with the required traits, including `Complex[Double]` itself:"
 msgstr "`Complex[T]` は、必要なトレイトを持つ任意の `T` に対して動作し、`Complex[Double]` 自体も例外ではありません:"
 
-#: manual/tutorial/core.md:154
+#: manual/tutorial/core.md:142
 msgid "The product is $1$ up to rounding, because the squared modulus $a^2 + b^2$ of this $z$ is invertible. In general `Complex[Complex[Double]]` is not a field; see the pitfalls below."
 msgstr "この $z$ の絶対値の 2 乗 $a^2 + b^2$ は可逆なので、積は丸め誤差の範囲で $1$ になります。一般には `Complex[Complex[Double]]` は体ではありません。下のよくある落とし穴を参照してください。"
 
-#: manual/tutorial/core.md:158
+#: manual/tutorial/core.md:146
 msgid "Analytic functions"
 msgstr "解析関数"
 
-#: manual/tutorial/core.md:160
+#: manual/tutorial/core.md:148
 msgid "The core has no `sqrt`, `exp` or `sin`. Import `Luna-Flow/luna-complex/float_backend` for `Complex[Double]`; the [float_backend tutorial](float_backend.md) shows how."
 msgstr "コアには `sqrt`、`exp`、`sin` はありません。`Complex[Double]` 向けには `Luna-Flow/luna-complex/float_backend` をインポートしてください。方法は [float_backend チュートリアル](float_backend.md) で説明しています。"
 
-#: manual/tutorial/core.md:164
-#: manual/tutorial/float_backend.md:195
+#: manual/tutorial/core.md:152
+#: manual/tutorial/float_backend.md:187
 msgid "Common pitfalls"
 msgstr "よくある落とし穴"
 
-#: manual/tutorial/core.md:166
-msgid "**Division by zero aborts.** `z / w` and `w.inv()` call `Inverse::inv` on $c^2 + d^2$; for `Double` that aborts when the value is zero, also when it underflows for $|w| \\lesssim 10^{-162}$. Use `@fb.div` from `float_backend` for robust division."
-msgstr "**ゼロ除算は中断する。** `z / w` と `w.inv()` は $c^2 + d^2$ に対して `Inverse::inv` を呼び出します。`Double` では、値がゼロのとき、また $|w| \\lesssim 10^{-162}$ でアンダーフローしたときにも中断します。堅牢な除算には `float_backend` の `@fb.div` を使ってください。"
+#: manual/tutorial/core.md:154
+msgid "**Division by zero aborts.** `z / w` and `w.inv()` call `Inverse::inv` on $c^2 + d^2$; for `Double` that aborts when the value is zero, also when it underflows for $|w| \\lesssim 10^{-162}$, and gives infinite or NaN parts for $|w| \\lesssim 10^{-154}$. Use `@fb.div` from `float_backend` for robust division."
+msgstr "**ゼロ除算は中断する。** `z / w` と `w.inv()` は $c^2 + d^2$ に対して `Inverse::inv` を呼び出します。`Double` では、値がゼロのとき、また $|w| \\lesssim 10^{-162}$ でアンダーフローしたときにも中断し、$|w| \\lesssim 10^{-154}$ では無限大や NaN の部分を与えます。堅牢な除算には `float_backend` の `@fb.div` を使ってください。"
 
-#: manual/tutorial/core.md:170
-msgid "**Large values overflow in division.** $c^2 + d^2$ overflows for $|w| \\gtrsim 10^{154}$."
-msgstr "**大きな値は除算でオーバーフローする。** $|w| \\gtrsim 10^{154}$ で $c^2 + d^2$ がオーバーフローします。"
+#: manual/tutorial/core.md:159
+msgid "**Large values overflow in division.** $c^2 + d^2$ overflows for $|w| \\gtrsim 10^{154}$, and the quotient becomes zero or NaN."
+msgstr "**大きな値は除算でオーバーフローする。** $|w| \\gtrsim 10^{154}$ で $c^2 + d^2$ がオーバーフローし、商はゼロまたは NaN になります。"
 
-#: manual/tutorial/core.md:172
+#: manual/tutorial/core.md:161
 msgid "**Shared mutation.** `let shared = z` does not copy; the setters change every alias."
 msgstr "**共有された変更。** `let shared = z` はコピーしません。セッターはすべての別名に影響します。"
 
-#: manual/tutorial/core.md:174
+#: manual/tutorial/core.md:163
 msgid "**Text form.** Negative imaginary parts print as `+ -2i`; use `debug_inspect` or your own formatting when you need another form."
 msgstr "**テキスト形式。** 負の虚部は `+ -2i` と出力されます。別の形式が必要な場合は `debug_inspect` か独自の整形を使ってください。"
 
-#: manual/tutorial/core.md:176
+#: manual/tutorial/core.md:165
 msgid "**Nested types are not fields.** In `Complex[Complex[Double]]`, values such as $1 + i\\,j$ have a zero squared modulus and `inv` aborts."
 msgstr "**入れ子の型は体ではない。** `Complex[Complex[Double]]` では、$1 + i\\,j$ のような値の絶対値の 2 乗はゼロとなり、`inv` が中断します。"
 
-#: manual/tutorial/core.md:179
-#: manual/tutorial/float_backend.md:211
+#: manual/tutorial/core.md:168
+#: manual/tutorial/float_backend.md:209
 msgid "Next steps"
 msgstr "次のステップ"
 
-#: manual/tutorial/core.md:181
+#: manual/tutorial/core.md:170
 msgid "The [core API](../api/core.md) lists every method and instance."
 msgstr "[core API](../api/core.md) にはすべてのメソッドとインスタンスが載っています。"
 
-#: manual/tutorial/core.md:182
+#: manual/tutorial/core.md:171
 msgid "The [core design](../design/core.md) derives the construction and the field condition."
 msgstr "[core の設計](../design/core.md) では構成と体になる条件を導出しています。"
 
-#: manual/tutorial/core.md:184
+#: manual/tutorial/core.md:173
 msgid "The [float_backend tutorial](float_backend.md) adds the analytic functions."
 msgstr "[float_backend チュートリアル](float_backend.md) では解析関数を扱います。"
 
-#: manual/tutorial/core.md:186
+#: manual/tutorial/core.md:175
 msgid "[luna-generic](https://lunaflow.cn/en/luna-generic/) documents the traits used in generic code."
 msgstr "[luna-generic](https://lunaflow.cn/en/luna-generic/) では、ジェネリックなコードで使うトレイトを説明しています。"
 
@@ -1602,88 +2015,226 @@ msgid "float_backend tutorial"
 msgstr "float_backend チュートリアル"
 
 #: manual/tutorial/float_backend.md:3
-msgid "This tutorial computes with the analytic functions of `Complex[Double]`. You will convert between Cartesian and polar form, take roots and logarithms, solve a quadratic equation, evaluate trigonometric functions and their inverses, and learn where the branch cuts are. The formulas and their numerical treatment are in the [float_backend design](../design/float_backend.md)."
-msgstr "このチュートリアルでは `Complex[Double]` の解析関数を使って計算します。直交形式と極形式の相互変換、根と対数の計算、2 次方程式の解法、三角関数とその逆関数の評価を行い、分岐切断がどこにあるかを学びます。式とその数値的な扱いは [float_backend の設計](../design/float_backend.md) にあります。"
+msgid "This tutorial computes with the analytic functions of `Complex[Double]`. You will convert between Cartesian and polar form, take roots and logarithms, solve a quadratic equation, evaluate trigonometric functions and their inverses, and learn where the branch cuts are. The formulas and their numerical treatment are in the [float_backend design](../design/float_backend.md). Every example is a test that you can paste into a `_test.mbt` file and run with `moon test`; the expected output is written in the `inspect` calls."
+msgstr "このチュートリアルでは `Complex[Double]` の解析関数を使って計算します。直交形式と極形式の相互変換、根と対数の計算、2 次方程式の解法、三角関数とその逆関数の評価を行い、分岐切断がどこにあるかを学びます。式とその数値的な扱いは [float_backend の設計](../design/float_backend.md) にあります。どの例も `_test.mbt` ファイルに貼り付けて `moon test` で実行できるテストであり、期待される出力は `inspect` の呼び出しに書いてあります。"
 
-#: manual/tutorial/float_backend.md:56
+#: manual/tutorial/float_backend.md:13
+msgid "get the modulus or the angle"
+msgstr "絶対値や角度を得る"
+
+#: manual/tutorial/float_backend.md:14
+msgid "divide safely, also with huge or tiny values"
+msgstr "非常に大きい値や小さい値でも安全に割る"
+
+#: manual/tutorial/float_backend.md:15
+msgid "take a square root or a logarithm"
+msgstr "平方根や対数をとる"
+
+#: manual/tutorial/float_backend.md:16
+msgid "raise to a power"
+msgstr "べき乗する"
+
+#: manual/tutorial/float_backend.md:17
+msgid "evaluate sine, cosine, tangent and their inverses"
+msgstr "正弦、余弦、正接とその逆関数を評価する"
+
+#: manual/tutorial/float_backend.md:18
+msgid "start from a real number outside the real domain"
+msgstr "実数の定義域の外にある実数から始める"
+
+#: manual/tutorial/float_backend.md:19
+msgid "write helpers generic over `Float` and `Double`"
+msgstr "`Float` と `Double` についてジェネリックな補助関数を書く"
+
+#: manual/tutorial/float_backend.md:27
+msgid "Import both packages in the `moon.pkg` of the package that uses them:"
+msgstr "それらを使うパッケージの `moon.pkg` で両方のパッケージをインポートします。"
+
+#: manual/tutorial/float_backend.md:36
+msgid "The smallest useful program applies three functions to one number:"
+msgstr "最小の役に立つプログラムは、一つの数に三つの関数を適用します。"
+
+#: manual/tutorial/float_backend.md:62
 msgid "Solve a quadratic equation"
 msgstr "2 次方程式を解く"
 
-#: manual/tutorial/float_backend.md:58
+#: manual/tutorial/float_backend.md:64
 msgid "The roots of $az^2 + bz + c$ are $(-b \\pm \\sqrt{b^2 - 4ac})/(2a)$. With `sqrt` and `div` the formula works for complex coefficients and negative discriminants:"
 msgstr "$az^2 + bz + c$ の根は $(-b \\pm \\sqrt{b^2 - 4ac})/(2a)$ です。`sqrt` と `div` を使えば、この式は複素係数や負の判別式に対しても機能します:"
 
-#: manual/tutorial/float_backend.md:81
+#: manual/tutorial/float_backend.md:82
 msgid "Logarithms and powers"
 msgstr "対数とべき乗"
 
-#: manual/tutorial/float_backend.md:100
+#: manual/tutorial/float_backend.md:94
 msgid "$i^i = e^{i \\cdot i\\pi/2} = e^{-\\pi/2}$ is real. Integer exponents use exact binary powering, so $i^2$ is exactly $-1$."
 msgstr "$i^i = e^{i \\cdot i\\pi/2} = e^{-\\pi/2}$ は実数です。整数の指数には厳密な二進累乗法を使うため、$i^2$ はちょうど $-1$ になります。"
 
-#: manual/tutorial/float_backend.md:103
+#: manual/tutorial/float_backend.md:97
+msgid "Do not take non-integer powers of negative real numbers yet. `arg` returns $2\\pi$ instead of $\\pi$ on the negative real axis, so the angle of the result is wrong:"
+msgstr "負の実数の整数でないべき乗は、まだ使わないでください。`arg` は負の実軸上で $\\pi$ ではなく $2\\pi$ を返すので、結果の角度が誤っています。"
+
+#: manual/tutorial/float_backend.md:111
+msgid "Use `sqrt` for square roots, and for other exponents compute $|z|^p e^{i\\pi p}$ yourself until the defect is fixed."
+msgstr "平方根には `sqrt` を使い、他の指数については欠陥が修正されるまで $|z|^p e^{i\\pi p}$ を自分で計算してください。"
+
+#: manual/tutorial/float_backend.md:114
 msgid "Trigonometric functions and their inverses"
 msgstr "三角関数とその逆関数"
 
-#: manual/tutorial/float_backend.md:121
+#: manual/tutorial/float_backend.md:126
 msgid "`asin_real` takes a `Double` and returns a complex result outside $[-1, 1]$."
 msgstr "`asin_real` は `Double` を受け取り、$[-1, 1]$ の外側では複素数の結果を返します。"
 
-#: manual/tutorial/float_backend.md:124
+#: manual/tutorial/float_backend.md:129
 msgid "Large arguments"
 msgstr "大きな引数"
 
-#: manual/tutorial/float_backend.md:126
+#: manual/tutorial/float_backend.md:131
 msgid "The formulas are scaled, so huge or tiny inputs do not overflow:"
 msgstr "式はスケーリングされているため、非常に大きい入力や非常に小さい入力でもオーバーフローしません:"
 
-#: manual/tutorial/float_backend.md:150
+#: manual/tutorial/float_backend.md:148
 msgid "Multi-valued functions jump across their branch cuts. `sqrt` has its cut on the negative real axis; approaching it from above and below gives roots of opposite sign:"
 msgstr "多価関数は分岐切断をまたぐと値が跳びます。`sqrt` の分岐切断は負の実軸上にあり、上側と下側から近づくと符号が逆の根が得られます:"
 
-#: manual/tutorial/float_backend.md:168
-msgid "On the cut itself the root is $+2i$. The [design](../design/float_backend.md#principal-values-of-the-other-functions) lists the cuts of every function."
-msgstr "分岐切断上そのものでは根は $+2i$ です。各関数の分岐切断は [設計](../design/float_backend.md#principal-values-of-the-other-functions) に一覧があります。"
+#: manual/tutorial/float_backend.md:161
+msgid "On the cut itself the root is $+2i$, also for a negative zero imaginary part: the functions do not look at the sign of a zero. The [design](../design/float_backend.md#principal-values-of-the-other-functions) lists the cuts of every function."
+msgstr "分岐切断上そのものでは根は $+2i$ であり、虚部が負のゼロでも同じです。関数はゼロの符号を見ません。各関数の分岐切断は [設計](../design/float_backend.md#principal-values-of-the-other-functions) に一覧があります。"
 
-#: manual/tutorial/float_backend.md:171
+#: manual/tutorial/float_backend.md:165
 msgid "Writing scalar-generic helpers"
 msgstr "スカラーについてジェネリックなヘルパーを書く"
 
-#: manual/tutorial/float_backend.md:173
+#: manual/tutorial/float_backend.md:167
 msgid "The capability traits let helpers state what they need from a real scalar. For example, a function that only inspects special values asks for `FloatingSpecialValues` and works for `Float` and `Double`:"
 msgstr "能力トレイトを使うと、ヘルパーが実スカラーに何を必要とするかを表明できます。例えば、特殊値を調べるだけの関数は `FloatingSpecialValues` を要求し、`Float` と `Double` の両方で動作します:"
 
-#: manual/tutorial/float_backend.md:197
-msgid "**The negative real axis.** `arg` and `log` currently return $2\\pi$ instead of $\\pi$ there (`log(-1)` is $2\\pi i$), and powers of negative real numbers with non-integer exponents inherit that angle; `acos`, `acos_real`, `asec_real` and `acosh_real` are affected for negative inputs. See the warning in the [float_backend API](../api/float_backend.md#conventions)."
-msgstr "**負の実軸。** そこでは `arg` と `log` は現在 $\\pi$ ではなく $2\\pi$ を返し(`log(-1)` は $2\\pi i$)、整数でない指数による負の実数のべき乗はその角度を受け継ぎます。`acos`、`acos_real`、`asec_real`、`acosh_real` も負の入力に対して影響を受けます。[float_backend API](../api/float_backend.md#conventions) の警告を参照してください。"
+#: manual/tutorial/float_backend.md:184
+msgid "`is_negative_zero` is also true for tiny negative subnormal numbers such as `-1.0e-310`; test `x == 0.0` first when you need exactly $-0$."
+msgstr "`is_negative_zero` は `-1.0e-310` のような小さな負の非正規化数でも真になります。ちょうど $-0$ を判定したいときは、先に `x == 0.0` を確かめてください。"
 
-#: manual/tutorial/float_backend.md:202
-msgid "**Reciprocal functions abort at poles.** `cot(0)`, `csc(0)`, `asec(0)` and the like stop the program instead of returning infinity."
-msgstr "**逆数系の関数は極で中断する。** `cot(0)`、`csc(0)`、`asec(0)` などは、無限大を返さずにプログラムを停止させます。"
+#: manual/tutorial/float_backend.md:189
+msgid "**The negative real axis.** `arg` and `log` currently return $2\\pi$ instead of $\\pi$ there (`log(-1)` is $2\\pi i$, and `exp(log(-1))` is $1$), and powers of negative real numbers with non-integer exponents inherit that angle; `acos`, `acos_real`, `asec`, `asec_real`, `acosh`, `acosh_real` and `asech` are affected for some negative inputs. See the warning in the [float_backend API](../api/float_backend.md#conventions)."
+msgstr "**負の実軸。** そこでは `arg` と `log` は現在 $\\pi$ ではなく $2\\pi$ を返し(`log(-1)` は $2\\pi i$、`exp(log(-1))` は $1$)、整数でない指数による負の実数のべき乗はその角度を受け継ぎます。`acos`、`acos_real`、`asec`、`asec_real`、`acosh`、`acosh_real`、`asech` も一部の負の入力で影響を受けます。[float_backend API](../api/float_backend.md#conventions) の警告を参照してください。"
 
-#: manual/tutorial/float_backend.md:204
-msgid "**Use `@fb.div`, not `/`, for extreme values.** The core operator forms $c^2 + d^2$ and aborts if it underflows to zero."
-msgstr "**極端な値には `/` ではなく `@fb.div` を使う。** コアの演算子は $c^2 + d^2$ を計算し、それがゼロにアンダーフローすると中断します。"
+#: manual/tutorial/float_backend.md:195
+msgid "**Reciprocal functions abort near zero.** `cot(0)`, `csc(0)`, `asec(0)`, `pow_real(z, -2.0)` for a tiny $z$ and the like stop the program instead of returning infinity, because they go through the core `inv`."
+msgstr "**逆数系の関数はゼロの近くで中断する。** `cot(0)`、`csc(0)`、`asec(0)`、小さな $z$ に対する `pow_real(z, -2.0)` などは、コアの `inv` を経由するため、無限大を返さずにプログラムを停止させます。"
+
+#: manual/tutorial/float_backend.md:199
+msgid "**Use `@fb.div`, not `/`, for extreme values.** The core operator forms $c^2 + d^2$ and aborts if it underflows to zero. `@fb.div` itself returns NaN when the divisor is a subnormal number below about $5.6 \\times 10^{-309}$."
+msgstr "**極端な値には `/` ではなく `@fb.div` を使う。** コアの演算子は $c^2 + d^2$ を計算し、それがゼロにアンダーフローすると中断します。`@fb.div` 自体も、除数が約 $5.6 \\times 10^{-309}$ 未満の非正規化数のときは NaN を返します。"
+
+#: manual/tutorial/float_backend.md:203
+msgid "**`exp` overflows early.** `exp(z)` for $\\operatorname{Re} z > 709.78$ has infinite or NaN parts; `sin`, `cos`, `sinh` and `cosh` produce NaN parts in the same way for arguments beyond about $710$."
+msgstr "**`exp` は早くオーバーフローする。** $\\operatorname{Re} z > 709.78$ に対する `exp(z)` は無限大または NaN の部分を持ちます。`sin`、`cos`、`sinh`、`cosh` も約 $710$ を超える引数で同じように NaN の部分を生じます。"
 
 #: manual/tutorial/float_backend.md:206
-msgid "**`exp` overflows early.** `exp(z)` for $\\operatorname{Re} z > 709.78$ has infinite or NaN parts."
-msgstr "**`exp` は早くオーバーフローする。** $\\operatorname{Re} z > 709.78$ に対する `exp(z)` は無限大または NaN の部分を持ちます。"
-
-#: manual/tutorial/float_backend.md:208
 msgid "**Only `Complex[Double]`.** The analytic functions do not accept `Complex[Float]`."
 msgstr "**`Complex[Double]` のみ。** 解析関数は `Complex[Float]` を受け付けません。"
 
-#: manual/tutorial/float_backend.md:213
+#: manual/tutorial/float_backend.md:211
 msgid "The [float_backend API](../api/float_backend.md) documents every function and its special cases."
 msgstr "[float_backend API](../api/float_backend.md) ではすべての関数とその特殊ケースを説明しています。"
 
-#: manual/tutorial/float_backend.md:215
+#: manual/tutorial/float_backend.md:213
 msgid "The [float_backend design](../design/float_backend.md) derives the stable formulas and lists the known deviations."
 msgstr "[float_backend の設計](../design/float_backend.md) では安定な式を導出し、既知の逸脱を一覧にしています。"
 
-#: manual/tutorial/float_backend.md:217
+#: manual/tutorial/float_backend.md:215
 msgid "The [core tutorial](core.md) covers the generic arithmetic."
 msgstr "[core チュートリアル](core.md) ではジェネリックな算術を扱います。"
+
+#~ msgid "It computes $n = c^2 + d^2$, then `Inverse::inv(n)`, and multiplies both parts of $z\\bar w$ by it. The formula is not scaled: for `Double`, $c^2 + d^2$ overflows for $|w| \\gtrsim 10^{154}$ and underflows for $|w| \\lesssim 10^{-162}$, and `Inverse::inv` of `Double` aborts with `Double::inv: division by zero` when $n$ is zero, including after underflow. Use [`@fb.div`](float_backend.md#div) for robust floating-point division."
+#~ msgstr "$n = c^2 + d^2$ を計算し、次に `Inverse::inv(n)` を求め、$z\\bar w$ の両方の部分にそれを掛けます。この式はスケーリングされていません。`Double` では $|w| \\gtrsim 10^{154}$ で $c^2 + d^2$ がオーバーフローし、$|w| \\lesssim 10^{-162}$ でアンダーフローします。また `Double` の `Inverse::inv` は、$n$ がゼロのとき(アンダーフローの結果ゼロになった場合を含む)`Double::inv: division by zero` で中断します。堅牢な浮動小数点除算には [`@fb.div`](float_backend.md#div) を使ってください。"
+
+#~ msgid "**Special values.** NaN and infinities are handled where stated (`div`, `atan`, `atanh`, `acosh`, `abs_log`, `pow`); elsewhere they propagate through ordinary `Double` arithmetic and may produce NaN parts."
+#~ msgstr "**特殊値。** NaN と無限大は明記された箇所(`div`、`atan`、`atanh`、`acosh`、`abs_log`、`pow`)で処理されます。それ以外では通常の `Double` 算術を通じて伝播し、NaN の部分を生じることがあります。"
+
+#~ msgid "**Reciprocal functions abort at poles.** `sec`, `csc`, `cot`, `sech`, `csch`, `coth`, `asec`, `acsc`, `asech`, `acsch`, `acoth` and the exponent $-1$ of `pow` use `Complex::inv`, which aborts with `Double::inv: division by zero` on a zero modulus."
+#~ msgstr "**逆数系の関数は極で中断します。** `sec`、`csc`、`cot`、`sech`、`csch`、`coth`、`asec`、`acsc`、`asech`、`acsch`、`acoth`、および `pow` の指数 $-1$ は `Complex::inv` を使うため、絶対値がゼロのときに `Double::inv: division by zero` で中断します。"
+
+#~ msgid "It is finite for every finite non-zero $z$, even when $|z|$ itself would overflow. `abs_log(0)` is $-\\infty$."
+#~ msgstr "$|z|$ 自体がオーバーフローする場合でも、ゼロでない有限の $z$ すべてに対して有限です。`abs_log(0)` は $-\\infty$ です。"
+
+#~ msgid "`z.inv()` (aborts if $z = 0$, which the first rows exclude)"
+#~ msgstr "`z.inv()`($z = 0$ のとき中断するが、最初の行で除外済み)"
+
+#~ msgid "Returns $1/\\cos z$; aborts where $\\cos z = 0$."
+#~ msgstr "$1/\\cos z$ を返します。$\\cos z = 0$ となる点で中断します。"
+
+#~ msgid "Returns $1/\\sin z$; aborts at $z = k\\pi$."
+#~ msgstr "$1/\\sin z$ を返します。$z = k\\pi$ で中断します。"
+
+#~ msgid "Returns $1/\\tan z$; aborts at $z = k\\pi$."
+#~ msgstr "$1/\\tan z$ を返します。$z = k\\pi$ で中断します。"
+
+#~ msgid "Returns $\\operatorname{acos}(1/z)$; aborts at $z = 0$."
+#~ msgstr "$\\operatorname{acos}(1/z)$ を返します。$z = 0$ で中断します。"
+
+#~ msgid "Returns $1/\\cosh z$; aborts where $\\cosh z = 0$."
+#~ msgstr "$1/\\cosh z$ を返します。$\\cosh z = 0$ となる点で中断します。"
+
+#~ msgid "Returns $1/\\sinh z$; aborts at $z = k\\pi i$."
+#~ msgstr "$1/\\sinh z$ を返します。$z = k\\pi i$ で中断します。"
+
+#~ msgid "Returns $1/\\tanh z$; aborts at $z = k\\pi i$."
+#~ msgstr "$1/\\tanh z$ を返します。$z = k\\pi i$ で中断します。"
+
+#~ msgid "Returns $\\operatorname{acosh}(1/z)$; aborts at $z = 0$."
+#~ msgstr "$\\operatorname{acosh}(1/z)$ を返します。$z = 0$ で中断します。"
+
+#~ msgid "As a quotient of a commutative ring, $R[i]$ is a commutative ring, with zero $0 + 0i$ and one $1 + 0i$; $R$ embeds as $a \\mapsto a + 0i$."
+#~ msgstr "可換環の剰余環として、$R[i]$ は零元 $0 + 0i$、単位元 $1 + 0i$ を持つ可換環であり、$R$ は $a \\mapsto a + 0i$ によって埋め込まれます。"
+
+#~ msgid "and symmetrically with $r = c/d$ when $|d| > |c|$. Only $r^2 \\le 1$ is squared, so the denominator overflows only if the quotient does. `div` computes $1/c$ once and multiplies by it. If $w$ has an infinite part and $z$ has no NaN part, `div` follows C99 Annex G: a finite numerator gives a zero result, and an infinite one the quotient of the infinity signs."
+#~ msgstr "$|d| > |c|$ のときは $r = c/d$ として対称的に計算します。2 乗されるのは $r^2 \\le 1$ だけなので、分母がオーバーフローするのは商がオーバーフローする場合に限ります。`div` は $1/c$ を一度だけ計算し、それを掛けます。$w$ に無限大の部分があり、$z$ に NaN の部分がない場合、`div` は C99 Annex G に従います: 有限の分子はゼロの結果を与え、無限大の分子は無限大の符号の商を与えます。"
+
+#~ msgid "`acosh` uses $2\\operatorname{Log}\\big(\\sqrt{(z + 1)/2} + \\sqrt{(z - 1)/2}\\big)$, built from the stable square root. Unlike $\\operatorname{Log}(z + \\sqrt{z^2 - 1})$, it has the correct cut $(-\\infty, 1)$ without extra sign adjustments, because each square root has its cut where its argument is negative real."
+#~ msgstr "`acosh` は安定な平方根から組み立てた $2\\operatorname{Log}\\big(\\sqrt{(z + 1)/2} + \\sqrt{(z - 1)/2}\\big)$ を使います。$\\operatorname{Log}(z + \\sqrt{z^2 - 1})$ とは異なり、各平方根の分岐切断はその引数が負の実数となる場所にあるため、追加の符号調整なしで正しい分岐切断 $(-\\infty, 1)$ を持ちます。"
+
+#~ msgid "`sec`, `csc`, `cot`, their hyperbolic counterparts and the inverse reciprocal functions are compositions with `Complex::inv` of the [core](core.md). They inherit its unscaled formula and its abort on a zero modulus, instead of producing infinities at poles. `acot` special-cases $z = 0$ to return $\\pi/2$."
+#~ msgstr "`sec`、`csc`、`cot`、それらの双曲線版、および逆数系の逆関数は、[core](core.md) の `Complex::inv` との合成です。そのスケーリングしない式と、絶対値がゼロのときの中断を受け継ぎ、極で無限大を返すことはありません。`acot` は $z = 0$ を特別扱いして $\\pi/2$ を返します。"
+
+#~ msgid "`exp` overflows in $e^x$ before multiplying by $\\cos y$ and $\\sin y$, so `exp(710 + 0i)` has a NaN imaginary part ($\\infty \\cdot 0$)."
+#~ msgstr "`exp` は $\\cos y$ と $\\sin y$ を掛ける前に $e^x$ でオーバーフローするため、`exp(710 + 0i)` の虚部は NaN になります($\\infty \\cdot 0$)。"
+
+#~ msgid "Packages"
+#~ msgstr "パッケージ"
+
+#~ msgid "Package"
+#~ msgstr "パッケージ"
+
+#~ msgid "Import path"
+#~ msgstr "インポートパス"
+
+#~ msgid "Role"
+#~ msgstr "役割"
+
+#~ msgid "generic `Complex[T]`: construction, mutation, arithmetic, conjugation, structure instances"
+#~ msgstr "ジェネリックな `Complex[T]`: 構築、変更、算術、共役、構造インスタンス"
+
+#~ msgid "[API](api/core.md) · [tutorial](tutorial/core.md) · [design](design/core.md)"
+#~ msgstr "[API](api/core.md) · [チュートリアル](tutorial/core.md) · [設計](design/core.md)"
+
+#~ msgid "analytic functions of `Complex[Double]`; `FloatingAnalyticScalar`, `FloatingSpecialValues`, `FloatingBackendScalar`"
+#~ msgstr "`Complex[Double]` の解析関数。`FloatingAnalyticScalar`、`FloatingSpecialValues`、`FloatingBackendScalar`"
+
+#~ msgid "[API](api/float_backend.md) · [tutorial](tutorial/float_backend.md) · [design](design/float_backend.md)"
+#~ msgstr "[API](api/float_backend.md) · [チュートリアル](tutorial/float_backend.md) · [設計](design/float_backend.md)"
+
+#~ msgid "Reading paths"
+#~ msgstr "読み進め方"
+
+#~ msgid "Installation"
+#~ msgstr "インストール"
+
+#~ msgid "Toolchain"
+#~ msgstr "ツールチェーン"
+
+#~ msgid "MoonBit `moonc` 0.10 or newer with `moon.mod` / `moon.pkg` manifests. The tests run on `wasm-gc`, `wasm`, `js` and `native`."
+#~ msgstr "`moon.mod` / `moon.pkg` マニフェストに対応した MoonBit `moonc` 0.10 以降。テストは `wasm-gc`、`wasm`、`js`、`native` で実行されます。"
 
 #~ msgid "$w$ real integer, $"
 #~ msgstr "$w$ が実整数、$"
@@ -1747,9 +2298,6 @@ msgstr "[core チュートリアル](core.md) ではジェネリックな算術�
 
 #~ msgid "Constructors and mutators are `Complex::new`, `set`, `set_re`, and `set_im`."
 #~ msgstr "構築と更新の入口は `Complex::new`、`set`、`set_re`、`set_im` です。"
-
-#~ msgid "The root package implements generic algebraic operations and Luna Flow traits when the scalar type supplies the matching capability: `Add`, `Sub`, `Neg`, `Mul`, `Div`, `Zero`, `One`, `Conjugate`, `Inverse`, `AddMonoid`, `AddGroup`, `MulMonoid`, `MulGroup`, `Semiring`, `Ring`, and `Field`."
-#~ msgstr "スカラー型が対応する能力を持つ場合、ルートパッケージは `Add`、`Sub`、`Neg`、`Mul`、`Div`、`Zero`、`One`、`Conjugate`、`Inverse`、`AddMonoid`、`AddGroup`、`MulMonoid`、`MulGroup`、`Semiring`、`Ring`、`Field` を実装します。"
 
 #~ msgid "The root package does not expose analytic functions such as `sin`, `log`, or `sqrt`; use `Luna-Flow/luna-complex/float_backend` for the floating analytic layer."
 #~ msgstr "ルートパッケージは `sin`、`log`、`sqrt` などの解析関数を公開しません。浮動小数点の解析レイヤーには `Luna-Flow/luna-complex/float_backend` を使います。"
@@ -1921,9 +2469,6 @@ msgstr "[core チュートリアル](core.md) ではジェネリックな算術�
 
 #~ msgid "The split is intentional: it keeps floating arithmetic, IEEE special values, and branch-cut behavior out of the root package's generic algebraic semantics."
 #~ msgstr "この分割は意図的なものです。浮動小数点演算、IEEE 特殊値、分岐切断の挙動を、ルートパッケージの汎用的な代数的意味論から切り離します。"
-
-#~ msgid "Where to go next"
-#~ msgstr "次に読むもの"
 
 #~ msgid "Each package has an API reference ([core](api/core.md), [float_backend](api/float_backend.md)), a tutorial ([core](tutorial/core.md), [float_backend](tutorial/float_backend.md)), and a design note ([core](design/core.md), [float_backend](design/float_backend.md))."
 #~ msgstr "各パッケージには API リファレンス（[core](api/core.md)、[float_backend](api/float_backend.md)）、チュートリアル（[core](tutorial/core.md)、[float_backend](tutorial/float_backend.md)）、設計ノート（[core](design/core.md)、[float_backend](design/float_backend.md)）があります。"
