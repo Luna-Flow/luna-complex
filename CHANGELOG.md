@@ -38,6 +38,22 @@ project uses semantic versioning.
   packages, with derivations of the stable formulas and branch cuts) with
   zh_CN and ja_JP translations.
 - `.gitignore` ignores local AI agent state.
+- Manual brought to the Luna Flow documentation standard: the overview has
+  install, page, export and validation sections and a warning about the
+  negative real axis; API pages gain purpose sections; tutorials gain task
+  tables and use `test` blocks with `inspect`; design pages state their
+  constraints and main decisions.
+- Logic review of the manual: the core design no longer assumes a
+  commutative `T` for the ring instances and derives the size limits of the
+  unscaled division for `Double`; the float_backend design corrects the
+  derivation of the asymptotic arcsine, the claims about Smith's division
+  and C99, and the acosh cut argument, and adds the side each function
+  takes on its branch cuts. Newly documented defects: `is_negative_zero` is
+  true for tiny negative subnormals, `div` returns NaN for subnormal
+  divisors, `exp`/`sin`/`cos`/`sinh`/`cosh` give NaN parts from
+  $\infty \cdot 0$, `abs_log` loses relative accuracy near $|z| = 1$,
+  `asec`/`asech` inherit the $2\pi$ defect, and the reciprocal functions
+  abort or return NaN for tiny and huge moduli, not only at exact zeros.
 
 ## 0.2.0 and earlier
 

@@ -51,6 +51,18 @@ sqrt(z) = 1 + 2i
 The analytic functions are free functions such as `@fb.log(z)`, because a
 package cannot add methods to a type defined in another package.
 
+## Known issues
+
+The `float_backend` functions have documented defects that are not fixed
+yet: `arg` returns $2\pi$ on the negative real axis (so `log(-1)` is
+$2\pi i$ and non-integer powers of negative reals are wrong), `acos` and
+`acosh` are off by $\pi$ for some negative inputs, reciprocal functions
+abort near zero, and `div` returns NaN for subnormal divisors. The
+`Field` instance of `Complex[Complex[Double]]` breaks the field laws. The
+[float_backend design](doc/manual/design/float_backend.md#known-deviations-from-the-principal-values)
+and the [core design](doc/manual/design/core.md#when-the-construction-is-a-field)
+list the details.
+
 ## Toolchain
 
 MoonBit `moonc` 0.10 or newer, with `moon.mod` / `moon.pkg` manifests. Tests
