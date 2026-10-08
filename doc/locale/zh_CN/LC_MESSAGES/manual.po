@@ -16,434 +16,1965 @@ msgid "core API"
 msgstr "core API"
 
 #: manual/api/core.md:3
-msgid "The root package `Luna-Flow/luna-complex` exposes the generic complex-number core."
-msgstr "根包 `Luna-Flow/luna-complex` 暴露泛型复数核心。"
+msgid "The root package `Luna-Flow/luna-complex` defines `Complex[T]`, the complex numbers $a + bi$ over any scalar type `T`, with construction, in-place mutation, conjugation, the arithmetic operators and the `luna-generic` structure traits. It contains no analytic functions; those are in [`float_backend`](float_backend.md). The algebra behind the instances is in the [core design](../design/core.md)."
+msgstr "根包 `Luna-Flow/luna-complex` 定义了 `Complex[T]`，即任意标量类型 `T` 上的复数 $a + bi$，并提供构造、原地修改、共轭、算术运算符以及 `luna-generic` 结构 trait。它不包含解析函数；这些函数位于 [`float_backend`](float_backend.md)。这些实例背后的代数原理见[核心设计](../design/core.md)。"
 
-#: manual/api/core.md:5
-#: manual/api/float_backend.md:5
-msgid "Scope"
-msgstr "范围"
-
-#: manual/api/core.md:7
-msgid "Source boundary: `src`"
-msgstr "源码边界：`src`"
-
-#: manual/api/core.md:8
-#: manual/api/float_backend.md:8
-msgid "Audience: package users, integrators, and maintainers who need the exported contract"
-msgstr "读者：需要依赖公开契约的使用者、集成方和维护者"
-
-#: manual/api/core.md:9
-#: manual/api/float_backend.md:9
-msgid "Status: active"
-msgstr "状态：active"
-
-#: manual/api/core.md:11
-#: manual/api/float_backend.md:11
-msgid "Public contract"
-msgstr "公开契约"
-
-#: manual/api/core.md:13
-msgid "`Complex[T]` is a mutable struct with public `re` and `im` fields."
-msgstr "`Complex[T]` 是可变结构体，公开 `re` 和 `im` 字段。"
+#: manual/api/core.md:10
+msgid "Source: [`src/complex.mbt`](../../../src/complex.mbt), [`src/complex_traits.mbt`](../../../src/complex_traits.mbt) and [`src/extends.mbt`](../../../src/extends.mbt)."
+msgstr "源码：[`src/complex.mbt`](../../../src/complex.mbt)、[`src/complex_traits.mbt`](../../../src/complex_traits.mbt) 和 [`src/extends.mbt`](../../../src/extends.mbt)。"
 
 #: manual/api/core.md:14
-msgid "Constructors and mutators are `Complex::new`, `set`, `set_re`, and `set_im`."
-msgstr "构造与修改入口包括 `Complex::new`、`set`、`set_re` 和 `set_im`。"
+#: manual/api/float_backend.md:14
+msgid "Importing"
+msgstr "导入"
 
-#: manual/api/core.md:15
-msgid "The root package implements generic algebraic operations and Luna Flow traits when the scalar type supplies the matching capability: `Add`, `Sub`, `Neg`, `Mul`, `Div`, `Zero`, `One`, `Conjugate`, `Inverse`, `AddMonoid`, `AddGroup`, `MulMonoid`, `MulGroup`, `Semiring`, `Ring`, and `Field`."
-msgstr "当标量类型提供相应能力时，根包实现泛型代数运算和 Luna Flow trait：`Add`、`Sub`、`Neg`、`Mul`、`Div`、`Zero`、`One`、`Conjugate`、`Inverse`、`AddMonoid`、`AddGroup`、`MulMonoid`、`MulGroup`、`Semiring`、`Ring` 和 `Field`。"
+#: manual/api/core.md:22
+msgid "The examples use the alias `@complex`."
+msgstr "示例使用别名 `@complex`。"
 
-#: manual/api/core.md:16
-msgid "The root package does not expose analytic functions such as `sin`, `log`, or `sqrt`; use `Luna-Flow/luna-complex/float_backend` for the floating analytic layer."
-msgstr "根包不暴露 `sin`、`log`、`sqrt` 等解析函数；浮点解析层位于 `Luna-Flow/luna-complex/float_backend`。"
+#: manual/api/core.md:24
+msgid "The type"
+msgstr "类型"
+
+#: manual/api/core.md:28
+msgid "A complex number with a real part `re` and an imaginary part `im`."
+msgstr "具有实部 `re` 和虚部 `im` 的复数。"
+
+#: manual/api/core.md:37
+msgid "The value is $\\texttt{re} + \\texttt{im}\\,i$ with $i^2 = -1$. Both fields are public and mutable, and the struct is `pub(all)`, so code outside the package can read, write and construct it with a record literal. `Complex[T]` is a reference type: two bindings to the same value see each other's updates."
+msgstr "其值为 $\\texttt{re} + \\texttt{im}\\,i$，其中 $i^2 = -1$。两个字段都是公开且可变的，且该结构体为 `pub(all)`，因此包外代码可以读取、写入它，并用记录字面量构造它。`Complex[T]` 是引用类型：绑定到同一个值的两个变量能看到彼此的修改。"
+
+#: manual/api/core.md:43
+msgid "`derive(Eq)` compares both parts with `T`'s equality (for `Double`, `0.0 == -0.0` and NaN is unequal to itself). `derive(Debug)` prints the record form `{ re: …, im: … }`."
+msgstr "`derive(Eq)` 使用 `T` 的相等性比较两个部分（对于 `Double`，`0.0 == -0.0`，且 NaN 不等于自身）。`derive(Debug)` 打印记录形式 `{ re: …, im: … }`。"
+
+#: manual/api/core.md:47
+msgid "Construction and mutation"
+msgstr "构造与修改"
+
+#: manual/api/core.md:51
+msgid "Builds $re + im\\,i$."
+msgstr "构造 $re + im\\,i$。"
+
+#: manual/api/core.md:59
+msgid "Overwrites both parts in place."
+msgstr "原地覆盖两个部分。"
+
+#: manual/api/core.md:67
+msgid "Overwrites the real part in place."
+msgstr "原地覆盖实部。"
+
+#: manual/api/core.md:75
+msgid "Overwrites the imaginary part in place."
+msgstr "原地覆盖虚部。"
+
+#: manual/api/core.md:91
+msgid "Identities"
+msgstr "单位元"
+
+#: manual/api/core.md:95
+msgid "Returns $0 + 0i$."
+msgstr "返回 $0 + 0i$。"
+
+#: manual/api/core.md:103
+msgid "Returns $1 + 0i$."
+msgstr "返回 $1 + 0i$。"
+
+#: manual/api/core.md:109
+msgid "Both are the promoted methods of the `Zero` and `One` instances."
+msgstr "两者分别是 `Zero` 和 `One` 实例的提升方法。"
+
+#: manual/api/core.md:111
+msgid "Arithmetic"
+msgstr "算术"
+
+#: manual/api/core.md:113
+msgid "Each operator is available as an operator and as a promoted method."
+msgstr "每种运算既可作为运算符使用，也可作为提升方法使用。"
+
+#: manual/api/core.md:115
+msgid "Item"
+msgstr "项目"
+
+#: manual/api/core.md:115
+msgid "Operator"
+msgstr "运算符"
+
+#: manual/api/core.md:115
+#: manual/api/float_backend.md:243
+#: manual/api/float_backend.md:390
+msgid "Result"
+msgstr "结果"
+
+#: manual/api/core.md:115
+#: manual/api/core.md:255
+msgid "Bound on `T`"
+msgstr "对 `T` 的约束"
+
+#: manual/api/core.md:123
+msgid "Here $z = a + bi$ and $w = c + di$."
+msgstr "此处 $z = a + bi$，$w = c + di$。"
+
+#: manual/api/core.md:127
+msgid "Adds componentwise."
+msgstr "逐分量相加。"
+
+#: manual/api/core.md:136
+msgid "Subtracts componentwise."
+msgstr "逐分量相减。"
+
+#: manual/api/core.md:145
+msgid "Negates both parts."
+msgstr "对两个部分取负。"
+
+#: manual/api/core.md:154
+msgid "Multiplies with $i^2 = -1$, using four multiplications."
+msgstr "按 $i^2 = -1$ 相乘，使用四次乘法。"
+
+#: manual/api/core.md:163
+msgid "Divides by multiplying with the inverse of the squared modulus."
+msgstr "通过乘以模平方的倒数来做除法。"
+
+#: manual/api/core.md:170
+msgid "It computes $n = c^2 + d^2$, then `Inverse::inv(n)`, and multiplies both parts of $z\\bar w$ by it. The formula is not scaled: for `Double`, $c^2 + d^2$ overflows for $|w| \\gtrsim 10^{154}$ and underflows for $|w| \\lesssim 10^{-162}$, and `Inverse::inv` of `Double` aborts with `Double::inv: division by zero` when $n$ is zero, including after underflow. Use [`@fb.div`](float_backend.md#div) for robust floating-point division."
+msgstr "它先计算 $n = c^2 + d^2$，再计算 `Inverse::inv(n)`，并用它乘以 $z\\bar w$ 的两个部分。该公式未做缩放：对于 `Double`，当 $|w| \\gtrsim 10^{154}$ 时 $c^2 + d^2$ 上溢，当 $|w| \\lesssim 10^{-162}$ 时下溢；而当 $n$ 为零（包括下溢导致为零）时，`Double` 的 `Inverse::inv` 会以 `Double::inv: division by zero` 中止。稳健的浮点除法请使用 [`@fb.div`](float_backend.md#div)。"
+
+#: manual/api/core.md:189
+msgid "Conjugate and inverse"
+msgstr "共轭与逆"
+
+#: manual/api/core.md:193
+msgid "Returns $\\bar z = a - bi$."
+msgstr "返回 $\\bar z = a - bi$。"
+
+#: manual/api/core.md:202
+msgid "Returns $z^{-1} = \\bar z / (a^2 + b^2)$."
+msgstr "返回 $z^{-1} = \\bar z / (a^2 + b^2)$。"
+
+#: manual/api/core.md:209
+msgid "It has the same unscaled formula and the same abort on a zero modulus as `Complex::div`."
+msgstr "它采用与 `Complex::div` 相同的未缩放公式，在模为零时同样会中止。"
+
+#: manual/api/core.md:221
+msgid "Equality and text"
+msgstr "相等性与文本"
+
+#: manual/api/core.md:225
+msgid "Compares both parts; the promoted method of the derived `Eq`. Prefer `==`."
+msgstr "比较两个部分；是派生的 `Eq` 的提升方法。建议使用 `==`。"
+
+#: manual/api/core.md:233
+msgid "Formats $z$ as `\"<re> + <im>i\"` using `T`'s `Show`."
+msgstr "使用 `T` 的 `Show` 将 $z$ 格式化为 `\"<re> + <im>i\"`。"
+
+#: manual/api/core.md:240
+msgid "The sign of the imaginary part is printed by `T`, so $1 - 2i$ prints as `1 + -2i`. String interpolation `\"\\{z}\"` uses the same text."
+msgstr "虚部的符号由 `T` 打印，因此 $1 - 2i$ 打印为 `1 + -2i`。字符串插值 `\"\\{z}\"` 使用相同的文本。"
+
+#: manual/api/core.md:250
+msgid "Structure instances"
+msgstr "结构实例"
+
+#: manual/api/core.md:252
+msgid "`Complex[T]` implements the `luna-generic` structure traits under the bounds below. The [core design](../design/core.md) derives each law."
+msgstr "`Complex[T]` 在下列约束下实现了 `luna-generic` 的结构 trait。[核心设计](../design/core.md)推导了每条定律。"
+
+#: manual/api/core.md:255
+msgid "Instance"
+msgstr "实例"
+
+#: manual/api/core.md:269
+msgid "[!WARNING] `Complex[T]` is a field only when $-1$ is not a square in `T`. That holds for the real-number types `Float` and `Double`, but not for `Complex[Double]`: in `Complex[Complex[Double]]` the non-zero value $1 + i\\,j$ (with $i$ the inner and $j$ the outer unit) has squared modulus $1 + i^2 = 0$, so `inv` aborts. The `Field` instance is still provided for every `T : Field`; see the [core design](../design/core.md#when-the-construction-is-a-field)."
+msgstr "[!WARNING] 仅当 $-1$ 在 `T` 中不是平方数时，`Complex[T]` 才是域。实数类型 `Float` 和 `Double` 满足这一点，但 `Complex[Double]` 不满足：在 `Complex[Complex[Double]]` 中，非零值 $1 + i\\,j$（$i$ 为内层单位、$j$ 为外层单位）的模平方为 $1 + i^2 = 0$，因此 `inv` 会中止。对每个 `T : Field` 仍然提供了 `Field` 实例；参见[核心设计](../design/core.md#when-the-construction-is-a-field)。"
+
+#: manual/api/core.md:289
+msgid "Deprecated"
+msgstr "已弃用"
+
+#: manual/api/core.md:291
+msgid "These method forms come from the trait instances and are hidden from the interface file; they warn when used outside the package."
+msgstr "这些方法形式来自 trait 实例，并在接口文件中隐藏；在包外使用时会发出警告。"
+
+#: manual/api/core.md:294
+msgid "Deprecated method"
+msgstr "已弃用的方法"
+
+#: manual/api/core.md:294
+msgid "Replacement"
+msgstr "替代方案"
+
+#: manual/api/core.md:297
+msgid "`z.to_string()` or `\"\\{z}\"`"
+msgstr "`z.to_string()` 或 `\"\\{z}\"`"
+
+#: manual/api/core.md:298
+msgid "`Repr(z)` or `@debug.Debug::to_repr(z)`"
+msgstr "`Repr(z)` 或 `@debug.Debug::to_repr(z)`"
 
 #: manual/api/float_backend.md:1
 msgid "float_backend API"
 msgstr "float_backend API"
 
 #: manual/api/float_backend.md:3
-msgid "`Luna-Flow/luna-complex/float_backend` exposes the floating analytic backend for complex numbers."
-msgstr "`Luna-Flow/luna-complex/float_backend` 暴露复数的浮点解析后端。"
+msgid "The `float_backend` package provides the analytic functions of `Complex[Double]`: modulus and argument, division, roots, exponentials and logarithms, powers, and the trigonometric and hyperbolic functions with their inverses. It also defines three capability traits for floating-point scalars, implemented for `Float` and `Double`. The derivations of the formulas and the branch cuts are in the [float_backend design](../design/float_backend.md)."
+msgstr "`float_backend` 包提供 `Complex[Double]` 的解析函数：模与辐角、除法、开方、指数与对数、幂，以及三角函数、双曲函数及其反函数。它还为浮点标量定义了三个能力 trait，并为 `Float` 和 `Double` 实现了它们。公式与分支切割线的推导见 [float_backend 设计](../design/float_backend.md)。"
 
-#: manual/api/float_backend.md:7
-msgid "Source boundary: `src/float_backend`"
-msgstr "源码边界：`src/float_backend`"
+#: manual/api/float_backend.md:10
+msgid "Source: [`src/float_backend/`](../../../src/float_backend/float_backend_traits.mbt) (`float_backend_traits.mbt`, `complex_elementary.mbt`, `complex_trigonometric.mbt`, `complex_hyperbolic.mbt`)."
+msgstr "源码：[`src/float_backend/`](../../../src/float_backend/float_backend_traits.mbt)（`float_backend_traits.mbt`、`complex_elementary.mbt`、`complex_trigonometric.mbt`、`complex_hyperbolic.mbt`）。"
 
-#: manual/api/float_backend.md:13
-msgid "Re-exports `Complex[T]` from the root package."
-msgstr "从根包重新导出 `Complex[T]`。"
+#: manual/api/float_backend.md:22
+msgid "The examples use `@fb` for this package and `@complex` for the root package. All functions are free functions over `Complex[Double]` (MoonBit does not let a package add methods to a type of another package)."
+msgstr "示例中用 `@fb` 表示本包，用 `@complex` 表示根包。所有函数都是作用于 `Complex[Double]` 的自由函数（MoonBit 不允许一个包为另一个包的类型添加方法）。"
 
-#: manual/api/float_backend.md:14
-msgid "Defines backend capability traits: `FloatingAnalyticScalar`, `FloatingSpecialValues`, and `FloatingBackendScalar`."
-msgstr "定义后端能力 trait：`FloatingAnalyticScalar`、`FloatingSpecialValues` 和 `FloatingBackendScalar`。"
+#: manual/api/float_backend.md:26
+msgid "Conventions"
+msgstr "约定"
 
-#: manual/api/float_backend.md:15
-msgid "Provides `Float` and `Double` implementations for the backend traits."
-msgstr "为 `Float` 和 `Double` 提供这些后端 trait 的实现。"
+#: manual/api/float_backend.md:28
+msgid "**Principal values.** Multi-valued functions return one value of a fixed branch, described per function. `arg` returns values in $(-\\pi, \\pi]$ except on the negative real axis (see the warning below)."
+msgstr "**主值。** 多值函数返回某个固定分支上的一个值，各函数分别说明。`arg` 返回 $(-\\pi, \\pi]$ 内的值，负实轴上除外（见下方警告）。"
 
-#: manual/api/float_backend.md:16
-msgid "Exposes the current complete analytic function surface for `Complex[Double]`: polar construction, argument and magnitude helpers, square root, exponentials, logarithms, powers, trigonometric functions, inverse trigonometric functions, hyperbolic functions, and inverse hyperbolic functions."
-msgstr "当前完整解析函数面向 `Complex[Double]`：极坐标构造、辐角与模长辅助函数、平方根、指数、对数、幂、三角函数、反三角函数、双曲函数和反双曲函数。"
+#: manual/api/float_backend.md:31
+msgid "**Special values.** NaN and infinities are handled where stated (`div`, `atan`, `atanh`, `acosh`, `abs_log`, `pow`); elsewhere they propagate through ordinary `Double` arithmetic and may produce NaN parts."
+msgstr "**特殊值。** NaN 和无穷大仅在注明之处（`div`、`atan`、`atanh`、`acosh`、`abs_log`、`pow`）做专门处理；其他地方它们通过普通 `Double` 算术传播，可能产生 NaN 分量。"
 
-#: manual/api/float_backend.md:17
-msgid "Keeps IEEE special-value behavior, branch choices, and numeric-stability helpers inside this package instead of the generic root package."
-msgstr "IEEE 特殊值行为、分支选择和数值稳定 helper 都保留在本包内，不进入泛型根包。"
+#: manual/api/float_backend.md:34
+msgid "**Reciprocal functions abort at poles.** `sec`, `csc`, `cot`, `sech`, `csch`, `coth`, `asec`, `acsc`, `asech`, `acsch`, `acoth` and the exponent $-1$ of `pow` use `Complex::inv`, which aborts with `Double::inv: division by zero` on a zero modulus."
+msgstr "**倒数类函数在极点处中止。** `sec`、`csc`、`cot`、`sech`、`csch`、`coth`、`asec`、`acsc`、`asech`、`acsch`、`acoth` 以及 `pow` 的指数 $-1$ 都使用 `Complex::inv`，它在模为零时以 `Double::inv: division by zero` 中止。"
+
+#: manual/api/float_backend.md:39
+msgid "[!WARNING] Several functions return an angle exactly $\\pi$ larger than the principal value, because the code uses $2\\pi$ where the principal value has $\\pi$: `arg` on the negative real axis ($2\\pi$ instead of $\\pi$, so `log(-1)` is $2\\pi i$ and `pow` of a negative real base uses that angle), the real part of `acos` for $\\operatorname{Re} z < 0$ and of `acos_real` and `asec_real` for negative arguments, and the imaginary part of `acosh_real` for $x < -1$. For those inputs `cos(acos(z))` returns $-z$ and `cosh(acosh_real(x))` returns $-x$. The values documented below are the values the code returns."
+msgstr "[!WARNING] 有几个函数返回的角度恰好比主值大 $\\pi$，因为代码在主值应取 $\\pi$ 的地方使用了 $2\\pi$：负实轴上的 `arg`（得到 $2\\pi$ 而非 $\\pi$，因此 `log(-1)` 为 $2\\pi i$，负实数底数的 `pow` 也使用这一角度），$\\operatorname{Re} z < 0$ 时 `acos` 的实部，负参数时 `acos_real` 与 `asec_real` 的实部，以及 $x < -1$ 时 `acosh_real` 的虚部。对这些输入，`cos(acos(z))` 返回 $-z$，`cosh(acosh_real(x))` 返回 $-x$。下文记录的是代码实际返回的值。"
+
+#: manual/api/float_backend.md:50
+msgid "Capability traits"
+msgstr "能力 trait"
+
+#: manual/api/float_backend.md:54
+msgid "The algebraic and analytic capabilities an analytic backend needs from its real scalar."
+msgstr "解析后端对其实数标量所需的代数与解析能力。"
+
+#: manual/api/float_backend.md:64
+msgid "It has no methods of its own: it names the composition of `luna-generic` and `arithmetic` traits."
+msgstr "它本身没有方法：它只是为 `luna-generic` 与 `arithmetic` trait 的组合命名。"
+
+#: manual/api/float_backend.md:69
+msgid "IEEE 754 special values and their tests."
+msgstr "IEEE 754 特殊值及其判定。"
+
+#: manual/api/float_backend.md:86
+msgid "`is_negative_zero(x)` is `is_neg_inf(1.0 / x)`, so it is true exactly for $-0$."
+msgstr "`is_negative_zero(x)` 即 `is_neg_inf(1.0 / x)`，因此它恰好对 $-0$ 为真。"
+
+#: manual/api/float_backend.md:91
+msgid "The primitives the numerically stable algorithms use, on top of the two traits above."
+msgstr "数值稳定算法在上述两个 trait 之上所用的基本操作。"
+
+#: manual/api/float_backend.md:106
+msgid "Method"
+msgstr "方法"
+
+#: manual/api/float_backend.md:106
+msgid "Meaning"
+msgstr "含义"
+
+#: manual/api/float_backend.md:108
+msgid "convert a `Double` constant"
+msgstr "转换一个 `Double` 常量"
+
+#: manual/api/float_backend.md:108
+msgid "identity"
+msgstr "恒等"
+
+#: manual/api/float_backend.md:109
+msgid "round towards zero"
+msgstr "向零舍入"
+
+#: manual/api/float_backend.md:110
+msgid "convert to `Int`"
+msgstr "转换为 `Int`"
+
+#: manual/api/float_backend.md:111
+msgid "$\\sqrt{x^2 + y^2}$ without overflow"
+msgstr "不会上溢的 $\\sqrt{x^2 + y^2}$"
+
+#: manual/api/float_backend.md:114
+msgid "The `Float` `log1p` is the direct formula, which loses relative accuracy for $|x| \\ll 1$. No public function of this package is generic over these traits yet; the `Complex[Double]` functions below call the `Double` primitives directly."
+msgstr "`Float` 的 `log1p` 是直接公式，当 $|x| \\ll 1$ 时会损失相对精度。本包目前还没有对这些 trait 泛型的公开函数；下面的 `Complex[Double]` 函数直接调用 `Double` 的基本操作。"
+
+#: manual/api/float_backend.md:141
+msgid "Re-exported type"
+msgstr "重新导出的类型"
+
+#: manual/api/float_backend.md:145
+msgid "`@fb.Complex` is `@complex.Complex`; see the [core API](core.md)."
+msgstr "`@fb.Complex` 就是 `@complex.Complex`；参见[核心 API](core.md)。"
+
+#: manual/api/float_backend.md:151
+msgid "Construction and storage"
+msgstr "构造与存储"
+
+#: manual/api/float_backend.md:155
+msgid "Builds $r e^{i\\theta} = r\\cos\\theta + i\\,r\\sin\\theta$."
+msgstr "构造 $r e^{i\\theta} = r\\cos\\theta + i\\,r\\sin\\theta$。"
+
+#: manual/api/float_backend.md:161
+msgid "No normalization is applied: a negative $r$ or any real $\\theta$ is accepted."
+msgstr "不做规范化：接受负的 $r$ 和任意实数 $\\theta$。"
+
+#: manual/api/float_backend.md:166
+msgid "Writes $z$ into an interleaved buffer `[re0, im0, re1, im1, …]` at complex index `offset`."
+msgstr "将 $z$ 写入交错缓冲区 `[re0, im0, re1, im1, …]` 中复数下标为 `offset` 的位置。"
+
+#: manual/api/float_backend.md:175
+msgid "Writes a real and an imaginary part into an interleaved buffer."
+msgstr "将实部和虚部写入交错缓冲区。"
+
+#: manual/api/float_backend.md:181
+msgid "The buffer length must be even. If `offset` equals the number of complex entries (`arr.length() / 2`), the pair is appended; otherwise it overwrites entry `offset`. An odd length aborts with `native_pack: buffer length must be even`, an offset outside `0..=arr.length() / 2` with `native_pack: offset out of bounds`."
+msgstr "缓冲区长度必须为偶数。如果 `offset` 等于复数条目数（`arr.length() / 2`），则追加这一对值；否则覆盖第 `offset` 个条目。长度为奇数时以 `native_pack: buffer length must be even` 中止，偏移量超出 `0..=arr.length() / 2` 时以 `native_pack: offset out of bounds` 中止。"
+
+#: manual/api/float_backend.md:199
+msgid "Modulus and argument"
+msgstr "模与辐角"
+
+#: manual/api/float_backend.md:203
+msgid "Returns $|z| = \\sqrt{x^2 + y^2}$ with `hypot`, without intermediate overflow or underflow."
+msgstr "用 `hypot` 返回 $|z| = \\sqrt{x^2 + y^2}$，中间过程不会上溢或下溢。"
+
+#: manual/api/float_backend.md:212
+msgid "Returns $|z|^2$, computed as $m^2\\big((x/m)^2 + (y/m)^2\\big)$ with $m = \\max(|x|, |y|)$."
+msgstr "返回 $|z|^2$，按 $m^2\\big((x/m)^2 + (y/m)^2\\big)$ 计算，其中 $m = \\max(|x|, |y|)$。"
+
+#: manual/api/float_backend.md:219
+msgid "The scaling avoids spurious underflow of the squares; the result itself overflows to infinity when $|z|^2$ exceeds the `Double` range. $0$ maps to $0$."
+msgstr "缩放避免了平方项的虚假下溢；当 $|z|^2$ 超出 `Double` 范围时，结果本身会上溢为无穷大。$0$ 映射为 $0$。"
+
+#: manual/api/float_backend.md:225
+msgid "Returns $\\ln|z|$ as $\\ln m + \\tfrac12\\ln(1 + t^2)$ with $m = \\max(|x|,|y|)$ and $t = \\min/\\max$."
+msgstr "按 $\\ln m + \\tfrac12\\ln(1 + t^2)$ 返回 $\\ln|z|$，其中 $m = \\max(|x|,|y|)$，$t = \\min/\\max$。"
+
+#: manual/api/float_backend.md:232
+msgid "It is finite for every finite non-zero $z$, even when $|z|$ itself would overflow. `abs_log(0)` is $-\\infty$."
+msgstr "对每个有限非零的 $z$，结果都是有限的，即使 $|z|$ 本身会上溢。`abs_log(0)` 为 $-\\infty$。"
+
+#: manual/api/float_backend.md:237
+msgid "Returns the argument $\\theta$ with $z = |z| e^{i\\theta}$."
+msgstr "返回满足 $z = |z| e^{i\\theta}$ 的辐角 $\\theta$。"
+
+#: manual/api/float_backend.md:243
+msgid "Input"
+msgstr "输入"
+
+#: manual/api/float_backend.md:245
+msgid "$z = 0$ (either zero sign)"
+msgstr "$z = 0$（任一零符号）"
+
+#: manual/api/float_backend.md:246
+msgid "$2\\pi$ (see the warning above)"
+msgstr "$2\\pi$（见上方警告）"
+
+#: manual/api/float_backend.md:247
+#: manual/api/float_backend.md:398
+msgid "otherwise"
+msgstr "其他情况"
+
+#: manual/api/float_backend.md:261
+msgid "Division"
+msgstr "除法"
+
+#: manual/api/float_backend.md:265
+msgid "Divides $z / w$ with Smith's scaling and IEEE special-value handling."
+msgstr "使用 Smith 缩放和 IEEE 特殊值处理计算 $z / w$。"
+
+#: manual/api/float_backend.md:271
+msgid "For finite $w$ it divides by the larger of $|c|, |d|$ first (with $r = d/c$ when $|c| \\ge |d|$):"
+msgstr "对于有限的 $w$，它先除以 $|c|, |d|$ 中较大者（当 $|c| \\ge |d|$ 时取 $r = d/c$）："
+
+#: manual/api/float_backend.md:278
+msgid "so no square of $c$ or $d$ is formed. When $z$ has no NaN part and $w$ has an infinite part, the result is computed from the signs of the infinities: a finite $z$ gives $\\pm 0$ parts, an infinite $z$ gives the quotient of the sign patterns. Division by $0 + 0i$ produces infinities or NaN (no abort)."
+msgstr "因此不会形成 $c$ 或 $d$ 的平方。当 $z$ 没有 NaN 分量而 $w$ 有无穷分量时，结果由无穷大的符号算出：有限的 $z$ 得到 $\\pm 0$ 分量，无穷的 $z$ 得到符号模式之商。除以 $0 + 0i$ 会产生无穷大或 NaN（不会中止）。"
+
+#: manual/api/float_backend.md:294
+msgid "Roots"
+msgstr "开方"
+
+#: manual/api/float_backend.md:298
+msgid "Returns the principal square root: $\\operatorname{Re}\\sqrt z \\ge 0$, with the branch cut along the negative real axis."
+msgstr "返回主平方根：$\\operatorname{Re}\\sqrt z \\ge 0$，分支切割线沿负实轴。"
+
+#: manual/api/float_backend.md:305
+msgid "It computes $w = \\sqrt{(|x| + |z|)/2}$ in a scaled form and returns $w + \\frac{y}{2w} i$ for $x \\ge 0$, and $\\frac{|y|}{2w} \\pm w\\,i$ for $x < 0$ with the sign of $y$. On the cut ($y = \\pm 0$, $x < 0$) the result is $+\\sqrt{|x|}\\,i$ for both zero signs. `sqrt(0)` is $0$."
+msgstr "它以缩放形式计算 $w = \\sqrt{(|x| + |z|)/2}$，当 $x \\ge 0$ 时返回 $w + \\frac{y}{2w} i$，当 $x < 0$ 时返回 $\\frac{|y|}{2w} \\pm w\\,i$（符号与 $y$ 相同）。在割线上（$y = \\pm 0$，$x < 0$），对两种零符号结果都是 $+\\sqrt{|x|}\\,i$。`sqrt(0)` 为 $0$。"
+
+#: manual/api/float_backend.md:312
+msgid "Square root of a real number as a complex number: $\\sqrt x$ for $x \\ge 0$, $i\\sqrt{-x}$ for $x < 0$."
+msgstr "实数的平方根，以复数表示：$x \\ge 0$ 时为 $\\sqrt x$，$x < 0$ 时为 $i\\sqrt{-x}$。"
+
+#: manual/api/float_backend.md:327
+msgid "Exponential and logarithms"
+msgstr "指数与对数"
+
+#: manual/api/float_backend.md:331
+msgid "Returns $e^z = e^x(\\cos y + i\\sin y)$."
+msgstr "返回 $e^z = e^x(\\cos y + i\\sin y)$。"
+
+#: manual/api/float_backend.md:337
+msgid "$e^x$ is computed first, so it overflows for $x > 709.78$ even when a part of the result would be finite, and `exp(710 + 0i)` has a NaN imaginary part ($\\infty \\cdot 0$)."
+msgstr "由于先计算 $e^x$，当 $x > 709.78$ 时它会上溢，即使结果的某个分量本应有限；并且 `exp(710 + 0i)` 的虚部为 NaN（$\\infty \\cdot 0$）。"
+
+#: manual/api/float_backend.md:343
+msgid "Returns $\\ln|z| + i\\arg z$ with `abs_log` and `arg`."
+msgstr "用 `abs_log` 和 `arg` 返回 $\\ln|z| + i\\arg z$。"
+
+#: manual/api/float_backend.md:349
+msgid "The imaginary part follows `arg`, so it is $2\\pi$ on the negative real axis. `log(0)` is $-\\infty + 0i$."
+msgstr "虚部遵循 `arg`，因此在负实轴上为 $2\\pi$。`log(0)` 为 $-\\infty + 0i$。"
+
+#: manual/api/float_backend.md:354
+msgid "Returns $\\log_{10} z = \\log z / \\ln 10$."
+msgstr "返回 $\\log_{10} z = \\log z / \\ln 10$。"
+
+#: manual/api/float_backend.md:362
+msgid "Returns $\\log_b z = \\log z / \\log b$, divided with `div`."
+msgstr "返回 $\\log_b z = \\log z / \\log b$，除法使用 `div`。"
+
+#: manual/api/float_backend.md:378
+msgid "Powers"
+msgstr "幂"
+
+#: manual/api/float_backend.md:382
+msgid "Returns $z^w$."
+msgstr "返回 $z^w$。"
+
+#: manual/api/float_backend.md:388
+msgid "The cases are tried in order:"
+msgstr "依次尝试以下情形："
+
+#: manual/api/float_backend.md:390
+msgid "Case"
+msgstr "情形"
+
+#: manual/api/float_backend.md:393
+msgid "$z = 0$, $w$ real and positive"
+msgstr "$z = 0$，$w$ 为正实数"
+
+#: manual/api/float_backend.md:394
+msgid "$z = 0$, otherwise"
+msgstr "$z = 0$，其他情况"
+
+#: manual/api/float_backend.md:394
+msgid "NaN + NaN$i$"
+msgstr "NaN + NaN$i$"
+
+#: manual/api/float_backend.md:396
+msgid "`z.inv()` (aborts if $z = 0$, which the first rows exclude)"
+msgstr "`z.inv()`（$z = 0$ 时中止，但前面几行已排除该情况）"
+
+#: manual/api/float_backend.md:397
+msgid "$w$ real integer, $\\lvert w\\rvert  \\le 2^{31} - 1$"
+msgstr "$w$ 为实整数，$\\lvert w\\rvert  \\le 2^{31} - 1$"
+
+#: manual/api/float_backend.md:397
+msgid "binary powering; negative exponents invert $z$ first"
+msgstr "二进制快速幂；负指数先对 $z$ 求逆"
+
+#: manual/api/float_backend.md:398
+msgid "$e^{w\\log z}$ in polar form"
+msgstr "极坐标形式的 $e^{w\\log z}$"
+
+#: manual/api/float_backend.md:400
+msgid "The polar form computes $\\rho = e^{\\operatorname{Re} w \\ln|z| - \\operatorname{Im} w \\arg z}$ and $\\beta = \\operatorname{Re} w \\arg z + \\operatorname{Im} w \\ln|z|$ and returns $\\rho(\\cos\\beta + i\\sin\\beta)$."
+msgstr "极坐标形式先计算 $\\rho = e^{\\operatorname{Re} w \\ln|z| - \\operatorname{Im} w \\arg z}$ 与 $\\beta = \\operatorname{Re} w \\arg z + \\operatorname{Im} w \\ln|z|$，再返回 $\\rho(\\cos\\beta + i\\sin\\beta)$。"
+
+#: manual/api/float_backend.md:406
+msgid "Returns $z^p$ for a real exponent $p$, with the same zero, integer and polar cases as `pow`."
+msgstr "对实指数 $p$ 返回 $z^p$，零、整数与极坐标情形与 `pow` 相同。"
+
+#: manual/api/float_backend.md:423
+msgid "Scalar operands"
+msgstr "标量操作数"
+
+#: manual/api/float_backend.md:427
+msgid "Applies a binary complex function with a real second operand $x + 0i$."
+msgstr "以实数 $x + 0i$ 作为第二个操作数应用二元复函数。"
+
+#: manual/api/float_backend.md:435
+msgid "Applies a binary complex function with an imaginary second operand $0 + yi$."
+msgstr "以纯虚数 $0 + yi$ 作为第二个操作数应用二元复函数。"
+
+#: manual/api/float_backend.md:450
+msgid "Trigonometric functions"
+msgstr "三角函数"
+
+#: manual/api/float_backend.md:454
+msgid "Returns $\\sin z = \\sin x\\cosh y + i\\cos x\\sinh y$; for $y = 0$ exactly, the real $\\sin x$."
+msgstr "返回 $\\sin z = \\sin x\\cosh y + i\\cos x\\sinh y$；当 $y = 0$ 严格成立时，返回实数 $\\sin x$。"
+
+#: manual/api/float_backend.md:463
+msgid "Returns $\\cos z = \\cos x\\cosh y - i\\sin x\\sinh y$; for $y = 0$ exactly, the real $\\cos x$."
+msgstr "返回 $\\cos z = \\cos x\\cosh y - i\\sin x\\sinh y$；当 $y = 0$ 严格成立时，返回实数 $\\cos x$。"
+
+#: manual/api/float_backend.md:472
+msgid "Returns $\\tan z$."
+msgstr "返回 $\\tan z$。"
+
+#: manual/api/float_backend.md:478
+msgid "For $|y| < 1$ it uses $\\dfrac{\\sin 2x + i\\sinh 2y}{2(\\cos^2 x + \\sinh^2 y)}$; for $|y| \\ge 1$ a form scaled by $e^{-2|y|}$ that tends to $\\pm i$ without overflow (see the design)."
+msgstr "当 $|y| < 1$ 时使用 $\\dfrac{\\sin 2x + i\\sinh 2y}{2(\\cos^2 x + \\sinh^2 y)}$；当 $|y| \\ge 1$ 时使用以 $e^{-2|y|}$ 缩放的形式，它趋于 $\\pm i$ 而不会上溢（见设计文档）。"
+
+#: manual/api/float_backend.md:484
+msgid "Returns $1/\\cos z$; aborts where $\\cos z = 0$."
+msgstr "返回 $1/\\cos z$；在 $\\cos z = 0$ 处中止。"
+
+#: manual/api/float_backend.md:492
+msgid "Returns $1/\\sin z$; aborts at $z = k\\pi$."
+msgstr "返回 $1/\\sin z$；在 $z = k\\pi$ 处中止。"
+
+#: manual/api/float_backend.md:500
+msgid "Returns $1/\\tan z$; aborts at $z = k\\pi$."
+msgstr "返回 $1/\\tan z$；在 $z = k\\pi$ 处中止。"
+
+#: manual/api/float_backend.md:518
+msgid "Inverse trigonometric functions"
+msgstr "反三角函数"
+
+#: manual/api/float_backend.md:522
+msgid "Returns the principal arcsine, with branch cuts on the real axis outside $[-1, 1]$; $\\operatorname{Re}$ lies in $[-\\pi/2, \\pi/2]$."
+msgstr "返回主值反正弦，分支切割线位于实轴上 $[-1, 1]$ 之外；$\\operatorname{Re}$ 位于 $[-\\pi/2, \\pi/2]$ 内。"
+
+#: manual/api/float_backend.md:529
+msgid "Real inputs go to `asin_real`, purely imaginary inputs to $i\\operatorname{asinh} y$, inputs with a part above $10^{150}$ to the asymptotic form $\\operatorname{atan2}(|x|, |y|) + i(\\ln 2 + \\ln|z|)$, and all others to the Hull–Fairgrieve–Tang algorithm (see the design). The result is odd in each part: the signs of $x$ and $y$ are copied to the real and imaginary parts."
+msgstr "实数输入交给 `asin_real`，纯虚数输入转为 $i\\operatorname{asinh} y$，某一分量超过 $10^{150}$ 的输入使用渐近形式 $\\operatorname{atan2}(|x|, |y|) + i(\\ln 2 + \\ln|z|)$，其余输入使用 Hull–Fairgrieve–Tang 算法（见设计文档）。结果在每个分量上都是奇函数：$x$ 与 $y$ 的符号分别复制到实部和虚部。"
+
+#: manual/api/float_backend.md:537
+msgid "Arcsine of a real number: $\\arcsin x$ for $|x| \\le 1$, $\\pm\\pi/2 + i\\operatorname{acosh}|x|$ for $|x| > 1$ (sign of $x$), NaN for NaN."
+msgstr "实数的反正弦：$|x| \\le 1$ 时为 $\\arcsin x$，$|x| > 1$ 时为 $\\pm\\pi/2 + i\\operatorname{acosh}|x|$（符号同 $x$），NaN 时为 NaN。"
+
+#: manual/api/float_backend.md:546
+msgid "Returns the arccosine, with branch cuts on the real axis outside $[-1, 1]$."
+msgstr "返回反余弦，分支切割线位于实轴上 $[-1, 1]$ 之外。"
+
+#: manual/api/float_backend.md:552
+msgid "For $x \\ge 0$ the real part is the principal value in $[0, \\pi/2]$ and the imaginary part has the sign opposite to $y$. For $x < 0$ the imaginary part is the principal one, but the real part is $2\\pi - \\rho$ instead of the principal $\\pi - \\rho$, where $\\rho \\in [0, \\pi/2]$ is the real part of $\\arccos(-z)$ (see the warning above). Purely imaginary inputs give $\\pi/2 - i\\operatorname{asinh} y$, and real inputs go to `acos_real`."
+msgstr "当 $x \\ge 0$ 时，实部是 $[0, \\pi/2]$ 内的主值，虚部符号与 $y$ 相反。当 $x < 0$ 时，虚部是主值，但实部为 $2\\pi - \\rho$ 而非主值 $\\pi - \\rho$，其中 $\\rho \\in [0, \\pi/2]$ 是 $\\arccos(-z)$ 的实部（见上方警告）。纯虚数输入得到 $\\pi/2 - i\\operatorname{asinh} y$，实数输入交给 `acos_real`。"
+
+#: manual/api/float_backend.md:561
+msgid "Arccosine of a real number: $\\arccos x$ for $|x| \\le 1$, $-i\\operatorname{acosh} x$ for $x > 1$, and $2\\pi - i\\operatorname{acosh}(-x)$ for $x < -1$."
+msgstr "实数的反余弦：$|x| \\le 1$ 时为 $\\arccos x$，$x > 1$ 时为 $-i\\operatorname{acosh} x$，$x < -1$ 时为 $2\\pi - i\\operatorname{acosh}(-x)$。"
+
+#: manual/api/float_backend.md:570
+msgid "Returns the principal arctangent, with branch cuts on the imaginary axis outside $[-i, i]$."
+msgstr "返回主值反正切，分支切割线位于虚轴上 $[-i, i]$ 之外。"
+
+#: manual/api/float_backend.md:577
+msgid "The imaginary part is $\\tfrac14\\ln\\frac{x^2 + (1+y)^2}{x^2 + (1-y)^2}$, computed with `log1p` when the ratio is close to $1$; the real part is $\\tfrac12\\operatorname{atan2}(2x, 1 - x^2 - y^2)$, rescaled for large inputs. On the cut ($x = 0$, $|y| > 1$) the real part is $\\pm\\pi/2$ with the sign of $y$. Infinite inputs return $\\pm\\pi/2 + 0i$."
+msgstr "虚部为 $\\tfrac14\\ln\\frac{x^2 + (1+y)^2}{x^2 + (1-y)^2}$，当比值接近 $1$ 时用 `log1p` 计算；实部为 $\\tfrac12\\operatorname{atan2}(2x, 1 - x^2 - y^2)$，对大输入会重新缩放。在割线上（$x = 0$，$|y| > 1$），实部为 $\\pm\\pi/2$，符号同 $y$。无穷输入返回 $\\pm\\pi/2 + 0i$。"
+
+#: manual/api/float_backend.md:585
+msgid "Returns $\\operatorname{acos}(1/z)$; aborts at $z = 0$."
+msgstr "返回 $\\operatorname{acos}(1/z)$；在 $z = 0$ 处中止。"
+
+#: manual/api/float_backend.md:593
+msgid "Arcsecant of a real number: $\\arccos(1/x)$ for $|x| \\ge 1$, $-i\\operatorname{acosh}(1/x)$ for $0 \\le x < 1$, $2\\pi - i\\operatorname{acosh}(-1/x)$ for $-1 < x < 0$."
+msgstr "实数的反正割：$|x| \\ge 1$ 时为 $\\arccos(1/x)$，$0 \\le x < 1$ 时为 $-i\\operatorname{acosh}(1/x)$，$-1 < x < 0$ 时为 $2\\pi - i\\operatorname{acosh}(-1/x)$。"
+
+#: manual/api/float_backend.md:603
+msgid "Returns $\\operatorname{asin}(1/z)$; aborts at $z = 0$."
+msgstr "返回 $\\operatorname{asin}(1/z)$；在 $z = 0$ 处中止。"
+
+#: manual/api/float_backend.md:611
+msgid "Arccosecant of a real number: $\\arcsin(1/x)$ for $|x| \\ge 1$, $\\pm\\pi/2 + i\\operatorname{acosh}|1/x|$ for $|x| < 1$."
+msgstr "实数的反余割：$|x| \\ge 1$ 时为 $\\arcsin(1/x)$，$|x| < 1$ 时为 $\\pm\\pi/2 + i\\operatorname{acosh}|1/x|$。"
+
+#: manual/api/float_backend.md:620
+msgid "Returns $\\operatorname{atan}(1/z)$, and $\\pi/2$ at $z = 0$."
+msgstr "返回 $\\operatorname{atan}(1/z)$，在 $z = 0$ 处返回 $\\pi/2$。"
+
+#: manual/api/float_backend.md:636
+msgid "Hyperbolic functions"
+msgstr "双曲函数"
+
+#: manual/api/float_backend.md:640
+msgid "Returns $\\sinh z = \\sinh x\\cos y + i\\cosh x\\sin y$."
+msgstr "返回 $\\sinh z = \\sinh x\\cos y + i\\cosh x\\sin y$。"
+
+#: manual/api/float_backend.md:648
+msgid "Returns $\\cosh z = \\cosh x\\cos y + i\\sinh x\\sin y$."
+msgstr "返回 $\\cosh z = \\cosh x\\cos y + i\\sinh x\\sin y$。"
+
+#: manual/api/float_backend.md:656
+msgid "Returns $\\tanh z$; for $|x| \\ge 1$ a form scaled by $e^{-2|x|}$ that tends to $\\pm 1$ without overflow."
+msgstr "返回 $\\tanh z$；当 $|x| \\ge 1$ 时使用以 $e^{-2|x|}$ 缩放的形式，它趋于 $\\pm 1$ 而不会上溢。"
+
+#: manual/api/float_backend.md:665
+msgid "Returns $1/\\cosh z$; aborts where $\\cosh z = 0$."
+msgstr "返回 $1/\\cosh z$；在 $\\cosh z = 0$ 处中止。"
+
+#: manual/api/float_backend.md:673
+msgid "Returns $1/\\sinh z$; aborts at $z = k\\pi i$."
+msgstr "返回 $1/\\sinh z$；在 $z = k\\pi i$ 处中止。"
+
+#: manual/api/float_backend.md:681
+msgid "Returns $1/\\tanh z$; aborts at $z = k\\pi i$."
+msgstr "返回 $1/\\tanh z$；在 $z = k\\pi i$ 处中止。"
+
+#: manual/api/float_backend.md:687
+msgid "Inverse hyperbolic functions"
+msgstr "反双曲函数"
+
+#: manual/api/float_backend.md:691
+msgid "Returns $\\operatorname{asinh} z = -i\\operatorname{asin}(iz)$, with branch cuts on the imaginary axis outside $[-i, i]$."
+msgstr "返回 $\\operatorname{asinh} z = -i\\operatorname{asin}(iz)$，分支切割线位于虚轴上 $[-i, i]$ 之外。"
+
+#: manual/api/float_backend.md:698
+msgid "Real inputs use the real `asinh`; purely imaginary inputs $iy$ give $i\\arcsin y$ for $|y| \\le 1$ and $\\pm(\\operatorname{acosh}|y| + i\\pi/2)$ otherwise."
+msgstr "实数输入使用实数 `asinh`；纯虚数输入 $iy$ 在 $|y| \\le 1$ 时得到 $i\\arcsin y$，否则得到 $\\pm(\\operatorname{acosh}|y| + i\\pi/2)$。"
+
+#: manual/api/float_backend.md:703
+msgid "Returns $\\operatorname{acosh} z = 2\\ln\\Big(\\sqrt{\\tfrac{z+1}{2}} + \\sqrt{\\tfrac{z-1}{2}}\\Big)$, with the branch cut on the real axis below $1$."
+msgstr "返回 $\\operatorname{acosh} z = 2\\ln\\Big(\\sqrt{\\tfrac{z+1}{2}} + \\sqrt{\\tfrac{z-1}{2}}\\Big)$，分支切割线位于实轴上 $1$ 以下的部分。"
+
+#: manual/api/float_backend.md:710
+msgid "Real inputs go to `acosh_real`; an infinite part gives $\\infty + i\\arg z$."
+msgstr "实数输入交给 `acosh_real`；含无穷分量时得到 $\\infty + i\\arg z$。"
+
+#: manual/api/float_backend.md:714
+msgid "Inverse hyperbolic cosine of a real number: $\\operatorname{acosh} x$ for $x \\ge 1$, $i\\arccos x$ for $-1 \\le x < 1$, $\\operatorname{acosh}(-x) + 2\\pi i$ for $x < -1$."
+msgstr "实数的反双曲余弦：$x \\ge 1$ 时为 $\\operatorname{acosh} x$，$-1 \\le x < 1$ 时为 $i\\arccos x$，$x < -1$ 时为 $\\operatorname{acosh}(-x) + 2\\pi i$。"
+
+#: manual/api/float_backend.md:724
+msgid "Returns $\\operatorname{atanh} z$, with branch cuts on the real axis outside $[-1, 1]$."
+msgstr "返回 $\\operatorname{atanh} z$，分支切割线位于实轴上 $[-1, 1]$ 之外。"
+
+#: manual/api/float_backend.md:731
+msgid "The real part is $\\tfrac14\\ln\\frac{(1+x)^2 + y^2}{(1-x)^2 + y^2}$ (with `log1p` near zero), the imaginary part $\\tfrac12\\operatorname{atan2}(2y, 1 - x^2 - y^2)$, rescaled for large inputs. Infinite inputs return $0 \\pm i\\pi/2$."
+msgstr "实部为 $\\tfrac14\\ln\\frac{(1+x)^2 + y^2}{(1-x)^2 + y^2}$（在零附近使用 `log1p`），虚部为 $\\tfrac12\\operatorname{atan2}(2y, 1 - x^2 - y^2)$，对大输入会重新缩放。无穷输入返回 $0 \\pm i\\pi/2$。"
+
+#: manual/api/float_backend.md:738
+msgid "Inverse hyperbolic tangent of a real number: $\\operatorname{atanh} x$ for $|x| < 1$, $\\pm\\infty$ at $\\pm 1$, and $\\operatorname{atanh}(1/x) + i\\pi/2$ for $|x| > 1$."
+msgstr "实数的反双曲正切：$|x| < 1$ 时为 $\\operatorname{atanh} x$，在 $\\pm 1$ 处为 $\\pm\\infty$，$|x| > 1$ 时为 $\\operatorname{atanh}(1/x) + i\\pi/2$。"
+
+#: manual/api/float_backend.md:748
+msgid "Returns $\\operatorname{acosh}(1/z)$; aborts at $z = 0$."
+msgstr "返回 $\\operatorname{acosh}(1/z)$；在 $z = 0$ 处中止。"
+
+#: manual/api/float_backend.md:756
+msgid "Returns $\\operatorname{asinh}(1/z)$; aborts at $z = 0$."
+msgstr "返回 $\\operatorname{asinh}(1/z)$；在 $z = 0$ 处中止。"
+
+#: manual/api/float_backend.md:764
+msgid "Returns $\\operatorname{atanh}(1/z)$; aborts at $z = 0$."
+msgstr "返回 $\\operatorname{atanh}(1/z)$；在 $z = 0$ 处中止。"
 
 #: manual/contributing.md:1
-msgid "Contribution Guidelines"
-msgstr "贡献规范"
+msgid "Contribution guidelines"
+msgstr "贡献指南"
 
 #: manual/contributing.md:3
-msgid "Code Style"
+msgid "This guide collects the rules for changing `luna-complex`. Run `./ready_to_pr.sh` before opening a pull request."
+msgstr "本指南汇集了修改 `luna-complex` 时应遵循的规则。提交拉取请求前请运行 `./ready_to_pr.sh`。"
+
+#: manual/contributing.md:6
+msgid "Code style"
 msgstr "代码风格"
 
-#: manual/contributing.md:5
+#: manual/contributing.md:8
 msgid "Format all code with `moon fmt`."
 msgstr "所有代码统一使用 `moon fmt` 格式化。"
 
-#: manual/contributing.md:6
-msgid "Prefer the shared aliases imported in `src/alias.mbt` instead of scattering repeated fully-qualified calls across implementation files."
-msgstr "优先复用 `src/alias.mbt` 中集中定义的别名和导入风格，不要在实现文件里重复堆叠完全限定名调用。"
-
-#: manual/contributing.md:7
-msgid "Keep comments short and technical. Comments should explain numerical stability choices, branch selection, or non-obvious contracts, not restate the code."
-msgstr "注释保持简洁、技术化，重点说明数值稳定性、分支选择和不明显的契约，不要简单复述代码。"
-
 #: manual/contributing.md:9
-msgid "Naming Conventions"
-msgstr "命名约定"
+msgid "Prefer the shared `using` imports in `src/alias.mbt` and `src/float_backend/alias.mbt` over repeated fully qualified calls."
+msgstr "优先使用 `src/alias.mbt` 和 `src/float_backend/alias.mbt` 中共享的 `using` 导入，而不是反复写完全限定调用。"
 
 #: manual/contributing.md:11
-msgid "Bindings and functions: lowercase with underscores, such as `scaled_re` or `pow_real`."
-msgstr "绑定和函数名使用小写加下划线，例如 `scaled_re`、`pow_real`。"
-
-#: manual/contributing.md:12
-msgid "Types and traits: PascalCase, such as `Complex`."
-msgstr "类型和 Trait 使用 PascalCase，例如 `Complex`。"
-
-#: manual/contributing.md:13
-msgid "Files: lowercase with underscores, and named after a specific behavior rather than a vague bucket."
-msgstr "文件名使用小写加下划线，并直接反映所负责的能力。"
+msgid "Keep comments short and technical. Comments explain numerical stability choices, branch selection or non-obvious contracts; they do not restate the code."
+msgstr "注释应简短且技术化。注释用于解释数值稳定性的取舍、分支选择或不明显的约定；不要复述代码。"
 
 #: manual/contributing.md:14
-msgid "If an error code is introduced later, use uppercase with underscores and an `E_` prefix."
-msgstr "如果后续引入错误码，使用全大写加下划线，并以 `E_` 为前缀。"
+msgid "Promote trait methods explicitly in `src/extends.mbt`; deprecated method forms stay there with `#deprecated` and `#doc(hidden)`."
+msgstr "在 `src/extends.mbt` 中显式提升 trait 方法；已弃用的方法形式保留在那里，并带有 `#deprecated` 和 `#doc(hidden)`。"
 
-#: manual/contributing.md:16
-msgid "File Organization"
-msgstr "文件组织"
+#: manual/contributing.md:17
+msgid "Naming"
+msgstr "命名"
 
-#: manual/contributing.md:18
-msgid "Organize files by package boundary first, then by behavior. In this repository, the root package owns the generic `Complex[T]` core, while `src/float_backend` owns floating backend traits and the current `Complex[Double]` analytic layer."
-msgstr "先按包边界组织，再按行为拆分文件。当前仓库中，根包负责泛型 `Complex[T]` 核心，`src/float_backend` 负责浮点后端 trait 和当前 `Complex[Double]` 的解析层。"
+#: manual/contributing.md:19
+msgid "Bindings and functions: lowercase with underscores, such as `pow_real`."
+msgstr "绑定与函数：小写加下划线，如 `pow_real`。"
 
 #: manual/contributing.md:20
-msgid "Inside each package, keep core data operations, elementary functions, trigonometric functions, hyperbolic functions, and tests in separate files."
-msgstr "在每个包内部，再把核心数据结构、初等函数、三角函数、双曲函数和测试分别放在独立文件中。"
-
-#: manual/contributing.md:21
-msgid "Avoid catch-all files such as `utils.mbt`. New files should describe the behavior they own."
-msgstr "避免 `utils.mbt` 这类兜底文件。新增文件名必须能明确说明职责。"
+msgid "Types and traits: PascalCase, such as `Complex` or `FloatingBackendScalar`."
+msgstr "类型与 trait：PascalCase，如 `Complex` 或 `FloatingBackendScalar`。"
 
 #: manual/contributing.md:22
-msgid "Keep public API changes deliberate. Internal helpers should remain internal unless the package genuinely needs to expose them."
-msgstr "公共 API 变更要有意识地控制；内部辅助函数除非确有必要，不应暴露到包接口中。"
+msgid "Files: lowercase with underscores, named after the behaviour they own. Avoid catch-all files such as `utils.mbt`."
+msgstr "文件：小写加下划线，按其负责的行为命名。避免 `utils.mbt` 这类大杂烩文件。"
 
-#: manual/contributing.md:23
-msgid "Do not assume the `float_backend` package can add methods to `Complex[T]`. Under current MoonBit rules, subpackages cannot attach methods or trait impls to a type defined in another package, so `float_backend` uses free functions."
-msgstr "不要假设 `float_backend` 可以给 `Complex[T]` 追加方法。以当前 MoonBit 规则，子包不能给别的包定义的类型补方法或 trait impl，所以 `float_backend` 采用自由函数形式。"
+#: manual/contributing.md:25
+msgid "Package boundaries"
+msgstr "包边界"
 
-#: manual/contributing.md:26
+#: manual/contributing.md:27
+msgid "The root package owns the generic `Complex[T]`: construction, mutation, algebraic operations and `luna-generic` instances. It contains no floating-point semantics."
+msgstr "根包负责泛型的 `Complex[T]`：构造、修改、代数运算以及 `luna-generic` 实例。它不包含任何浮点语义。"
+
+#: manual/contributing.md:30
+msgid "`src/float_backend` owns the floating-point capability traits and the analytic functions. Under current MoonBit rules a package cannot add methods or trait instances to a type of another package, so these are free functions."
+msgstr "`src/float_backend` 负责浮点能力 trait 与解析函数。按照当前 MoonBit 的规则，一个包不能为另一个包的类型添加方法或 trait 实例，因此这些都是自由函数。"
+
+#: manual/contributing.md:34
+msgid "Add an instance to `Complex[T]` only when the construction satisfies its laws under the stated bound; see the [core design](design/core.md)."
+msgstr "仅当该构造在所述约束下满足相应定律时，才为 `Complex[T]` 添加实例；参见[核心设计](design/core.md)。"
+
+#: manual/contributing.md:36
+msgid "Keep public API changes deliberate; internal helpers stay private."
+msgstr "公开 API 的变更须经过深思熟虑；内部辅助函数保持私有。"
+
+#: manual/contributing.md:38
+msgid "Numerical changes"
+msgstr "数值相关的修改"
+
+#: manual/contributing.md:40
+msgid "State the formula and the reason for any rescaling or special case in the [float_backend design](design/float_backend.md), and the observable branch and special-value behaviour in the [float_backend API](api/float_backend.md)."
+msgstr "在 [float_backend 设计](design/float_backend.md)中写明公式以及任何重新缩放或特殊情形的理由，并在 [float_backend API](api/float_backend.md) 中写明可观察到的分支与特殊值行为。"
+
+#: manual/contributing.md:44
+msgid "Add regression tests for every changed numerical behaviour: identities such as `exp(log z) = z`, values on and near branch cuts, huge and tiny inputs, and special values."
+msgstr "为每一项改变的数值行为添加回归测试：如 `exp(log z) = z` 之类的恒等式、分支切割线上及其附近的值、极大与极小的输入，以及特殊值。"
+
+#: manual/contributing.md:48
 msgid "Testing"
 msgstr "测试要求"
 
-#: manual/contributing.md:28
-msgid "Add or update tests whenever changing numerical behavior."
-msgstr "任何数值行为调整都必须同步补测试或改测试。"
+#: manual/contributing.md:50
+msgid "Black-box tests live in `*_test.mbt` next to the code and use qualified names such as `@luna-complex.Complex::new`."
+msgstr "黑盒测试位于代码旁的 `*_test.mbt` 中，并使用限定名，如 `@luna-complex.Complex::new`。"
 
-#: manual/contributing.md:29
-msgid "Prefer a mix of regression examples and algebraic identity checks."
-msgstr "测试应同时包含回归样例和代数恒等式校验。"
+#: manual/contributing.md:52
+msgid "Run `moon test` on all targets you change behaviour for, and `moon test --enable-coverage` before submitting."
+msgstr "对所有行为发生变化的目标运行 `moon test`，提交前运行 `moon test --enable-coverage`。"
 
-#: manual/contributing.md:30
-msgid "Preserve coverage for both layers: generic algebraic behavior in the root package and floating analytic behavior in `float_backend`."
-msgstr "同时覆盖两层能力：根包中的泛型代数能力，以及 `float_backend` 中的浮点解析能力。"
+#: manual/contributing.md:54
+msgid "Regenerate `pkg.generated.mbti` with `moon info` whenever the public API changes, and review its diff."
+msgstr "公开 API 变化时，用 `moon info` 重新生成 `pkg.generated.mbti`，并检查其差异。"
 
-#: manual/contributing.md:32
-msgid "Use `moon test --enable-coverage` before submitting changes."
-msgstr "提交前运行 `moon test --enable-coverage`。"
+#: manual/contributing.md:57
+msgid "Documentation"
+msgstr "文档"
 
-#: manual/contributing.md:33
-msgid "Regenerate `pkg.generated.mbti` with `moon info` whenever the public API changes."
-msgstr "如果公共 API 有变化，使用 `moon info` 重新生成 `pkg.generated.mbti`。"
+#: manual/contributing.md:59
+msgid "The manual lives in `doc/manual`. After changing English pages, run `lunadoc update` and update the Chinese and Japanese catalogs in `doc/locale`."
+msgstr "手册位于 `doc/manual`。修改英文页面后，运行 `lunadoc update` 并更新 `doc/locale` 中的中文和日文翻译目录。"
 
-#: manual/contributing.md:35
-msgid "Commit Guidelines"
-msgstr "提交规范"
+#: manual/contributing.md:62
+msgid "Code examples in the manual must compile against the current code."
+msgstr "手册中的代码示例必须能针对当前代码编译通过。"
 
-#: manual/contributing.md:37
-msgid "Run `./ready_to_pr.sh` before committing when the change affects code or public API."
-msgstr "代码或公开接口有改动时，提交前运行 `./ready_to_pr.sh`。"
+#: manual/contributing.md:64
+msgid "Commits and releases"
+msgstr "提交与发布"
 
-#: manual/contributing.md:38
-msgid "Use concise English Conventional Commit messages such as `fix: stabilize inverse trigonometric branches`."
-msgstr "Commit message 使用简洁英文 Conventional Commits，例如 `fix: stabilize inverse trigonometric branches`。"
+#: manual/contributing.md:66
+msgid "Use English Conventional Commits, such as `fix(float_backend): use pi on the negative real axis`."
+msgstr "使用英文的 Conventional Commits，例如 `fix(float_backend): use pi on the negative real axis`。"
 
-#: manual/contributing.md:39
+#: manual/contributing.md:68
 msgid "Keep each commit focused on one logical change."
 msgstr "每次提交只聚焦一个逻辑变更。"
 
-#: manual/contributing.md:41
-msgid "Release Checklist"
-msgstr "发布检查"
+#: manual/contributing.md:69
+msgid "Before publishing, update the version in `moon.mod`, update `README.md` and `CHANGELOG.md`, run `moon check` and `moon test --enable-coverage`, and trigger the publish workflow with the exact version from `moon.mod`."
+msgstr "发布前，更新 `moon.mod` 中的版本号，更新 `README.md` 和 `CHANGELOG.md`，运行 `moon check` 和 `moon test --enable-coverage`，并使用与 `moon.mod` 完全一致的版本号触发发布工作流。"
 
-#: manual/contributing.md:43
-msgid "Update `moon.mod` before publishing a new package version."
-msgstr "发布前先更新 `moon.mod` 中的版本号。"
-
-#: manual/contributing.md:44
-msgid "Ensure `README.md` reflects the current package state."
-msgstr "确保 `README.md` 与当前仓库状态一致。"
-
-#: manual/contributing.md:45
-msgid "Run `moon check` and `moon test --enable-coverage`."
-msgstr "运行 `moon check` 和 `moon test --enable-coverage`。"
-
-#: manual/contributing.md:46
-msgid "When triggering GitHub Actions `publish-package`, provide the exact version from `moon.mod`."
-msgstr "触发 GitHub Actions `publish-package` 时，输入值必须与 `moon.mod` 中版本完全一致。"
-
-#: manual/contributing.md:48
-msgid "Code Review"
-msgstr "代码审查"
-
-#: manual/contributing.md:50
-msgid "If you are not a maintainer or collaborator, contact them before changing dependency or version declarations in `moon.mod`."
-msgstr "如果你不是维护者或协作者，在修改 `moon.mod` 中的依赖或版本前，请先联系维护者。"
-
-#: manual/contributing.md:51
-msgid "Reviews should focus on correctness, numerical stability, API clarity, tests, and maintainability."
-msgstr "审查重点应放在正确性、数值稳定性、API 清晰度、测试充分性和可维护性。"
+#: manual/contributing.md:72
+msgid "If you are not a maintainer, ask before changing dependency or version declarations in `moon.mod`."
+msgstr "如果你不是维护者，修改 `moon.mod` 中的依赖或版本声明前请先询问。"
 
 #: manual/design/core.md:1
 msgid "core design"
 msgstr "core 设计"
 
 #: manual/design/core.md:3
-#: manual/index.md:12
-msgid "The root package owns generic `Complex[T]` structure, algebraic operations, and trait-driven constraints."
-msgstr "根包负责泛型 `Complex[T]` 结构、代数运算以及由 trait 驱动的约束。"
-
-#: manual/design/core.md:5
-#: manual/design/float_backend.md:5
-msgid "Responsibilities"
-msgstr "职责"
-
-#: manual/design/core.md:7
-msgid "Keep `Complex[T]` generic and independent of floating-point analytic semantics."
-msgstr "保持 `Complex[T]` 的泛型性质，不把浮点解析语义放入根包。"
+msgid "This page derives the algebra of `Complex[T]`, states when each `luna-generic` instance is lawful, and explains the choices behind the generic type: mutable fields, the unscaled division formula, and the separation from floating-point analysis."
+msgstr "本页推导 `Complex[T]` 的代数结构，说明每个 `luna-generic` 实例在何时合法，并解释泛型类型背后的设计选择：可变字段、未缩放的除法公式，以及与浮点分析的分离。"
 
 #: manual/design/core.md:8
-msgid "Preserve the mutable field model because callers may intentionally update `re` or `im` in place."
-msgstr "保留可变字段模型，因为调用方可能需要原地更新 `re` 或 `im`。"
-
-#: manual/design/core.md:9
-msgid "Keep algebraic trait implementations constrained by the smallest scalar capability needed."
-msgstr "代数 trait 实现只要求实际所需的最小标量能力。"
+#: manual/design/float_backend.md:8
+msgid "Design goal"
+msgstr "设计目标"
 
 #: manual/design/core.md:10
-msgid "Leave branch cuts, NaN, infinity, negative zero, and transcendental functions to `float_backend`."
-msgstr "分支切割、NaN、无穷、负零和超越函数留给 `float_backend`。"
-
-#: manual/design/core.md:12
-#: manual/design/float_backend.md:12
-msgid "Maintenance notes"
-msgstr "维护说明"
-
-#: manual/design/core.md:14
-msgid "Update this page when the root package gains or loses a public trait implementation."
-msgstr "根包新增或移除公开 trait 实现时，同步更新本文档。"
+msgid "One generic complex type for every scalar of the ecosystem, whose instances advertise exactly the algebraic structure the construction has, and which leaves IEEE special values, branch cuts and transcendental functions to a backend package."
+msgstr "为生态中的每种标量提供同一个泛型复数类型，其实例所声明的代数结构恰好是该构造所具有的结构，而 IEEE 特殊值、分支切割线和超越函数则交给后端包处理。"
 
 #: manual/design/core.md:15
-msgid "Do not document speculative generic analytic APIs in the root package."
-msgstr "不要在根包文档中描述尚未实现的泛型解析 API。"
+#: manual/design/float_backend.md:16
+msgid "Mathematical background"
+msgstr "数学背景"
+
+#: manual/design/core.md:17
+msgid "The construction"
+msgstr "构造"
+
+#: manual/design/core.md:19
+msgid "For a commutative ring $R$, the complex numbers over $R$ are the quotient of the polynomial ring by the ideal generated by $x^2 + 1$:"
+msgstr "对于交换环 $R$，$R$ 上的复数是多项式环对由 $x^2 + 1$ 生成的理想所作的商："
+
+#: manual/design/core.md:26
+msgid "Division by the monic polynomial $x^2 + 1$ leaves a unique remainder of degree below two, so every element is $a + bi$ with unique $a, b \\in R$: the pair `(re, im)`. Computing with polynomials and reducing $i^2 = -1$ gives the operations of the package:"
+msgstr "用首一多项式 $x^2 + 1$ 做除法会留下唯一一个次数低于二的余式，因此每个元素都可唯一地写成 $a + bi$（$a, b \\in R$）：即二元组 `(re, im)`。用多项式计算并以 $i^2 = -1$ 化简，便得到本包的各项运算："
+
+#: manual/design/core.md:38
+msgid "As a quotient of a commutative ring, $R[i]$ is a commutative ring, with zero $0 + 0i$ and one $1 + 0i$; $R$ embeds as $a \\mapsto a + 0i$."
+msgstr "作为交换环的商，$R[i]$ 是交换环，零元为 $0 + 0i$，单位元为 $1 + 0i$；$R$ 通过 $a \\mapsto a + 0i$ 嵌入其中。"
+
+#: manual/design/core.md:41
+msgid "Conjugation and the norm"
+msgstr "共轭与范数"
+
+#: manual/design/core.md:43
+msgid "$\\overline{a + bi} = a - bi$ is the map induced by $x \\mapsto -x$, which fixes the ideal $(x^2 + 1)$, so it is a ring automorphism of order two:"
+msgstr "$\\overline{a + bi} = a - bi$ 是由 $x \\mapsto -x$ 诱导的映射，它保持理想 $(x^2 + 1)$ 不变，因此是一个二阶环自同构："
+
+#: manual/design/core.md:51
+msgid "The norm $N(z) = z\\bar z = (a + bi)(a - bi) = a^2 + b^2$ lies in $R$ and is multiplicative, $N(zw) = zw\\,\\bar z\\bar w = N(z)N(w)$."
+msgstr "范数 $N(z) = z\\bar z = (a + bi)(a - bi) = a^2 + b^2$ 属于 $R$，并且是乘性的：$N(zw) = zw\\,\\bar z\\bar w = N(z)N(w)$。"
+
+#: manual/design/core.md:54
+msgid "Inverses and division"
+msgstr "逆元与除法"
+
+#: manual/design/core.md:56
+msgid "If $N(z)$ is invertible in $R$, then $z \\cdot \\bar z\\,N(z)^{-1} = 1$, so"
+msgstr "若 $N(z)$ 在 $R$ 中可逆，则 $z \\cdot \\bar z\\,N(z)^{-1} = 1$，因此"
+
+#: manual/design/core.md:64
+msgid "Conversely, if $z$ is invertible then $N(z)N(z^{-1}) = N(1) = 1$, so $N(z)$ is invertible. Hence $z$ is a unit exactly when $a^2 + b^2$ is."
+msgstr "反之，若 $z$ 可逆，则 $N(z)N(z^{-1}) = N(1) = 1$，因此 $N(z)$ 可逆。所以 $z$ 是单位当且仅当 $a^2 + b^2$ 是单位。"
+
+#: manual/design/core.md:67
+msgid "When the construction is a field"
+msgstr "何时该构造是域"
+
+#: manual/design/core.md:69
+msgid ""
+"Let $K$ be a field. $K[x]/(x^2 + 1)$ is a field exactly when $x^2 + 1$ is irreducible over $K$, that is when $-1$ is not a square in $K$. Directly: a non-zero $z$ with $N(z) = a^2 + b^2 = 0$ must have $b \\n"
+"e 0$, and then $(a/b)^2 = -1$. Conversely, if $s^2 = -1$ then $(s + i)(s - i) = s^2 + 1 = 0$ exhibits zero divisors."
+msgstr ""
+"设 $K$ 为域。$K[x]/(x^2 + 1)$ 是域当且仅当 $x^2 + 1$ 在 $K$ 上不可约，即 $-1$ 在 $K$ 中不是平方数。直接来看：满足 $N(z) = a^2 + b^2 = 0$ 的非零 $z$ 必有 $b \\n"
+"e 0$，从而 $(a/b)^2 = -1$。反之，若 $s^2 = -1$，则 $(s + i)(s - i) = s^2 + 1 = 0$ 给出了零因子。"
+
+#: manual/design/core.md:75
+msgid "For $K = \\mathbb R$ (`Float`, `Double`), $-1$ is not a square and $\\mathbb R[i] = \\mathbb C$ is a field."
+msgstr "对于 $K = \\mathbb R$（`Float`、`Double`），$-1$ 不是平方数，$\\mathbb R[i] = \\mathbb C$ 是域。"
+
+#: manual/design/core.md:77
+msgid "For $K = \\mathbb C$ (`Complex[Double]`), $-1 = i^2$ is a square, so `Complex[Complex[Double]]` $\\cong \\mathbb C[j]/(j^2 + 1) \\cong \\mathbb C \\times \\mathbb C$ is a ring with zero divisors, such as $(1 + ij)(1 - ij) = 1 - i^2 j^2 = 0$."
+msgstr "对于 $K = \\mathbb C$（`Complex[Double]`），$-1 = i^2$ 是平方数，因此 `Complex[Complex[Double]]` $\\cong \\mathbb C[j]/(j^2 + 1) \\cong \\mathbb C \\times \\mathbb C$ 是一个含零因子的环，例如 $(1 + ij)(1 - ij) = 1 - i^2 j^2 = 0$。"
+
+#: manual/design/core.md:82
+#: manual/design/float_backend.md:89
+msgid "Design decisions"
+msgstr "设计决策"
+
+#: manual/design/core.md:84
+msgid "Instances follow the structure of `T`"
+msgstr "实例跟随 `T` 的结构"
+
+#: manual/design/core.md:86
+msgid "**Problem.** Which `luna-generic` traits may `Complex[T]` implement?"
+msgstr "**问题。** `Complex[T]` 可以实现哪些 `luna-generic` trait？"
+
+#: manual/design/core.md:88
+msgid "**Choice.** `Zero`, `One`, `AddMonoid` and `AddGroup` need only the corresponding operations of `T`, because they act componentwise. `MulMonoid`, `Semiring` and `Ring` need `T : Ring`, because the product uses subtraction ($ac - bd$) and the ring laws of $R[i]$ need those of $R$. `Inverse`, `MulGroup`, `Field` and the `Div` operator need `T : Field` for $N(z)^{-1}$. `Conjugate` needs only `Neg`."
+msgstr "**选择。** `Zero`、`One`、`AddMonoid` 和 `AddGroup` 只需要 `T` 的相应运算，因为它们逐分量作用。`MulMonoid`、`Semiring` 和 `Ring` 需要 `T : Ring`，因为乘积要用到减法（$ac - bd$），而 $R[i]$ 的环公理依赖于 $R$ 的环公理。`Inverse`、`MulGroup`、`Field` 以及 `Div` 运算符需要 `T : Field` 来计算 $N(z)^{-1}$。`Conjugate` 只需要 `Neg`。"
+
+#: manual/design/core.md:95
+msgid "The `Field` instance is declared for every `T : Field`. By the previous section that is lawful when $-1$ is not a square in `T`, which covers the real scalar types; for `T = Complex[Double]` it is not, and `inv` aborts on non-zero zero divisors. A trait bound cannot express \"−1 is not a square\", so the instance trusts the caller here.[^honesty]"
+msgstr "`Field` 实例对每个 `T : Field` 都有声明。由上一节可知，当 $-1$ 在 `T` 中不是平方数时它是合法的，这涵盖了实数标量类型；对于 `T = Complex[Double]` 则不然，`inv` 会在非零的零因子上中止。trait 约束无法表达“−1 不是平方数”，因此该实例在这里信任调用者。[^honesty]"
+
+#: manual/design/core.md:101
+msgid "This is a known gap in the \"implement only lawful instances\" rule of Luna Flow. The test suite uses nested complex numbers only on values with an invertible norm."
+msgstr "这是 Luna Flow“只实现合法实例”这一规则中的一个已知缺口。测试套件只在范数可逆的值上使用嵌套复数。"
+
+#: manual/design/core.md:105
+msgid "Four multiplications"
+msgstr "四次乘法"
+
+#: manual/design/core.md:107
+msgid "**Options.** The schoolbook product $(ac - bd) + (ad + bc)i$ with four multiplications; Gauss's three-multiplication form $k_1 = c(a + b)$, $k_2 = a(d - c)$, $k_3 = b(c + d)$, product $(k_1 - k_3) + (k_1 + k_2)i$."
+msgstr "**备选方案。** 使用四次乘法的教科书式乘积 $(ac - bd) + (ad + bc)i$；高斯的三次乘法形式 $k_1 = c(a + b)$、$k_2 = a(d - c)$、$k_3 = b(c + d)$，乘积为 $(k_1 - k_3) + (k_1 + k_2)i$。"
+
+#: manual/design/core.md:111
+msgid "**Choice.** Four multiplications. Over floating point the schoolbook form has a normwise relative error of at most $\\sqrt5\\,u$,[^bpz] while the three-multiplication form adds cancellation-prone sums such as $a + b$ and $d - c$ and is less accurate componentwise; and for generic `T` a multiplication is not necessarily more expensive than an addition."
+msgstr "**选择。** 四次乘法。在浮点下，教科书形式的按范数相对误差至多为 $\\sqrt5\\,u$，[^bpz] 而三次乘法形式引入了 $a + b$、$d - c$ 这类容易相消的和，按分量的精度更差；并且对于泛型 `T`，乘法不一定比加法更昂贵。"
+
+#: manual/design/core.md:117
+msgid "R. Brent, C. Percival and P. Zimmermann, \"Error bounds on complex floating-point multiplication\", *Mathematics of Computation* 76 (2007)."
+msgstr "R. Brent, C. Percival and P. Zimmermann, \"Error bounds on complex floating-point multiplication\", *Mathematics of Computation* 76 (2007)."
+
+#: manual/design/core.md:120
+msgid "Componentwise, $\\mathrm{fl}(ac - bd) = ac(1 + \\theta_2) - bd(1 + \\theta_2')$ with $|\\theta_2| \\le \\gamma_2 = 2u/(1 - 2u)$, so"
+msgstr "按分量看，$\\mathrm{fl}(ac - bd) = ac(1 + \\theta_2) - bd(1 + \\theta_2')$，其中 $|\\theta_2| \\le \\gamma_2 = 2u/(1 - 2u)$，因此"
+
+#: manual/design/core.md:127
+msgid "which is small relative to the result unless $ac$ and $bd$ cancel."
+msgstr "除非 $ac$ 与 $bd$ 相消，否则它相对于结果是很小的。"
+
+#: manual/design/core.md:129
+msgid "Textbook division in the generic core"
+msgstr "泛型核心中的教科书式除法"
+
+#: manual/design/core.md:131
+msgid "**Problem.** Division needs $N(w)^{-1}$; for floating point, $c^2 + d^2$ overflows or underflows long before $c + di$ does."
+msgstr "**问题。** 除法需要 $N(w)^{-1}$；对浮点数而言，$c^2 + d^2$ 远在 $c + di$ 之前就会上溢或下溢。"
+
+#: manual/design/core.md:134
+msgid "**Options.** Scaled algorithms (Smith's, or rescaling by a power of two) need comparisons and absolute values that a generic field does not have; the textbook formula needs only field operations."
+msgstr "**备选方案。** 带缩放的算法（Smith 算法，或按 2 的幂重新缩放）需要比较和绝对值，而泛型域不具备这些；教科书公式只需要域运算。"
+
+#: manual/design/core.md:138
+msgid "**Choice.** The generic `Div` and `Inverse` use the textbook formula with `Inverse::inv` of `T`. It is exact for exact fields. For `Double` it is correct while $c^2 + d^2$ stays in range, and `Inverse` of `Double` aborts on zero, including an underflowed norm. Scaled, special-value-aware division lives in [`float_backend`](float_backend.md#smiths-division)."
+msgstr "**选择。** 泛型的 `Div` 和 `Inverse` 使用教科书公式，配合 `T` 的 `Inverse::inv`。对于精确的域它是精确的。对于 `Double`，只要 $c^2 + d^2$ 不超出范围它就是正确的，而 `Double` 的 `Inverse` 在遇到零（包括下溢后的范数）时中止。带缩放且考虑特殊值的除法位于 [`float_backend`](float_backend.md#smiths-division)。"
+
+#: manual/design/core.md:144
+msgid "Mutable fields"
+msgstr "可变字段"
+
+#: manual/design/core.md:146
+msgid "**Problem.** Complex values are often updated in loops (accumulators, recurrences), where allocating a new value per step is wasteful."
+msgstr "**问题。** 复数值常常在循环中更新（累加器、递推），每一步都分配新值是一种浪费。"
+
+#: manual/design/core.md:149
+msgid "**Choice.** `Complex[T]` is a `pub(all)` struct with `mut re` and `mut im` plus `set`, `set_re` and `set_im`. Every operation returns a new value and never mutates its inputs, so code that does not call the setters can treat complex numbers as values. Callers that do mutate must remember that the struct is shared by reference."
+msgstr "**选择。** `Complex[T]` 是一个 `pub(all)` 结构体，带有 `mut re` 和 `mut im`，以及 `set`、`set_re` 和 `set_im`。每个运算都返回新值，从不修改其输入，因此不调用这些 setter 的代码可以把复数当作值来对待。确实要修改的调用者必须记住该结构体是按引用共享的。"
+
+#: manual/design/core.md:155
+msgid "No analytic functions in the core"
+msgstr "核心中没有解析函数"
+
+#: manual/design/core.md:157
+msgid "$\\sqrt z$, $\\log z$ or $\\sin z$ need an order, absolute values, transcendental functions of the real scalar, a choice of branch, and IEEE special values. None of these exist for a generic field. The root package therefore stops at algebra, and the [float_backend](float_backend.md) package supplies analysis for `Double`."
+msgstr "$\\sqrt z$、$\\log z$ 或 $\\sin z$ 需要序、绝对值、实数标量的超越函数、分支的选择以及 IEEE 特殊值。这些对泛型域都不存在。因此根包止步于代数，由 [float_backend](float_backend.md) 包为 `Double` 提供分析功能。"
+
+#: manual/design/core.md:163
+msgid "Text and debug forms"
+msgstr "文本与调试形式"
+
+#: manual/design/core.md:165
+msgid "`Show` prints `re + imi` using `T`'s text (`1 + -2i` for $1 - 2i$), which is the canonical text of the type and the reason `to_string` stays a promoted method. `Debug` prints the record form for tests and diagnostics. MoonBit 0.10 promotion of the other trait methods is explicit in [`src/extends.mbt`](../../../src/extends.mbt)."
+msgstr "`Show` 使用 `T` 的文本打印 `re + imi`（$1 - 2i$ 打印为 `1 + -2i`），这是该类型的规范文本，也是 `to_string` 保留为提升方法的原因。`Debug` 为测试和诊断打印记录形式。MoonBit 0.10 中其他 trait 方法的提升在 [`src/extends.mbt`](../../../src/extends.mbt) 中显式完成。"
+
+#: manual/design/core.md:171
+#: manual/design/float_backend.md:317
+msgid "Correctness and invariants"
+msgstr "正确性与不变量"
+
+#: manual/design/core.md:173
+msgid "Ring laws hold for `T : Ring` because $R[i]$ is a quotient ring; the test suite checks associativity, identities and $\\overline{zw} = \\bar z\\bar w$ on integers."
+msgstr "对于 `T : Ring`，由于 $R[i]$ 是商环，环公理成立；测试套件在整数上检查结合律、单位元以及 $\\overline{zw} = \\bar z\\bar w$。"
+
+#: manual/design/core.md:176
+msgid "`z * z.conjugate()` equals $N(z) + 0i$ exactly for exact `T`."
+msgstr "对于精确的 `T`，`z * z.conjugate()` 精确等于 $N(z) + 0i$。"
+
+#: manual/design/core.md:177
+msgid "`z * w / w == z` and `z.inv() * z == 1` hold for exact fields when $N(w)$, $N(z)$ are units, and up to rounding for `Double` within range."
+msgstr "当 $N(w)$、$N(z)$ 为单位时，`z * w / w == z` 与 `z.inv() * z == 1` 对精确的域成立；对 `Double` 在范围内则在舍入误差意义下成立。"
+
+#: manual/design/core.md:179
+msgid "No operation mutates its arguments; only the three setters do."
+msgstr "没有任何运算会修改其参数；只有三个 setter 会。"
+
+#: manual/design/core.md:181
+#: manual/design/float_backend.md:360
+msgid "Alternatives rejected"
+msgstr "被否决的方案"
+
+#: manual/design/core.md:183
+msgid "**A `Double`-only complex type.** It would duplicate the type for `Float`, integers (Gaussian integers) and exact rationals."
+msgstr "**仅支持 `Double` 的复数类型。** 这会导致为 `Float`、整数（高斯整数）和精确有理数重复定义该类型。"
+
+#: manual/design/core.md:185
+msgid "**Immutable fields.** Cleaner value semantics, but a breaking change for existing callers that update `re` and `im` in place."
+msgstr "**不可变字段。** 值语义更清晰，但对原地更新 `re` 和 `im` 的现有调用者来说是破坏性变更。"
+
+#: manual/design/core.md:187
+msgid "**Scaled division in the core.** It needs order and magnitude operations that generic fields lack."
+msgstr "**在核心中做带缩放的除法。** 它需要泛型域所缺乏的序和量级运算。"
+
+#: manual/design/core.md:190
+#: manual/design/float_backend.md:373
+msgid "Boundaries"
+msgstr "边界"
+
+#: manual/design/core.md:192
+msgid "No analytic or transcendental functions, no special-value handling, no branch cuts; see [float_backend](float_backend.md)."
+msgstr "不提供解析函数或超越函数，不做特殊值处理，没有分支切割线；参见 [float_backend](float_backend.md)。"
+
+#: manual/design/core.md:194
+msgid "No polar representation in the core."
+msgstr "核心中没有极坐标表示。"
+
+#: manual/design/core.md:195
+msgid "No check that `T` makes $R[i]$ a field; the `Field` instance trusts it."
+msgstr "不检查 `T` 是否使 $R[i]$ 成为域；`Field` 实例信任这一点。"
+
+#: manual/design/core.md:196
+msgid "No overflow-safe division for floating-point `T`."
+msgstr "不为浮点 `T` 提供防上溢的除法。"
 
 #: manual/design/float_backend.md:1
 msgid "float_backend design"
 msgstr "float_backend 设计"
 
 #: manual/design/float_backend.md:3
-msgid "The `float_backend` package owns floating-point analytic behavior for complex numbers."
-msgstr "`float_backend` 包负责复数的浮点解析行为。"
-
-#: manual/design/float_backend.md:7
-msgid "Keep floating arithmetic, special values, and branch-cut semantics out of the root package."
-msgstr "将浮点算术、特殊值和分支切割语义隔离在根包之外。"
-
-#: manual/design/float_backend.md:8
-msgid "Keep backend capability traits local to this package until a broader ecosystem trait is justified."
-msgstr "后端能力 trait 暂时保留在本包内，直到生态层面确实需要更通用的 trait。"
-
-#: manual/design/float_backend.md:9
-msgid "Preserve the current `Complex[Double]` stability behavior while allowing future `Float` analytic functions to share the backend capability surface."
-msgstr "保持当前 `Complex[Double]` 的稳定性行为，同时为未来 `Float` 解析函数复用同一后端能力面预留空间。"
+msgid "This page derives the formulas that `float_backend` implements for `Complex[Double]`, explains how each one avoids overflow, underflow and cancellation, states the branch cuts and principal values, and explains why the scalar capabilities are split into three traits."
+msgstr "本页推导 `float_backend` 为 `Complex[Double]` 实现的公式，解释每个公式如何避免上溢、下溢和相消，给出分支切割线与主值，并解释为何将标量能力拆分为三个 trait。"
 
 #: manual/design/float_backend.md:10
-msgid "Keep helper code internal unless a function is part of the documented public API."
-msgstr "helper 默认保持内部可见；只有明确属于公开 API 的函数才导出。"
+msgid "Provide the elementary functions of $\\mathbb C$ for `Complex[Double]` with principal values on documented branch cuts, numerically stable formulas over the whole `Double` range, and the IEEE special values handled where it matters, while keeping all of this out of the generic [core](core.md)."
+msgstr "为 `Complex[Double]` 提供 $\\mathbb C$ 的初等函数：在明确记录的分支切割线上取主值，在整个 `Double` 范围内使用数值稳定的公式，并在要紧之处处理 IEEE 特殊值，同时让这一切都不进入泛型[核心](core.md)。"
 
-#: manual/design/float_backend.md:14
-msgid "Update this page when public backend traits or analytic function signatures change."
-msgstr "公开后端 trait 或解析函数签名变化时，同步更新本文档。"
+#: manual/design/float_backend.md:18
+#: manual/tutorial/float_backend.md:39
+msgid "Polar form"
+msgstr "极坐标形式"
 
-#: manual/design/float_backend.md:15
-msgid "Do not imply full `Complex[Float]` analytic coverage until those functions are actually exported."
-msgstr "在 `Complex[Float]` 解析函数真正导出之前，不要把文档写成已经完整支持。"
+#: manual/design/float_backend.md:20
+msgid ""
+"Every $z = x + iy \\n"
+"e 0$ has a polar form $z = r e^{i\\theta}$ with $r = |z| = \\sqrt{x^2 + y^2}$. The angle $\\theta$ is determined modulo $2\\pi$; the principal argument $\\operatorname{Arg} z$ is the representative in $(-\\pi, \\pi]$, which equals $\\operatorname{atan2}(y, x)$ off the negative real axis."
+msgstr ""
+"每个 $z = x + iy \\n"
+"e 0$ 都有极坐标形式 $z = r e^{i\\theta}$，其中 $r = |z| = \\sqrt{x^2 + y^2}$。角度 $\\theta$ 在模 $2\\pi$ 意义下确定；主辐角 $\\operatorname{Arg} z$ 是 $(-\\pi, \\pi]$ 中的代表元，在负实轴以外等于 $\\operatorname{atan2}(y, x)$。"
+
+#: manual/design/float_backend.md:26
+msgid "The principal logarithm and its branch cut"
+msgstr "主值对数及其分支切割线"
+
+#: manual/design/float_backend.md:28
+msgid "The solutions of $e^w = z$ are $w = \\ln|z| + i(\\operatorname{Arg} z + 2k\\pi)$. The principal logarithm takes $k = 0$:"
+msgstr "$e^w = z$ 的解为 $w = \\ln|z| + i(\\operatorname{Arg} z + 2k\\pi)$。主值对数取 $k = 0$："
+
+#: manual/design/float_backend.md:35
+msgid "$\\operatorname{Arg}$ jumps by $2\\pi$ across the negative real axis, so $\\operatorname{Log}$ is analytic on $\\mathbb C \\setminus (-\\infty, 0]$ and $(-\\infty, 0]$ is its *branch cut*. All other multi-valued functions are defined through $\\operatorname{Log}$ and inherit cuts from it.[^kahan]"
+msgstr "$\\operatorname{Arg}$ 在跨越负实轴时跳变 $2\\pi$，因此 $\\operatorname{Log}$ 在 $\\mathbb C \\setminus (-\\infty, 0]$ 上解析，$(-\\infty, 0]$ 是它的*分支切割线*。其他所有多值函数都通过 $\\operatorname{Log}$ 定义，并从它继承割线。[^kahan]"
+
+#: manual/design/float_backend.md:40
+msgid "W. Kahan, \"Branch cuts for complex elementary functions, or much ado about nothing's sign bit\", in *The State of the Art in Numerical Analysis*, Clarendon Press, 1987. It also discusses how a signed zero can select the side of a cut."
+msgstr "W. Kahan, \"Branch cuts for complex elementary functions, or much ado about nothing's sign bit\", in *The State of the Art in Numerical Analysis*, Clarendon Press, 1987. 该文还讨论了带符号的零如何选择割线的一侧。"
+
+#: manual/design/float_backend.md:45
+msgid "Principal values of the other functions"
+msgstr "其他函数的主值"
+
+#: manual/design/float_backend.md:60
+msgid "Function"
+msgstr "函数"
+
+#: manual/design/float_backend.md:60
+#: manual/tutorial/float_backend.md:148
+msgid "Branch cuts"
+msgstr "分支切割线"
+
+#: manual/design/float_backend.md:60
+msgid "Principal range"
+msgstr "主值范围"
+
+#: manual/design/float_backend.md:64
+msgid "$(-\\infty, 0]$ in $z$ (non-integer $w$)"
+msgstr "$z$ 中的 $(-\\infty, 0]$（$w$ 非整数）"
+
+#: manual/design/float_backend.md:64
+msgid "from $\\operatorname{Log}$"
+msgstr "由 $\\operatorname{Log}$ 决定"
+
+#: manual/design/float_backend.md:72
+msgid "The reciprocal functions are compositions: $\\sec z = 1/\\cos z$, $\\operatorname{asec} z = \\operatorname{acos}(1/z)$, and so on."
+msgstr "倒数类函数是复合函数：$\\sec z = 1/\\cos z$、$\\operatorname{asec} z = \\operatorname{acos}(1/z)$，依此类推。"
+
+#: manual/design/float_backend.md:75
+msgid "Real and imaginary parts"
+msgstr "实部与虚部"
+
+#: manual/design/float_backend.md:77
+msgid "The trigonometric and hyperbolic functions split by the addition theorems with $\\cos(iy) = \\cosh y$ and $\\sin(iy) = i\\sinh y$:"
+msgstr "三角函数与双曲函数借助加法定理以及 $\\cos(iy) = \\cosh y$、$\\sin(iy) = i\\sinh y$ 拆分为："
+
+#: manual/design/float_backend.md:91
+msgid "Three capability traits"
+msgstr "三个能力 trait"
+
+#: manual/design/float_backend.md:93
+msgid "**Problem.** The algorithms need more from the real scalar than `luna-generic` and `arithmetic` traits, but not every scalar type has every extra capability."
+msgstr "**问题。** 这些算法对实数标量的需求超出了 `luna-generic` 和 `arithmetic` trait，但并非每种标量类型都具备所有额外能力。"
+
+#: manual/design/float_backend.md:97
+msgid "**Options.** One large \"floating real\" trait; no traits (hard-code `Double`); a layered set."
+msgstr "**备选方案。** 一个庞大的“浮点实数” trait；不用 trait（硬编码 `Double`）；一组分层的 trait。"
+
+#: manual/design/float_backend.md:100
+msgid "**Choice.** Three traits, each a separate concern:"
+msgstr "**选择。** 三个 trait，各自负责一个关注点："
+
+#: manual/design/float_backend.md:102
+msgid "`FloatingAnalyticScalar` names the algebraic and analytic capabilities (a `Field` with `Num`, `Compare`, constants and the real elementary functions and their inverses). It assumes nothing about IEEE 754, so an exact or interval type could satisfy it."
+msgstr "`FloatingAnalyticScalar` 命名代数与解析能力（带有 `Num`、`Compare`、常量以及实数初等函数及其反函数的 `Field`）。它不对 IEEE 754 做任何假设，因此精确类型或区间类型也可能满足它。"
+
+#: manual/design/float_backend.md:106
+msgid "`FloatingSpecialValues` names the IEEE 754 layer: NaN, signed infinities and the sign of zero. These have no meaning for a type without them, so they are not part of the analytic trait."
+msgstr "`FloatingSpecialValues` 命名 IEEE 754 这一层：NaN、带符号的无穷大以及零的符号。对于没有这些值的类型，它们没有意义，因此不属于解析 trait。"
+
+#: manual/design/float_backend.md:109
+msgid "`FloatingBackendScalar` combines both and adds the primitives the stable algorithms below use: `hypot` (modulus without overflow), `log1p` (logarithms near one), `trunc` and `to_int` (detecting integer exponents in `pow`) and `from_double` (constants)."
+msgstr "`FloatingBackendScalar` 组合了二者，并加入下面稳定算法所用的基本操作：`hypot`（不会上溢的模）、`log1p`（接近一处的对数）、`trunc` 与 `to_int`（在 `pow` 中检测整数指数）以及 `from_double`（常量）。"
+
+#: manual/design/float_backend.md:114
+msgid "Code can then require the smallest trait that states its needs, as Luna Flow prefers over a single \"real number\" trait. All three are implemented for `Float` and `Double`. The public functions are still written for `Complex[Double]` and call the `Double` primitives directly; no function is generic over the traits yet."
+msgstr "这样代码就可以只要求能表达其需求的最小 trait，这正是 Luna Flow 相对于单一“实数” trait 所偏好的做法。三者都为 `Float` 和 `Double` 实现。公开函数目前仍针对 `Complex[Double]` 编写，并直接调用 `Double` 的基本操作；还没有对这些 trait 泛型的函数。"
+
+#: manual/design/float_backend.md:120
+msgid "Free functions"
+msgstr "自由函数"
+
+#: manual/design/float_backend.md:122
+msgid "MoonBit does not allow a package to add methods or trait instances to a type defined in another package, so the analytic functions cannot be methods of `Complex[T]`. They are free functions, `@fb.log(z)`, and the generic core stays free of floating-point semantics."
+msgstr "MoonBit 不允许一个包为另一个包中定义的类型添加方法或 trait 实例，因此解析函数不能是 `Complex[T]` 的方法。它们是自由函数，如 `@fb.log(z)`，泛型核心也因此不含浮点语义。"
+
+#: manual/design/float_backend.md:127
+msgid "Modulus without overflow"
+msgstr "不会上溢的模"
+
+#: manual/design/float_backend.md:129
+msgid "The direct $\\sqrt{x^2 + y^2}$ overflows when $|x| > 1.34 \\times 10^{154}$, although $|z|$ is representable, and underflows for tiny inputs. With $m = \\max(|x|, |y|)$ and $t = \\min(|x|, |y|)/m \\in [0, 1]$:"
+msgstr "直接计算 $\\sqrt{x^2 + y^2}$ 时，当 $|x| > 1.34 \\times 10^{154}$ 会上溢，尽管 $|z|$ 本身可以表示；对极小的输入则会下溢。取 $m = \\max(|x|, |y|)$，$t = \\min(|x|, |y|)/m \\in [0, 1]$："
+
+#: manual/design/float_backend.md:139
+msgid "`abs` delegates to `hypot`, which uses this kind of scaling; `abs_log` uses the second form, so $\\ln|z|$ is finite for every finite non-zero $z$; and `abs_sqr` uses the third, which only overflows when $|z|^2$ itself does."
+msgstr "`abs` 委托给使用此类缩放的 `hypot`；`abs_log` 使用第二种形式，因此对每个有限非零的 $z$，$\\ln|z|$ 都是有限的；`abs_sqr` 使用第三种形式，只有当 $|z|^2$ 本身上溢时才会上溢。"
+
+#: manual/design/float_backend.md:143
+msgid "Stable square root"
+msgstr "稳定的平方根"
+
+#: manual/design/float_backend.md:145
+msgid "The textbook formulas"
+msgstr "教科书公式"
+
+#: manual/design/float_backend.md:152
+msgid "cancel catastrophically: for $x > 0$ and $|y| \\ll x$, $|z| - x$ loses all digits, and for $x < 0$, $|z| + x$ does. The package computes only the cancellation-free quantity"
+msgstr "会发生灾难性相消：当 $x > 0$ 且 $|y| \\ll x$ 时，$|z| - x$ 丢失全部有效数字；当 $x < 0$ 时，$|z| + x$ 亦然。本包只计算无相消的量"
+
+#: manual/design/float_backend.md:164
+msgid "where the scaled forms avoid overflow, and recovers the other part from $\\operatorname{Re}\\sqrt z \\cdot \\operatorname{Im}\\sqrt z = y/2$. For $x \\ge 0$ the root is $w + \\frac{y}{2w}i$; indeed, with $w^2 = (x + |z|)/2$,"
+msgstr "其中缩放形式避免了上溢，再由 $\\operatorname{Re}\\sqrt z \\cdot \\operatorname{Im}\\sqrt z = y/2$ 求出另一部分。当 $x \\ge 0$ 时，根为 $w + \\frac{y}{2w}i$；事实上，由 $w^2 = (x + |z|)/2$，"
+
+#: manual/design/float_backend.md:174
+msgid "For $x < 0$ the root is $\\frac{|y|}{2w} \\pm wi$ with the sign of $y$, by the same computation with $|x|$. The real part is never negative, as the principal branch requires. On the cut, $y = -0$ is treated like $y = +0$, so both sides map to $+\\sqrt{|x|}\\,i$."
+msgstr "当 $x < 0$ 时，按同样的计算（用 $|x|$）可得根为 $\\frac{|y|}{2w} \\pm wi$，符号与 $y$ 相同。实部永不为负，符合主分支的要求。在割线上，$y = -0$ 与 $y = +0$ 同样处理，因此两侧都映射到 $+\\sqrt{|x|}\\,i$。"
+
+#: manual/design/float_backend.md:179
+msgid "Smith's division"
+msgstr "Smith 除法"
+
+#: manual/design/float_backend.md:181
+msgid "The textbook quotient divides by $c^2 + d^2$, with the overflow problems of the [core design](core.md#textbook-division-in-the-generic-core). Smith's method divides by the larger component first.[^smith] For $|c| \\ge |d|$ let $r = d/c$, so $|r| \\le 1$:"
+msgstr "教科书式商要除以 $c^2 + d^2$，存在[核心设计](core.md#textbook-division-in-the-generic-core)中所述的上溢问题。Smith 方法先除以较大的分量。[^smith] 当 $|c| \\ge |d|$ 时，令 $r = d/c$，于是 $|r| \\le 1$："
+
+#: manual/design/float_backend.md:193
+msgid "and symmetrically with $r = c/d$ when $|d| > |c|$. Only $r^2 \\le 1$ is squared, so the denominator overflows only if the quotient does. `div` computes $1/c$ once and multiplies by it. If $w$ has an infinite part and $z$ has no NaN part, `div` follows C99 Annex G: a finite numerator gives a zero result, and an infinite one the quotient of the infinity signs."
+msgstr "当 $|d| > |c|$ 时，对称地取 $r = c/d$。只有 $r^2 \\le 1$ 被平方，因此分母仅在商本身上溢时才会上溢。`div` 只计算一次 $1/c$ 再与之相乘。若 $w$ 有无穷分量而 $z$ 没有 NaN 分量，`div` 遵循 C99 附录 G：有限的分子得到零结果，无穷的分子得到无穷大符号之商。"
+
+#: manual/design/float_backend.md:199
+msgid "R. L. Smith, \"Algorithm 116: Complex division\", *Communications of the ACM* 5(8), 1962."
+msgstr "R. L. Smith, \"Algorithm 116: Complex division\", *Communications of the ACM* 5(8), 1962."
+
+#: manual/design/float_backend.md:202
+msgid "Exact integer powers"
+msgstr "精确的整数幂"
+
+#: manual/design/float_backend.md:204
+msgid "$z^n$ through $e^{n\\operatorname{Log} z}$ rounds the angle $n\\theta$ and the modulus $e^{n\\ln|z|}$, so even $(1 + i)^2$ would not come out as exactly $2i$. For a real integer exponent with $|n| \\le 2^{31} - 1$, `pow` and `pow_real` use binary powering instead: $O(\\log |n|)$ complex multiplications, exact for small Gaussian integers, and $z^{-n} = (z^{-1})^n$. Other exponents use the polar form of $e^{w\\operatorname{Log} z}$: with $\\ell = \\ln|z|$ from `abs_log` and $\\theta = \\arg z$,"
+msgstr "通过 $e^{n\\operatorname{Log} z}$ 计算 $z^n$ 会对角度 $n\\theta$ 和模 $e^{n\\ln|z|}$ 进行舍入，因此即使 $(1 + i)^2$ 也不会精确得到 $2i$。对于满足 $|n| \\le 2^{31} - 1$ 的实整数指数，`pow` 和 `pow_real` 改用二进制快速幂：$O(\\log |n|)$ 次复数乘法，对小的高斯整数是精确的，且 $z^{-n} = (z^{-1})^n$。其他指数使用 $e^{w\\operatorname{Log} z}$ 的极坐标形式：取 `abs_log` 给出的 $\\ell = \\ln|z|$ 和 $\\theta = \\arg z$，"
+
+#: manual/design/float_backend.md:217
+msgid "At $z = 0$, $0^0 = 1$, $0^w = 0$ for real $w > 0$, and every other exponent gives NaN."
+msgstr "在 $z = 0$ 处，$0^0 = 1$，对实数 $w > 0$ 有 $0^w = 0$，其他所有指数都得到 NaN。"
+
+#: manual/design/float_backend.md:220
+msgid "Overflow-free tangent"
+msgstr "不会上溢的正切"
+
+#: manual/design/float_backend.md:222
+msgid "$\\tan(x + iy) = \\dfrac{\\sin 2x + i\\sinh 2y}{\\cos 2x + \\cosh 2y}$, using $\\cos^2 x + \\sinh^2 y = \\frac12(\\cos 2x + \\cosh 2y)$. For large $|y|$ both $\\sinh 2y$ and $\\cosh 2y$ overflow while $\\tan z \\to \\pm i$. Multiplying numerator and denominator by $2d$ with $d = e^{-2|y|}$, and using $2d\\cosh 2y = 1 + d^2$, $2d\\sinh 2y = \\operatorname{sign}(y)(1 - d^2)$:"
+msgstr "利用 $\\cos^2 x + \\sinh^2 y = \\frac12(\\cos 2x + \\cosh 2y)$，有 $\\tan(x + iy) = \\dfrac{\\sin 2x + i\\sinh 2y}{\\cos 2x + \\cosh 2y}$。当 $|y|$ 很大时，$\\sinh 2y$ 和 $\\cosh 2y$ 都会上溢，而 $\\tan z \\to \\pm i$。将分子分母同乘以 $2d$（$d = e^{-2|y|}$），并利用 $2d\\cosh 2y = 1 + d^2$、$2d\\sinh 2y = \\operatorname{sign}(y)(1 - d^2)$："
+
+#: manual/design/float_backend.md:232
+msgid "`tan` uses this form for $|y| \\ge 1$ and the direct form below, where it is accurate. `tanh` applies the same derivation with the roles of $x$ and $y$ exchanged."
+msgstr "`tan` 在 $|y| \\ge 1$ 时使用这一形式，在其下方使用精度足够的直接形式。`tanh` 采用相同的推导，只是交换 $x$ 与 $y$ 的角色。"
+
+#: manual/design/float_backend.md:236
+msgid "The arcsine algorithm of Hull, Fairgrieve and Tang"
+msgstr "Hull、Fairgrieve 与 Tang 的反正弦算法"
+
+#: manual/design/float_backend.md:238
+msgid "For $x, y \\ge 0$, let $r = |z + 1|$, $s = |z - 1|$, $A = \\frac{r + s}{2} \\ge 1$ and $B = x/A \\le 1$. Then[^hft]"
+msgstr "对 $x, y \\ge 0$，令 $r = |z + 1|$，$s = |z - 1|$，$A = \\frac{r + s}{2} \\ge 1$，$B = x/A \\le 1$。则[^hft]"
+
+#: manual/design/float_backend.md:247
+msgid "and the other quadrants follow from oddness in each part. Both formulas lose accuracy in two regions, which the algorithm treats separately:"
+msgstr "其他象限可由各分量的奇性得出。这两个公式在两个区域会损失精度，算法对它们分别处理："
+
+#: manual/design/float_backend.md:250
+msgid "When $B$ is close to $1$ ($B > 0.6417$), $\\arcsin B$ is ill-conditioned. The real part is computed as $\\arctan(x/\\sqrt D)$ with a quantity $D$ formed from $r + x + 1$ and $s \\pm (1 - x)$ without subtraction."
+msgstr "当 $B$ 接近 $1$（$B > 0.6417$）时，$\\arcsin B$ 是病态的。此时实部按 $\\arctan(x/\\sqrt D)$ 计算，其中量 $D$ 由 $r + x + 1$ 和 $s \\pm (1 - x)$ 构成，不涉及减法。"
+
+#: manual/design/float_backend.md:253
+msgid "When $A$ is close to $1$ ($A \\le 1.5$), $\\ln(A + \\sqrt{A^2 - 1})$ suffers from $A^2 - 1$. The algorithm computes $A - 1$ without cancellation from $y^2/(r + x + 1)$ and $s \\pm (1 - x)$ and uses $\\operatorname{log1p}\\big((A - 1) + \\sqrt{(A - 1)(A + 1)}\\big)$."
+msgstr "当 $A$ 接近 $1$（$A \\le 1.5$）时，$\\ln(A + \\sqrt{A^2 - 1})$ 受 $A^2 - 1$ 影响。算法由 $y^2/(r + x + 1)$ 和 $s \\pm (1 - x)$ 无相消地计算 $A - 1$，并使用 $\\operatorname{log1p}\\big((A - 1) + \\sqrt{(A - 1)(A + 1)}\\big)$。"
+
+#: manual/design/float_backend.md:258
+msgid "For $|x|$ or $|y|$ above $10^{150}$, where $r$ and $s$ would overflow, `asin` uses the asymptotic form $\\operatorname{asin} z \\approx \\operatorname{atan2}(x, y) + i(\\ln 2 + \\ln|z|)$, from $\\sqrt{1 - z^2} \\approx -iz$. `acos` uses $\\pi/2 - \\operatorname{asin} z$ there."
+msgstr "当 $|x|$ 或 $|y|$ 超过 $10^{150}$ 时，$r$ 和 $s$ 会上溢，此时 `asin` 使用由 $\\sqrt{1 - z^2} \\approx -iz$ 得到的渐近形式 $\\operatorname{asin} z \\approx \\operatorname{atan2}(x, y) + i(\\ln 2 + \\ln|z|)$。在该区域 `acos` 使用 $\\pi/2 - \\operatorname{asin} z$。"
+
+#: manual/design/float_backend.md:263
+msgid "T. E. Hull, T. F. Fairgrieve and P. T. P. Tang, \"Implementing the complex arcsine and arccosine functions using exception handling\", *ACM Transactions on Mathematical Software* 23(3), 1997. The crossover values $1.5$ and $0.6417$ are theirs."
+msgstr "T. E. Hull, T. F. Fairgrieve and P. T. P. Tang, \"Implementing the complex arcsine and arccosine functions using exception handling\", *ACM Transactions on Mathematical Software* 23(3), 1997. 分界值 $1.5$ 和 $0.6417$ 取自该文。"
+
+#: manual/design/float_backend.md:268
+msgid "Arctangent and inverse hyperbolic tangent"
+msgstr "反正切与反双曲正切"
+
+#: manual/design/float_backend.md:270
+msgid "Writing $q = (1 + iz)/(1 - iz)$ with $z = x + iy$:"
+msgstr "记 $q = (1 + iz)/(1 - iz)$，其中 $z = x + iy$："
+
+#: manual/design/float_backend.md:278
+msgid "and $\\operatorname{atan} z = \\frac{1}{2i}\\operatorname{Log} q$ gives"
+msgstr "由 $\\operatorname{atan} z = \\frac{1}{2i}\\operatorname{Log} q$ 得"
+
+#: manual/design/float_backend.md:285
+msgid "The ratio inside the logarithm equals $(1 + u)/(1 - u)$ with $u = 2y/(1 + |z|^2)$; for $|u| < 0.1$ the package evaluates it as $\\operatorname{log1p}(u) - \\operatorname{log1p}(-u)$ to keep accuracy near the real axis. For large $|z|$ the real part is evaluated on $x/m, y/m$ with $m = \\max(|x|, |y|)$. `atanh` is the same computation with $x$ and $y$ exchanged, from $\\operatorname{atanh} z = -i\\operatorname{atan}(iz)$, and switches to $\\operatorname{log1p}$ when $|4x/((1 - x)^2 + y^2)| < 1/4$."
+msgstr "对数内的比值等于 $(1 + u)/(1 - u)$，其中 $u = 2y/(1 + |z|^2)$；当 $|u| < 0.1$ 时，本包将其按 $\\operatorname{log1p}(u) - \\operatorname{log1p}(-u)$ 求值，以保持实轴附近的精度。当 $|z|$ 很大时，实部在 $x/m, y/m$ 上求值，其中 $m = \\max(|x|, |y|)$。由 $\\operatorname{atanh} z = -i\\operatorname{atan}(iz)$，`atanh` 是交换 $x$ 与 $y$ 后的相同计算，并在 $|4x/((1 - x)^2 + y^2)| < 1/4$ 时切换到 $\\operatorname{log1p}$。"
+
+#: manual/design/float_backend.md:293
+msgid "Inverse hyperbolic cosine by Kahan's formula"
+msgstr "基于 Kahan 公式的反双曲余弦"
+
+#: manual/design/float_backend.md:295
+msgid "`acosh` uses $2\\operatorname{Log}\\big(\\sqrt{(z + 1)/2} + \\sqrt{(z - 1)/2}\\big)$, built from the stable square root. Unlike $\\operatorname{Log}(z + \\sqrt{z^2 - 1})$, it has the correct cut $(-\\infty, 1)$ without extra sign adjustments, because each square root has its cut where its argument is negative real."
+msgstr "`acosh` 使用 $2\\operatorname{Log}\\big(\\sqrt{(z + 1)/2} + \\sqrt{(z - 1)/2}\\big)$，由稳定的平方根构成。与 $\\operatorname{Log}(z + \\sqrt{z^2 - 1})$ 不同，它无需额外的符号调整就具有正确的割线 $(-\\infty, 1)$，因为每个平方根的割线都位于其参数为负实数之处。"
+
+#: manual/design/float_backend.md:301
+msgid "Exact real fast paths"
+msgstr "精确的实数快速路径"
+
+#: manual/design/float_backend.md:303
+msgid "`sin` and `cos` return the real function for $y = 0$ exactly; `asin`, `acos`, `asinh`, `acosh` and `atanh` dispatch real inputs to the `_real` functions and purely imaginary inputs to the real inverse functions of $y$. This keeps results on the real line exactly real, and the `_real` functions also serve callers who start from a `Double`."
+msgstr "`sin` 和 `cos` 在 $y = 0$ 严格成立时返回实函数值；`asin`、`acos`、`asinh`、`acosh` 和 `atanh` 将实数输入分派给 `_real` 函数，将纯虚数输入分派给关于 $y$ 的实反函数。这使实轴上的结果保持为精确的实数，且 `_real` 函数也可供从 `Double` 出发的调用者使用。"
+
+#: manual/design/float_backend.md:309
+msgid "Reciprocal functions through the core inverse"
+msgstr "通过核心逆元实现的倒数类函数"
+
+#: manual/design/float_backend.md:311
+msgid "`sec`, `csc`, `cot`, their hyperbolic counterparts and the inverse reciprocal functions are compositions with `Complex::inv` of the [core](core.md). They inherit its unscaled formula and its abort on a zero modulus, instead of producing infinities at poles. `acot` special-cases $z = 0$ to return $\\pi/2$."
+msgstr "`sec`、`csc`、`cot`、它们的双曲对应函数以及反倒数类函数都是与[核心](core.md)的 `Complex::inv` 的复合。它们继承了其未缩放的公式以及在模为零时中止的行为，而不是在极点处产生无穷大。`acot` 对 $z = 0$ 做特殊处理，返回 $\\pi/2$。"
+
+#: manual/design/float_backend.md:319
+msgid "Identities checked by the test suite"
+msgstr "测试套件检查的恒等式"
+
+#: manual/design/float_backend.md:321
+msgid "`exp(log z) = z`, `sin(asin z) = z`, `cos(acos z) = z`, `tan(atan z) = z`, `sinh(asinh z) = z` and `tanh(atanh z) = z` at sample points in the first quadrant, with tolerances $10^{-10}$ to $10^{-12}$; `sqrt(-3 + 4i) = 1 + 2i`; regressions for huge `asin` arguments, the `atan` cut, infinite `atanh` and `acosh` inputs, division by infinity and $0^0$, $0^{-1}$."
+msgstr "在第一象限的采样点上检查 `exp(log z) = z`、`sin(asin z) = z`、`cos(acos z) = z`、`tan(atan z) = z`、`sinh(asinh z) = z` 和 `tanh(atanh z) = z`，容差为 $10^{-10}$ 至 $10^{-12}$；`sqrt(-3 + 4i) = 1 + 2i`；以及针对超大 `asin` 参数、`atan` 割线、无穷 `atanh` 与 `acosh` 输入、除以无穷大以及 $0^0$、$0^{-1}$ 的回归测试。"
+
+#: manual/design/float_backend.md:327
+msgid "Known deviations from the principal values"
+msgstr "与主值的已知偏差"
+
+#: manual/design/float_backend.md:329
+msgid "The implementation uses the constant $2\\pi$ (`tau`) in places where the principal value needs $\\pi$:"
+msgstr "实现在主值需要 $\\pi$ 的地方使用了常量 $2\\pi$（`tau`）："
+
+#: manual/design/float_backend.md:332
+msgid "Function and input"
+msgstr "函数与输入"
+
+#: manual/design/float_backend.md:332
+msgid "Returned"
+msgstr "返回值"
+
+#: manual/design/float_backend.md:332
+msgid "Principal value"
+msgstr "主值"
+
+#: manual/design/float_backend.md:334
+msgid "$\\pi$ (C99: $\\pm\\pi$ by the sign of $y$)"
+msgstr "$\\pi$（C99：按 $y$ 的符号取 $\\pm\\pi$）"
+
+#: manual/design/float_backend.md:335
+msgid "`log(z)`, same inputs"
+msgstr "`log(z)`，输入同上"
+
+#: manual/design/float_backend.md:336
+msgid "`pow`, `pow_real`, negative real base, non-integer exponent"
+msgstr "`pow`、`pow_real`，负实数底数，非整数指数"
+
+#: manual/design/float_backend.md:336
+msgid "angle $2\\pi$"
+msgstr "角度 $2\\pi$"
+
+#: manual/design/float_backend.md:336
+msgid "angle $\\pi$"
+msgstr "角度 $\\pi$"
+
+#: manual/design/float_backend.md:342
+msgid "Because $e^{2\\pi i} = 1$ while $e^{\\pi i} = -1$, these values are not even logarithms or inverses of the input: `exp(log(-1))` is $1$, and `cos(acos(z))` is $-z$ for $x < 0$. The test suite currently asserts the $2\\pi$ value of `arg` on the negative axis. These are defects to be fixed in the implementation; this manual records the current behaviour."
+msgstr "由于 $e^{2\\pi i} = 1$ 而 $e^{\\pi i} = -1$，这些值甚至不是输入的对数或反函数值：`exp(log(-1))` 为 $1$，并且当 $x < 0$ 时 `cos(acos(z))` 为 $-z$。测试套件目前断言的是负实轴上 `arg` 的 $2\\pi$ 值。这些是有待在实现中修复的缺陷；本手册记录的是当前行为。"
+
+#: manual/design/float_backend.md:348
+msgid "Other accuracy notes"
+msgstr "其他精度说明"
+
+#: manual/design/float_backend.md:350
+msgid "`asin` evaluates $\\sqrt{A^2 - 1}$ in its $A \\le 1.5$ branch where the Hull–Fairgrieve–Tang algorithm (and `acos` here) uses $\\sqrt{(A - 1)(A + 1)}$. Close to the branch points $\\pm1$ this loses digits: at $1 + 10^{-10}i$ the imaginary part has a relative error near $4 \\times 10^{-8}$."
+msgstr "`asin` 在 $A \\le 1.5$ 分支中计算 $\\sqrt{A^2 - 1}$，而 Hull–Fairgrieve–Tang 算法（以及这里的 `acos`）使用 $\\sqrt{(A - 1)(A + 1)}$。在分支点 $\\pm1$ 附近这会丢失有效数字：在 $1 + 10^{-10}i$ 处，虚部的相对误差接近 $4 \\times 10^{-8}$。"
+
+#: manual/design/float_backend.md:355
+msgid "`exp` overflows in $e^x$ before multiplying by $\\cos y$ and $\\sin y$, so `exp(710 + 0i)` has a NaN imaginary part ($\\infty \\cdot 0$)."
+msgstr "`exp` 在乘以 $\\cos y$ 和 $\\sin y$ 之前就在 $e^x$ 处上溢，因此 `exp(710 + 0i)` 的虚部为 NaN（$\\infty \\cdot 0$）。"
+
+#: manual/design/float_backend.md:357
+msgid "The `Float` instance of `log1p` is $\\ln(1 + x)$ and loses relative accuracy for $|x| \\ll 1$; no public function uses it yet."
+msgstr "`log1p` 的 `Float` 实例为 $\\ln(1 + x)$，当 $|x| \\ll 1$ 时会损失相对精度；目前还没有公开函数使用它。"
+
+#: manual/design/float_backend.md:362
+msgid "**Methods on `Complex`.** Not possible from a separate package, and moving the functions into the core would bring IEEE semantics into the generic type."
+msgstr "**`Complex` 上的方法。** 在独立的包中无法做到，而把这些函数移入核心又会把 IEEE 语义带入泛型类型。"
+
+#: manual/design/float_backend.md:365
+msgid "**A single floating-real trait.** It would force IEEE special values on every analytic scalar."
+msgstr "**单一的浮点实数 trait。** 这会把 IEEE 特殊值强加给每个解析标量。"
+
+#: manual/design/float_backend.md:367
+msgid "**Textbook formulas everywhere.** Simpler, but they overflow for $|z| \\gtrsim 10^{154}$ and cancel near the branch cuts, as derived above."
+msgstr "**处处使用教科书公式。** 更简单，但如上文推导所示，它们在 $|z| \\gtrsim 10^{154}$ 时上溢，并在分支切割线附近发生相消。"
+
+#: manual/design/float_backend.md:369
+msgid "**Full C99 Annex G special-value tables.** Only the cases listed in the API are handled; the remaining infinities and NaN propagate through ordinary arithmetic."
+msgstr "**完整的 C99 附录 G 特殊值表。** 只处理 API 中列出的情形；其余的无穷大和 NaN 通过普通算术传播。"
+
+#: manual/design/float_backend.md:375
+msgid "Analytic functions for `Complex[Double]` only; no `Complex[Float]` functions, although the traits are implemented for `Float`."
+msgstr "仅为 `Complex[Double]` 提供解析函数；虽然这些 trait 已为 `Float` 实现，但没有 `Complex[Float]` 函数。"
+
+#: manual/design/float_backend.md:377
+msgid "No signed-zero selection of the side of a branch cut, except in `arg`."
+msgstr "除 `arg` 外，不通过带符号的零来选择分支切割线的哪一侧。"
+
+#: manual/design/float_backend.md:378
+msgid "Reciprocal functions abort at poles instead of returning infinities."
+msgstr "倒数类函数在极点处中止，而不是返回无穷大。"
+
+#: manual/design/float_backend.md:379
+msgid "No error bounds are certified; accuracy is checked by regression tests."
+msgstr "不提供经过认证的误差界；精度由回归测试检查。"
+
+#: manual/design/float_backend.md:380
+msgid "No checked or contextual (`Result`) variants."
+msgstr "没有带检查或带上下文（`Result`）的变体。"
 
 #: manual/index.md:1
 msgid "luna-complex"
 msgstr "luna-complex"
 
 #: manual/index.md:3
-msgid "`luna-complex` provides a generic `Complex[T]` core for algebraic complex arithmetic in LunaFlow, with floating analytic and transcendental helpers split into the `Luna-Flow/luna-complex/float_backend` backend package. This manual describes version 0.3.0."
-msgstr "`luna-complex` 为 LunaFlow 提供用于代数复数运算的泛型 `Complex[T]` 核心，浮点解析函数与超越函数辅助则拆分到 `Luna-Flow/luna-complex/float_backend` 后端包中。本手册描述 0.3.0 版本。"
+msgid "`Luna-Flow/luna-complex` provides complex numbers for Luna Flow. The root package defines the generic type `Complex[T]`, the ring $T[i]/(i^2 + 1)$ over any scalar `T`, with its arithmetic and `luna-generic` structure instances. The `float_backend` package adds the analytic functions of `Complex[Double]` (roots, logarithms, powers, trigonometric and hyperbolic functions and their inverses) with numerically stable formulas, and the capability traits for floating-point scalars."
+msgstr "`Luna-Flow/luna-complex` 为 Luna Flow 提供复数。根包定义了泛型类型 `Complex[T]`，即任意标量 `T` 上的环 $T[i]/(i^2 + 1)$，以及其算术运算和 `luna-generic` 结构实例。`float_backend` 包添加了 `Complex[Double]` 的解析函数（开方、对数、幂、三角函数与双曲函数及其反函数），采用数值稳定的公式，并提供浮点标量的能力 trait。"
 
-#: manual/index.md:5
+#: manual/index.md:11
+msgid "This manual documents the code of version `0.2.0` (the version in `moon.mod`) on MoonBit 0.10."
+msgstr "本手册记录的是 MoonBit 0.10 上 `0.2.0` 版本（即 `moon.mod` 中的版本）的代码。"
+
+#: manual/index.md:14
 msgid "Packages"
 msgstr "包"
 
-#: manual/index.md:7
+#: manual/index.md:16
 msgid "Package"
 msgstr "包"
 
-#: manual/index.md:7
-msgid "Source"
-msgstr "源码"
-
-#: manual/index.md:7
-msgid "Contents"
-msgstr "内容"
-
-#: manual/index.md:9
-msgid "The generic `Complex[T]` type, its trait implementations, and basic algebraic operations."
-msgstr "泛型 `Complex[T]` 类型、它的 trait 实现以及基本代数运算。"
-
-#: manual/index.md:10
-msgid "Floating backend traits plus `Complex[Double]` functions such as `polar`, `arg`, `abs`, `sqrt`, `log`, `sin`, `cos`, `asin`, `acosh`, and `atanh`."
-msgstr "浮点后端 trait，以及 `Complex[Double]` 函数，例如 `polar`、`arg`、`abs`、`sqrt`、`log`、`sin`、`cos`、`asin`、`acosh` 和 `atanh`。"
-
-#: manual/index.md:14
-msgid "`Complex[T]` is a mutable struct with explicit `re` / `im` fields for in-place updates when desired. Besides `Complex::new`, it provides `set`, `set_re`, and `set_im`. Under the matching constraints on `T`, it implements the `luna-generic` algebra traits from `Zero` and `AddMonoid` up to `Ring` and `Field`, together with `Conjugate`, `Inverse`, the arithmetic operators, `Eq`, and `Show`. Because the constraints are traits rather than a fixed scalar type, values can nest, as in `Complex[Complex[Double]]`."
-msgstr "`Complex[T]` 是一个可变结构体，带有显式的 `re` / `im` 字段，需要时可以原地更新。除 `Complex::new` 外，它还提供 `set`、`set_re` 和 `set_im`。在 `T` 满足相应约束时，它实现从 `Zero`、`AddMonoid` 直到 `Ring`、`Field` 的 `luna-generic` 代数 trait，以及 `Conjugate`、`Inverse`、算术运算符、`Eq` 和 `Show`。由于约束是 trait 而不是固定的标量类型，值可以嵌套，例如 `Complex[Complex[Double]]`。"
+#: manual/index.md:16
+msgid "Import path"
+msgstr "导入路径"
 
 #: manual/index.md:16
-msgid "`float_backend` covers the elementary functions (`exp`, `log`, `log_10`, `log_b`, `pow`, `pow_real`, `sqrt`), the trigonometric and hyperbolic functions with their inverses, and real-argument variants such as `sqrt_real`, `asin_real`, and `acosh_real`. It relies on `Luna-Flow/arithmetic` for the elementary-function capability surface and keeps its floating backend traits, IEEE special-value handling, and numeric-stability logic inside the package."
-msgstr "`float_backend` 涵盖初等函数（`exp`、`log`、`log_10`、`log_b`、`pow`、`pow_real`、`sqrt`）、三角函数与双曲函数及其反函数，以及 `sqrt_real`、`asin_real`、`acosh_real` 等实数参数版本。它依赖 `Luna-Flow/arithmetic` 提供初等函数能力，并把浮点后端 trait、IEEE 特殊值处理和数值稳定性逻辑保留在包内部。"
+msgid "Role"
+msgstr "作用"
+
+#: manual/index.md:16
+msgid "Pages"
+msgstr "页面"
 
 #: manual/index.md:18
-#: manual/tutorial/float_backend.md:3
-msgid "Use `float_backend` when a `Complex[Double]` value needs analytic or transcendental functions."
-msgstr "当 `Complex[Double]` 需要解析函数或超越函数时使用 `float_backend`。"
+msgid "generic `Complex[T]`: construction, mutation, arithmetic, conjugation, structure instances"
+msgstr "泛型 `Complex[T]`：构造、修改、算术、共轭、结构实例"
 
-#: manual/index.md:20
-msgid "Quick start"
-msgstr "快速开始"
+#: manual/index.md:18
+msgid "[API](api/core.md) · [tutorial](tutorial/core.md) · [design](design/core.md)"
+msgstr "[API](api/core.md) · [教程](tutorial/core.md) · [设计](design/core.md)"
 
-#: manual/index.md:44
-msgid "Design notes"
-msgstr "设计说明"
+#: manual/index.md:19
+msgid "analytic functions of `Complex[Double]`; `FloatingAnalyticScalar`, `FloatingSpecialValues`, `FloatingBackendScalar`"
+msgstr "`Complex[Double]` 的解析函数；`FloatingAnalyticScalar`、`FloatingSpecialValues`、`FloatingBackendScalar`"
 
-#: manual/index.md:46
-msgid "The analytic functions are free functions, such as `@float_backend.log(z)` and `@float_backend.sin(z)`, not methods. MoonBit does not allow a subpackage to add methods or trait implementations to a type defined in another package, so `float_backend` cannot attach them to `Complex[T]`. Restoring method-style transcendental APIs would require moving those definitions back into the root package or introducing a different wrapper design."
-msgstr "解析函数是自由函数，例如 `@float_backend.log(z)` 和 `@float_backend.sin(z)`，而不是方法。MoonBit 不允许子包为其他包中定义的类型添加方法或 trait 实现，因此 `float_backend` 无法把它们挂到 `Complex[T]` 上。若要恢复方法风格的超越函数 API，需要把这些定义移回根包，或采用另一种包装设计。"
+#: manual/index.md:19
+msgid "[API](api/float_backend.md) · [tutorial](tutorial/float_backend.md) · [design](design/float_backend.md)"
+msgstr "[API](api/float_backend.md) · [教程](tutorial/float_backend.md) · [设计](design/float_backend.md)"
 
-#: manual/index.md:48
-msgid "The split is intentional: it keeps floating arithmetic, IEEE special values, and branch-cut behavior out of the root package's generic algebraic semantics."
-msgstr "这种拆分是有意为之：它把浮点运算、IEEE 特殊值和分支切割行为排除在根包的泛型代数语义之外。"
+#: manual/index.md:21
+msgid "The root package is documented under the name `core`. `float_backend` replaces the former `double_ext` package."
+msgstr "根包以 `core` 为名进行记录。`float_backend` 取代了原先的 `double_ext` 包。"
 
-#: manual/index.md:50
-msgid "Where to go next"
-msgstr "下一步"
+#: manual/index.md:24
+msgid "Reading paths"
+msgstr "阅读路线"
 
-#: manual/index.md:52
-msgid "Each package has an API reference ([core](api/core.md), [float_backend](api/float_backend.md)), a tutorial ([core](tutorial/core.md), [float_backend](tutorial/float_backend.md)), and a design note ([core](design/core.md), [float_backend](design/float_backend.md))."
-msgstr "每个包都有 API 参考（[core](api/core.md)、[float_backend](api/float_backend.md)）、教程（[core](tutorial/core.md)、[float_backend](tutorial/float_backend.md)）和设计说明（[core](design/core.md)、[float_backend](design/float_backend.md)）。"
+#: manual/index.md:26
+msgid "**First steps.** Read the [core tutorial](tutorial/core.md) for arithmetic, then the [float_backend tutorial](tutorial/float_backend.md) for `sqrt`, `log`, `sin` and the other functions."
+msgstr "**入门。** 先阅读[核心教程](tutorial/core.md)了解算术运算，再阅读 [float_backend 教程](tutorial/float_backend.md)了解 `sqrt`、`log`、`sin` 及其他函数。"
+
+#: manual/index.md:30
+msgid "**Using the library.** Keep the [core API](api/core.md) and the [float_backend API](api/float_backend.md) at hand; the latter states the branch, special-value and abort behaviour of every function, including the known deviations on the negative real axis."
+msgstr "**使用本库。** 随手查阅[核心 API](api/core.md) 和 [float_backend API](api/float_backend.md)；后者说明了每个函数的分支、特殊值与中止行为，包括负实轴上的已知偏差。"
+
+#: manual/index.md:35
+msgid "**Contributing.** Read the [core design](design/core.md) for the algebra and the lawfulness of the instances, the [float_backend design](design/float_backend.md) for the derivations of the stable formulas and the branch cuts, and the [contribution guide](contributing.md)."
+msgstr "**参与贡献。** 阅读[核心设计](design/core.md)了解代数结构及实例的合法性，阅读 [float_backend 设计](design/float_backend.md)了解稳定公式和分支切割线的推导，并阅读[贡献指南](contributing.md)。"
+
+#: manual/index.md:41
+msgid "Installation"
+msgstr "安装"
 
 #: manual/index.md:54
-msgid "The generated interface files `src/pkg.generated.mbti` and `src/float_backend/pkg.generated.mbti` list every public signature, and the package documentation on [mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-complex) renders them. To work on the library, read the [contribution guidelines](contributing.md)."
-msgstr "生成的接口文件 `src/pkg.generated.mbti` 和 `src/float_backend/pkg.generated.mbti` 列出了全部公开签名，[mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-complex) 上的包文档会渲染这些接口。如需参与本库的开发，请阅读[贡献规范](contributing.md)。"
+msgid "Toolchain"
+msgstr "工具链"
+
+#: manual/index.md:56
+msgid "MoonBit `moonc` 0.10 or newer with `moon.mod` / `moon.pkg` manifests. The tests run on `wasm-gc`, `wasm`, `js` and `native`."
+msgstr "MoonBit `moonc` 0.10 或更高版本，使用 `moon.mod` / `moon.pkg` 清单。测试在 `wasm-gc`、`wasm`、`js` 和 `native` 上运行。"
+
+#: manual/index.md:59
+msgid "Validation"
+msgstr "验证"
 
 #: manual/tutorial/core.md:1
 msgid "core tutorial"
 msgstr "core 教程"
 
 #: manual/tutorial/core.md:3
-msgid "Use the root package when you need generic complex construction and algebraic operations."
-msgstr "需要泛型复数构造和代数运算时使用根包。"
-
-#: manual/tutorial/core.md:5
-#: manual/tutorial/float_backend.md:5
-msgid "Suggested flow"
-msgstr "建议流程"
-
-#: manual/tutorial/core.md:7
-msgid "Import the root package and bring `Complex` into scope."
-msgstr "导入根包并引入 `Complex`。"
-
-#: manual/tutorial/core.md:8
-msgid "Construct values with `Complex::new(re, im)`."
-msgstr "使用 `Complex::new(re, im)` 构造复数。"
+msgid "This tutorial uses the generic `Complex[T]` type for complex arithmetic. You will build and print complex numbers, compute with them over `Double` and over the integers, write generic code that accepts complex numbers through the `luna-generic` traits, and update values in place. The algebra behind it is in the [core design](../design/core.md)."
+msgstr "本教程使用泛型 `Complex[T]` 类型进行复数运算。你将构造并打印复数，在 `Double` 和整数上用它们进行计算，编写通过 `luna-generic` trait 接受复数的泛型代码，并原地更新值。其背后的代数原理见[核心设计](../design/core.md)。"
 
 #: manual/tutorial/core.md:9
-msgid "Use algebraic operators when the scalar type implements the required Luna Flow traits."
-msgstr "当标量类型实现所需 Luna Flow trait 时，直接使用代数运算符。"
+#: manual/tutorial/float_backend.md:9
+msgid "Quick start"
+msgstr "快速开始"
 
-#: manual/tutorial/core.md:11
-#: manual/tutorial/float_backend.md:11
-msgid "Practical guidance"
-msgstr "实用建议"
+#: manual/tutorial/core.md:37
+#: manual/tutorial/float_backend.md:37
+msgid "Everyday tasks"
+msgstr "日常任务"
 
-#: manual/tutorial/core.md:13
-msgid "Use `Complex[Double]` for ordinary floating-point values and `Complex[Complex[Double]]` when nested algebraic behavior is useful."
-msgstr "普通浮点复数使用 `Complex[Double]`；需要嵌套代数行为时可以使用 `Complex[Complex[Double]]`。"
+#: manual/tutorial/core.md:39
+msgid "Conjugate and squared modulus"
+msgstr "共轭与模平方"
 
-#: manual/tutorial/core.md:14
-msgid "Use `set`, `set_re`, and `set_im` only when mutation is intended."
-msgstr "只有确实需要原地更新时才使用 `set`、`set_re` 和 `set_im`。"
+#: manual/tutorial/core.md:41
+msgid "$z\\bar z = |z|^2$ is real:"
+msgstr "$z\\bar z = |z|^2$ 是实数："
 
-#: manual/tutorial/core.md:15
-msgid "Use `float_backend` for transcendental and branch-sensitive floating behavior."
-msgstr "超越函数和分支敏感的浮点行为使用 `float_backend`。"
+#: manual/tutorial/core.md:57
+msgid "Gaussian integers"
+msgstr "高斯整数"
+
+#: manual/tutorial/core.md:59
+msgid "Over `Int`, `Complex[Int]` is the ring $\\mathbb Z[i]$ of Gaussian integers. Everything except division works, and results are exact:"
+msgstr "在 `Int` 上，`Complex[Int]` 就是高斯整数环 $\\mathbb Z[i]$。除法以外的一切都能工作，且结果是精确的："
+
+#: manual/tutorial/core.md:80
+msgid "$5 = (2 + i)(2 - i)$ shows that $5$ is not prime in $\\mathbb Z[i]$."
+msgstr "$5 = (2 + i)(2 - i)$ 表明 $5$ 在 $\\mathbb Z[i]$ 中不是素数。"
+
+#: manual/tutorial/core.md:82
+msgid "Generic code over a ring"
+msgstr "环上的泛型代码"
+
+#: manual/tutorial/core.md:84
+msgid "Code written against `luna-generic` traits accepts complex numbers. Here a Horner evaluation of $p(x) = x^2 + 1$:"
+msgstr "针对 `luna-generic` trait 编写的代码可以接受复数。下面用 Horner 方法求 $p(x) = x^2 + 1$ 的值："
+
+#: manual/tutorial/core.md:110
+msgid "Update in place"
+msgstr "原地更新"
+
+#: manual/tutorial/core.md:112
+msgid "`set`, `set_re` and `set_im` overwrite a value. Every binding to it sees the change:"
+msgstr "`set`、`set_re` 和 `set_im` 会覆盖一个值。所有绑定到它的变量都会看到这一变化："
+
+#: manual/tutorial/core.md:133
+#: manual/tutorial/float_backend.md:146
+msgid "Going further"
+msgstr "进阶"
+
+#: manual/tutorial/core.md:135
+msgid "Nested complex numbers"
+msgstr "嵌套复数"
+
+#: manual/tutorial/core.md:137
+msgid "`Complex[T]` works for any `T` with the required traits, including `Complex[Double]` itself:"
+msgstr "`Complex[T]` 适用于任何具备所需 trait 的 `T`，包括 `Complex[Double]` 本身："
+
+#: manual/tutorial/core.md:154
+msgid "The product is $1$ up to rounding, because the squared modulus $a^2 + b^2$ of this $z$ is invertible. In general `Complex[Complex[Double]]` is not a field; see the pitfalls below."
+msgstr "乘积在舍入误差范围内等于 $1$，因为这个 $z$ 的模平方 $a^2 + b^2$ 可逆。一般而言，`Complex[Complex[Double]]` 不是域；参见下面的常见陷阱。"
+
+#: manual/tutorial/core.md:158
+msgid "Analytic functions"
+msgstr "解析函数"
+
+#: manual/tutorial/core.md:160
+msgid "The core has no `sqrt`, `exp` or `sin`. Import `Luna-Flow/luna-complex/float_backend` for `Complex[Double]`; the [float_backend tutorial](float_backend.md) shows how."
+msgstr "核心中没有 `sqrt`、`exp` 或 `sin`。对于 `Complex[Double]`，请导入 `Luna-Flow/luna-complex/float_backend`；[float_backend 教程](float_backend.md)介绍了用法。"
+
+#: manual/tutorial/core.md:164
+#: manual/tutorial/float_backend.md:195
+msgid "Common pitfalls"
+msgstr "常见陷阱"
+
+#: manual/tutorial/core.md:166
+msgid "**Division by zero aborts.** `z / w` and `w.inv()` call `Inverse::inv` on $c^2 + d^2$; for `Double` that aborts when the value is zero, also when it underflows for $|w| \\lesssim 10^{-162}$. Use `@fb.div` from `float_backend` for robust division."
+msgstr "**除以零会中止。** `z / w` 和 `w.inv()` 对 $c^2 + d^2$ 调用 `Inverse::inv`；对于 `Double`，当该值为零时会中止，当 $|w| \\lesssim 10^{-162}$ 导致下溢时也是如此。稳健的除法请使用 `float_backend` 中的 `@fb.div`。"
+
+#: manual/tutorial/core.md:170
+msgid "**Large values overflow in division.** $c^2 + d^2$ overflows for $|w| \\gtrsim 10^{154}$."
+msgstr "**大数值在除法中上溢。** 当 $|w| \\gtrsim 10^{154}$ 时 $c^2 + d^2$ 上溢。"
+
+#: manual/tutorial/core.md:172
+msgid "**Shared mutation.** `let shared = z` does not copy; the setters change every alias."
+msgstr "**共享的修改。** `let shared = z` 不会复制；setter 会改变每一个别名。"
+
+#: manual/tutorial/core.md:174
+msgid "**Text form.** Negative imaginary parts print as `+ -2i`; use `debug_inspect` or your own formatting when you need another form."
+msgstr "**文本形式。** 负虚部打印为 `+ -2i`；需要其他形式时，请使用 `debug_inspect` 或自行格式化。"
+
+#: manual/tutorial/core.md:176
+msgid "**Nested types are not fields.** In `Complex[Complex[Double]]`, values such as $1 + i\\,j$ have a zero squared modulus and `inv` aborts."
+msgstr "**嵌套类型不是域。** 在 `Complex[Complex[Double]]` 中，$1 + i\\,j$ 这样的值模平方为零，`inv` 会中止。"
+
+#: manual/tutorial/core.md:179
+#: manual/tutorial/float_backend.md:211
+msgid "Next steps"
+msgstr "后续步骤"
+
+#: manual/tutorial/core.md:181
+msgid "The [core API](../api/core.md) lists every method and instance."
+msgstr "[核心 API](../api/core.md) 列出了所有方法与实例。"
+
+#: manual/tutorial/core.md:182
+msgid "The [core design](../design/core.md) derives the construction and the field condition."
+msgstr "[核心设计](../design/core.md)推导了该构造以及成为域的条件。"
+
+#: manual/tutorial/core.md:184
+msgid "The [float_backend tutorial](float_backend.md) adds the analytic functions."
+msgstr "[float_backend 教程](float_backend.md)介绍解析函数。"
+
+#: manual/tutorial/core.md:186
+msgid "[luna-generic](https://lunaflow.cn/en/luna-generic/) documents the traits used in generic code."
+msgstr "[luna-generic](https://lunaflow.cn/en/luna-generic/) 记录了泛型代码中使用的 trait。"
 
 #: manual/tutorial/float_backend.md:1
 msgid "float_backend tutorial"
 msgstr "float_backend 教程"
 
-#: manual/tutorial/float_backend.md:7
-msgid "Import `Complex` from the root package or through `float_backend`."
-msgstr "从根包或 `float_backend` 引入 `Complex`。"
+#: manual/tutorial/float_backend.md:3
+msgid "This tutorial computes with the analytic functions of `Complex[Double]`. You will convert between Cartesian and polar form, take roots and logarithms, solve a quadratic equation, evaluate trigonometric functions and their inverses, and learn where the branch cuts are. The formulas and their numerical treatment are in the [float_backend design](../design/float_backend.md)."
+msgstr "本教程使用 `Complex[Double]` 的解析函数进行计算。你将在直角坐标形式与极坐标形式之间转换，求根和对数，解二次方程，计算三角函数及其反函数，并了解分支切割线的位置。公式及其数值处理见 [float_backend 设计](../design/float_backend.md)。"
 
-#: manual/tutorial/float_backend.md:8
-msgid "Construct a `Complex[Double]` value."
-msgstr "构造一个 `Complex[Double]`。"
+#: manual/tutorial/float_backend.md:56
+msgid "Solve a quadratic equation"
+msgstr "解二次方程"
 
-#: manual/tutorial/float_backend.md:9
-msgid "Call free functions such as `@float_backend.log(z)`, `@float_backend.sin(z)`, or `@float_backend.sqrt(z)`."
-msgstr "调用自由函数，例如 `@float_backend.log(z)`、`@float_backend.sin(z)` 或 `@float_backend.sqrt(z)`。"
+#: manual/tutorial/float_backend.md:58
+msgid "The roots of $az^2 + bz + c$ are $(-b \\pm \\sqrt{b^2 - 4ac})/(2a)$. With `sqrt` and `div` the formula works for complex coefficients and negative discriminants:"
+msgstr "$az^2 + bz + c$ 的根为 $(-b \\pm \\sqrt{b^2 - 4ac})/(2a)$。借助 `sqrt` 和 `div`，该公式适用于复系数和负判别式："
 
-#: manual/tutorial/float_backend.md:13
-msgid "Prefer the free functions in this package over duplicating formulas downstream."
-msgstr "优先使用本包的自由函数，不要在下游重复实现公式。"
+#: manual/tutorial/float_backend.md:81
+msgid "Logarithms and powers"
+msgstr "对数与幂"
 
-#: manual/tutorial/float_backend.md:14
-msgid "Treat branch-sensitive functions such as `arg`, `log`, `sqrt`, and inverse trigonometric functions as part of this package's observable contract."
-msgstr "`arg`、`log`、`sqrt` 和反三角函数等分支敏感函数属于本包的可观察契约。"
+#: manual/tutorial/float_backend.md:100
+msgid "$i^i = e^{i \\cdot i\\pi/2} = e^{-\\pi/2}$ is real. Integer exponents use exact binary powering, so $i^2$ is exactly $-1$."
+msgstr "$i^i = e^{i \\cdot i\\pi/2} = e^{-\\pi/2}$ 是实数。整数指数使用精确的二进制快速幂，因此 $i^2$ 恰好为 $-1$。"
 
-#: manual/tutorial/float_backend.md:15
-msgid "Use the backend traits only when writing new floating backend code."
-msgstr "只有在编写新的浮点后端代码时才直接使用后端 trait。"
+#: manual/tutorial/float_backend.md:103
+msgid "Trigonometric functions and their inverses"
+msgstr "三角函数及其反函数"
+
+#: manual/tutorial/float_backend.md:121
+msgid "`asin_real` takes a `Double` and returns a complex result outside $[-1, 1]$."
+msgstr "`asin_real` 接受一个 `Double`，在 $[-1, 1]$ 之外返回复数结果。"
+
+#: manual/tutorial/float_backend.md:124
+msgid "Large arguments"
+msgstr "大参数"
+
+#: manual/tutorial/float_backend.md:126
+msgid "The formulas are scaled, so huge or tiny inputs do not overflow:"
+msgstr "这些公式经过缩放，因此极大或极小的输入都不会上溢："
+
+#: manual/tutorial/float_backend.md:150
+msgid "Multi-valued functions jump across their branch cuts. `sqrt` has its cut on the negative real axis; approaching it from above and below gives roots of opposite sign:"
+msgstr "多值函数在跨越分支切割线时会跳变。`sqrt` 的割线位于负实轴；从上方和下方逼近它会得到符号相反的根："
+
+#: manual/tutorial/float_backend.md:168
+msgid "On the cut itself the root is $+2i$. The [design](../design/float_backend.md#principal-values-of-the-other-functions) lists the cuts of every function."
+msgstr "在割线上，根为 $+2i$。[设计文档](../design/float_backend.md#principal-values-of-the-other-functions)列出了每个函数的割线。"
+
+#: manual/tutorial/float_backend.md:171
+msgid "Writing scalar-generic helpers"
+msgstr "编写标量泛型的辅助函数"
+
+#: manual/tutorial/float_backend.md:173
+msgid "The capability traits let helpers state what they need from a real scalar. For example, a function that only inspects special values asks for `FloatingSpecialValues` and works for `Float` and `Double`:"
+msgstr "借助能力 trait，辅助函数可以声明它对实数标量的需求。例如，一个只检查特殊值的函数只要求 `FloatingSpecialValues`，便可同时适用于 `Float` 和 `Double`："
+
+#: manual/tutorial/float_backend.md:197
+msgid "**The negative real axis.** `arg` and `log` currently return $2\\pi$ instead of $\\pi$ there (`log(-1)` is $2\\pi i$), and powers of negative real numbers with non-integer exponents inherit that angle; `acos`, `acos_real`, `asec_real` and `acosh_real` are affected for negative inputs. See the warning in the [float_backend API](../api/float_backend.md#conventions)."
+msgstr "**负实轴。** `arg` 和 `log` 目前在负实轴上返回 $2\\pi$ 而非 $\\pi$（`log(-1)` 为 $2\\pi i$），负实数的非整数次幂也继承了这一角度；`acos`、`acos_real`、`asec_real` 和 `acosh_real` 对负输入也受影响。参见 [float_backend API](../api/float_backend.md#conventions) 中的警告。"
+
+#: manual/tutorial/float_backend.md:202
+msgid "**Reciprocal functions abort at poles.** `cot(0)`, `csc(0)`, `asec(0)` and the like stop the program instead of returning infinity."
+msgstr "**倒数类函数在极点处中止。** `cot(0)`、`csc(0)`、`asec(0)` 等会终止程序，而不是返回无穷大。"
+
+#: manual/tutorial/float_backend.md:204
+msgid "**Use `@fb.div`, not `/`, for extreme values.** The core operator forms $c^2 + d^2$ and aborts if it underflows to zero."
+msgstr "**对极端值使用 `@fb.div` 而非 `/`。** 核心运算符会计算 $c^2 + d^2$，若其下溢为零则中止。"
+
+#: manual/tutorial/float_backend.md:206
+msgid "**`exp` overflows early.** `exp(z)` for $\\operatorname{Re} z > 709.78$ has infinite or NaN parts."
+msgstr "**`exp` 过早上溢。** 当 $\\operatorname{Re} z > 709.78$ 时，`exp(z)` 含有无穷或 NaN 分量。"
+
+#: manual/tutorial/float_backend.md:208
+msgid "**Only `Complex[Double]`.** The analytic functions do not accept `Complex[Float]`."
+msgstr "**仅支持 `Complex[Double]`。** 解析函数不接受 `Complex[Float]`。"
+
+#: manual/tutorial/float_backend.md:213
+msgid "The [float_backend API](../api/float_backend.md) documents every function and its special cases."
+msgstr "[float_backend API](../api/float_backend.md) 记录了每个函数及其特殊情形。"
+
+#: manual/tutorial/float_backend.md:215
+msgid "The [float_backend design](../design/float_backend.md) derives the stable formulas and lists the known deviations."
+msgstr "[float_backend 设计](../design/float_backend.md)推导了稳定公式，并列出了已知偏差。"
+
+#: manual/tutorial/float_backend.md:217
+msgid "The [core tutorial](core.md) covers the generic arithmetic."
+msgstr "[核心教程](core.md)介绍泛型算术运算。"
+
+#~ msgid "$w$ real integer, $"
+#~ msgstr "$w$ 为实整数，$"
+
+#~ msgid "w"
+#~ msgstr "w"
+
+#~ msgid "\\le 2^{31} - 1$"
+#~ msgstr "\\le 2^{31} - 1$"
+
+#~ msgid "x^2 - y^2)$, rescaled for large inputs. Infinite inputs return $0 \\pm i\\pi/2$."
+#~ msgstr "x^2 - y^2)$，对大输入会重新缩放。无穷输入返回 $0 \\pm i\\pi/2$。"
+
+#~ msgid "`acosh` uses $2\\operatorname{Log}\\big(\\sqrt{(z + 1)/2} + \\sqrt{(z - 1)/2}\\big)$, built from the stable square root. Unlike $\\operatorname{Log}(z"
+#~ msgstr "`acosh` 使用由稳定平方根构造的 $2\\operatorname{Log}\\big(\\sqrt{(z + 1)/2} + \\sqrt{(z - 1)/2}\\big)$。与 $\\operatorname{Log}(z"
+
+#~ msgid "$\\ln"
+#~ msgstr "$\\ln"
+
+#~ msgid "x"
+#~ msgstr "x"
+
+#~ msgid "+ 2\\pi i$"
+#~ msgstr "+ 2\\pi i$"
+
+#~ msgid "+ \\pi i$"
+#~ msgstr "+ \\pi i$"
+
+#~ msgid "$2\\pi - i\\operatorname{acosh}"
+#~ msgstr "$2\\pi - i\\operatorname{acosh}"
+
+#~ msgid "$\\pi - i\\operatorname{acosh}"
+#~ msgstr "$\\pi - i\\operatorname{acosh}"
+
+#~ msgid "1/x"
+#~ msgstr "1/x"
+
+#~ msgid "$\\operatorname{acosh}"
+#~ msgstr "$\\operatorname{acosh}"
+
+#~ msgid "The root package `Luna-Flow/luna-complex` exposes the generic complex-number core."
+#~ msgstr "根包 `Luna-Flow/luna-complex` 暴露泛型复数核心。"
+
+#~ msgid "Scope"
+#~ msgstr "范围"
+
+#~ msgid "Source boundary: `src`"
+#~ msgstr "源码边界：`src`"
+
+#~ msgid "Audience: package users, integrators, and maintainers who need the exported contract"
+#~ msgstr "读者：需要依赖公开契约的使用者、集成方和维护者"
+
+#~ msgid "Status: active"
+#~ msgstr "状态：active"
+
+#~ msgid "Public contract"
+#~ msgstr "公开契约"
+
+#~ msgid "`Complex[T]` is a mutable struct with public `re` and `im` fields."
+#~ msgstr "`Complex[T]` 是可变结构体，公开 `re` 和 `im` 字段。"
+
+#~ msgid "Constructors and mutators are `Complex::new`, `set`, `set_re`, and `set_im`."
+#~ msgstr "构造与修改入口包括 `Complex::new`、`set`、`set_re` 和 `set_im`。"
+
+#~ msgid "The root package implements generic algebraic operations and Luna Flow traits when the scalar type supplies the matching capability: `Add`, `Sub`, `Neg`, `Mul`, `Div`, `Zero`, `One`, `Conjugate`, `Inverse`, `AddMonoid`, `AddGroup`, `MulMonoid`, `MulGroup`, `Semiring`, `Ring`, and `Field`."
+#~ msgstr "当标量类型提供相应能力时，根包实现泛型代数运算和 Luna Flow trait：`Add`、`Sub`、`Neg`、`Mul`、`Div`、`Zero`、`One`、`Conjugate`、`Inverse`、`AddMonoid`、`AddGroup`、`MulMonoid`、`MulGroup`、`Semiring`、`Ring` 和 `Field`。"
+
+#~ msgid "The root package does not expose analytic functions such as `sin`, `log`, or `sqrt`; use `Luna-Flow/luna-complex/float_backend` for the floating analytic layer."
+#~ msgstr "根包不暴露 `sin`、`log`、`sqrt` 等解析函数；浮点解析层位于 `Luna-Flow/luna-complex/float_backend`。"
+
+#~ msgid "`Luna-Flow/luna-complex/float_backend` exposes the floating analytic backend for complex numbers."
+#~ msgstr "`Luna-Flow/luna-complex/float_backend` 暴露复数的浮点解析后端。"
+
+#~ msgid "Source boundary: `src/float_backend`"
+#~ msgstr "源码边界：`src/float_backend`"
+
+#~ msgid "Re-exports `Complex[T]` from the root package."
+#~ msgstr "从根包重新导出 `Complex[T]`。"
+
+#~ msgid "Defines backend capability traits: `FloatingAnalyticScalar`, `FloatingSpecialValues`, and `FloatingBackendScalar`."
+#~ msgstr "定义后端能力 trait：`FloatingAnalyticScalar`、`FloatingSpecialValues` 和 `FloatingBackendScalar`。"
+
+#~ msgid "Provides `Float` and `Double` implementations for the backend traits."
+#~ msgstr "为 `Float` 和 `Double` 提供这些后端 trait 的实现。"
+
+#~ msgid "Exposes the current complete analytic function surface for `Complex[Double]`: polar construction, argument and magnitude helpers, square root, exponentials, logarithms, powers, trigonometric functions, inverse trigonometric functions, hyperbolic functions, and inverse hyperbolic functions."
+#~ msgstr "当前完整解析函数面向 `Complex[Double]`：极坐标构造、辐角与模长辅助函数、平方根、指数、对数、幂、三角函数、反三角函数、双曲函数和反双曲函数。"
+
+#~ msgid "Keeps IEEE special-value behavior, branch choices, and numeric-stability helpers inside this package instead of the generic root package."
+#~ msgstr "IEEE 特殊值行为、分支选择和数值稳定 helper 都保留在本包内，不进入泛型根包。"
+
+#~ msgid "Prefer the shared aliases imported in `src/alias.mbt` instead of scattering repeated fully-qualified calls across implementation files."
+#~ msgstr "优先复用 `src/alias.mbt` 中集中定义的别名和导入风格，不要在实现文件里重复堆叠完全限定名调用。"
+
+#~ msgid "Files: lowercase with underscores, and named after a specific behavior rather than a vague bucket."
+#~ msgstr "文件名使用小写加下划线，并直接反映所负责的能力。"
+
+#~ msgid "If an error code is introduced later, use uppercase with underscores and an `E_` prefix."
+#~ msgstr "如果后续引入错误码，使用全大写加下划线，并以 `E_` 为前缀。"
+
+#~ msgid "File Organization"
+#~ msgstr "文件组织"
+
+#~ msgid "Organize files by package boundary first, then by behavior. In this repository, the root package owns the generic `Complex[T]` core, while `src/float_backend` owns floating backend traits and the current `Complex[Double]` analytic layer."
+#~ msgstr "先按包边界组织，再按行为拆分文件。当前仓库中，根包负责泛型 `Complex[T]` 核心，`src/float_backend` 负责浮点后端 trait 和当前 `Complex[Double]` 的解析层。"
+
+#~ msgid "Inside each package, keep core data operations, elementary functions, trigonometric functions, hyperbolic functions, and tests in separate files."
+#~ msgstr "在每个包内部，再把核心数据结构、初等函数、三角函数、双曲函数和测试分别放在独立文件中。"
+
+#~ msgid "Keep public API changes deliberate. Internal helpers should remain internal unless the package genuinely needs to expose them."
+#~ msgstr "公共 API 变更要有意识地控制；内部辅助函数除非确有必要，不应暴露到包接口中。"
+
+#~ msgid "Do not assume the `float_backend` package can add methods to `Complex[T]`. Under current MoonBit rules, subpackages cannot attach methods or trait impls to a type defined in another package, so `float_backend` uses free functions."
+#~ msgstr "不要假设 `float_backend` 可以给 `Complex[T]` 追加方法。以当前 MoonBit 规则，子包不能给别的包定义的类型补方法或 trait impl，所以 `float_backend` 采用自由函数形式。"
+
+#~ msgid "Add or update tests whenever changing numerical behavior."
+#~ msgstr "任何数值行为调整都必须同步补测试或改测试。"
+
+#~ msgid "Prefer a mix of regression examples and algebraic identity checks."
+#~ msgstr "测试应同时包含回归样例和代数恒等式校验。"
+
+#~ msgid "Preserve coverage for both layers: generic algebraic behavior in the root package and floating analytic behavior in `float_backend`."
+#~ msgstr "同时覆盖两层能力：根包中的泛型代数能力，以及 `float_backend` 中的浮点解析能力。"
+
+#~ msgid "Use `moon test --enable-coverage` before submitting changes."
+#~ msgstr "提交前运行 `moon test --enable-coverage`。"
+
+#~ msgid "Commit Guidelines"
+#~ msgstr "提交规范"
+
+#~ msgid "Run `./ready_to_pr.sh` before committing when the change affects code or public API."
+#~ msgstr "代码或公开接口有改动时，提交前运行 `./ready_to_pr.sh`。"
+
+#~ msgid "Use concise English Conventional Commit messages such as `fix: stabilize inverse trigonometric branches`."
+#~ msgstr "Commit message 使用简洁英文 Conventional Commits，例如 `fix: stabilize inverse trigonometric branches`。"
+
+#~ msgid "Release Checklist"
+#~ msgstr "发布检查"
+
+#~ msgid "Update `moon.mod` before publishing a new package version."
+#~ msgstr "发布前先更新 `moon.mod` 中的版本号。"
+
+#~ msgid "Ensure `README.md` reflects the current package state."
+#~ msgstr "确保 `README.md` 与当前仓库状态一致。"
+
+#~ msgid "Run `moon check` and `moon test --enable-coverage`."
+#~ msgstr "运行 `moon check` 和 `moon test --enable-coverage`。"
+
+#~ msgid "When triggering GitHub Actions `publish-package`, provide the exact version from `moon.mod`."
+#~ msgstr "触发 GitHub Actions `publish-package` 时，输入值必须与 `moon.mod` 中版本完全一致。"
+
+#~ msgid "Code Review"
+#~ msgstr "代码审查"
+
+#~ msgid "Reviews should focus on correctness, numerical stability, API clarity, tests, and maintainability."
+#~ msgstr "审查重点应放在正确性、数值稳定性、API 清晰度、测试充分性和可维护性。"
+
+#~ msgid "The root package owns generic `Complex[T]` structure, algebraic operations, and trait-driven constraints."
+#~ msgstr "根包负责泛型 `Complex[T]` 结构、代数运算以及由 trait 驱动的约束。"
+
+#~ msgid "Responsibilities"
+#~ msgstr "职责"
+
+#~ msgid "Keep `Complex[T]` generic and independent of floating-point analytic semantics."
+#~ msgstr "保持 `Complex[T]` 的泛型性质，不把浮点解析语义放入根包。"
+
+#~ msgid "Preserve the mutable field model because callers may intentionally update `re` or `im` in place."
+#~ msgstr "保留可变字段模型，因为调用方可能需要原地更新 `re` 或 `im`。"
+
+#~ msgid "Keep algebraic trait implementations constrained by the smallest scalar capability needed."
+#~ msgstr "代数 trait 实现只要求实际所需的最小标量能力。"
+
+#~ msgid "Leave branch cuts, NaN, infinity, negative zero, and transcendental functions to `float_backend`."
+#~ msgstr "分支切割、NaN、无穷、负零和超越函数留给 `float_backend`。"
+
+#~ msgid "Maintenance notes"
+#~ msgstr "维护说明"
+
+#~ msgid "Update this page when the root package gains or loses a public trait implementation."
+#~ msgstr "根包新增或移除公开 trait 实现时，同步更新本文档。"
+
+#~ msgid "Do not document speculative generic analytic APIs in the root package."
+#~ msgstr "不要在根包文档中描述尚未实现的泛型解析 API。"
+
+#~ msgid "The `float_backend` package owns floating-point analytic behavior for complex numbers."
+#~ msgstr "`float_backend` 包负责复数的浮点解析行为。"
+
+#~ msgid "Keep floating arithmetic, special values, and branch-cut semantics out of the root package."
+#~ msgstr "将浮点算术、特殊值和分支切割语义隔离在根包之外。"
+
+#~ msgid "Keep backend capability traits local to this package until a broader ecosystem trait is justified."
+#~ msgstr "后端能力 trait 暂时保留在本包内，直到生态层面确实需要更通用的 trait。"
+
+#~ msgid "Preserve the current `Complex[Double]` stability behavior while allowing future `Float` analytic functions to share the backend capability surface."
+#~ msgstr "保持当前 `Complex[Double]` 的稳定性行为，同时为未来 `Float` 解析函数复用同一后端能力面预留空间。"
+
+#~ msgid "Keep helper code internal unless a function is part of the documented public API."
+#~ msgstr "helper 默认保持内部可见；只有明确属于公开 API 的函数才导出。"
+
+#~ msgid "Update this page when public backend traits or analytic function signatures change."
+#~ msgstr "公开后端 trait 或解析函数签名变化时，同步更新本文档。"
+
+#~ msgid "Do not imply full `Complex[Float]` analytic coverage until those functions are actually exported."
+#~ msgstr "在 `Complex[Float]` 解析函数真正导出之前，不要把文档写成已经完整支持。"
+
+#~ msgid "`luna-complex` provides a generic `Complex[T]` core for algebraic complex arithmetic in LunaFlow, with floating analytic and transcendental helpers split into the `Luna-Flow/luna-complex/float_backend` backend package. This manual describes version 0.3.0."
+#~ msgstr "`luna-complex` 为 LunaFlow 提供用于代数复数运算的泛型 `Complex[T]` 核心，浮点解析函数与超越函数辅助则拆分到 `Luna-Flow/luna-complex/float_backend` 后端包中。本手册描述 0.3.0 版本。"
+
+#~ msgid "Source"
+#~ msgstr "源码"
+
+#~ msgid "Contents"
+#~ msgstr "内容"
+
+#~ msgid "The generic `Complex[T]` type, its trait implementations, and basic algebraic operations."
+#~ msgstr "泛型 `Complex[T]` 类型、它的 trait 实现以及基本代数运算。"
+
+#~ msgid "Floating backend traits plus `Complex[Double]` functions such as `polar`, `arg`, `abs`, `sqrt`, `log`, `sin`, `cos`, `asin`, `acosh`, and `atanh`."
+#~ msgstr "浮点后端 trait，以及 `Complex[Double]` 函数，例如 `polar`、`arg`、`abs`、`sqrt`、`log`、`sin`、`cos`、`asin`、`acosh` 和 `atanh`。"
+
+#~ msgid "`Complex[T]` is a mutable struct with explicit `re` / `im` fields for in-place updates when desired. Besides `Complex::new`, it provides `set`, `set_re`, and `set_im`. Under the matching constraints on `T`, it implements the `luna-generic` algebra traits from `Zero` and `AddMonoid` up to `Ring` and `Field`, together with `Conjugate`, `Inverse`, the arithmetic operators, `Eq`, and `Show`. Because the constraints are traits rather than a fixed scalar type, values can nest, as in `Complex[Complex[Double]]`."
+#~ msgstr "`Complex[T]` 是一个可变结构体，带有显式的 `re` / `im` 字段，需要时可以原地更新。除 `Complex::new` 外，它还提供 `set`、`set_re` 和 `set_im`。在 `T` 满足相应约束时，它实现从 `Zero`、`AddMonoid` 直到 `Ring`、`Field` 的 `luna-generic` 代数 trait，以及 `Conjugate`、`Inverse`、算术运算符、`Eq` 和 `Show`。由于约束是 trait 而不是固定的标量类型，值可以嵌套，例如 `Complex[Complex[Double]]`。"
+
+#~ msgid "`float_backend` covers the elementary functions (`exp`, `log`, `log_10`, `log_b`, `pow`, `pow_real`, `sqrt`), the trigonometric and hyperbolic functions with their inverses, and real-argument variants such as `sqrt_real`, `asin_real`, and `acosh_real`. It relies on `Luna-Flow/arithmetic` for the elementary-function capability surface and keeps its floating backend traits, IEEE special-value handling, and numeric-stability logic inside the package."
+#~ msgstr "`float_backend` 涵盖初等函数（`exp`、`log`、`log_10`、`log_b`、`pow`、`pow_real`、`sqrt`）、三角函数与双曲函数及其反函数，以及 `sqrt_real`、`asin_real`、`acosh_real` 等实数参数版本。它依赖 `Luna-Flow/arithmetic` 提供初等函数能力，并把浮点后端 trait、IEEE 特殊值处理和数值稳定性逻辑保留在包内部。"
+
+#~ msgid "Use `float_backend` when a `Complex[Double]` value needs analytic or transcendental functions."
+#~ msgstr "当 `Complex[Double]` 需要解析函数或超越函数时使用 `float_backend`。"
+
+#~ msgid "Design notes"
+#~ msgstr "设计说明"
+
+#~ msgid "The analytic functions are free functions, such as `@float_backend.log(z)` and `@float_backend.sin(z)`, not methods. MoonBit does not allow a subpackage to add methods or trait implementations to a type defined in another package, so `float_backend` cannot attach them to `Complex[T]`. Restoring method-style transcendental APIs would require moving those definitions back into the root package or introducing a different wrapper design."
+#~ msgstr "解析函数是自由函数，例如 `@float_backend.log(z)` 和 `@float_backend.sin(z)`，而不是方法。MoonBit 不允许子包为其他包中定义的类型添加方法或 trait 实现，因此 `float_backend` 无法把它们挂到 `Complex[T]` 上。若要恢复方法风格的超越函数 API，需要把这些定义移回根包，或采用另一种包装设计。"
+
+#~ msgid "The split is intentional: it keeps floating arithmetic, IEEE special values, and branch-cut behavior out of the root package's generic algebraic semantics."
+#~ msgstr "这种拆分是有意为之：它把浮点运算、IEEE 特殊值和分支切割行为排除在根包的泛型代数语义之外。"
+
+#~ msgid "Where to go next"
+#~ msgstr "下一步"
+
+#~ msgid "Each package has an API reference ([core](api/core.md), [float_backend](api/float_backend.md)), a tutorial ([core](tutorial/core.md), [float_backend](tutorial/float_backend.md)), and a design note ([core](design/core.md), [float_backend](design/float_backend.md))."
+#~ msgstr "每个包都有 API 参考（[core](api/core.md)、[float_backend](api/float_backend.md)）、教程（[core](tutorial/core.md)、[float_backend](tutorial/float_backend.md)）和设计说明（[core](design/core.md)、[float_backend](design/float_backend.md)）。"
+
+#~ msgid "The generated interface files `src/pkg.generated.mbti` and `src/float_backend/pkg.generated.mbti` list every public signature, and the package documentation on [mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-complex) renders them. To work on the library, read the [contribution guidelines](contributing.md)."
+#~ msgstr "生成的接口文件 `src/pkg.generated.mbti` 和 `src/float_backend/pkg.generated.mbti` 列出了全部公开签名，[mooncakes.io](https://mooncakes.io/docs/Luna-Flow/luna-complex) 上的包文档会渲染这些接口。如需参与本库的开发，请阅读[贡献规范](contributing.md)。"
+
+#~ msgid "Use the root package when you need generic complex construction and algebraic operations."
+#~ msgstr "需要泛型复数构造和代数运算时使用根包。"
+
+#~ msgid "Suggested flow"
+#~ msgstr "建议流程"
+
+#~ msgid "Import the root package and bring `Complex` into scope."
+#~ msgstr "导入根包并引入 `Complex`。"
+
+#~ msgid "Construct values with `Complex::new(re, im)`."
+#~ msgstr "使用 `Complex::new(re, im)` 构造复数。"
+
+#~ msgid "Use algebraic operators when the scalar type implements the required Luna Flow traits."
+#~ msgstr "当标量类型实现所需 Luna Flow trait 时，直接使用代数运算符。"
+
+#~ msgid "Practical guidance"
+#~ msgstr "实用建议"
+
+#~ msgid "Use `Complex[Double]` for ordinary floating-point values and `Complex[Complex[Double]]` when nested algebraic behavior is useful."
+#~ msgstr "普通浮点复数使用 `Complex[Double]`；需要嵌套代数行为时可以使用 `Complex[Complex[Double]]`。"
+
+#~ msgid "Use `set`, `set_re`, and `set_im` only when mutation is intended."
+#~ msgstr "只有确实需要原地更新时才使用 `set`、`set_re` 和 `set_im`。"
+
+#~ msgid "Use `float_backend` for transcendental and branch-sensitive floating behavior."
+#~ msgstr "超越函数和分支敏感的浮点行为使用 `float_backend`。"
+
+#~ msgid "Import `Complex` from the root package or through `float_backend`."
+#~ msgstr "从根包或 `float_backend` 引入 `Complex`。"
+
+#~ msgid "Construct a `Complex[Double]` value."
+#~ msgstr "构造一个 `Complex[Double]`。"
+
+#~ msgid "Call free functions such as `@float_backend.log(z)`, `@float_backend.sin(z)`, or `@float_backend.sqrt(z)`."
+#~ msgstr "调用自由函数，例如 `@float_backend.log(z)`、`@float_backend.sin(z)` 或 `@float_backend.sqrt(z)`。"
+
+#~ msgid "Prefer the free functions in this package over duplicating formulas downstream."
+#~ msgstr "优先使用本包的自由函数，不要在下游重复实现公式。"
+
+#~ msgid "Treat branch-sensitive functions such as `arg`, `log`, `sqrt`, and inverse trigonometric functions as part of this package's observable contract."
+#~ msgstr "`arg`、`log`、`sqrt` 和反三角函数等分支敏感函数属于本包的可观察契约。"
+
+#~ msgid "Use the backend traits only when writing new floating backend code."
+#~ msgstr "只有在编写新的浮点后端代码时才直接使用后端 trait。"
 
 #~ msgid "Use this subsystem when you need logarithmic, trigonometric, or hyperbolic helpers specialized for `Complex[Double]`."
 #~ msgstr "当你需要专门针对 `Complex[Double]` 的对数、三角或双曲函数时，使用这个子包。"
