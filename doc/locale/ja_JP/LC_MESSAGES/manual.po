@@ -1700,8 +1700,8 @@ msgid "Then import the packages you need in your `moon.pkg`. The examples in thi
 msgstr "続いて、必要なパッケージを `moon.pkg` でインポートします。このマニュアルの例は次の別名を使います。"
 
 #: manual/index.md:41
-msgid "The packages need the MoonBit toolchain 0.10 or later (`moonc` ≥ 0.10) with `moon.mod` / `moon.pkg` manifests; the tests run on `wasm-gc`, `wasm`, `js` and `native`. They depend on `Luna-Flow/luna-generic` 0.3.3, `Luna-Flow/arithmetic` 0.2.2 and `Kaida-Amethyst/math`."
-msgstr "これらのパッケージには `moon.mod` / `moon.pkg` マニフェストを使う MoonBit ツールチェーン 0.10 以降(`moonc` ≥ 0.10)が必要です。テストは `wasm-gc`、`wasm`、`js`、`native` で実行されます。依存先は `Luna-Flow/luna-generic` 0.3.3、`Luna-Flow/arithmetic` 0.2.2、`Kaida-Amethyst/math` です。"
+msgid "The packages need the MoonBit toolchain 0.10 or later (`moonc` ≥ 0.10) with `moon.mod` / `moon.pkg` manifests; the tests run on `wasm-gc`, `wasm`, `js` and `native`. They depend on `Luna-Flow/luna-generic` 0.4.0, `Luna-Flow/arithmetic` 0.5.0 and `Kaida-Amethyst/math`."
+msgstr "これらのパッケージには `moon.mod` / `moon.pkg` マニフェストを使う MoonBit ツールチェーン 0.10 以降(`moonc` ≥ 0.10)が必要です。テストは `wasm-gc`、`wasm`、`js`、`native` で実行されます。依存先は `Luna-Flow/luna-generic` 0.4.0、`Luna-Flow/arithmetic` 0.5.0、`Kaida-Amethyst/math` です。"
 
 #: manual/index.md:46
 msgid "Pages"

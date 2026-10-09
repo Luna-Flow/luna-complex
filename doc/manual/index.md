@@ -40,8 +40,8 @@ import {
 
 The packages need the MoonBit toolchain 0.10 or later (`moonc` ≥ 0.10) with
 `moon.mod` / `moon.pkg` manifests; the tests run on `wasm-gc`, `wasm`, `js`
-and `native`. They depend on `Luna-Flow/luna-generic` 0.3.3,
-`Luna-Flow/arithmetic` 0.2.2 and `Kaida-Amethyst/math`.
+and `native`. They depend on `Luna-Flow/luna-generic` 0.4.0,
+`Luna-Flow/arithmetic` 0.5.0 and `Kaida-Amethyst/math`.
 
 ## Pages
 

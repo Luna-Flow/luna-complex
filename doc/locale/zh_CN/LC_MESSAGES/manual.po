@@ -1700,8 +1700,8 @@ msgid "Then import the packages you need in your `moon.pkg`. The examples in thi
 msgstr "然后在你的 `moon.pkg` 中导入需要的包。本手册中的示例使用这些别名："
 
 #: manual/index.md:41
-msgid "The packages need the MoonBit toolchain 0.10 or later (`moonc` ≥ 0.10) with `moon.mod` / `moon.pkg` manifests; the tests run on `wasm-gc`, `wasm`, `js` and `native`. They depend on `Luna-Flow/luna-generic` 0.3.3, `Luna-Flow/arithmetic` 0.2.2 and `Kaida-Amethyst/math`."
-msgstr "这些包需要 MoonBit 工具链 0.10 或更高版本（`moonc` ≥ 0.10），使用 `moon.mod` / `moon.pkg` 清单；测试在 `wasm-gc`、`wasm`、`js` 和 `native` 上运行。它们依赖 `Luna-Flow/luna-generic` 0.3.3、`Luna-Flow/arithmetic` 0.2.2 和 `Kaida-Amethyst/math`。"
+msgid "The packages need the MoonBit toolchain 0.10 or later (`moonc` ≥ 0.10) with `moon.mod` / `moon.pkg` manifests; the tests run on `wasm-gc`, `wasm`, `js` and `native`. They depend on `Luna-Flow/luna-generic` 0.4.0, `Luna-Flow/arithmetic` 0.5.0 and `Kaida-Amethyst/math`."
+msgstr "这些包需要 MoonBit 工具链 0.10 或更高版本（`moonc` ≥ 0.10），使用 `moon.mod` / `moon.pkg` 清单；测试在 `wasm-gc`、`wasm`、`js` 和 `native` 上运行。它们依赖 `Luna-Flow/luna-generic` 0.4.0、`Luna-Flow/arithmetic` 0.5.0 和 `Kaida-Amethyst/math`。"
 
 #: manual/index.md:46
 msgid "Pages"
