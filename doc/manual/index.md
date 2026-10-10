@@ -25,7 +25,7 @@ capability traits for floating-point scalars.
 ## Install
 
 ```bash
-moon add Luna-Flow/luna-complex@0.2.0
+moon add Luna-Flow/luna-complex@0.3.0
 ```
 
 Then import the packages you need in your `moon.pkg`. The examples in this
