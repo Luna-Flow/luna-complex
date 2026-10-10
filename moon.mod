@@ -1,6 +1,6 @@
 name = "Luna-Flow/luna-complex"
 
-version = "0.2.0"
+version = "0.3.0"
 
 import {
   "Luna-Flow/arithmetic@0.5.0",

@@ -5,6 +5,8 @@ project uses semantic versioning.
 
 ## Unreleased
 
+## 0.3.0 - 2026-10-10
+
 ### Breaking changes
 
 - The `Luna-Flow/luna-complex/double_ext` package is removed. Its
