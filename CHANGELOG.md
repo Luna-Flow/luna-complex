@@ -5,6 +5,13 @@ project uses semantic versioning.
 
 ## Unreleased
 
+### Changed
+
+- Builds with the latest MoonBit toolchain (moon 0.1.20261012, moonc 0.10.15):
+  `Luna-Flow/arithmetic` is raised to 0.5.1 and `Kaida-Amethyst/math` to 0.1.21
+  (the earlier versions ship the legacy `moon.mod.json`, which the new toolchain
+  rejects), and the sources follow the formatter of that toolchain.
+
 ## 0.3.0 - 2026-10-10
 
 ### Breaking changes
