@@ -21,7 +21,7 @@ output is written in the `inspect` calls.
 ## Quick start
 
 ```bash
-moon add Luna-Flow/luna-complex@0.3.0
+moon add Luna-Flow/luna-complex@0.3.1
 ```
 
 Import the root package in the `moon.pkg` of the package that uses it. The
