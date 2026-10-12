@@ -77,7 +77,7 @@ fn stable_quotient(
 ///|
 fn complex_pow_integer(
   base : Complex[Double],
-  exponent : Int,
+  exponent : Int32,
 ) -> Complex[Double] {
   if exponent == 0 {
     return Complex::one()

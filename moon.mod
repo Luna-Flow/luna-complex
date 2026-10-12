@@ -3,8 +3,8 @@ name = "Luna-Flow/luna-complex"
 version = "0.3.0"
 
 import {
-  "Luna-Flow/arithmetic@0.5.0",
-  "Kaida-Amethyst/math@0.1.20",
+  "Luna-Flow/arithmetic@0.5.1",
+  "Kaida-Amethyst/math@0.1.21",
   "Luna-Flow/luna-generic@0.4.0",
 }
 

@@ -6,7 +6,7 @@ pub fn native_pack(
   re : Double,
   im : Double,
   arr : Array[Double],
-  offset : Int,
+  offset : Int32,
 ) -> Unit {
   guard arr.length() % 2 == 0 else {
     abort("native_pack: buffer length must be even")
@@ -24,7 +24,7 @@ pub fn native_pack(
 }
 
 ///|
-pub fn pack(z : Complex[Double], arr : Array[Double], offset : Int) -> Unit {
+pub fn pack(z : Complex[Double], arr : Array[Double], offset : Int32) -> Unit {
   native_pack(z.re, z.im, arr, offset)
 }
 

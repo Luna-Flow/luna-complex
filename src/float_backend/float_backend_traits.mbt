@@ -18,7 +18,7 @@ pub(open) trait FloatingSpecialValues {
 pub(open) trait FloatingBackendScalar: FloatingAnalyticScalar + FloatingSpecialValues {
   fn from_double(Double) -> Self
   fn trunc(Self) -> Self
-  fn to_int(Self) -> Int
+  fn to_int(Self) -> Int32
   fn hypot(Self, Self) -> Self
   fn log1p(Self) -> Self
 }
