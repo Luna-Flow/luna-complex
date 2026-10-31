@@ -74,13 +74,13 @@ pub fn log_10(@luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
 
 pub fn log_b(@luna-complex.Complex[Double], @luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
 
-pub fn native_pack(Double, Double, Array[Double], Int) -> Unit
+pub fn native_pack(Double, Double, Array[Double], Int32) -> Unit
 
 pub fn op_bin_im(@luna-complex.Complex[Double], Double, (@luna-complex.Complex[Double], @luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
 
 pub fn op_bin_re(@luna-complex.Complex[Double], Double, (@luna-complex.Complex[Double], @luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]) -> @luna-complex.Complex[Double]
 
-pub fn pack(@luna-complex.Complex[Double], Array[Double], Int) -> Unit
+pub fn pack(@luna-complex.Complex[Double], Array[Double], Int32) -> Unit
 
 pub fn polar(Double, Double) -> @luna-complex.Complex[Double]
 
@@ -120,7 +120,7 @@ pub impl FloatingAnalyticScalar for Double
 pub(open) trait FloatingBackendScalar : FloatingAnalyticScalar + FloatingSpecialValues {
   fn from_double(Double) -> Self
   fn trunc(Self) -> Self
-  fn to_int(Self) -> Int
+  fn to_int(Self) -> Int32
   fn hypot(Self, Self) -> Self
   fn log1p(Self) -> Self
 }
