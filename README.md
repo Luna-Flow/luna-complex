@@ -65,7 +65,7 @@ list the details.
 
 ## Toolchain
 
-MoonBit `moonc` 0.10 or newer, with `moon.mod` / `moon.pkg` manifests. Tests
+MoonBit `moonc` 0.10.20 or later (verified with `moon 0.1.20261104` and `moonc v0.10.20`; older 0.10 compilers ignore `#derive`), with `moon.mod` / `moon.pkg` manifests. Tests
 run on `wasm-gc`, `wasm`, `js` and `native`.
 
 ## Documentation
