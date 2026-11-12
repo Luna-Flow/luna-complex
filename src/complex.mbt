@@ -1,9 +1,10 @@
 ///|
 /// Represents a complex number with mutable real and imaginary parts.
+#derive(Eq, Debug)
 pub(all) struct Complex[T] {
   mut re : T
   mut im : T
-} derive(Eq, Debug)
+}
 
 ///|
 pub fn[T] Complex::new(re : T, im : T) -> Complex[T] {

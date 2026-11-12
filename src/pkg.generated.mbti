@@ -11,10 +11,11 @@ import {
 // Errors
 
 // Types and methods
+#derive(Eq, @debug.Debug)
 pub(all) struct Complex[T] {
   mut re : T
   mut im : T
-} derive(Eq, @debug.Debug)
+}
 pub fn[T : Add] Complex::add(Self[T], Self[T]) -> Self[T]
 pub fn[T : Neg] Complex::conjugate(Self[T]) -> Self[T]
 pub fn[T : @luna-generic.Field] Complex::div(Self[T], Self[T]) -> Self[T]
