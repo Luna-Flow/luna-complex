@@ -21,7 +21,7 @@ with `moon test`; the expected output is written in the `inspect` calls.
 ## Quick start
 
 ```bash
-moon add Luna-Flow/luna-complex@0.3.1
+moon add Luna-Flow/luna-complex@0.3.2
 ```
 
 Import both packages in the `moon.pkg` of the package that uses them:

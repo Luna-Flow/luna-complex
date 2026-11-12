@@ -1,9 +1,9 @@
 name = "Luna-Flow/luna-complex"
 
-version = "0.3.1"
+version = "0.3.2"
 
 import {
-  "Luna-Flow/arithmetic@0.5.1",
+  "Luna-Flow/arithmetic@0.5.2",
   "Kaida-Amethyst/math@0.1.21",
   "Luna-Flow/luna-generic@0.4.0",
 }

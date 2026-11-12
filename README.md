@@ -12,7 +12,7 @@ numerically stable formulas.
 ## Install
 
 ```bash
-moon add Luna-Flow/luna-complex@0.3.1
+moon add Luna-Flow/luna-complex@0.3.2
 ```
 
 ```moonbit nocheck
